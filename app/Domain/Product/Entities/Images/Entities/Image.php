@@ -14,7 +14,7 @@ class Image extends Entity
     protected $table = 'images';
 
     public function image(){
-        $this->belongsTo(Product::class);
+        $this->hasMany(Product::class);
     }
 
     public function getImageAttribute($value)

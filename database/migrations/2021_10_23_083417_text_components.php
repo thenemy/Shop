@@ -14,6 +14,7 @@ class TextComponents extends Migration
     public function up()
     {
         Schema::create('text_components', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('header_components_id')->constrained('header_components')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->json('text');
         });

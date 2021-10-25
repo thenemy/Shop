@@ -13,5 +13,4 @@ class Order extends Entity
     protected $table = "orders";
 
 
-
 }
