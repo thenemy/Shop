@@ -14,7 +14,7 @@ class Credits extends Migration
     public function up()
     {
         Schema::create('credits', function (Blueprint $table) {
-//            $table->id();
+            $table->id();
 //            $table->bigInteger('initial_price');
 //            $table->timestamp('date_taken');
 //            $table->foreignId('users_id')->constrained('users')->onUpdate('CASCADE')->onDelete('CASCADE');

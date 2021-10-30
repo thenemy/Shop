@@ -12,6 +12,7 @@ class IconCat extends Entity
     use MediaTrait;
 
     protected $table = "icon_cats";
+    public $incrementing = false;
 
     public function getIconAttribute($value)
     {

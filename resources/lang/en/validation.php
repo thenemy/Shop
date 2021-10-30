@@ -144,7 +144,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Custom Validation Attributes
+    | Custom Validation BaseAttributes
     |--------------------------------------------------------------------------
     |
     | The following language lines are used to swap our attribute placeholder

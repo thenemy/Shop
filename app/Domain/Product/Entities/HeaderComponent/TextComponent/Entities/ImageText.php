@@ -13,7 +13,7 @@ class ImageText extends Entity
 
     use MediaTrait;
 
-    public function imageText()
+    public function imageText(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(TextComponent::class);
     }
@@ -39,5 +39,20 @@ class ImageText extends Entity
         return [
             "image_text"
         ];
+    }
+
+    public function getColumns(): array
+    {
+        // TODO: Implement getColumns() method.
+    }
+
+    public function livewireComponents(): array
+    {
+        // TODO: Implement livewireComponents() method.
+    }
+
+    public function getTableRows(): array
+    {
+        // TODO: Implement getTableRows() method.
     }
 }

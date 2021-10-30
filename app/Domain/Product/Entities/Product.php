@@ -12,12 +12,13 @@ use App\Domain\Core\Main\Entities\Entity;
 class Product extends Entity
 {
     use Translatable, Sluggable;
+
     public $guarded = [];
     protected $table = "products";
 
-    public function product()
+    public function user_favourites(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, "favourites");
     }
 
     public function setTitleAttribute($value)
@@ -35,5 +36,20 @@ class Product extends Entity
         return [
             'slug' => 'title'
         ];
+    }
+
+    public function getColumns(): array
+    {
+        // TODO: Implement getColumns() method.
+    }
+
+    public function livewireComponents(): array
+    {
+        // TODO: Implement livewireComponents() method.
+    }
+
+    public function getTableRows(): array
+    {
+        // TODO: Implement getTableRows() method.
     }
 }

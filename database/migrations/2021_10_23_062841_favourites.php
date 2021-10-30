@@ -13,10 +13,10 @@ class Favourites extends Migration
      */
     public function up()
     {
-        Schema::create('favourite', function (Blueprint $table) {
-            $table->id();
+        Schema::create('favourites', function (Blueprint $table) {
             $table->foreignId("product_id")->constrained("products");
             $table->foreignId("user_id")->constrained("users")->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->primary(["product_id", "user_id"]);
         });
     }
 
