@@ -17,7 +17,7 @@ class Image extends Entity
         $this->hasMany(Product::class);
     }
 
-    public function getImageAttribute($value)
+    public function getImageAttribute($value): \App\Domain\Core\Media\Models\Media
     {
         return $this->getMedia('image', $value);
     }

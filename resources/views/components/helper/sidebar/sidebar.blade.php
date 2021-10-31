@@ -1,33 +1,24 @@
 @props([
 "name"=>"Default",
-"list"=>[]
+"list"=>[],
 ])
-<div class="shadow-lg">
-    <h1 class="font-bold text-2xl p-5 border-b border-gray-200">{{$name}}</h1>
-    <div class="flex flex-col ">
-        @foreach($list as $item)
+<link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"/>
 
-            <div class="border-b border-gray-200 hover:bg-blue-100">
+<div class="min-h-screen flex flex-row bg-gray-100">
+    <div class="flex flex-col w-80 bg-white rounded-r-3xl overflow-hidden">
+        <div class="flex items-center justify-center h-20 shadow-md">
+            <h1 class="text-3xl uppercase text-indigo-500">Админ</h1>
+        </div>
+        <ul class="flex flex-col py-4">
+            @foreach($list as $item)
 
-                <div x-data="{ open: false }">
-                    <button @click="open = ! open">
-                        <div
-                            class="@if(\Illuminate\Support\Facades\Route::is($item->route_also)) border-l-4 border-blue-400 @endif p-3">
-                            <a href="{{$item->route_name}}">{{$item->name}}</a>
-                            {{--                            <p>{{$item->name}}</p>--}}
-                        </div>
-                    </button>
-                    @if($item->getType()==\App\View\Helper\SideBar\Interfaces\SideBarInterface::LIST_SIDEBAR)
-                        @foreach($item->sublist as $sublist)
-                            <div class="">
-                                <div class="text-gray-700 block py-2 pl-8 text-sm" x-show="open"
-                                     @click.outside="open = false"><a href="">{{$sublist->name}}</a></div>
-                            </div>
-                        @endforeach
-                    @endif
-                </div>
-            </div>
-
-        @endforeach
+                @if($item->getType()==\App\View\Helper\SideBar\Interfaces\SideBarInterface::USUAL_SIDEBAR)
+                    <x-helper.sidebar.sidebar-elem :item="$item"/>
+                @elseif($item->getType()==\App\View\Helper\SideBar\Interfaces\SideBarInterface::LIST_SIDEBAR)
+                    <x-helper.sidebar.sidebar-elem-with-list :item="$item">
+                    </x-helper.sidebar.sidebar-elem-with-list>
+                @endif
+            @endforeach
+        </ul>
     </div>
 </div>

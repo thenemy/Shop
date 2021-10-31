@@ -14,9 +14,18 @@ class HeaderText extends Entity
 
     protected $table = 'header_texts';
 
-    public function headerText(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function headerText(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    public function headerValueDot(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(HeaderTextValueDot::class,'header_text_id');
+    }
+    public function headerKeyText(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(HeaderTextKeyText::class,'header_text_id');
     }
 
     public function setTextAttribute($value)
@@ -24,7 +33,7 @@ class HeaderText extends Entity
         $this->setTranslate('text', $value);
     }
 
-    public function getTextAttribute()
+    public function getTextAttribute(): ?string
     {
         return $this->getTranslatable('text');
     }

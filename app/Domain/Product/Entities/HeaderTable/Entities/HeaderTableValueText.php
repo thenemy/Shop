@@ -13,9 +13,9 @@ class HeaderTableValueText extends Entity
 
     protected $table = 'header_table_value_texts';
 
-    public function headerTableValueText(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function headerTableValueText(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->hasMany(HeaderTableKeyText::class);
+        return $this->belongsTo(HeaderTableKeyText::class, 'id');
     }
 
     public function getTextAttribute($value): ?string

@@ -15,4 +15,19 @@ class Authenticable extends Entity implements
     CanResetPasswordContract
 {
     use \Illuminate\Auth\Authenticatable, Authorizable, CanResetPassword, MustVerifyEmail;
+
+    public function getColumns(): array
+    {
+        // TODO: Implement getColumns() method.
+    }
+
+    public function livewireComponents(): array
+    {
+        // TODO: Implement livewireComponents() method.
+    }
+
+    public function getTableRows(): array
+    {
+        // TODO: Implement getTableRows() method.
+    }
 }

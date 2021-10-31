@@ -4,7 +4,7 @@
 namespace App\View\Helper\OpenButton\Interfaces;
 
 
-class OpenButtonInterfaces
+interface OpenButtonInterfaces
 {
     public static function getButtons($id): array;
 }

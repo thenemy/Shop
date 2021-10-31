@@ -9,7 +9,7 @@ use App\Domain\Core\Front\Admin\CustomTable\Attributes\Abstracts\AbstractAttribu
 interface TableInterface
 {
     // ordering is important
-    public function getNameOfColumns(): array;
+    public function getColumnsName(): array;
 
-    public function getRows($item): AbstractAttributes;
+    public function getRowsName($item): AbstractAttributes;
 }

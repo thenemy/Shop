@@ -18,7 +18,8 @@ class CardImages extends Entity
         $this->hasOne(Product::class,'product_id');
     }
 
-    public function getImageAttribute($value){
+    public function getImageAttribute($value): \App\Domain\Core\Media\Models\Media
+    {
         return $this->getMedia('image',$value);
     }
 
@@ -26,7 +27,7 @@ class CardImages extends Entity
         $this->setPublicMedia('image',$value);
     }
 
-    public function getMediaPathStorages()
+    public function getMediaPathStorages(): string
     {
         return "product/image_header";
     }

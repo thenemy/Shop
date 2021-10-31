@@ -13,12 +13,12 @@ class ImageText extends Entity
 
     use MediaTrait;
 
-    public function imageText(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function imageText(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->hasOne(TextComponent::class);
+        return $this->belongsTo(TextComponent::class,'id');
     }
 
-    public function getImageTextAttribute($value)
+    public function getImageTextAttribute($value): \App\Domain\Core\Media\Models\Media
     {
         return $this->getMedia('image', $value);
     }
@@ -28,7 +28,7 @@ class ImageText extends Entity
         $this->setPublicMedia('image', $value);
     }
 
-    public function getMediaPathStorages()
+    public function getMediaPathStorages(): string
     {
         return 'text_components/image_text';
 

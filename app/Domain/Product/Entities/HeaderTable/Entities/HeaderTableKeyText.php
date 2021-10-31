@@ -6,6 +6,8 @@ namespace App\Domain\Product\Entities\HeaderTable\Entities;
 
 use App\Domain\Core\Language\Traits\Translatable;
 use App\Domain\Core\Main\Entities\Entity;
+use App\Domain\Product\Entities\HeaderText\Entitites\HeaderTextValueLink;
+use App\Domain\Product\Entities\HeaderText\Entitites\HeaderTextValueText;
 
 class HeaderTableKeyText extends Entity
 {
@@ -16,6 +18,14 @@ class HeaderTableKeyText extends Entity
     public function headerTableKeyText(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(HeaderTable::class);
+    }
+    public function keyTextValueText(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(HeaderTextValueText::class);
+    }
+    public function keyTextValueLink(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(HeaderTextValueLink::class);
     }
 
     public function setTextAttribute($value)

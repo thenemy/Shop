@@ -13,9 +13,9 @@ class HeaderTableValueLink extends Entity
 
     protected $table = 'value_text';
 
-    public function valueText(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function valueText(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->hasOne(HeaderTableKeyText::class);
+        return $this->belongsTo(HeaderTableKeyText::class, 'id');
     }
 
     public function setTextAttribute($value)

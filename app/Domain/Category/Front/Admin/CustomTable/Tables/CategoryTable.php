@@ -11,7 +11,7 @@ use App\Domain\Core\Front\Admin\CustomTable\Attributes\Abstracts\AbstractAttribu
 class CategoryTable extends AbstractTable
 {
 
-    public function getNameOfColumns(): array
+    public function getColumnsName(): array
     {
         return [
             __("Иконка"),
@@ -20,7 +20,7 @@ class CategoryTable extends AbstractTable
         ];
     }
 
-    public function getRows($item): AbstractAttributes
+    public function getRowsName($item): AbstractAttributes
     {
         return new CategoryAttributes($item->id);
     }

@@ -14,7 +14,7 @@ class HeaderBody extends Entity
 
     protected $table = 'header_bodies';
 
-    public function headerBody()
+    public function headerBody(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(ProductHeaders::class,'product_id');
     }

@@ -20,7 +20,8 @@ class Header extends Entity
         return $this->belongsTo(Product::class);
     }
 
-    public function bodyHeader(){
+    public function bodyHeader(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
         return $this->hasMany(HeaderTable::class,'product_id');
     }
 

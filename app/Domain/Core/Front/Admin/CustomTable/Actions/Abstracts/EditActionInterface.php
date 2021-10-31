@@ -7,17 +7,17 @@ namespace App\Domain\Core\Front\Admin\CustomTable\Actions\Abstracts;
 use App\Domain\Core\Front\Admin\CustomTable\Actions\Interfaces\ActionInterface;
 use App\Domain\Core\Front\Admin\Routes\Abstracts\RouteHandler;
 
-class EditActionInterface implements ActionInterface
+abstract class EditActionInterface extends BaseAbstractAction
 {
 
-    public function click()
+    public function __construct($params = [])
     {
-        // TODO: Implement click() method.
+        parent::__construct($params);
     }
 
     public function getIcon(): int
     {
-        // TODO: Implement getIcon() method.
+        return self::TYPE_EDIT;
     }
 
     public function getRouteHandler(): RouteHandler

@@ -6,6 +6,7 @@ namespace App\Domain\Product\Entities\HeaderComponent\Header\Entities;
 
 use App\Domain\Core\Language\Traits\Translatable;
 use App\Domain\Core\Main\Entities\Entity;
+use App\Domain\Product\Entities\HeaderComponent\TextComponent\Entities\TextComponent;
 use App\Domain\Product\Entities\Product;
 use http\Header;
 
@@ -20,13 +21,14 @@ class HeaderComponent extends Entity
         return $this->belongsTo(Product::class);
     }
 
-    public function imageHeaderComponent()
+    public function imageHeaderComponent(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(ImageComponent::class, 'header_component_id');
     }
 
-    public function headerTextComponent(){
-        
+    public function headerTextComponent(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(TextComponent::class, 'id');
     }
 
     public function setTextAttribute($value)
@@ -34,7 +36,7 @@ class HeaderComponent extends Entity
     $this->setTranslate('text', $value);
 }
 
-    public function getTextAttribute($value)
+    public function getTextAttribute($value): ?string
     {
         return $this->getTranslatable('text');
     }

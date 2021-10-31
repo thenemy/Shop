@@ -10,7 +10,7 @@ class ProductInfo extends Entity
 {
     public function productInfo(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'product_id');
     }
 
     public function getColumns(): array

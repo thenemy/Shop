@@ -14,7 +14,7 @@ abstract class AbstractTable implements TableInterface
     {
         $this->pagination = $entities;
         $this->attributes = $entities->map(function ($item){
-            return $this->getRows($item);
+            return $this->getRowsName($item);
         });
     }
 }

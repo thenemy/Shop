@@ -7,17 +7,16 @@ namespace App\Domain\Core\Front\Admin\CustomTable\Actions\Abstracts;
 use App\Domain\Core\Front\Admin\CustomTable\Actions\Interfaces\ActionInterface;
 use App\Domain\Core\Front\Admin\Routes\Abstracts\RouteHandler;
 
-class DenyActionInterface implements ActionInterface
+abstract class DenyActionInterface extends BaseAbstractAction
 {
-
-    public function click()
+    public function __construct($params = [])
     {
-        // TODO: Implement click() method.
+        parent::__construct($params);
     }
 
     public function getIcon(): int
     {
-        // TODO: Implement getIcon() method.
+        return self::TYPE_DENY;
     }
 
     public function getRouteHandler(): RouteHandler

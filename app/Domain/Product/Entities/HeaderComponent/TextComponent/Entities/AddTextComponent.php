@@ -14,9 +14,9 @@ class AddTextComponent extends Entity
 
     protected $table = 'add_text_components';
 
-    public function addTextComponent()
+    public function addTextComponent(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->hasOne(TextComponent::class);
+        return $this->belongsTo(TextComponent::class,'id');
     }
 
     public function setAddTextComponent($value)
@@ -24,7 +24,7 @@ class AddTextComponent extends Entity
         $this->setTranslate('text', $value);
     }
 
-    public function getAddTextComponent($value)
+    public function getAddTextComponent($value): ?string
     {
         return $this->getTranslatable('text');
     }

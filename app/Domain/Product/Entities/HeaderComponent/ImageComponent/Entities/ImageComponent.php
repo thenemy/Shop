@@ -11,9 +11,9 @@ class ImageComponent extends Entity
 {
     use MediaTrait;
     protected $table = 'image_components';
-    public function imageComponent(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function imageComponent(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->hasMany(HeaderComponent::class);
+        return $this->belongsTo(HeaderComponent::class);
     }
 
     public function setImageAttribute($value){

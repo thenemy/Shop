@@ -11,7 +11,8 @@ class Credits extends Entity
 {
     protected $table = 'categories';
 
-    public function credits(){
+    public function credits(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
         return $this->hasMany(Product::class,'id');
     }
 

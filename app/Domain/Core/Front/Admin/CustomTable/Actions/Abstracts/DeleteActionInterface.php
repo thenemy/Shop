@@ -7,17 +7,17 @@ namespace App\Domain\Core\Front\Admin\CustomTable\Actions\Abstracts;
 use App\Domain\Core\Front\Admin\CustomTable\Actions\Interfaces\ActionInterface;
 use App\Domain\Core\Front\Admin\Routes\Abstracts\RouteHandler;
 
-class DeleteActionInterface implements ActionInterface
+abstract  class DeleteActionInterface extends BaseAbstractAction
 {
 
-    public function click()
+    public function __construct($params = [])
     {
-        // TODO: Implement click() method.
+        parent::__construct($params);
     }
 
     public function getIcon(): int
     {
-        // TODO: Implement getIcon() method.
+        return self::TYPE_DELETE;
     }
 
     public function getRouteHandler(): RouteHandler

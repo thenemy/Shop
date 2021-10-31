@@ -17,4 +17,19 @@ class Shop extends Entity
            'slug' =>'name'
        ];
     }
+
+    public function getColumns(): array
+    {
+        // TODO: Implement getColumns() method.
+    }
+
+    public function livewireComponents(): array
+    {
+        // TODO: Implement livewireComponents() method.
+    }
+
+    public function getTableRows(): array
+    {
+        // TODO: Implement getTableRows() method.
+    }
 }

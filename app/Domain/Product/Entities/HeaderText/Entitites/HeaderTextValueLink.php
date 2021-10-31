@@ -10,12 +10,13 @@ use App\Domain\Core\Main\Entities\Entity;
 class HeaderTextValueLink extends Entity
 {
     use Translatable;
+
     protected $table = 'header_text_value_Links';
 
 
-    public function headerTextValueLink(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function headerTextValueLink(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->hasOne(HeaderTextKeyText::class);
+        return $this->belongsTo(HeaderTextKeyText::class, 'header_tables_id');
     }
 
     public function setTextAttribute($value)
@@ -23,7 +24,7 @@ class HeaderTextValueLink extends Entity
         $this->setTranslate('text', $value);
     }
 
-    public function getTextAttribute()
+    public function getTextAttribute(): ?string
     {
         $this->getTranslatable('text');
     }
