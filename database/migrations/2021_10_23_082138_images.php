@@ -14,6 +14,7 @@ class Images extends Migration
     public function up()
     {
         Schema::create('images', function (Blueprint $table) {
+            $table->id();
             $table->string('image');
             $table->foreignId('products_id')->constrained('products')->onUpdate('CASCADE')->onDelete('CASCADE');
         });

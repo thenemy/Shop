@@ -14,11 +14,12 @@ class UserCreditData extends Migration
     public function up()
     {
 
-        Schema::create('user_credit_data', function (Blueprint $table) {
-            $table->foreignId('id')->unique()->constrained('users')->onDelete('CASCADE')->onUpdate('CASCADE');
-            $table->string('name');
-            $table->string('password');
-            $table->string('phone');
+        Schema::create('user_credit_datas', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->unique()->constrained('users')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->string('passport');
+            $table->string('inn');
+            $table->string('pnfl');
         });
     }
 

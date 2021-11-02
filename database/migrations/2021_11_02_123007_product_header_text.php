@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Discounts extends Migration
+class ProductHeaderText extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class Discounts extends Migration
      */
     public function up()
     {
-        Schema::create('discounts', function (Blueprint $table) {
-            $table->id();
-            $table->integer('percentage');
+        Schema::create('product_header_text', function (Blueprint $table) {
+            $table->foreignId("header_value_text_id")->constrained("header_value_texts");
             $table->foreignId("product_id")->constrained("products");
+            $table->primary(["product_id", "header_value_text_id"]);
         });
     }
 
@@ -27,6 +27,6 @@ class Discounts extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('discounts');
+        Schema::dropIfExists('header_text_value_product');
     }
 }

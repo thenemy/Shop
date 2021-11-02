@@ -14,7 +14,8 @@ class ProductValues extends Migration
     public function up()
     {
         Schema::create('product_values', function (Blueprint $table) {
-            $table->foreignId('products_key_id')->primary()->constrained('product_keys')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->id();
+            $table->foreignId('products_key_id')->constrained('product_keys')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->json('text');
         });
     }

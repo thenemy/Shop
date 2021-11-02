@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ValueLinks extends Migration
+class KeyTexts extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class ValueLinks extends Migration
      */
     public function up()
     {
-        Schema::create('value_links', function (Blueprint $table) {
-            $table->foreignId('key_text_id')->primary()->constrained('key_text')->onUpdate('CASCADE')->onDelete('CASCADE');
+        Schema::create('header_key_texts', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('header_text_id')->constrained('header_texts')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->json('text');
-            $table->string('link');
         });
     }
 
@@ -27,6 +27,6 @@ class ValueLinks extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('value_links');
+        Schema::dropIfExists('key_texts');
     }
 }

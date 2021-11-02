@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class KeyTexts extends Migration
+class CommentProduct extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class KeyTexts extends Migration
      */
     public function up()
     {
-        Schema::create('key_texts', function (Blueprint $table) {
+        Schema::create('comment_product', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('header_text_id')->constrained('header_texts')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->json('text');
+            $table->timestamps();
+            $table->foreignId("user_id")->constrained("users");
+            $table->foreignId("product_id")->constrained("products");
+            $table->string("message");
         });
     }
 
@@ -27,6 +29,6 @@ class KeyTexts extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('key_texts');
+        Schema::dropIfExists('comment_product');
     }
 }

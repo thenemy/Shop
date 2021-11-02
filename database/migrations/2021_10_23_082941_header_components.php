@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+// will be connected from values and from values we will get the header
 class HeaderComponents extends Migration
 {
     /**
@@ -14,7 +14,7 @@ class HeaderComponents extends Migration
     public function up()
     {
         Schema::create('header_components', function (Blueprint $table) {
-            $table->foreignId('id')->primary()->constrained('products')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->id();
             $table->json('text');
         });
     }

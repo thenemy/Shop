@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Discounts extends Migration
+class MarkProduct extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class Discounts extends Migration
      */
     public function up()
     {
-        Schema::create('discounts', function (Blueprint $table) {
-            $table->id();
-            $table->integer('percentage');
+        Schema::create('mark_product', function (Blueprint $table) {
+            $table->foreignId("user_id")->constrained("users");
             $table->foreignId("product_id")->constrained("products");
+            $table->smallInteger("mark");
+            $table->primary(["user_id", "product_id"]);
         });
     }
 
@@ -27,6 +28,6 @@ class Discounts extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('discounts');
+        Schema::dropIfExists('mark_product');
     }
 }

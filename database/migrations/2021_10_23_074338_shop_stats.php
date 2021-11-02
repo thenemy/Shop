@@ -16,7 +16,6 @@ class ShopStats extends Migration
         Schema::create('shop_stats', function (Blueprint $table) {
             $table->foreignId('id')->primary()->constrained('shops')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->boolean('status');
-
         });
     }
 

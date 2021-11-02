@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ProductHeaders extends Migration
+class MainBanner extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class ProductHeaders extends Migration
      */
     public function up()
     {
-        Schema::create('product_headers', function (Blueprint $table) {
+        Schema::create('main_banner', function (Blueprint $table) {
             $table->id();
-            $table->json('text');
+            $table->string("image");
+
         });
     }
 
@@ -26,6 +27,6 @@ class ProductHeaders extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_headers');
+        Schema::dropIfExists('main_banner');
     }
 }

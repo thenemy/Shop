@@ -14,8 +14,9 @@ class CardImages extends Migration
     public function up()
     {
         Schema::create('card_images', function (Blueprint $table) {
-            $table->string('image');
             $table->foreignId('product_id')->primary()->constrained('products')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->string('image');
+
         });
     }
 

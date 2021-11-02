@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ProductHeaders extends Migration
+class CommentShop extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class ProductHeaders extends Migration
      */
     public function up()
     {
-        Schema::create('product_headers', function (Blueprint $table) {
+        Schema::create('comment_shop', function (Blueprint $table) {
             $table->id();
-            $table->json('text');
+            $table->timestamps();
+            $table->foreignId("user_id")->constrained("users");
+            $table->foreignId("shop_id")->constrained("users");
+            $table->string("message");
         });
     }
 
@@ -26,6 +29,6 @@ class ProductHeaders extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_headers');
+        Schema::dropIfExists('comment_shop');
     }
 }

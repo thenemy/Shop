@@ -13,9 +13,12 @@ class HeaderBodies extends Migration
      */
     public function up()
     {
-        Schema::create('header_bodies', function (Blueprint $table) {
+        Schema::create('product_header_bodies', function (Blueprint $table) {
+            $table->foreignId('product_header_id')->constrained('product_headers')
+                ->onUpdate("CASCADE")
+                ->onDelete('CASCADE');
+            $table->foreignId('product_id')->constrained('products')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->json('text');
-            $table->foreignId('product_id')->constrained('products')->onUpdate("CASCADE")->onDelete('CASCADE');
         });
     }
 

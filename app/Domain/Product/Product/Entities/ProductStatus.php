@@ -1,19 +1,18 @@
 <?php
 
-
-namespace App\Domain\Credits\Entities;
-
+namespace App\Domain\Product\Product\Entities;
 
 use App\Domain\Core\Main\Entities\Entity;
-use App\Domain\Product\Product\Entities\Product;
 
-class Credits extends Entity
+class ProductStatus extends Entity
 {
-    protected $table = 'categories';
+    protected $table = "products_product_stats";
 
     public function product(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Product::class, 'product_credits');
+        return $this->belongsToMany(Product::class, "products_product_stats",
+            "status",
+            'product_id');
     }
 
     public function getColumns(): array

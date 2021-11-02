@@ -15,6 +15,8 @@ class Credits extends Migration
     {
         Schema::create('credits', function (Blueprint $table) {
             $table->id();
+            $table->smallInteger("percent");
+            $table->smallInteger("month");
 //            $table->bigInteger('initial_price');
 //            $table->timestamp('date_taken');
 //            $table->foreignId('users_id')->constrained('users')->onUpdate('CASCADE')->onDelete('CASCADE');

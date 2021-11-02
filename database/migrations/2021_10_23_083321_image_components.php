@@ -14,6 +14,7 @@ class ImageComponents extends Migration
     public function up()
     {
         Schema::create('image_components', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('header_component_id')->constrained('header_components')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->string('image');
         });

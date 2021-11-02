@@ -14,7 +14,7 @@ class HeaderTables extends Migration
     public function up()
     {
         Schema::create('header_tables', function (Blueprint $table) {
-            $table->foreignId('product_id')->constrained('products')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->id();
             $table->json('text');
         });
     }

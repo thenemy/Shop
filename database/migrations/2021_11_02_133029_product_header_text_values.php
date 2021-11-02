@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ProductHeaders extends Migration
+class ProductHeaderTextValues extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class ProductHeaders extends Migration
      */
     public function up()
     {
-        Schema::create('product_headers', function (Blueprint $table) {
+        Schema::create('product_header_text_values', function (Blueprint $table) {
             $table->id();
-            $table->json('text');
+            $table->foreignId("link_id")->constrained("header_value_links");
+            $table->foreignId("product_id")->constrained("products");
+            $table->primary(["product_id", "link_id"]);
         });
     }
 
@@ -26,6 +28,6 @@ class ProductHeaders extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_headers');
+        Schema::dropIfExists('product_header_text_values');
     }
 }

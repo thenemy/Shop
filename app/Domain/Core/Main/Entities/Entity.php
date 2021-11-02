@@ -4,11 +4,12 @@
 namespace App\Domain\Core\Main\Entities;
 
 
-use Illuminate\Database\Eloquent\Model;
 
 //create several types
 
 // header will be livewire for asynchornious
+use Illuminate\Database\Eloquent\Model;
+
 abstract class Entity extends Model
 {
     public $timestamps = false;

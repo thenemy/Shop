@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ValueDots extends Migration
+class Basket extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class ValueDots extends Migration
      */
     public function up()
     {
-        Schema::create('value_dots', function (Blueprint $table) {
-            $table->foreignId('header_text_id')->constrained('header_text')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->json('text');
+        Schema::create('basket', function (Blueprint $table) {
+            $table->foreignId("order_id")->primary()->constrained("orders");
+            $table->foreignId("user_id")->constrained("users");
+
         });
     }
 
@@ -26,6 +27,6 @@ class ValueDots extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('value_dot');
+        Schema::dropIfExists('basket');
     }
 }
