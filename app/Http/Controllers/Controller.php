@@ -12,20 +12,4 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public $form;
-
-    public function __construct()
-    {
-
-    }
-
-    public function index()
-    {
-        return $this->create("saasfasfsaf");
-    }
-
-    public function update(Request $request)
-    {
-        return $this->update("adsdasdasdadasd", [$request->id, "params"=>$request->params]);
-    }
 }

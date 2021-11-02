@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class MainBanner extends Migration
+class ProductBrands extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class MainBanner extends Migration
      */
     public function up()
     {
-        Schema::create('main_banner', function (Blueprint $table) {
-            $table->id();
-            $table->string("image");
+        Schema::create('product_brands', function (Blueprint $table) {
+
+            $table->foreignId("product_id")->constrained("products");
+            $table->foreignId("brand_id")->constrained("brands");
         });
     }
 
@@ -26,6 +27,6 @@ class MainBanner extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('main_banner');
+        Schema::dropIfExists('product_brands');
     }
 }

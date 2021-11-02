@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class MainBanner extends Migration
+class Currency extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class MainBanner extends Migration
      */
     public function up()
     {
-        Schema::create('main_banner', function (Blueprint $table) {
+        Schema::create('currency', function (Blueprint $table) {
             $table->id();
-            $table->string("image");
+            $table->bigInteger("price");
         });
     }
 
@@ -26,6 +26,6 @@ class MainBanner extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('main_banner');
+        Schema::dropIfExists('currency');
     }
 }
