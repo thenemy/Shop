@@ -4,15 +4,10 @@
 namespace App\View\Helper\DropDown\Items;
 
 
-class DropItem
+class DropItem extends BaseDropItem
 {
-    public $id;
-    public $name;
-
     public function __construct($id, $name)
     {
-        $this->id = $id;
-        $this->name = $name;
+        parent::__construct($id, $name);
     }
-
 }

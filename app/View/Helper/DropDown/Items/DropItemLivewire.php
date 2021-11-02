@@ -15,11 +15,16 @@ class DropItemLivewire implements DropItemInterfaces
     public $clicked;
     public $id;
 
-    public function __construct($id, string $name, string $class)
+    public function __construct($id, string $name, string $class) // nothing in the constructor // 4 abstract methods for name key type
     {
         $this->name = $name;
-        $this->clicked = sprintf(self::FORMAT, self::FUNCTION_NAME, $id, $this->encodePath($class));
+        $this->clicked = $this->dropSprintf();
         $this->id = $id;
+    }
+
+    public function dropSprintf(...$value): string
+    {
+        return $this->clicked = sprintf(self::FORMAT, $value);
     }
 
     static public function create_text($id, string $name, string $class)

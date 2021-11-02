@@ -7,30 +7,37 @@ namespace App\View\Helper\Form\Models\Base;
 use App\View\Helper\PATH\Abstracts\RouteHandler;
 use App\View\Helper\PATH\Interfaces\Admin\AdminBasicRoutesName;
 
-class BaseForm implements AdminBasicRoutesName
+// object is created two time in different places -> we need only one
+// in create & edit only two methods should be called
+// in params of create & edit should just be title name
+// in edit we should also be able to pass arr[]
+
+abstract class BaseForm implements AdminBasicRoutesName
 {
     public $title;
     public $save_route;
     public $back_route;
+    private $route_handler;
 
-    public function __construct($title, RouteHandler $routeHandler)
+    public function __construct()
+    {
+        $this->route_handler = $this->getRouteHandler();
+        $this->back_route = route($this->route_handler->getRoute(self::INDEX_ROUTE));
+        $this->save_route = route($this->route_handler->getRoute(self::STORE_ROUTE));
+    }
+
+    public function create($title): BaseForm
     {
         $this->title = $title;
-        $this->back_route = route($routeHandler->getRoute(self::INDEX_ROUTE));
-        $this->save_route = route($routeHandler->getRoute(self::STORE_ROUTE));
-
+        return $this;
     }
 
-    static public function update_construct($title, $id, RouteHandler $routeHandler = null): BaseForm
+    public function update($title, $params = []): BaseForm
     {
-        return self::update($title, $id, $routeHandler, []);
+        $this->create($title);
+        $this->save_route = route($this->route_handler->getRoute(self::UPDATE_ROUTE), $params);
+        return $this;
     }
 
-    static protected function update($title, $id, RouteHandler $routeHandler = null, $params = []): BaseForm
-    {
-        $new = new self($title, $routeHandler);
-        $array_id = [$id];
-        $new->save_route = route($routeHandler->getRoute(self::UPDATE_ROUTE), array_merge($array_id, $params));
-        return $new;
-    }
 }
+

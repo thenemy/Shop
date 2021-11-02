@@ -4,7 +4,7 @@
 namespace App\View\Helper\PATH\Abstracts;
 
 
-abstract  class RouteHandler
+abstract class RouteHandler
 {
     abstract protected function getName(): string;
 

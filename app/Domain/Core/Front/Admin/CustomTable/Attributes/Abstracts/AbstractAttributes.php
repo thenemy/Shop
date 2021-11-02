@@ -8,7 +8,6 @@ use App\Domain\Core\Front\Admin\CustomTable\Attributes\Interfaces\AttributesInte
 
 abstract class AbstractAttributes implements AttributesInterface
 {
-
     public $attribute;
     public $actions;
 
