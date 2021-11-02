@@ -13,8 +13,9 @@ class UserCreditData extends Migration
      */
     public function up()
     {
+
         Schema::create('user_credit_data', function (Blueprint $table) {
-            $table->foreignId('id')->primary()->constrained('users')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->foreignId('id')->unique()->constrained('users')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->string('name');
             $table->string('password');
             $table->string('phone');
