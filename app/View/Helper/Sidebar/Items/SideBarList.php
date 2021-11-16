@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Helper\SideBar\Items;
+namespace App\View\Helper\Sidebar\Items;
 
 class SideBarList extends SideBarBase
 {

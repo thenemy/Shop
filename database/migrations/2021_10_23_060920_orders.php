@@ -14,11 +14,12 @@ class Orders extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-           $table->id();
+            $table->id();
+            $table->timestamps();
             $table->integer('quantity');
             $table->json('order');
             $table->integer('price');
-            $table->timestamp();
+            $table->foreignId("product_id")->constrained("products");
         });
     }
 

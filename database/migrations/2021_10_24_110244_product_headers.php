@@ -14,8 +14,8 @@ class ProductHeaders extends Migration
     public function up()
     {
         Schema::create('product_headers', function (Blueprint $table) {
+            $table->id();
             $table->json('text');
-            $table->foreignId('product_id')->constrained('products')->onDelete('CASCADE')->onUpdate('CASCADE');
         });
     }
 

@@ -5,15 +5,15 @@ namespace App\Domain\Credits\Entities;
 
 
 use App\Domain\Core\Main\Entities\Entity;
-use App\Domain\Product\Entities\Product;
+use App\Domain\Product\Product\Entities\Product;
 
 class Credits extends Entity
 {
     protected $table = 'categories';
 
-    public function credits(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function product(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->hasMany(Product::class,'id');
+        return $this->belongsToMany(Product::class, 'product_credits');
     }
 
     public function getColumns(): array

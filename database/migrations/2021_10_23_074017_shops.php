@@ -14,7 +14,6 @@ class Shops extends Migration
     public function up()
     {
         Schema::create('shops', function (Blueprint $table) {
-
             $table->foreignId('id')->primary()->constrained('users')->onUpdate('CASCADE')->onDelete('CASCADE');
             $table->string("slug")->unique();
         });

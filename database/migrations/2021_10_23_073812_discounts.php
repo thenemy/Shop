@@ -14,9 +14,9 @@ class Discounts extends Migration
     public function up()
     {
         Schema::create('discounts', function (Blueprint $table) {
-
-            $table->integer('percentage');
             $table->id();
+            $table->integer('percentage');
+            $table->foreignId("product_id")->constrained("products");
         });
     }
 

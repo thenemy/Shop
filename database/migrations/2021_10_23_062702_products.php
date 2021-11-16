@@ -17,6 +17,8 @@ class Products extends Migration
             $table->id();
             $table->json('title');
             $table->bigInteger('price');
+            $table->smallInteger("currency");
+            $table->integer("number");
             $table->string("slug")->unique();
             $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('shop_id')->constrained('shop')->onUpdate('CASCADE')->onDelete('CASCADE');

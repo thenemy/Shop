@@ -16,5 +16,5 @@ interface AdminBasicRoutesName
     public const STORE_ROUTE = "admin.change.store";
     public const UPDATE_ROUTE = "admin.change.update";
 
-    public function getRouteHandler(): RouteHandler;
+
 }
