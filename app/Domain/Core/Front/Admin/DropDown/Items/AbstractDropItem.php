@@ -4,7 +4,9 @@
 namespace App\View\Helper\DropDown\Items;
 
 
-abstract class BaseDropItem
+use App\View\Helper\DropDown\Interfaces\DropItemInterfaces;
+
+abstract class AbstractDropItem implements DropItemInterfaces
 {
     public $id;
     public $name;
@@ -15,12 +17,5 @@ abstract class BaseDropItem
         $this->name = $name;
     }
 
-    abstract public function setName();
-
-    abstract public function setKey();
-
-    abstract public function setType();
-
-    abstract public function setItems();
 
 }
