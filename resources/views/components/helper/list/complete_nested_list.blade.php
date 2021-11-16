@@ -1,4 +1,4 @@
-@extends("components.helper.list.base_complete_list")
+@extends("components.helper.table.base_complete_list")
 @section("action")
     <div class="self-stretch flex flex-row justify-between">
         <div>

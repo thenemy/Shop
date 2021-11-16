@@ -1,6 +1,6 @@
 @props([
 "name"=>"Default",
-"list"=>[],
+"table"=>[],
 ])
 <link rel="stylesheet" href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"/>
 

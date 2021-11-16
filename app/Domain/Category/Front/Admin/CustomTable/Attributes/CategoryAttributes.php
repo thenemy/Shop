@@ -18,14 +18,9 @@ class CategoryAttributes extends AbstractAttributes
         return [
             new ImageAttribute($entity->icon, "icon"),
             new TextAttribute($entity, "name"),
-        ];
-    }
-
-
-    public function getActions($entity): array
-    {
-        return [
             new CategoryAcceptAction()
         ];
     }
 }
+
+

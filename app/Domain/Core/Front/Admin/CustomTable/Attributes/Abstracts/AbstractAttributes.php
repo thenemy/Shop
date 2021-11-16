@@ -14,6 +14,5 @@ abstract class AbstractAttributes implements AttributesInterface
     public function __construct($entity)
     {
         $this->attribute = $this->getAttributes($entity);
-        $this->actions = $this->getActions($entity);
     }
 }

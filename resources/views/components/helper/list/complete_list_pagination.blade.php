@@ -1,4 +1,4 @@
-@extends("components.helper.list.complete_list")
+@extends("components.helper.table.complete_list")
 @section("pagination")
     {{$list->paginate->links()}}
 @endsection

@@ -6,7 +6,7 @@ namespace App\Domain\Credits\Entities;
 
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Product\Product\Entities\Product;
-
+ // take into account how much user is paid and how much is remained
 class Credits extends Entity
 {
     protected $table = 'categories';

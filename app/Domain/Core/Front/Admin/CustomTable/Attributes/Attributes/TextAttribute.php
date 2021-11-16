@@ -7,8 +7,10 @@ use App\Domain\Core\Front\Admin\CustomTable\Attributes\Abstracts\BaseAttributes;
 
 class TextAttribute extends BaseAttributes
 {
-    public function getType():int
+
+
+    public function generateHtml()
     {
-        return self::STRING_TYPE;
+      return "<x-helper.text.title>sadad sad asdsad sad  </x-helper.text.title>";
     }
 }

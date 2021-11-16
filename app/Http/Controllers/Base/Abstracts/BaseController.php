@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Base\Abstracts;
 
+use App\Domain\Core\Front\Admin\CustomTable\Abstracts\AbstractTable;
+use App\Domain\Core\Front\Admin\Routes\Interfaces\RoutesInterface;
 use App\Domain\Core\Main\Entities\Entity;
 use App\Http\Controllers\Base\Interfaces\ControllerInterface;
 use App\Http\Controllers\Controller;
@@ -21,12 +23,16 @@ use Illuminate\Http\Request;
 abstract class BaseController extends Controller implements ControllerInterface
 {
     private $service;
-    private $list;
+    private $table;
     private $form;
     private $path = "admin.";
-    public function createDirectory(){
+    private $entity;
+
+    public function createDirectory()
+    {
 
     }
+
     public function getPath(): string
     {
         return $this->path . strtolower($this->getClassName()) . ".";
@@ -34,9 +40,15 @@ abstract class BaseController extends Controller implements ControllerInterface
 
     public function __construct()
     {
+        $this->entity = $this->getNewEntity();
         $this->form = $this->getForm();
-        $this->list = $this->getTable();
+        $this->table = $this->getTable();
         $this->service = $this->getService();
+    }
+
+    public function getTable(): AbstractTable
+    {
+        return;
     }
 
     private function getClassName(): string
@@ -58,16 +70,16 @@ abstract class BaseController extends Controller implements ControllerInterface
 
     public function getIndex(FormRequest $request)
     {
-        return view($this->getPath() . "index",
+        return view($this->getPath() . RoutesInterface::INDEX,
             [
-                "list" => $this->list
+                "table" => $this->table
             ]
         );
     }
 
     public function getCreate($params = [])
     {
-        return view($this->getPath() . 'create', [
+        return view($this->getPath() . RoutesInterface::CREATE, [
             "form" => $this->form->create()
         ]);
     }
@@ -90,7 +102,7 @@ abstract class BaseController extends Controller implements ControllerInterface
     public function getEdit(FormRequest $formRequest, $id, $params = [])
     {
         $entity = $this->getEntity($id);
-        return view($this->getPath() . "edit",
+        return view($this->getPath() . RoutesInterface::EDIT,
             [
                 "form" => $this->form->update($params)
             ]

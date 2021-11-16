@@ -8,8 +8,9 @@ use App\Domain\Core\Front\Admin\CustomTable\Attributes\Abstracts\AbstractAttribu
 
 interface TableInterface
 {
-    // ordering is important
-    public function getColumnsName(): array;
+    const TABLE_COMPONENT = "<x-helper.table.table :table='%s' />";
 
-    public function getRowsName($item): AbstractAttributes;
+    // ordering is important
+    public function getColumns(): array;
+
 }

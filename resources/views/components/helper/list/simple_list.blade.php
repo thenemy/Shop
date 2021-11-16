@@ -1,4 +1,4 @@
-@props(["list" => []])
+@props(["table" => []])
 <table class="table-auto border-collapse border w-full">
     <tr class="w-8/12">
         <th class="p-2 border">№</th>

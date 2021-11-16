@@ -8,13 +8,13 @@ use App\Domain\Core\Front\Admin\CustomTable\Interfaces\TableInterface;
 
 abstract class AbstractTable implements TableInterface
 {
-    public $attributes;
-    public $pagination;
+    public $columns;
+    public $list;
+
     public function __construct($entities)
     {
-        $this->pagination = $entities;
-        $this->attributes = $entities->map(function ($item){
-            return $this->getRowsName($item);
-        });
+        $this->list = $entities;
+        $this->columns = $this->getColumns();
     }
+
 }

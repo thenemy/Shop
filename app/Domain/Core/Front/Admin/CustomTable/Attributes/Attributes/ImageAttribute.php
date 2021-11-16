@@ -12,8 +12,9 @@ class ImageAttribute extends BaseAttributes
         parent::__construct($entity, $key);
     }
 
-    public function getType(): int
+
+    public function generateHtml(): string
     {
-        return self::IMAGE_TYPE;
+        return sprintf("<x-helper.image.image_table value='%s' />", $this->getValue());
     }
 }
