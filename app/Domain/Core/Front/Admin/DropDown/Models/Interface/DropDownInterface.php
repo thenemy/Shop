@@ -7,7 +7,7 @@ use App\View\Helper\DropDown\Models\Base\DropDown;
 
 interface DropDownInterface
 {
-    static public function getDropDown():DropDown;
 
+    static public function getDropDown(): DropDown;
 }
 

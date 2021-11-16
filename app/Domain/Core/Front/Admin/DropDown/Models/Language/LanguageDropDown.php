@@ -19,12 +19,9 @@ class LanguageDropDown implements DropDownLivewireInterface, DropDownInterface
 {
     return [
         new DropDown(
-            "Выберите язык для записи",
-            "lang",
-            "number",
-            [
-                new DropItemLivewire( LanguageInterface::RUSSIAN,"Руский",  self::class),
-                new DropItemLivewire( LanguageInterface::ENGLISH,"English", self::class),
+            (string)[
+                new DropItemLivewire(LanguageInterface::RUSSIAN, "Руский", self::class),
+                new DropItemLivewire(LanguageInterface::ENGLISH, "English", self::class),
                 new DropItemLivewire(LanguageInterface::UZBEK, "Uzbek", self::class)
             ]
         )
@@ -34,10 +31,7 @@ class LanguageDropDown implements DropDownLivewireInterface, DropDownInterface
     static public function getDropDown(): DropDown
 {
     return new DropDown(
-        "Выберите язык для записи",
-        "lang",
-        "number",
-        [
+        (string)[
             new DropItem(LanguageInterface::RUSSIAN, "Руский"),
             new DropItem(LanguageInterface::ENGLISH, "English"),
             new DropItem(LanguageInterface::UZBEK, "Uzbek")
