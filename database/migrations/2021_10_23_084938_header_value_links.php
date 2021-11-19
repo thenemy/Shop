@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ValueLinks extends Migration
+class HeaderValueLinks extends Migration
 {
     /**
      * Run the migrations.

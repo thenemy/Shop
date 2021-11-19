@@ -14,7 +14,9 @@ class OrderLocations extends Migration
     public function up()
     {
         Schema::create('order_locations', function (Blueprint $table) {
-            $table->foreignId('order_id')->primary()->constrained('orders')->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->foreignId('order_id')
+                ->primary()
+                ->constrained('orders')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->float("latitude");
             $table->float('longitude');
         });

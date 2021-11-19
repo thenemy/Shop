@@ -7,6 +7,7 @@ use App\Domain\Core\Front\Admin\CustomTable\Attributes\Interfaces\AttributeInter
 
 abstract class BaseAttributes implements AttributeInterface
 {
+    static protected $object;
     public $key;
     public $entity;
 
@@ -22,5 +23,13 @@ abstract class BaseAttributes implements AttributeInterface
         return $this->entity->$key;
     }
 
+    static public function preGenerate($entity, $key): string
+    {
+        if (!self::$object) {
+            $class = get_called_class();
+            self::$object = new $class($entity, $key);
+        }
+        return self::$object->generateHtml();
+    }
 
 }

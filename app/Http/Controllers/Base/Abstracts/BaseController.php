@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Base\Abstracts;
 
+use App\Domain\Core\File\Models\FileBladeCreator;
+use App\Domain\Core\File\Models\FileLivewireCreator;
 use App\Domain\Core\Front\Admin\CustomTable\Abstracts\AbstractTable;
 use App\Domain\Core\Front\Admin\Routes\Interfaces\RoutesInterface;
 use App\Domain\Core\Main\Entities\Entity;
+use App\Domain\Core\Text\Traits\CaseConverter;
 use App\Http\Controllers\Base\Interfaces\ControllerInterface;
 use App\Http\Controllers\Controller;
 use App\View\Helper\DropDown\Models\Base\DropDown;
@@ -20,35 +23,24 @@ use Illuminate\Http\Request;
 // There will be extension of this controller for nested Controller
 // There will be created livewire components dynamically
 //
+
+/// first create livewire
+///
+/// second create all blades
 abstract class BaseController extends Controller implements ControllerInterface
 {
+    use CaseConverter;
+
     private $service;
-    private $table;
+
     private $form;
     private $path = "admin.";
     private $entity;
 
-    public function createDirectory()
-    {
-
-    }
 
     public function getPath(): string
     {
-        return $this->path . strtolower($this->getClassName()) . ".";
-    }
-
-    public function __construct()
-    {
-        $this->entity = $this->getNewEntity();
-        $this->form = $this->getForm();
-        $this->table = $this->getTable();
-        $this->service = $this->getService();
-    }
-
-    public function getTable(): AbstractTable
-    {
-        return;
+        return $this->path . $this->toSnackCase($this->getClassName()) . ".";
     }
 
     private function getClassName(): string
@@ -56,6 +48,16 @@ abstract class BaseController extends Controller implements ControllerInterface
         $to_parts = explode("\\", $this->getEntityClass());
         return end($to_parts);
     }
+
+    public function __construct()
+    {
+        $this->entity = $this->getNewEntity();
+        $this->form = $this->getForm();
+        $this->service = $this->getService();
+        $createLivewire = new FileLivewireCreator($this->getClassName(), $this);
+        $createBlades = new FileBladeCreator($this->getClassName());
+    }
+
 
     private function getEntity($id)
     {
@@ -68,13 +70,16 @@ abstract class BaseController extends Controller implements ControllerInterface
         return new $base();
     }
 
-    public function getIndex(FormRequest $request)
+
+
+    //// MAIN FUNCTIONS
+    ///
+    ///
+    ///
+
+    public function getIndex(Request $request)
     {
-        return view($this->getPath() . RoutesInterface::INDEX,
-            [
-                "table" => $this->table
-            ]
-        );
+        return view($this->getPath() . RoutesInterface::INDEX);
     }
 
     public function getCreate($params = [])

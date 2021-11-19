@@ -18,10 +18,14 @@ class TakenCredits extends Migration
             $table->timestamps();
             $table->boolean('is_paid');
             $table->bigInteger('initial_price');
-            $table->timestamp('date_taken');
-            $table->timestamp('date_finish');
+            $table->dateTime('date_taken');
+            $table->dateTime('date_finish');
             $table->smallInteger("day_payment");
-            $table->foreignId("user_credit_data_id")->constrained("user_credit_datas");
+            $table->time("time_payment"); // from hh:mm:ss to HH:mm
+            $table->foreignId("user_credit_data_id")->constrained("user_credit_datas")
+                ->onDelete("restrict");
+            $table->foreignUuid("plastic_id")->constrained("plastic_user_cards")
+                ->onDelete("restrict");
             $table->foreignId("credit_id")->constrained("credits")->onDelete("restrict");
             $table->foreignId('order_id')->constrained('orders')->onUpdate('CASCADE')->onDelete('CASCADE');
 

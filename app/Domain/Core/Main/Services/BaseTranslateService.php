@@ -6,7 +6,7 @@ namespace App\Domain\Core\Main\Services;
 
 use App\Domain\Core\Language\Traits\ConvertLanguage;
 
-abstract  class BaseTranslateService extends BaseService
+abstract class BaseTranslateService extends BaseService
 {
     use ConvertLanguage;
 

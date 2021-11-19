@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Domain\Core\Front\Admin\Form\Models\Abstracts;
+namespace App\Domain\Core\Front\Admin\Form\Abstracts;
 
 
 use App\Domain\Core\Front\Admin\Routes\Abstracts\RouteHandler;
@@ -25,7 +25,7 @@ abstract class AbstractForm implements AdminBasicRoutesName
 
     public function create($params = []): AbstractForm
     {
-        $this->title = "Создать новый " . $this->getTitle();
+        $this->title = __("Создать новый") . " " . $this->getTitle();
         $this->route_save = route($this->route_handler->getRoute(self::STORE_ROUTE), $params);
         return $this;
     }
@@ -34,7 +34,7 @@ abstract class AbstractForm implements AdminBasicRoutesName
 
     public function update($params = []): AbstractForm
     {
-        $this->title = "Обновить " . $this->getTitle();
+        $this->title = __("Обновить") . " ". $this->getTitle();
         $this->route_save = route($this->route_handler->getRoute(self::UPDATE_ROUTE), $params);
         return $this;
     }

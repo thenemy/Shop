@@ -10,7 +10,7 @@ trait Translatable
 {
     public function getTranslatable(string $key): ?string
     {
-        if (($entities = $this->getTranslatable($key))->isEmpty())
+        if (($entities = $this->getTranslations($key))->isEmpty())
             return null;
         return $entities[app()->getLocale()] ?? ($entities[config("app.fallback_locale")] ?? $entities->first());
     }
@@ -24,7 +24,7 @@ trait Translatable
 
     private function getTranslations(string $key): ?Collection
     {
-        $source = nulll;
+        $source = null;
         if (isset($this->original[$key]))
             $source = $this->original[$key];
         if (!isset($source) && isset($this->attributes[$key])) {
@@ -54,7 +54,7 @@ trait Translatable
         return json_encode((object)array_merge($existing, $value), JSON_UNESCAPED_UNICODE);
     }
 
-    private function checkIfStringExists($value)
+    private function checkIfStringExists($value): bool
     {
         return is_string($value) && !empty($value);
     }

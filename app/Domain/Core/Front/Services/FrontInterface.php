@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Core\Main\Interfaces;
+namespace App\Domain\Core\Front\Services;
 
 // AttributesInterface where will be stored all types
 // ColumnInterface where will be stored all column types

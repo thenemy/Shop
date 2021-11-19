@@ -10,10 +10,11 @@ use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\ImageAttribute
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\StatusAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
 use App\Domain\Core\Front\Admin\Routes\Interfaces\RoutesInterface;
-use App\Domain\Core\Main\Interfaces\FrontInterface;
-use App\Domain\Core\Media\Traits\MediaTrait;
+use App\Domain\Core\Front\Interfaces\FrontEntityInterface;
+use App\Domain\Core\Front\Traits\ProvideService;
 
-class CategoryIndex extends Category implements FrontInterface
+
+class CategoryIndex extends Category
 {
 
 //    write all mutators required for table
@@ -23,15 +24,15 @@ class CategoryIndex extends Category implements FrontInterface
 //
     public function getIconImageAttribute(): string
     {
-        return (new ImageAttribute($this, 'icon'))->generateHtml();
+        return ImageAttribute::preGenerate($this, "icon");
     }
 
-    public function getNameTableAttribute()
+    public function getNameTableAttribute(): string
     {
-        return new TextAttribute($this, "text");
+        return TextAttribute::preGenerate($this, "text");
     }
 
-    public function getStatusTableAttribute()
+    public function getStatusTableAttribute(): string
     {
         return "";
     }
@@ -39,7 +40,7 @@ class CategoryIndex extends Category implements FrontInterface
     static public function getFilter(): array
     {
         // must return filters which will be used
-        return;
+        return [];
     }
 
     // not neccessary because mutators will be created
@@ -56,7 +57,7 @@ class CategoryIndex extends Category implements FrontInterface
 
     public function livewireComponents(): array
     {
-        // TODO: Implement livewireComponents() method.
+        return [];
     }
 
     // get Open button with all required data
@@ -72,19 +73,6 @@ class CategoryIndex extends Category implements FrontInterface
     }
 
 
-    // move somewhere else
-    public function setIconImageAttribute($value)
-    {
-        if ($this->icon) {
-            $this->icon->icon = $value;
-            $this->icon->save();
-        } else {
-            $icon = new IconCat();
-            $icon->category()->associate($this->id);
-            $icon->icon = $value;
-            $icon->save();
-        }
-    }
 
     static public function getTitles(): array
     {
@@ -95,9 +83,12 @@ class CategoryIndex extends Category implements FrontInterface
         ];
     }
 
+//
+//
+//    static public function getColumns(): array
+//    {
+//        return [];
+//    }
 
-    static public function getColumns(): array
-    {
-        // TODO: Implement getColumns() method.
-    }
+
 }

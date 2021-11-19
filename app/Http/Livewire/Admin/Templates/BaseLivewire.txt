@@ -1,0 +1,33 @@
+<?php
+// namespace  will start with
+namespace %s
+
+use App\Http\Livewire\Admin\Base\Abstracts\BaseLivewire;
+
+class %s extends BaseLivewire
+{
+    public function getPath()
+    {
+        return '%s';
+    }
+
+    public function getVariable()
+    {
+        $this->includeSearch();
+        $table = $this->getTable();
+        $entity = $this->getEntity();
+        return [
+            "table" => new $table($entity::filterBy($this->filterBy)->paginate($this->paginate))
+        ];
+    }
+
+    public function getTable(){
+        return '%s';
+    }
+
+    public function getEntity(){
+        return '%s';
+    }
+
+   %s
+}

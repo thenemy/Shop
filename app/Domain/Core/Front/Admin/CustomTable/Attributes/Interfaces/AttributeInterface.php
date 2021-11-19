@@ -9,4 +9,7 @@ interface AttributeInterface
     public function generateHtml();
 
     public function getValue();
+
+
+    static public function preGenerate($entity, $key);
 }
