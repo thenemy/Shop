@@ -13,7 +13,7 @@ class TextAttribute extends BaseAttributes
 {
     public function generateHtml()
     {
-        $text = new Test("adadasfasfas");
+        $text = new Test($this->getValue());
         return $text->render()->with($text->data());
     }
 }

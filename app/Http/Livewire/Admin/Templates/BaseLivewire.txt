@@ -7,10 +7,10 @@ use App\Http\Livewire\Admin\Base\Abstracts\BaseLivewire;
 class %s extends BaseLivewire
 {
 
-
+   %s //3
     public function getPath()
     {
-        return '%s'; //3
+        return '%s'; //4
     }
 
     public function getVariable()
@@ -20,18 +20,18 @@ class %s extends BaseLivewire
         $entity = $this->getEntity();
         return [
             "table" => new $table($entity::filterBy($this->filterBy)->paginate($this->paginate)),
-             %s //4
+             %s //5
         ];
     }
 
     public function getTable(){
-        return '%s'; //5
-    }
-
-    public function getEntity(){
         return '%s'; //6
     }
 
-   %s //7
+    public function getEntity(){
+        return '%s'; //7
+    }
+
+
 
 }

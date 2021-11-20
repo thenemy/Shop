@@ -61,7 +61,7 @@ class FileLivewireCreator extends AbstractFileManager implements LivewireCreator
 
     protected function getEntityClass(): string
     {
-        return $this->controller->getEntityClass();
+        return $this->controller->getIndexEntity();
     }
 
     protected function openIndexBlade()
@@ -121,11 +121,12 @@ class FileLivewireCreator extends AbstractFileManager implements LivewireCreator
         return sprintf($file_from,
             $this->getNamespace(),
             $this->getLivewireClassName(),
+            $this->getFunctions(),
             $this->getBladePath(),
+            $this->initializeVariables(),
             $this->getTableClass(),
             $this->getEntityClass(),
-            $this->getFunctions(),
-            $this->initializeVariables()
+
         );
     }
 

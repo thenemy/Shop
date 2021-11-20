@@ -14,21 +14,23 @@ trait FunctionGenerate
 
     abstract static public function getVariable(): string;
 
-    static public function toRealVariable(): string
+    abstract static public function getVariableBlade(): string;
+
+    static public function toRealBlade(): string
     {
-        return "$" . self::getVariable();
+        return "$" . self::getVariableBlade();
     }
 
-    private function thisVariable()
+    protected function toThisVariable(): string
     {
-        return "$" . "this" . '->' . self::getVariable();
+        return "$" . "this" . "->" . $this->getVariable();
     }
 
     abstract protected function initializeFunction();
 
     public function generateInitialization(): string
     {
-        return $this->thisVariable() . '=' . $this->initializeFunction() . ";";
+        return sprintf("'%s' => %s", $this->getVariableBlade(), $this->initializeFunction());
     }
 
     public function generateVariable(): string
@@ -36,12 +38,8 @@ trait FunctionGenerate
         return sprintf(FunctionInterface::VARIABLE_TEMPLATE, $this->getVariable());
     }
 
-    public function generateFunction(): string
-    {
-        return sprintf(FunctionInterface::FUNCTION_TEMPLATE,
-            $this->getFunctionName(),
-            $this->formatArguments());
-    }
+
+   abstract public function generateFunction(): string;
 
     private function formatArguments(): string
     {
