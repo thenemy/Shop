@@ -15,10 +15,18 @@ class ProductOfDays extends Migration
     {
         Schema::create('product_of_days', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('start_time');
-            $table->timestamp('end_time');
+            $table->dateTime('start_time');
+            $table->dateTime('end_time');
         });
     }
+    /**
+     * use trigger to remove product offer after 24 hours
+     * BEGIN
+         DO SLEEP(<seconds>);
+         UPDATE ...;
+       END
+     *
+     */
 
     /**
      * Reverse the migrations.

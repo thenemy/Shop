@@ -14,9 +14,12 @@ class ProductsProductOfDays extends Migration
     public function up()
     {
         Schema::create('products_product_of_days', function (Blueprint $table) {
-
-            $table->foreignId("product_of_day_id")->constrained("product_of_days")->onDelete('CASCADE')->onUpdate('CASCADE');
-            $table->foreignId("product_id")->constrained("products")->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->foreignId("product_of_day_id")->constrained("product_of_days")
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
+            $table->foreignId("product_id")->constrained("products")
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
             $table->primary(['product_of_day_id','product_id']);
         });
     }

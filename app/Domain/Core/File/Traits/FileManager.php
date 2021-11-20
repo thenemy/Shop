@@ -2,7 +2,9 @@
 
 namespace App\Domain\Core\File\Traits;
 
-class FileManager
+use Illuminate\Support\Facades\Log;
+
+trait FileManager
 {
     //I will extend my controller the controller will get all necessary data
     //Then I will create the blade with all fields required
@@ -35,13 +37,20 @@ class FileManager
     {
         $folder = explode("/", $path);
         array_pop($folder);
+
         return $this->checkFileExistence($folder);
     }
 
     public function createDirectory($path)
     {
-        mkdir($path);
+        try {
+            mkdir("../" . $path);
+        } catch (\Exception $exception) {
+
+        }
+
     }
+
 
 }
 

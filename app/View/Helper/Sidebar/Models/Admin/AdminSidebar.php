@@ -4,6 +4,7 @@
 namespace App\View\Helper\Sidebar\Models\Admin;
 
 
+use App\Domain\Core\Front\Admin\Routes\Models\CategoryRouteHandler;
 use App\View\Helper\PATH\Abstracts\RouteHandler;
 use App\View\Helper\PATH\Interfaces\Admin\AdminBasicRoutesName;
 use App\View\Helper\SideBar\Interfaces\SideBarFactoryInterface;
@@ -15,11 +16,7 @@ class AdminSidebar implements SideBarFactoryInterface
     static public function sideBars(): array
     {
         return [
-            new SideBarList("Баннеры", [
-                new SideBar("aaa", self::getRoute(new CategoryRouteHandler())),
-                new SideBar("sss", self::getRoute(new CategoryRouteHandler()))
-            ], self::getRoute(new BannerRouteHandler())),
-            new SideBar("Категории", self::getRoute(new CategoryRouteHandler())),
+            new SideBar("Категории",new CategoryRouteHandler())
         ];
     }
 

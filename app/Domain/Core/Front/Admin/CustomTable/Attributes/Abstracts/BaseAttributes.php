@@ -22,5 +22,12 @@ abstract class BaseAttributes implements AttributeInterface
         return $this->entity->$key;
     }
 
+    static public function preGenerate($entity, $key): string
+    {
+
+        $class = get_called_class();
+        $object = new $class($entity, $key);
+        return $object->generateHtml();
+    }
 
 }

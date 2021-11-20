@@ -14,7 +14,6 @@ class ProductHeaderTextValues extends Migration
     public function up()
     {
         Schema::create('product_header_text_values', function (Blueprint $table) {
-            $table->id();
             $table->foreignId("link_id")->constrained("header_value_links");
             $table->foreignId("product_id")->constrained("products");
             $table->primary(["product_id", "link_id"]);

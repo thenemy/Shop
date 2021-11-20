@@ -9,6 +9,7 @@ use App\Domain\Core\Front\Admin\Attributes\Models\Column;
 use App\Domain\Core\Front\Admin\CustomTable\Abstracts\AbstractTable;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Abstracts\AbstractAttributes;
 
+// only this is needed
 class CategoryTable extends AbstractTable
 {
     public function getColumns(): array

@@ -15,7 +15,7 @@ class ProductsProductStats extends Migration
     {
         Schema::create('products_product_stats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("status")->constrained("product_stats");
+            $table->foreignId("status")->constrained("product_stats", "status");
             $table->foreignId("product_id")->constrained("products")->onDelete('CASCADE')->onUpdate('CASCADE');
         });
     }

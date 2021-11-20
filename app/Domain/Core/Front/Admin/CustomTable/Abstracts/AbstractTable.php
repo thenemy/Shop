@@ -10,10 +10,11 @@ abstract class AbstractTable implements TableInterface
 {
     public $columns;
     public $list;
-
+    public $paginate;
     public function __construct($entities)
     {
         $this->list = $entities;
+        $this->paginate = $entities;
         $this->columns = $this->getColumns();
     }
 

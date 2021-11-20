@@ -1,26 +1,19 @@
 <?php
 
 
-namespace App\View\Helper\DropDown\Items;
+namespace App\Domain\Core\Front\Admin\DropDown\Items;
 
+use App\Domain\Core\Front\Admin\DropDown\Interfaces\DropItemInterfaces;
 
-use App\View\Helper\DropDown\Interfaces\DropItemInterfaces;
-
-class DropItem extends AbstractDropItem implements DropItemInterfaces
+class DropItem
 {
+    public $id;
+    public $name;
+
     public function __construct($id, $name)
     {
-        parent::__construct($id, $name);
+        $this->id = $id;
+        $this->name = $name;
     }
 
-
-    function setType()
-    {
-
-    }
-
-    public function getFormat(): string
-    {
-       return self::FORMAT;
-    }
 }

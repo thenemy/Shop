@@ -14,8 +14,7 @@ class ProductStats extends Migration
     public function up()
     {
         Schema::create('product_stats', function (Blueprint $table) {
-            $table->integer('status')->primary();
-
+            $table->bigInteger('status')->unsigned()->primary();
         });
     }
 

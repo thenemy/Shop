@@ -14,7 +14,7 @@ class Roles extends Migration
     public function up()
     {
         Schema::create('roles', function (Blueprint $table) {
-            $table->integer('role')->primary();
+            $table->bigInteger('role')->unsigned()->primary();
         });
     }
 

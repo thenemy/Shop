@@ -13,7 +13,7 @@ class Products extends Migration
      */
     public function up()
     {
-        Schema::create('product', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->json('title');
             $table->bigInteger('price');
@@ -21,7 +21,7 @@ class Products extends Migration
             $table->integer("number");
             $table->string("slug")->unique();
             $table->foreignId('category_id')->constrained('categories');
-            $table->foreignId('shop_id')->constrained('shop')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreignId('shop_id')->constrained('users')->onUpdate('CASCADE')->onDelete('CASCADE');
         });
     }
 

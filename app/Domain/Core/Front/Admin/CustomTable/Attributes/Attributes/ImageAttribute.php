@@ -7,6 +7,7 @@ use App\Domain\Core\Front\Admin\CustomTable\Attributes\Abstracts\BaseAttributes;
 
 class ImageAttribute extends BaseAttributes
 {
+
     public function __construct($entity, $key = "image")
     {
         parent::__construct($entity, $key);
@@ -17,4 +18,6 @@ class ImageAttribute extends BaseAttributes
     {
         return sprintf("<x-helper.image.image_table value='%s' />", $this->getValue());
     }
+
+
 }

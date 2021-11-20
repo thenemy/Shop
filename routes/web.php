@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/admin', function () {
+Route::group([
+    "prefix" => LaravelLocalization::setLocale(),
+    "middleware" => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
+],
+    function () {
+
+    }
+);
+
+Route::get('/', [\App\Http\Controllers\Admin\CategoryController::class, "index"])->name('admin.category.index');
+Route::get('/adminasd', function () {
     return view('admin');
 });
