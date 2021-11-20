@@ -3,10 +3,11 @@
 namespace App\Domain\Core\Front\Admin\DropDown\Models\Paginator;
 
 use App\Domain\Core\Front\Admin\DropDown\Abstracts\AbstractDropDown;
+use App\Domain\Core\Front\Admin\DropDown\Abstracts\AbstractLivewireDropDown;
 use App\Domain\Core\Front\Admin\DropDown\Items\DropLivewireItem;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Traits\FunctionGenerate;
 
-class PaginatorDropDown extends AbstractDropDown
+class PaginatorDropDown extends AbstractLivewireDropDown
 {
     use FunctionGenerate;
 
@@ -52,7 +53,7 @@ class PaginatorDropDown extends AbstractDropDown
 
     public function generateHtml(): string
     {
-        return sprintf("<x-helper.drop_down.drop_down_livewire :drop='%s' />", self::toRealVariable());
+        return sprintf("<x-helper.drop_down.drop_down_livewire :drop='%s' />", self::toRealBlade());
     }
 
     static public function getFunctionName(): string
@@ -69,11 +70,11 @@ class PaginatorDropDown extends AbstractDropDown
 
     static public function getVariable(): string
     {
-        return "notPaginator";
+        return "selected_value";
     }
-
-    protected function initializeFunction(): string
+    
+    static public function getVariableBlade(): string
     {
-        return "\\" . self::class . "::" . "getDropDown()";
+        return "name_blade";
     }
 }

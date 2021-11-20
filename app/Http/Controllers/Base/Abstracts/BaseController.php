@@ -83,8 +83,8 @@ abstract class BaseController extends Controller implements ControllerInterface
 
     public function getIndex(Request $request)
     {
-//        $createLivewire = new FileLivewireCreator($this->getClassName(), $this, $this->getNewEntityIndex());
-//        $createBlades = new FileBladeCreator($this->getClassName(), $createLivewire);
+        $createLivewire = new FileLivewireCreator($this->getClassName(), $this, $this->getNewEntityIndex());
+        $createBlades = new FileBladeCreator($this->getClassName(), $createLivewire);
 
         return view($this->getPath() . RoutesInterface::INDEX);
     }

@@ -33,7 +33,7 @@ class CategoryIndex extends Category implements FrontEntityInterface
 
     public function getNameTableAttribute(): string
     {
-        return TextAttribute::preGenerate($this, "text");
+        return TextAttribute::preGenerate($this, "name");
     }
 
     public function getStatusTableAttribute(): string

@@ -5,6 +5,7 @@ namespace App\Domain\Core\Front\Admin\DropDown\Abstracts;
 use App\Domain\Core\Front\Admin\Attributes\Interfaces\AttributeFormInterface;
 use App\Domain\Core\Front\Admin\DropDown\Interfaces\DropDownInterface;
 use App\Domain\Core\Front\Admin\DropDown\Interfaces\DropDownMainInterface;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Traits\FunctionGenerate;
 
 abstract class AbstractDropDown implements DropDownInterface, DropDownMainInterface, AttributeFormInterface
 {
