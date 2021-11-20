@@ -1,7 +1,7 @@
 @extends("layout.layout")
 
 @section("header")
-    <x-auth.common.header/>
+{{--    <x-auth.common.header/>--}}
 @endsection
 @section("body")
     <div class="m-5 flex flex-row">

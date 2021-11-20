@@ -1280,7 +1280,7 @@ module.exports = (
   // Standard browser envs support document.cookie
     (function standardBrowserEnv() {
       return {
-        write: function write(name, value, expires, pathMain, domain, secure) {
+        write: function write(name, value, expires, path, domain, secure) {
           var cookie = [];
           cookie.push(name + '=' + encodeURIComponent(value));
 
@@ -5171,7 +5171,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * @param {Array|string} path The path of the property to get.
      * @returns {*} Returns the resolved value.
      */
-    function baseGet(object, pathMain) {
+    function baseGet(object, path) {
       path = castPath(path, object);
 
       var index = 0,
@@ -5356,7 +5356,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * @param {Array} args The arguments to invoke the method with.
      * @returns {*} Returns the result of the invoked method.
      */
-    function baseInvoke(object, pathMain, args) {
+    function baseInvoke(object, path, args) {
       path = castPath(path, object);
       object = parent(object, path);
       var func = object == null ? object : object[toKey(last(path))];
@@ -5716,7 +5716,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * @param {*} srcValue The value to match.
      * @returns {Function} Returns the new spec function.
      */
-    function baseMatchesProperty(pathMain, srcValue) {
+    function baseMatchesProperty(path, srcValue) {
       if (isKey(path) && isStrictComparable(srcValue)) {
         return matchesStrictComparable(toKey(path), srcValue);
       }
@@ -5903,7 +5903,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * @returns {Object} Returns the new object.
      */
     function basePick(object, paths) {
-      return basePickBy(object, paths, function(value, pathMain) {
+      return basePickBy(object, paths, function(value, path) {
         return hasIn(object, path);
       });
     }
@@ -5923,7 +5923,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
           result = {};
 
       while (++index < length) {
-        var pathMain = paths[index],
+        var path = paths[index],
             value = baseGet(object, path);
 
         if (predicate(value, path)) {
@@ -5940,7 +5940,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * @param {Array|string} path The path of the property to get.
      * @returns {Function} Returns the new accessor function.
      */
-    function basePropertyDeep(pathMain) {
+    function basePropertyDeep(path) {
       return function(object) {
         return baseGet(object, path);
       };
@@ -6121,7 +6121,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * @param {Function} [customizer] The function to customize path creation.
      * @returns {Object} Returns `object`.
      */
-    function baseSet(object, pathMain, value, customizer) {
+    function baseSet(object, path, value, customizer) {
       if (!isObject(object)) {
         return object;
       }
@@ -6472,7 +6472,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * @param {Array|string} path The property path to unset.
      * @returns {boolean} Returns `true` if the property is deleted, else `false`.
      */
-    function baseUnset(object, pathMain) {
+    function baseUnset(object, path) {
       path = castPath(path, object);
       object = parent(object, path);
       return object == null || delete object[toKey(last(path))];
@@ -6488,7 +6488,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * @param {Function} [customizer] The function to customize path creation.
      * @returns {Object} Returns `object`.
      */
-    function baseUpdate(object, pathMain, updater, customizer) {
+    function baseUpdate(object, path, updater, customizer) {
       return baseSet(object, path, updater(baseGet(object, path)), customizer);
     }
 
@@ -8284,7 +8284,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * @param {Function} hasFunc The function to check properties.
      * @returns {boolean} Returns `true` if `path` exists, else `false`.
      */
-    function hasPath(object, pathMain, hasFunc) {
+    function hasPath(object, path, hasFunc) {
       path = castPath(path, object);
 
       var index = -1,
@@ -8740,7 +8740,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * @param {Array} path The path to get the parent value of.
      * @returns {*} Returns the parent value.
      */
-    function parent(object, pathMain) {
+    function parent(object, path) {
       return path.length < 2 ? object : baseGet(object, baseSlice(path, 0, -1));
     }
 
@@ -11636,7 +11636,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * _.invokeMap([123, 456], String.prototype.split, '');
      * // => [['1', '2', '3'], ['4', '5', '6']]
      */
-    var invokeMap = baseRest(function(collection, pathMain, args) {
+    var invokeMap = baseRest(function(collection, path, args) {
       var index = -1,
           isFunc = typeof path == 'function',
           result = isArrayLike(collection) ? Array(collection.length) : [];
@@ -15295,7 +15295,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * _.get(object, 'a.b.c', 'default');
      * // => 'default'
      */
-    function get(object, pathMain, defaultValue) {
+    function get(object, path, defaultValue) {
       var result = object == null ? undefined : baseGet(object, path);
       return result === undefined ? defaultValue : result;
     }
@@ -15327,7 +15327,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * _.has(other, 'a');
      * // => false
      */
-    function has(object, pathMain) {
+    function has(object, path) {
       return object != null && hasPath(object, path, baseHas);
     }
 
@@ -15357,7 +15357,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * _.hasIn(object, 'b');
      * // => false
      */
-    function hasIn(object, pathMain) {
+    function hasIn(object, path) {
       return object != null && hasPath(object, path, baseHasIn);
     }
 
@@ -15671,7 +15671,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
         return result;
       }
       var isDeep = false;
-      paths = arrayMap(paths, function(pathMain) {
+      paths = arrayMap(paths, function(path) {
         path = castPath(path, object);
         isDeep || (isDeep = path.length > 1);
         return path;
@@ -15758,7 +15758,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
         return [prop];
       });
       predicate = getIteratee(predicate);
-      return basePickBy(object, props, function(value, pathMain) {
+      return basePickBy(object, props, function(value, path) {
         return predicate(value, path[0]);
       });
     }
@@ -15792,7 +15792,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * _.result(object, 'a[0].b.c3', _.constant('default'));
      * // => 'default'
      */
-    function result(object, pathMain, defaultValue) {
+    function result(object, path, defaultValue) {
       path = castPath(path, object);
 
       var index = -1,
@@ -15842,7 +15842,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * console.log(object.x[0].y.z);
      * // => 5
      */
-    function set(object, pathMain, value) {
+    function set(object, path, value) {
       return object == null ? object : baseSet(object, path, value);
     }
 
@@ -15870,7 +15870,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * _.setWith(object, '[0][1]', 'a', Object);
      * // => { '0': { '1': 'a' } }
      */
-    function setWith(object, pathMain, value, customizer) {
+    function setWith(object, path, value, customizer) {
       customizer = typeof customizer == 'function' ? customizer : undefined;
       return object == null ? object : baseSet(object, path, value, customizer);
     }
@@ -16007,7 +16007,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * console.log(object);
      * // => { 'a': [{ 'b': {} }] };
      */
-    function unset(object, pathMain) {
+    function unset(object, path) {
       return object == null ? true : baseUnset(object, path);
     }
 
@@ -16038,7 +16038,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * console.log(object.x[0].y.z);
      * // => 0
      */
-    function update(object, pathMain, updater) {
+    function update(object, path, updater) {
       return object == null ? object : baseUpdate(object, path, castFunction(updater));
     }
 
@@ -16066,7 +16066,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * _.updateWith(object, '[0][1]', _.constant('a'), Object);
      * // => { '0': { '1': 'a' } }
      */
-    function updateWith(object, pathMain, updater, customizer) {
+    function updateWith(object, path, updater, customizer) {
       customizer = typeof customizer == 'function' ? customizer : undefined;
       return object == null ? object : baseUpdate(object, path, castFunction(updater), customizer);
     }
@@ -17780,7 +17780,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * _.filter(objects, _.overSome([_.matchesProperty('a', 1), _.matchesProperty('a', 4)]));
      * // => [{ 'a': 1, 'b': 2, 'c': 3 }, { 'a': 4, 'b': 5, 'c': 6 }]
      */
-    function matchesProperty(pathMain, srcValue) {
+    function matchesProperty(path, srcValue) {
       return baseMatchesProperty(path, baseClone(srcValue, CLONE_DEEP_FLAG));
     }
 
@@ -17808,7 +17808,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * _.map(objects, _.method(['a', 'b']));
      * // => [2, 1]
      */
-    var method = baseRest(function(pathMain, args) {
+    var method = baseRest(function(path, args) {
       return function(object) {
         return baseInvoke(object, path, args);
       };
@@ -17838,7 +17838,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * // => [2, 0]
      */
     var methodOf = baseRest(function(object, args) {
-      return function(pathMain) {
+      return function(path) {
         return baseInvoke(object, path, args);
       };
     });
@@ -18083,7 +18083,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * _.map(_.sortBy(objects, _.property(['a', 'b'])), 'a.b');
      * // => [1, 2]
      */
-    function property(pathMain) {
+    function property(path) {
       return isKey(path) ? baseProperty(toKey(path)) : basePropertyDeep(path);
     }
 
@@ -18109,7 +18109,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
      * // => [2, 0]
      */
     function propertyOf(object) {
-      return function(pathMain) {
+      return function(path) {
         return object == null ? undefined : baseGet(object, path);
       };
     }
@@ -19137,7 +19137,7 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
       return this.reverse().find(predicate);
     };
 
-    LazyWrapper.prototype.invokeMap = baseRest(function(pathMain, args) {
+    LazyWrapper.prototype.invokeMap = baseRest(function(path, args) {
       if (typeof path == 'function') {
         return new LazyWrapper(this);
       }
@@ -19529,7 +19529,7 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","C:\\\\projects\\\\Shop"]
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/
+/******/ 	
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -19543,20 +19543,20 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","C:\\\\projects\\\\Shop"]
 /******/ 			loaded: false,
 /******/ 			exports: {}
 /******/ 		};
-/******/
+/******/ 	
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
+/******/ 	
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
-/******/
+/******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
+/******/ 	
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = __webpack_modules__;
-/******/
+/******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/chunk loaded */
 /******/ 	(() => {
@@ -19589,7 +19589,7 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","C:\\\\projects\\\\Shop"]
 /******/ 			return result;
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
@@ -19601,12 +19601,12 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","C:\\\\projects\\\\Shop"]
 /******/ 			}
 /******/ 		})();
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -19617,7 +19617,7 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","C:\\\\projects\\\\Shop"]
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/node module decorator */
 /******/ 	(() => {
 /******/ 		__webpack_require__.nmd = (module) => {
@@ -19626,11 +19626,11 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","C:\\\\projects\\\\Shop"]
 /******/ 			return module;
 /******/ 		};
 /******/ 	})();
-/******/
+/******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */
 /******/ 	(() => {
 /******/ 		// no baseURI
-/******/
+/******/ 		
 /******/ 		// object to store loaded and loading chunks
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
@@ -19638,19 +19638,19 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","C:\\\\projects\\\\Shop"]
 /******/ 			"/js/app": 0,
 /******/ 			"css/app": 0
 /******/ 		};
-/******/
+/******/ 		
 /******/ 		// no chunk on demand loading
-/******/
+/******/ 		
 /******/ 		// no prefetching
-/******/
+/******/ 		
 /******/ 		// no preloaded
-/******/
+/******/ 		
 /******/ 		// no HMR
-/******/
+/******/ 		
 /******/ 		// no HMR manifest
-/******/
+/******/ 		
 /******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
-/******/
+/******/ 		
 /******/ 		// install a JSONP callback for chunk loading
 /******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
 /******/ 			var [chunkIds, moreModules, runtime] = data;
@@ -19675,20 +19675,20 @@ module.exports = JSON.parse('{"_args":[["axios@0.21.4","C:\\\\projects\\\\Shop"]
 /******/ 			}
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
-/******/
+/******/ 		
 /******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();
-/******/
+/******/ 	
 /************************************************************************/
-/******/
+/******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
 /******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/css/app.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
-/******/
+/******/ 	
 /******/ })()
 ;

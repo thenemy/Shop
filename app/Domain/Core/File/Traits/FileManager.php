@@ -2,6 +2,8 @@
 
 namespace App\Domain\Core\File\Traits;
 
+use Illuminate\Support\Facades\Log;
+
 trait FileManager
 {
     //I will extend my controller the controller will get all necessary data
@@ -41,7 +43,12 @@ trait FileManager
 
     public function createDirectory($path)
     {
-        mkdir($path);
+        try {
+            mkdir("../" . $path);
+        } catch (\Exception $exception) {
+
+        }
+
     }
 
 

@@ -1,6 +1,6 @@
-@extends("layout.layout")
+{{--@extends("layout.layout")--}}
 
-@section("body")
-    <livewire:new-livewire/>
+{{--@section("body")--}}
+{{--    <livewire:new-livewire/>--}}
 {{--    {!!(new \App\Domain\Category\Front\Models\CategoryIndex())->name_table !!}--}}
-@endsection
+{{--@endsection--}}

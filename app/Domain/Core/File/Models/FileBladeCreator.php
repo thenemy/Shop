@@ -7,6 +7,8 @@ use App\Domain\Core\File\Exception\CreatedException;
 use App\Domain\Core\File\Interfaces\BladeCreatorInterface;
 use App\Domain\Core\File\Traits\FileManager;
 use App\Domain\Core\Text\Traits\CaseConverter;
+use App\Http\Controllers\Base\Abstracts\BaseController;
+use Illuminate\Support\Facades\Log;
 
 class FileBladeCreator extends AbstractFileManager implements BladeCreatorInterface
 {
@@ -17,14 +19,10 @@ class FileBladeCreator extends AbstractFileManager implements BladeCreatorInterf
         $this->livewireCreator = $livewireCreator;
         $this->classNameBlade = $this->toSnackCase($className);
         $this->setMainPath();
-        try {
-            $this->createFolderIfExists();
-            $this->openIndex();
-            $this->openCreate();
-            $this->openEdit();
-        } catch (CreatedException $exception) {
-
-        }
+        $this->createFolderIfExists();
+        $this->openIndex();
+        $this->openCreate();
+        $this->openEdit();
     }
 
     protected function setMainPath()
@@ -36,29 +34,30 @@ class FileBladeCreator extends AbstractFileManager implements BladeCreatorInterf
     public function openIndex()
     {
         $index = $this->pathMain . self::INDEX;
-        $file_from = file_get_contents(self::FROM_INDEX);
+        $file_from = $this->getContents(self::FROM_INDEX);
         // put correct formatted livewire inside the blade
         $formatted_index = $this->formatIndex($file_from);
-        file_put_contents($index, $formatted_index);
+        $this->putContents($index, $formatted_index);
     }
 
     private function formatIndex($file_from): string
     {
         return sprintf($file_from,
-            $this->livewireCreator,
+            "asd",
+            $this->livewireCreator->generateLivewire(),
         );
     }
 
     public function openCreate()
     {
         $create = $this->pathMain . self::CREATE;
-        $file_from = file_get_contents(self::FROM_CREATE);
+        $file_from = $this->getContents(self::FROM_CREATE);
     }
 
     public function openEdit()
     {
         $edit = $this->pathMain . self::EDIT;
-        $data = file_get_contents(self::FROM_EDIT);
+        $data = $this->getContents(self::FROM_EDIT);
     }
 
 

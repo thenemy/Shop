@@ -8,6 +8,7 @@ use App\Domain\Category\Front\Models\CategoryCreate;
 use App\Domain\Category\Front\Models\CategoryEdit;
 use App\Domain\Category\Front\Models\CategoryIndex;
 use App\Domain\Category\Services\CategoryService;
+use App\Domain\Core\File\Interfaces\LivewireCreatorInterface;
 use App\Domain\Core\Front\Admin\CustomTable\Abstracts\AbstractTable;
 use App\Domain\Core\Front\Admin\Form\Abstracts\AbstractForm;
 

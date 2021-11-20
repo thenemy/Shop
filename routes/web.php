@@ -14,19 +14,16 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 |
 */
 
-//Route::group([
-//    "prefix" => LaravelLocalization::setLocale(),
-//    "middleware" => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
-//],
-//    function () {
-//
-//    }
-//);
+Route::group([
+    "prefix" => LaravelLocalization::setLocale(),
+    "middleware" => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
+],
+    function () {
 
-//Route::get(
-//    "/asd", [\App\Http\Controllers\Admin\CategoryController::class, "index"]);
+    }
+);
 
-
-//Route::get('/admin', function () {
-//    return view('admin');
-//});
+Route::get('/', [\App\Http\Controllers\Admin\CategoryController::class, "index"])->name('admin.category.index');
+Route::get('/adminasd', function () {
+    return view('admin');
+});

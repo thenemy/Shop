@@ -16,7 +16,7 @@ interface LivewireCreatorInterface
      *         fifth    --- class name of entity
      *         sixth    --- set of functions  (in front entity described)
      */
-    const CLASS_TEMPLATE = "BaseLivewire.text";
+    const CLASS_TEMPLATE = "BaseLivewire.txt";
     const FROM_CLASS = self::BASE_CLASS . "Templates/" . self::CLASS_TEMPLATE;
 
     const BLADE_TEMPLATE = "base-template.blade.php";

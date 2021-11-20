@@ -15,10 +15,12 @@ class FileLivewireCreator extends AbstractFileManager implements LivewireCreator
     protected $pathMainClass;
     protected $className;
     protected $controller;
+    private $entity;
 
-    public function __construct($className, BaseController $controller)
+    public function __construct($className, BaseController $controller, $entity)
     {
         $this->className = $className;
+        $this->entity = $entity;
         $this->controller = $controller;
         $this->classNameBlade = $this->toLivewireCase($className);
         $this->openIndex();
@@ -28,17 +30,22 @@ class FileLivewireCreator extends AbstractFileManager implements LivewireCreator
     {
         return sprintf("<livewire:admin.pages.%s.%s/>", $this->classNameBlade, $this->getBladeName());
     }
+
+    public function initializeVariables(): string
+    {
+        return $this->entity->livewireComponents()->initializeVariables();
+    }
     // implement this function
     //to livewire class
     private function getFunctions(): string
     {
-        return "";
+        return $this->entity->livewireComponents()->generateFunctions();
     }
 
     // to blade in livewire
     private function getFunctionComponents(): string
     {
-        return "";
+        return $this->entity->livewireComponents()->generateBlades();
     }
 
     public function openIndex()
@@ -59,18 +66,14 @@ class FileLivewireCreator extends AbstractFileManager implements LivewireCreator
 
     protected function openIndexBlade()
     {
-        try {
-            $this->setMainPath();
-            $this->createFolderIfExists();
-            $this->createIndexBlade();
-        } catch (\Exception $exception) {
-
-        }
+        $this->setMainPath();
+        $this->createFolderIfExists();
+        $this->createIndexBlade();
     }
 
     private function getBladePath(): string
     {
-        return "livewire.admin." . $this->classNameBlade . "." . $this->getBladeName();
+        return "livewire.admin.pages." . $this->classNameBlade . "." . $this->getBladeName();
     }
 
 
@@ -81,7 +84,7 @@ class FileLivewireCreator extends AbstractFileManager implements LivewireCreator
 
     private function getNamespace(): string
     {
-        return self::BASE_CLASS . $this->className;
+        return str_replace("/", "\\", self::BASE_CLASS . "Pages/" . $this->className . ";");
     }
 
     private function getLivewireClassName(): string
@@ -91,29 +94,26 @@ class FileLivewireCreator extends AbstractFileManager implements LivewireCreator
 
     protected function openIndexClass()
     {
-        try {
-            $this->setMainPathClass();
-            $this->createFolderIfExists();
-            $this->createIndexClass();
-        } catch (\Exception $exception) {
-
-        }
+        $this->setMainPathClass();
+        $this->createFolderIfExists();
+        $this->createIndexClass();
     }
 
     private function createIndexClass()
     {
-        $file_to = $this->pathMain . $this->getLivewireClassName();
-        $file_from = file_get_contents(self::FROM_CLASS);
+        $file_to = $this->pathMain . $this->getLivewireClassName() . ".php";
+        $file_from = $this->getContents(self::FROM_CLASS);
+
         $formatted_data = $this->formatClass($file_from);
-        file_put_contents($file_to, $formatted_data);
+        $this->putContents($file_to, $formatted_data);
     }
 
     private function createIndexBlade()
     {
-        $file_to = $this->pathMain . $this->getBladeName();
-        $file_from = file_get_contents(self::FROM_BLADE);
+        $file_to = $this->pathMain . $this->getBladeName() . ".blade.php";
+        $file_from = $this->getContents(self::FROM_BLADE);
         $formatted_data = $this->formatBlade($file_from);
-        file_put_contents($file_to, $formatted_data);
+        $this->putContents($file_to, $formatted_data);
     }
 
     private function formatClass($file_from): string
@@ -124,7 +124,8 @@ class FileLivewireCreator extends AbstractFileManager implements LivewireCreator
             $this->getBladePath(),
             $this->getTableClass(),
             $this->getEntityClass(),
-            $this->getFunctions()
+            $this->getFunctions(),
+            $this->initializeVariables()
         );
     }
 

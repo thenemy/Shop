@@ -1,19 +1,16 @@
 <table>
-    @foreach($table->columns as $column)
-        <tr>
+    <tr>
+        @foreach($table->columns as $column)
             <th>{{$column->column_name}}</th>
+        @endforeach
+    </tr>
+    @foreach($table->list as $items)
+        <tr>
+            @foreach($table->columns as $row)
+                <td> {!! $items[$row->key_to_row] !!}</td>
+            @endforeach
         </tr>
     @endforeach
-    @foreach($table->list as $items)
-        @foreach($table->columns as $row)
-            <tr>
-                <td>{{$items[$row->key_to_row]}}</td>
-                {{--               items will be maped to correctly show  necessary attribute
-                                   through getter
-                --}}
-            </tr>
-            {{--        some style will be here above to react on action--}}
-        @endforeach
-    @endforeach
+    {{--        some style will be here above to react on action--}}
     {{$table->paginate->links()}}
 </table>

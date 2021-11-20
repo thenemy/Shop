@@ -1,11 +1,9 @@
 <?php
 
-namespace App\View\Helper\DropDown\Interfaces;
+namespace App\Domain\Core\Front\Admin\DropDown\Interfaces;
 
 interface DropItemInterfaces
 {
-    const FORMAT = "%s(%d,'%s')";
-    const FORMAT_TEXT = "%s('%s','%s')";
 
     public function getFormat(): string;
 

@@ -3,18 +3,17 @@
 namespace App\Domain\Category\Front\Models;
 
 use App\Domain\Category\Entities\Category;
-use App\Domain\Category\Entities\IconCat;
-use App\Domain\Core\Front\Admin\Attributes\Models\Column;
-use App\Domain\Core\Front\Admin\Attributes\Models\Row;
+
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\ImageAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\StatusAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
-use App\Domain\Core\Front\Admin\Routes\Interfaces\RoutesInterface;
+use App\Domain\Core\Front\Admin\DropDown\Models\Paginator\PaginatorDropDown;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Base\LivewireFunctions;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireAdditionalFunctions;
 use App\Domain\Core\Front\Interfaces\FrontEntityInterface;
-use App\Domain\Core\Front\Traits\ProvideService;
 
 
-class CategoryIndex extends Category
+class CategoryIndex extends Category implements FrontEntityInterface
 {
 
 //    write all mutators required for table
@@ -22,9 +21,14 @@ class CategoryIndex extends Category
 //    addButton function and route to create new object
 //    addFiltration which are required
 //
-    public function getIconImageAttribute(): string
+    public function getIconTableAttribute(): string
     {
-        return ImageAttribute::preGenerate($this, "icon");
+        return ImageAttribute::preGenerate($this, 'icon_value');
+    }
+
+    public function getIconValueAttribute()
+    {
+        return "";
     }
 
     public function getNameTableAttribute(): string
@@ -43,21 +47,12 @@ class CategoryIndex extends Category
         return [];
     }
 
-    // not neccessary because mutators will be created
-    static public function getTableRows(): array
-    {
-        return [
-            'icon_image' => ImageAttribute::class,
-            "name" => TextAttribute::class,
-            "status" => StatusAttribute::class,
-            "under_category" => true,
-            "action" => true,
-        ];
-    }
 
-    public function livewireComponents(): array
+    public function livewireComponents(): LivewireAdditionalFunctions
     {
-        return [];
+        return new LivewireFunctions([
+            PaginatorDropDown::getDropDown()
+        ]);
     }
 
     // get Open button with all required data
@@ -72,16 +67,6 @@ class CategoryIndex extends Category
 
     }
 
-
-
-    static public function getTitles(): array
-    {
-        return [
-            RoutesInterface::INDEX => "",
-            RoutesInterface::CREATE => "",
-            RoutesInterface::EDIT => "",
-        ];
-    }
 
 //
 //

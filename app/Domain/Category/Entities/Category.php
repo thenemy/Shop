@@ -4,6 +4,7 @@
 namespace App\Domain\Category\Entities;
 
 
+use App\Domain\Category\Builders\CategoryBuilder;
 use App\Domain\Core\Language\Traits\Translatable;
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Core\Slug\Traits\Sluggable;
@@ -16,6 +17,10 @@ class Category extends Entity
 
     public $guarded = [];
     protected $table = "categories";
+    public function newEloquentBuilder($query): CategoryBuilder
+    {
+        return new CategoryBuilder($query);
+    }
 
     public function products()
     {

@@ -34,7 +34,7 @@ abstract class BaseController extends Controller implements ControllerInterface
     private $service;
 
     private $form;
-    private $path = "admin.";
+    private $path = "admin.pages.";
     private $entity;
 
 
@@ -54,8 +54,7 @@ abstract class BaseController extends Controller implements ControllerInterface
         $this->entity = $this->getNewEntity();
         $this->form = $this->getForm();
         $this->service = $this->getService();
-        $createLivewire = new FileLivewireCreator($this->getClassName(), $this);
-        $createBlades = new FileBladeCreator($this->getClassName());
+
     }
 
 
@@ -70,6 +69,11 @@ abstract class BaseController extends Controller implements ControllerInterface
         return new $base();
     }
 
+    private function getNewEntityIndex()
+    {
+        $base = $this->getIndexEntity();
+        return new $base();
+    }
 
 
     //// MAIN FUNCTIONS
@@ -79,6 +83,9 @@ abstract class BaseController extends Controller implements ControllerInterface
 
     public function getIndex(Request $request)
     {
+//        $createLivewire = new FileLivewireCreator($this->getClassName(), $this, $this->getNewEntityIndex());
+//        $createBlades = new FileBladeCreator($this->getClassName(), $createLivewire);
+
         return view($this->getPath() . RoutesInterface::INDEX);
     }
 
