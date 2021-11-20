@@ -24,6 +24,7 @@ Route::group([
 );
 
 Route::get('/', [\App\Http\Controllers\Admin\CategoryController::class, "index"])->name('admin.category.index');
+
 Route::get('/adminasd', function () {
     return view('admin');
 });

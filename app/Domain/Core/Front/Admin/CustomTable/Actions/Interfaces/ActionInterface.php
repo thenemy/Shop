@@ -14,7 +14,7 @@ interface ActionInterface
 
     public function getRouteHandler(): RouteHandler;
 
-    public function routeName();
+    public function subActionRoute();
 
     public function buildRoute($route, $params);
 
@@ -22,4 +22,8 @@ interface ActionInterface
     const TYPE_DENY = 2;
     const TYPE_DELETE = 3;
     const TYPE_EDIT = 4;
+
+    const CREATE = "create";
+    const INDEX = "index";
+    const ACCEPT  = "accept";
 }

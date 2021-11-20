@@ -4,9 +4,9 @@ namespace App\Domain\Core\Front\Admin\DropDown\Interfaces;
 
 interface DropDownInterface
 {
-    function setType();
+    function setType():string;
 
-    function setKey();
+    function setKey():string;
 
-    function setName();
+    function setName():string;
 }

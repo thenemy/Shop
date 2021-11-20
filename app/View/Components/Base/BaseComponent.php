@@ -1,16 +1,13 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\Base;
+
 
 use Illuminate\View\Component;
 
-class Test extends Component
+abstract class BaseComponent extends Component
 {
-    /**
-     * Create a new component instance.
-     *
-     * @return void
-     */
+
     public $slot;
 
     public function __construct($slot)
@@ -25,6 +22,8 @@ class Test extends Component
      */
     public function render()
     {
-        return view('components.helper.text.pre_title');
+        return view($this->getPathToComponent());
     }
+
+    abstract protected function getPathToComponent();
 }

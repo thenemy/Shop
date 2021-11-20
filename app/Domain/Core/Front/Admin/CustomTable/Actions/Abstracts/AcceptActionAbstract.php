@@ -19,5 +19,14 @@ abstract class AcceptActionAbstract extends BaseAbstractAction
         return self::TYPE_ACTION;
     }
 
+    public function subActionRoute(): string
+    {
+        return self::ACCEPT;
+    }
 
+    public function generateHtml()
+    {
+//        $accept_action = new AcceptComponent($this->event);
+//        return $accept_action->render()->with($accept_action->data);
+    }
 }

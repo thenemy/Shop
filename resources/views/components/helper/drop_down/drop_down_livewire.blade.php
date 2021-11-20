@@ -1,7 +1,7 @@
 @props([
 "drop",
 ])
-<x-helper.drop_down.base_drop_down :drop="$drop" {{$attributes}}>
+<x-helper.drop_down.base_drop_down :drop="$drop" :attributes="$attributes">
     @foreach($drop->items as $item)
         <button @click="isOpen = false"
                 wire:click="{{$item->clicked}}"

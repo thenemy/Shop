@@ -4,6 +4,8 @@ namespace App\Domain\Category\Front\Models;
 
 use App\Domain\Category\Entities\Category;
 
+use App\Domain\Category\Front\Admin\CustomTable\Action\Models\CategoryAcceptAction;
+use App\Domain\Core\Front\Admin\CustomTable\Actions\Base\AllActions;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\ImageAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\StatusAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
@@ -23,13 +25,12 @@ class CategoryIndex extends Category implements FrontEntityInterface
 //
     public function getIconTableAttribute(): string
     {
-        return TextAttribute::preGenerate($this, "name");
-//        return ImageAttribute::preGenerate($this, 'icon_value');
+        return ImageAttribute::preGenerate($this, 'icon_value');
     }
 
-    public function getIconValueAttribute()
+    public function getIconValueAttribute(): string
     {
-        return "";
+        return "https://";
     }
 
     public function getNameTableAttribute(): string
@@ -63,9 +64,10 @@ class CategoryIndex extends Category implements FrontEntityInterface
     }
 
     // call function which will have set of actions for this table
-    public function getActionTableAttribute()
+    public function getActionTableAttribute(): string
     {
-        return TextAttribute::preGenerate($this, "name");
+        return "";
+//        return (new AllActions([new CategoryAcceptAction()]))->generateHtml();
     }
 
 

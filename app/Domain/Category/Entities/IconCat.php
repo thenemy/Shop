@@ -14,7 +14,7 @@ class IconCat extends Entity
     protected $table = "icon_cats";
     public $incrementing = false;
 
-    public function getIconAttribute($value)
+    public function getIconAttribute($value): \App\Domain\Core\Media\Models\Media
     {
         return $this->getMedia("icon", $value);
     }

@@ -44,7 +44,7 @@ class Category extends Entity
 
     public function icon()
     {
-        return $this->hasOne(IconCat::class);
+        return $this->hasOne(IconCat::class, "id");
     }
 
     public function slugSources(): array

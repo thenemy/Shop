@@ -4,16 +4,14 @@
 namespace App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes;
 
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Abstracts\BaseAttributes;
-use App\Http\Livewire\Admin\Asd;
-use App\Http\Livewire\NewLivewire;
-use App\View\Components\Test;
-use Livewire\Livewire;
+
+use App\View\Components\Text\TextTableComponent;
 
 class TextAttribute extends BaseAttributes
 {
     public function generateHtml()
     {
-        $text = new Test($this->getValue());
+        $text = new TextTableComponent($this->getValueOfMainKey());
         return $text->render()->with($text->data());
     }
 }

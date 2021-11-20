@@ -7,7 +7,7 @@ use App\Domain\Core\Front\Admin\DropDown\Interfaces\DropDownInterface;
 use App\Domain\Core\Front\Admin\DropDown\Interfaces\DropDownMainInterface;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Traits\FunctionGenerate;
 
-abstract class AbstractDropDown implements DropDownInterface, DropDownMainInterface, AttributeFormInterface
+abstract class AbstractDropDown implements DropDownInterface, DropDownMainInterface
 {
     public $name;
     public $key;

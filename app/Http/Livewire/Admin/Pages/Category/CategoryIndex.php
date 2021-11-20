@@ -19,14 +19,15 @@ class CategoryIndex extends BaseLivewire
     {
         $this->includeSearch();
         $table = $this->getTable();
-        $entity = $this->getEntity();
         return [
-            "table" => new $table($entity::filterBy($this->filterBy)->paginate($this->paginate)),
+            "table" => new $table($this->getLists()),
              
 'name_blade' => \App\Domain\Core\Front\Admin\DropDown\Models\Paginator\PaginatorDropDown::getDropDown($this->selected_value), //5
         ];
     }
-
+    protected function getItemsToOptionalDropDown():array{
+        return [];
+    }
     public function getTable(){
         return 'App\Domain\Category\Front\Admin\CustomTable\Tables\CategoryTable'; //6
     }

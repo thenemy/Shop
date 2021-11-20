@@ -17,13 +17,14 @@ class %s extends BaseLivewire
     {
         $this->includeSearch();
         $table = $this->getTable();
-        $entity = $this->getEntity();
         return [
-            "table" => new $table($entity::filterBy($this->filterBy)->paginate($this->paginate)),
+            "table" => new $table($this->getLists()),
              %s //5
         ];
     }
-
+    protected function getItemsToOptionalDropDown():array{
+        return [];
+    }
     public function getTable(){
         return '%s'; //6
     }

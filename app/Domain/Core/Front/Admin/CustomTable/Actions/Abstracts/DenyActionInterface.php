@@ -24,9 +24,9 @@ abstract class DenyActionInterface extends BaseAbstractAction
         // TODO: Implement getRouteHandler() method.
     }
 
-    public function routeName()
+    public function subActionRoute()
     {
-        // TODO: Implement routeName() method.
+        // TODO: Implement subActionRoute() method.
     }
 
     public function buildRoute($route, $params)
