@@ -3,16 +3,24 @@
 namespace App\Http\Livewire\Admin\Base\Abstracts;
 
 use Livewire\Component;
+use Livewire\WithPagination;
 
 abstract class BaseLivewire extends Component
-{ /*
+{
+    use WithPagination;
+    /*
    * @array
  */
     public $filterBy = [];
     public $search; // model
-    public $paginate; // drop_down
+    public $paginate = 10; // drop_down
     public $checkBox = []; // model
     public $keySearch = "search"; // set search
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
 
     public function setPaginate($number)
     {
