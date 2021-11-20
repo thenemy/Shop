@@ -1,3 +1,1 @@
-<div>
-
-</div>
+@extends('layout.admin_layout')

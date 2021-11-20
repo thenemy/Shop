@@ -19,7 +19,7 @@
 <body class="bg-blue-200 antialiased">
 <!-- This example requires Tailwind CSS v2.0+ -->
 <div class="max-w-7xl mx-auto px-28 sm:px-6 lg:px-8 space-y-10">
-    <x-app.common.header/>
+
     <div class="flex flex-row space-x-2"><a href="">Главная страница</a> <span>»</span> <a href="">Главная страница</a>
         <span>»</span> <a href="">Главная страница</a></div>
     {{--    <div class="md:flex h-auto md:flex-row space-y-8  ">--}}
@@ -28,7 +28,7 @@
     {{--    </div>--}}
     <div class="">
         <div class="flex flex-row h-full w-full">
-            <x-course.sidebar/>
+{{--            <x-helper.sidebar/>--}}
                     <span class="w-5"></span>
 
             @yield("content")
@@ -38,6 +38,5 @@
 
 
 </div>
-    <x-app.common.footer/>
 </body>
 </html>

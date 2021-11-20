@@ -7,10 +7,8 @@ use App\Domain\Core\Front\Admin\CustomTable\Attributes\Abstracts\BaseAttributes;
 
 class TextAttribute extends BaseAttributes
 {
-
-
     public function generateHtml()
     {
-      return "<x-helper.text.title>sadad sad asdsad sad  </x-helper.text.title>";
+      return "<x-helper.text.title>sdasdsad </x-helper.text.title>";
     }
 }

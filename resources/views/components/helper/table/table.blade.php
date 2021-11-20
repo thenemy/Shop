@@ -1,3 +1,4 @@
+
 <table>
     @foreach($table->columns as $column)
         <tr>
