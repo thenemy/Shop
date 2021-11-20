@@ -23,7 +23,8 @@ class CategoryIndex extends Category implements FrontEntityInterface
 //
     public function getIconTableAttribute(): string
     {
-        return ImageAttribute::preGenerate($this, 'icon_value');
+        return TextAttribute::preGenerate($this, "name");
+//        return ImageAttribute::preGenerate($this, 'icon_value');
     }
 
     public function getIconValueAttribute()
@@ -38,7 +39,7 @@ class CategoryIndex extends Category implements FrontEntityInterface
 
     public function getStatusTableAttribute(): string
     {
-        return "";
+        return TextAttribute::preGenerate($this, "name");
     }
 
     static public function getFilter(): array
@@ -56,15 +57,15 @@ class CategoryIndex extends Category implements FrontEntityInterface
     }
 
     // get Open button with all required data
-    public function getUnderCategoryAttribute()
+    public function getUnderCategoryTableAttribute()
     {
-
+        return TextAttribute::preGenerate($this, "name");
     }
 
     // call function which will have set of actions for this table
-    public function getActionAttribute()
+    public function getActionTableAttribute()
     {
-
+        return TextAttribute::preGenerate($this, "name");
     }
 
 

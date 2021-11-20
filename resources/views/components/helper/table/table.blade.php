@@ -13,5 +13,5 @@
         </tr>
     @endforeach
     {{--        some style will be here above to react on action--}}
-    {{$table->paginate->links()}}
 </table>
+{{$table->paginate->links()}}

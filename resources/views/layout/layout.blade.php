@@ -12,7 +12,7 @@
     <!-- Styles -->
     <livewire:styles/>
     @livewireStyles
-    @livewireScripts
+
     <script src="{{ mix('js/app.js') }}"></script>
 
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -27,6 +27,6 @@
 
 </body>
 
-
+@livewireScripts
 {{--<script src="{{asset("js/adding_file.js")}}"></script>--}}
 </html>
