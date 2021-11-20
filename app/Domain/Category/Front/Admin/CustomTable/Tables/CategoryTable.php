@@ -18,7 +18,7 @@ class CategoryTable extends AbstractTable
             new Column(__("Иконка"), "icon_table"),
             new Column(__("Название"), "name_table"),
             new Column(__("Статус"), 'status_table'),
-            new Column(__("Под категории"), "under_category_table"),
+            new Column(__("Подкатегории"), "under_category_table"),
             new Column(__("Действия"), "action_table"),
         ];
     }
