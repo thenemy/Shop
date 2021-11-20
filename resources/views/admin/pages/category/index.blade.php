@@ -7,6 +7,6 @@
         {{--    give the title--}}
         <x-helper.text.title>{{__('asd')}}</x-helper.text.title>
         {{--    insert name of the breadcrumbs and the arguments--}}
-        <livewire:admin.pages.category.category-index :filterBy=""/>
+        <livewire:admin.pages.category.category-index/>
     </div>
 @endsection
