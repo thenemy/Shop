@@ -25,6 +25,6 @@ class Test extends Component
      */
     public function render()
     {
-        return view('components.helper.text.title');
+        return view('components.helper.text.pre_title');
     }
 }

@@ -17,7 +17,7 @@ class CategoryCreate extends Category implements FrontAttributesInterface
     public function formAttributes(): array
     {
         return [
-            new AttributeText('', "name", "", "", ""),
+            new AttributeText('', "name", "", ""),
         ];
     }
 

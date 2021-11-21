@@ -15,4 +15,9 @@ class Sidebar extends SideBarBase
     {
         return self::USUAL_SIDEBAR;
     }
+
+    public function isCurrentRoute(): bool // check
+    {
+        return true;
+    }
 }

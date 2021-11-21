@@ -4,8 +4,9 @@
 namespace App\Domain\Core\Front\Admin\CustomTable\Attributes\Abstracts;
 
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Interfaces\AttributeInterface;
+use App\Domain\Core\Front\Interfaces\HtmlInterface;
 
-abstract class BaseAttributes implements AttributeInterface
+abstract class BaseAttributes implements AttributeInterface, HtmlInterface
 {
     public $key;
     public $entity;
@@ -16,7 +17,7 @@ abstract class BaseAttributes implements AttributeInterface
         $this->key = $key;
     }
 
-    public function getValue()
+    public function getValueOfMainKey()
     {
         $key = $this->key;
         return $this->entity->$key;

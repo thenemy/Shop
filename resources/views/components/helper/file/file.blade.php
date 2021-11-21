@@ -2,7 +2,7 @@
 "file",
 "template"=>false,
 ])
-<div class="w-80 bg-blue-light-100 p-5 flex-row justify-between items-center  flex">
+<div class="w-full bg-blue-light-100 p-5 flex-row justify-between items-center  flex">
     <div class="flex-none flex flex-col space-y-2 text-left">
         <div class="info">
             <input id=fileStore type="file" name="{{$file->key ?? ""}}" class="hidden"/>
