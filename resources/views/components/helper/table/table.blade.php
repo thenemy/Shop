@@ -48,11 +48,13 @@
         @endforeach
     </tr>
     @foreach($table->list as $items)
-        <tr class="w-8/12 text-center border-b border-gray-200 hover:bg-gray-200 longpress">
-            <td class="p-2 hidden checker checkbox-show">
-                <label for="check{{$loop->index}}">
-                    <input type="checkbox" class="form-checkbox w-5 h-5"/>
-                </label>
+        <tr class="w-8/12   text-center border-b border-gray-200 hover:bg-gray-200 longpress">
+            <td class=" p-2 flex flex-col hidden checker items-center checkbox-show">
+                <div class="items-center justify-center">
+                    <label class="" for="check{{$loop->index}}">
+                        <input type="checkbox" class="form-checkbox w-5 h-5"/>
+                    </label>
+                </div>
             </td>
             @foreach($table->columns as $row)
                 <td class="p-2 items-center justify-center"> {!! $items[$row->key_to_row] !!}</td>

@@ -8,7 +8,7 @@
 
     <div class="m-5 flex flex-row">
 
-{{--        @yield("sidebar")--}}
+        @yield("sidebar")
 
         <div class="flex-1">
 
