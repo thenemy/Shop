@@ -9,6 +9,9 @@ module.exports = {
             screens: {
                 'xs': {'min': '300px', "max": "639px"},
             },
+            transitionProperty: {
+                'width': 'width'
+            },
         },
     },
     variants: {

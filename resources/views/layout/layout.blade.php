@@ -16,7 +16,7 @@
     @livewireStyles
     @livewireScripts
     <script src="{{ mix('js/app.js') }}"></script>
-
+{{--    <script src="{{asset("js/long-press.min.js")}}"></script>--}}
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body>
@@ -30,5 +30,6 @@
 </body>
 @yield("scripts")
 
-{{--<script src="{{asset("js/adding_file.js")}}"></script>--}}
+<script src="{{asset("js/table_action.js")}}"></script>
+
 </html>

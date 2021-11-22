@@ -5,6 +5,7 @@ namespace App\Domain\Category\Front\Models;
 use App\Domain\Category\Entities\Category;
 use App\Domain\Core\File\Models\FileLivewireNested;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\ImageAttribute;
+use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputAttribute;
 use App\Domain\Core\Front\Admin\Form\Interfaces\FormAttributesInterface;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 
@@ -15,15 +16,17 @@ class CategoryEdit extends Category implements FormAttributesInterface
     {
         return BladeGenerator::generation(array(
             new FileLivewireNested("Category", $this->child_category),
-            new ImageAttribute($this, "icon_image")
+            new InputAttribute("name", "text")
         ));
     }
 
     public function getChildCategoryAttribute(): CategoryNested
     {
-        return new CategoryNested([],
+        return CategoryNested::generate(
             "attachCategory",
-            "Категории");
+            "Категории",
+            "parent_id"
+        );
     }
 
     public function attachCategory($id)

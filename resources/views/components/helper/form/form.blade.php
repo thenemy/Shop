@@ -18,6 +18,7 @@
             <div class="flex flex-row justify-start space-x-5">
                 <div>
                     <x-helper.button.main_button type="submit"
+                                                 id="real_submit"
                                                  class="p-2">{{$form->name_save_button}}</x-helper.button.main_button>
                 </div>
 
@@ -31,6 +32,14 @@
         </form>
     </div>
 </div>
-
+<script>
+    $('#form').submit(function (e) {
+        console.log(e.currentTarget);
+        e.preventDefault();
+    });
+    $("#real_submit").on("click", function () {
+        $("#form")[0].submit();
+    });
+</script>
 
 {{-- probably some code which will send data must be written--}}

@@ -4,6 +4,7 @@ namespace App\Domain\Category\Front\Models;
 
 use App\Domain\Category\Entities\Category;
 
+use App\Domain\Category\Front\Admin\CustomTable\Action\Models\CategoryDeleteAction;
 use App\Domain\Category\Front\Admin\CustomTable\Action\Models\CategoryEditAction;
 use App\Domain\Category\Front\Admin\CustomTable\Tables\CategoryTable;
 use App\Domain\Category\Front\Traits\CategoryAttributeTable;
@@ -43,7 +44,8 @@ class CategoryIndex extends Category implements FrontEntityInterface, TableInFro
     {
         return (new AllActions(
             [
-                new CategoryEditAction([$this->id])
+                new CategoryEditAction([$this->id]),
+                new CategoryDeleteAction([$this->id])
             ]
         ))->generateHtml();
     }

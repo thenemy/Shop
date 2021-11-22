@@ -15,11 +15,11 @@ abstract class BaseLivewire extends Component
     /*
    * @array
  */
-    public $filterBy = [];
-    public $search; // model
+    public array $filterBy = [];
+    public string $search = ""; // model
     public $paginate = 10; // drop_down
-    public $checkBox = []; // model
-    public $keySearch = "search"; // set search
+    public array $checkBox = []; // model
+    public string $keySearch = "search"; // set search
 
     public function checkAll()
     {
@@ -56,6 +56,11 @@ abstract class BaseLivewire extends Component
         $this->resetPage();
     }
 
+    public function updatingPaginate()
+    {
+        $this->resetPage();
+    }
+
     public function setPaginate($number)
     {
         $this->paginate = $number;
@@ -63,8 +68,8 @@ abstract class BaseLivewire extends Component
 
     public function deleteIn()
     {
-//        $entity = $this->getEntity();
-//        $entity::deleteIn($this->checkBox);
+        $entity = $this->getEntity();
+        $entity::deleteIn($this->checkBox);
     }
 
     abstract protected function getTable();

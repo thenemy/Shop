@@ -4,8 +4,8 @@
 <livewire:admin.pages.category.category-nested
                 :attachEntityId='$entity->id'
                 :attachEntity='get_class($entity)'
-                keyToAttach='attachCategory'
+                keyToFilter='attachCategory'
+                :filterBy='["parent_id" => "$entity->id"]'
                 />
-<img class="items-center justify-center object-fill w-10 h-10" src=""/>
-
+<x-helper.input.input name='name' type='text' value='{{$entity->name}}' />
 @endsection

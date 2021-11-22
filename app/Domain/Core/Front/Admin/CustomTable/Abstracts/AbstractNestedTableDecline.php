@@ -10,6 +10,7 @@ abstract class AbstractNestedTableDecline extends AbstractTable implements Table
     public function getColumns(): array
     {
         return [
+            ...$this->getCommonColumns(),
             new Column(__("Действия"), "decline_button")
         ];
     }

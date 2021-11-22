@@ -2,13 +2,16 @@
 
 namespace App\Domain\Category\Builders;
 
-use Illuminate\Database\Eloquent\Builder;
+use App\Domain\Core\Main\Builders\BuilderEntity;
 
-class CategoryBuilder extends Builder
+class CategoryBuilder extends BuilderEntity
 {
-    public function filterByNot($filter)
+    public function filterByNot($filter): CategoryBuilder
     {
-        dd($filter);
+        if (isset($filter["parent_id"])) {
+            $this->where("parent_id", "!=", $filter["parent_id"]);
+        }
+        return $this;
     }
 
     public function filterBy($filter): CategoryBuilder
@@ -18,5 +21,10 @@ class CategoryBuilder extends Builder
             $this->where("name", "LIKE", "%" . $search . "%");
         }
         return $this;
+    }
+
+    public function deleteIn(array $keys)
+    {
+        return $this->whereIn("id", $keys)->delete();
     }
 }

@@ -66,9 +66,13 @@ class CategoryController extends BaseController
     {
         return $this->getEdit($request, $category, [$category]);
     }
+    public function destroy(Category $category): \Illuminate\Http\RedirectResponse
+    {
+        return $this->getDestroy($category);
+    }
 
     public function createFiles()
     {
-        CategoryCreator::createFiles();
+//        CategoryCreator::createFiles();
     }
 }

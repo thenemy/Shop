@@ -8,16 +8,20 @@ class FileLivewireNested extends FileLivewireCreator implements LivewireCreatorN
 {
     public function generateHtml(): string
     {
+
         return sprintf("<livewire:admin.pages.%s.%s
                 :attachEntityId='%s'
                 :attachEntity='get_class(%s)'
-                keyToAttach='%s'
+                keyToFilter='%s'
+                :filterBy='[\"%s\" => \"%s\"]'
                 />",
             $this->classNameBlade,
             $this->getBladeName(),
             "$" . "entity->id",
             "$" . "entity",
-            $this->entity->key_to_attach
+            $this->entity->key_to_attach,
+            $this->entity->key_to_filter,
+            "$" . "entity->id",
         );
     }
 

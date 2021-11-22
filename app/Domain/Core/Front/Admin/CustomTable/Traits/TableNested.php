@@ -13,12 +13,15 @@ trait TableNested
 {
     public string $key_to_attach;
     public string $title_for_table;
+    public string $key_to_filter;
 
-    public function __construct(array $attributes = [], string $key_to_attach = "", string $title_for_table = "")
+    static public function generate($key_to_attach, $title_for_table, $key_to_filter)
     {
-        parent::__construct($attributes);
-        $this->key_to_attach = $key_to_attach;
-        $this->title_for_table = $title_for_table;
+        $new = new self();
+        $new->key_to_attach = $key_to_attach;
+        $new->title_for_table = $title_for_table;
+        $new->key_to_filter = $key_to_filter;
+        return $new;
     }
 
     abstract public function getTableClass(): string;
@@ -37,17 +40,20 @@ trait TableNested
         ]);
     }
 
-    public function liviwireOptionalDropDownAccept():LivewireDropOptional {
+    public function liviwireOptionalDropDownAccept(): LivewireDropOptional
+    {
         return new LivewireDropOptional([
 
         ]);
     }
 
-    public function liviwireOptionalDropDownDecline():LivewireDropOptional {
+    public function liviwireOptionalDropDownDecline(): LivewireDropOptional
+    {
         return new LivewireDropOptional([
 
         ]);
     }
+
     public function getDeclineButtonAttribute(): string
     {
         return (new ButtonRedLivewire(__("Удалить"),

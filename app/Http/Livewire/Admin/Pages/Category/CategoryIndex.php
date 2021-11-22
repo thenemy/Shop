@@ -7,7 +7,9 @@ use App\Http\Livewire\Admin\Base\Abstracts\BaseLivewire;
 class CategoryIndex extends BaseLivewire
 {
 
-      public function activateChosen(){} //3   --- set of functions and variables
+      public function activateChosen(){
+
+      } //3   --- set of functions and variables
     public function getPath()
     {
         return 'livewire.admin.pages.category.category-index'; //4  --- path to blade

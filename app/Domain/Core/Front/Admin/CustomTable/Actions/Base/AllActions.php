@@ -15,10 +15,11 @@ class AllActions implements HtmlInterface
 
     public function generateHtml(): string
     {
-        $str = "";
+        $str = "<div class='flex flex-row space-x-1'>";
         foreach ($this->items as $item) {
             $str = $str . " " . $item->generateHtml();
         }
+        $str = $str . " " . "</div>";
         return $str;
     }
 }

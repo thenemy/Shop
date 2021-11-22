@@ -122,9 +122,9 @@ abstract class BaseController extends Controller implements ControllerInterface
         );
     }
 
-    public function getDestroy($id): \Illuminate\Http\RedirectResponse
+    public function getDestroy($entity): \Illuminate\Http\RedirectResponse
     {
-        $this->getEntity($id)->delete();
+        $entity->delete();
         return back();
     }
 }

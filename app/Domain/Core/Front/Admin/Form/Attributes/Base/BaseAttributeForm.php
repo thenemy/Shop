@@ -22,6 +22,6 @@ abstract class BaseAttributeForm implements HtmlInterface
 
     protected function getVariable(): string
     {
-        return sprintf('$entity->%s', $this->key);
+        return sprintf('{{$entity->%s}}', $this->key);
     }
 }

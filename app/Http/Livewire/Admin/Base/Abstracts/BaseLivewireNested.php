@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Base\Abstracts;
 
 use App\Domain\Core\Front\Admin\DropDown\Items\DropLivewireItem;
 use App\Domain\Core\Front\Admin\DropDown\Models\DropDownOptional;
+use Symfony\Component\Console\Helper\Table;
 
 /**
  * accepts @params
@@ -22,7 +23,7 @@ abstract class BaseLivewireNested extends BaseLivewire
 
     public function mount()
     {
-        $this->filterBy["parent_id"] = $this->attachEntityId;
+
     }
 
     public function changeToAdd()
@@ -63,6 +64,7 @@ abstract class BaseLivewireNested extends BaseLivewire
 
         $withOutSearch = collect($this->filterBy);
         $filterBy = [$this->keySearch => $withOutSearch->pull($this->keySearch)];
+
         return new $table($entity::filterByNot($withOutSearch->toArray())->filterBy($filterBy)->paginate($this->paginate));
     }
 
