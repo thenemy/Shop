@@ -9,7 +9,7 @@
     <div class="m-5 rounded">
         <div x-data="{ sidebarOpen: false }" class="flex overflow-x-hidden">
             <aside class="flex-shrink-0 w-70 w-1/6 flex flex-col transition-all duration-300"
-                   :class="{ '-ml-80': !sidebarOpen }">
+                   :class="{ '-ml-70': !sidebarOpen }">
                 @yield("sidebar")
             </aside>
             <div class="flex-1 m-4 flex-row">
