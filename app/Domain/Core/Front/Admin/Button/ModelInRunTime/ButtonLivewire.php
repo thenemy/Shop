@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Core\Front\Admin\Button\Models;
+namespace App\Domain\Core\Front\Admin\Button\ModelInRunTime;
 
 use App\Domain\Core\Front\Admin\Button\BaseButton\BaseButton;
 use App\View\Components\Button\ButtonLivewireComponent;

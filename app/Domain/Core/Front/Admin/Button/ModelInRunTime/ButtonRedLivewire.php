@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Core\Front\Admin\Button\Models;
+namespace App\Domain\Core\Front\Admin\Button\ModelInRunTime;
 
 class ButtonRedLivewire extends ButtonLivewire
 {

@@ -12,7 +12,7 @@ class ImageTableComponent extends BaseComponent
         parent::__construct($slot);
     }
 
-    protected function getPathToComponent()
+    protected function getPathToComponent(): string
     {
         return "components.helper.image.image";
     }

@@ -6,7 +6,7 @@ use App\Domain\Core\Front\Interfaces\HtmlInterface;
 
 class AllActions implements HtmlInterface
 {
-    private $items;
+    private array $items;
 
     public function __construct(array $items)
     {

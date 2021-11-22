@@ -20,6 +20,4 @@ class ImageAttribute extends BaseAttributes
         $image_component = new ImageTableComponent($this->getValueOfMainKey());
         return $image_component->render()->with($image_component->data());
     }
-
-
 }

@@ -3,6 +3,7 @@
 namespace App\Domain\Core\File\Factory;
 
 use App\Domain\Core\File\Interfaces\CreatorInterface;
+use App\Domain\Core\File\Models\FileBladeCreatorEdit;
 use App\Domain\Core\File\Models\FileBladeCreatorIndex;
 use App\Domain\Core\File\Models\FileLivewireCreator;
 use App\Domain\Core\File\Models\FileLivewireNested;
@@ -10,7 +11,7 @@ use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Core\Main\Traits\FastInstantiation;
 
-abstract class MainFactory implements CreatorInterface
+abstract class MainFactoryCreator implements CreatorInterface
 {
     use FastInstantiation;
 
@@ -27,7 +28,6 @@ abstract class MainFactory implements CreatorInterface
         $class = new $called();
         $class->createIndex();
         $class->createEdit();
-
     }
 
     protected function createIndex()
@@ -43,9 +43,12 @@ abstract class MainFactory implements CreatorInterface
 
     protected function createEdit()
     {
-
         $entity_edit = self::newClass($this->getEditEntity());
-
+        new FileBladeCreatorEdit(
+            $this->entity->class_name,
+            BladeGenerator::generation([$entity_edit->formAttributes()]),
+            $entity_edit
+        );
     }
 
 }

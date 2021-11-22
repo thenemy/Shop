@@ -7,5 +7,4 @@
 
     {{--   table -> drop down action --}}
     <x-helper.table.table :table="$table" :optional="$optional"/>
-    <x-helper.container.container/>
 </div>

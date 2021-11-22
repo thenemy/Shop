@@ -6,6 +6,7 @@ use App\Domain\Category\Entities\Category;
 use App\Domain\Category\Front\Models\CategoryCreate;
 use App\Domain\Category\Front\Models\CategoryEdit;
 use App\Domain\Category\Front\Models\CategoryIndex;
+use App\Domain\Core\File\Factory\MainFactoryCreator;
 use App\Domain\Core\File\Interfaces\CreatorInterface;
 use App\Domain\Core\File\Models\FileBladeCreatorIndex;
 use App\Domain\Core\File\Models\FileLivewireCreator;
@@ -13,13 +14,8 @@ use App\Domain\Core\File\Models\FileLivewireNested;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\Core\Main\Traits\FastInstantiation;
 
-class CategoryCreator implements CreatorInterface
+class CategoryCreator extends MainFactoryCreator
 {
-
-
-    private function __construct()
-    {
-    }
 
 
     public function getEntityClass(): string

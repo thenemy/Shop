@@ -2,8 +2,8 @@
 
 namespace App\Domain\Core\Front\Admin\CustomTable\Traits;
 
-use App\Domain\Core\Front\Admin\Button\Models\ButtonGreenLivewire;
-use App\Domain\Core\Front\Admin\Button\Models\ButtonRedLivewire;
+use App\Domain\Core\Front\Admin\Button\ModelInRunTime\ButtonGreenLivewire;
+use App\Domain\Core\Front\Admin\Button\ModelInRunTime\ButtonRedLivewire;
 use App\Domain\Core\Front\Admin\DropDown\OptionalItems\ActivateChooseItem;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Base\LivewireDropOptional;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Base\LivewireFunctions;

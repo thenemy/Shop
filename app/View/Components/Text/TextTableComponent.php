@@ -9,6 +9,6 @@ class TextTableComponent extends BaseComponent
 
     protected function getPathToComponent(): string
     {
-        return "components.helper.text.pre_title";
+        return "components.helper.text.text_lg";
     }
 }

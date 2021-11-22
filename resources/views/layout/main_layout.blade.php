@@ -28,8 +28,8 @@
     {{--    </div>--}}
     <div class="">
         <div class="flex flex-row h-full w-full">
-{{--            <x-helper.sidebar/>--}}
-                    <span class="w-5"></span>
+            <x-helper.sidebar/>
+            <span class="w-5"></span>
 
             @yield("content")
         </div>
