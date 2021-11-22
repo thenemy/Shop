@@ -8,8 +8,9 @@
 
     <div class="m-5 rounded">
         <div x-data="{ sidebarOpen: false }" class="flex overflow-x-hidden">
-            <aside class="flex-shrink-0 w-90 w-1/6 flex flex-col transition-all duration-300"
-                   :class="{ '-ml-72': !sidebarOpen }">
+            <aside class="flex-shrink-0 lg:w-72 xl:w-80 flex  flex-col transition-all duration-300"
+                   :class="{ 'lg:-ml-72 xl:-ml-80': !sidebarOpen }"
+            >
                 @yield("sidebar")
             </aside>
             <div class="flex-1 m-4 flex-row">
