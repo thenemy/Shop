@@ -23,8 +23,6 @@ abstract class BaseLivewireNested extends BaseLivewire
     public function mount()
     {
         $this->filterBy["parent_id"] = $this->attachEntityId;
-
-        dd($this->filterBy);
     }
 
     public function changeToAdd()
@@ -64,8 +62,8 @@ abstract class BaseLivewireNested extends BaseLivewire
         $entity = $this->getEntity();
 
         $withOutSearch = collect($this->filterBy);
-        $filterBy = [$this->keySearch => $withOutSearch->pop($this->keySearch)];
-        return new $table($entity::filterByNot($withOutSearch)->filterBy($filterBy)->paginate($this->paginate));
+        $filterBy = [$this->keySearch => $withOutSearch->pull($this->keySearch)];
+        return new $table($entity::filterByNot($withOutSearch->toArray())->filterBy($filterBy)->paginate($this->paginate));
     }
 
     public function getItemsToOptionalDropDown(): array
