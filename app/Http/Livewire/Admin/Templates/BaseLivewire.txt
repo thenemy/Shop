@@ -22,7 +22,7 @@ class %s extends BaseLivewire
              %s //5   --- variable to blade
         ];
     }
-    protected function getItemsToOptionalDropDown():array{
+    public function getItemsToOptionalDropDown():array{
         return [
             %s // 6  --- optional dropdown items
         ];

@@ -4,15 +4,15 @@
     <div class="flex flex-row justify-between">
         <x-helper.drop_down.drop_down_livewire :drop="$optional" class="hidden checkbox-show"/>
         <div class="remove-checks">
-            <x-helper.button.outline_button onclick="selectAll(this)" wire:click="checkAll"
+            <x-helper.button.outline_button type="button" onclick="selectAll(this)" wire:click="checkAll"
                                             class="hidden checkbox-show">
                 {{__("выбрать все")}}
             </x-helper.button.outline_button>
-            <x-helper.button.outline_button onclick="removeChecker(this)" wire:click="removeAll"
+            <x-helper.button.outline_button type="button" onclick="removeChecker(this)" wire:click="removeAll"
                                             class="hidden checkbox-show">
                 {{__("Отменить выделения")}}
             </x-helper.button.outline_button>
-            <x-helper.button.outline_button onclick="hideCheck(this)" class="hidden checkbox-show">
+            <x-helper.button.outline_button type="button" onclick="hideCheck(this)" class="hidden checkbox-show">
                 {{__("Выйти")}}
             </x-helper.button.outline_button>
         </div>

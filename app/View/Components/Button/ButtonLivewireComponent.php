@@ -6,13 +6,13 @@ use App\View\Components\Base\BaseComponent;
 
 class ButtonLivewireComponent extends BaseComponent
 {
-    public string $clicked;
+    public string $click;
     public string $class;
 
-    public function __construct($slot, $clicked, $class)
+    public function __construct($slot, $click, $class)
     {
         parent::__construct($slot);
-        $this->clicked = $clicked;
+        $this->click = $click;
         $this->class = $class;
     }
 

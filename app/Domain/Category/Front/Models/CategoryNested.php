@@ -24,8 +24,9 @@ class CategoryNested extends Category implements FrontEntityInterface
         return CategoryAcceptTable::class;
     }
 
-    public function getDeclineTable(): string
+    public function tableDeclineClass(): string
     {
         return CategoryDeclineTable::class;
     }
+
 }

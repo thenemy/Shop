@@ -20,6 +20,13 @@ abstract class BaseLivewireNested extends BaseLivewire
     public string $attachEntity;
     public string $keyToAttach;
 
+    public function mount()
+    {
+        $this->filterBy["parent_id"] = $this->attachEntityId;
+
+        dd($this->filterBy);
+    }
+
     public function changeToAdd()
     {
         $this->isAcceptMode = true;
@@ -38,7 +45,7 @@ abstract class BaseLivewireNested extends BaseLivewire
         return $this->getDeclineList();
     }
 
-    protected function getOptionalDropDown(): DropDownOptional
+    public function getOptionalDropDown(): DropDownOptional
     {
         return new  DropDownOptional(
             $this->getItemsToOptionalDropDown()
@@ -55,6 +62,7 @@ abstract class BaseLivewireNested extends BaseLivewire
     {
         $table = $this->getTableDecline();
         $entity = $this->getEntity();
+
         $withOutSearch = collect($this->filterBy);
         $filterBy = [$this->keySearch => $withOutSearch->pop($this->keySearch)];
         return new $table($entity::filterByNot($withOutSearch)->filterBy($filterBy)->paginate($this->paginate));
@@ -64,14 +72,20 @@ abstract class BaseLivewireNested extends BaseLivewire
     {
         if ($this->isAcceptMode) {
             return [
-                new DropLivewireItem(__("Добавить все отмечанные"), "acceptAllChecked")
+                new DropLivewireItem(__("Добавить все отмечанные"), "acceptAllChecked"),
+                ...$this->getItmsToDropDownAccept()
             ];
         } else {
             return [
-                new DropLivewireItem(__("Удалить все отмечанные"), "removeAllChecked")
+                new DropLivewireItem(__("Удалить все отмечанные"), "removeAllChecked"),
+                ...$this->getItmsToDropDownDecline()
             ];
         }
     }
+
+    abstract public function getItmsToDropDownAccept(): array;
+
+    abstract public function getItmsToDropDownDecline(): array;
 
     public function acceptAllChecked()
     {

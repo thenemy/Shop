@@ -1,4 +1,4 @@
-<div x-data="{open:false}" class="flex flex-col space-y-5">
+<div x-data="{open:false}" class="flex flex-col space-y-5 w-full">
     <div class="flex flex-col cursor-pointer">
         <div @click="open = ! open" class="flex flex-row justify-between items-center">
             <div>

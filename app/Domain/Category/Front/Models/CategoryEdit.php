@@ -14,7 +14,6 @@ class CategoryEdit extends Category implements FormAttributesInterface
     public function formAttributes(): BladeGenerator
     {
         return BladeGenerator::generation(array(
-
             new FileLivewireNested("Category", $this->child_category),
             new ImageAttribute($this, "icon_image")
         ));
@@ -22,7 +21,7 @@ class CategoryEdit extends Category implements FormAttributesInterface
 
     public function getChildCategoryAttribute(): CategoryNested
     {
-        return new CategoryNested(
+        return new CategoryNested([],
             "attachCategory",
             "Категории");
     }
@@ -31,4 +30,5 @@ class CategoryEdit extends Category implements FormAttributesInterface
     {
 
     }
+
 }

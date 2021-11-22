@@ -7,19 +7,19 @@ use App\View\Components\Button\ButtonLivewireComponent;
 
 class ButtonLivewire extends BaseButton
 {
-    public string $clicked;
+    public string $click;
     public string $class;
 
-    public function __construct($name, $clicked, $class)
+    public function __construct($name, $click, $class)
     {
         parent::__construct($name);
-        $this->clicked = $clicked;
+        $this->click = $click;
         $this->class = $class;
     }
 
-    public function generateHtml():string
+    public function generateHtml(): string
     {
-        $button = new ButtonLivewireComponent($this->name, $this->clicked, $this->class);
-        return $button->render()->with($button->data());
+        $button = new ButtonLivewireComponent($this->name, $this->click, $this->class);
+        return $button->render()->with($button->data())->render();
     }
 }

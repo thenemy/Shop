@@ -5,8 +5,9 @@
     <div class="flex flex-col">
         {{--    insert there new created livewire--}}
         {{--    give the title--}}
-        <x-helper.text.title>{{__('asd')}}</x-helper.text.title>
+        <x-helper.text.title>{{__('Категории')}}</x-helper.text.title>
         {{--    insert name of the breadcrumbs and the arguments--}}
-        <livewire:admin.pages.category.category-index/>
+        
+<livewire:admin.pages.category.category-index/>
     </div>
 @endsection

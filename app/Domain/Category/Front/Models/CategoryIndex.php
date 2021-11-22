@@ -30,10 +30,7 @@ class CategoryIndex extends Category implements FrontEntityInterface, TableInFro
 //    addFiltration which are required
 //
 
-    public function getIconValueAttribute(): string
-    {
-        return "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/How_to_use_icon.svg/1200px-How_to_use_icon.svg.png";
-    }
+
 
     public function getNameTableAttribute(): string
     {
@@ -61,6 +58,10 @@ class CategoryIndex extends Category implements FrontEntityInterface, TableInFro
     public function getTableClass(): string
     {
         return CategoryTable::class;
+    }
+
+    public function getTitle(){
+        return  "Категории";
     }
 
     public function livewireComponents(): LivewireAdditionalFunctions

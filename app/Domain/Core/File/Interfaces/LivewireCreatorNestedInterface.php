@@ -11,10 +11,11 @@ interface LivewireCreatorNestedInterface
      *         third    --- set of functions and variables
      *         fourth   --- path to blade
      *         fifth    --- variable to blade
-     *         sixth    --- optional dropdown items
-     *         seventh  --- class name of table
-     *         eighth   --- class name of entity
-     *         ninth    --- class name of decline table
+     *         sixth    --- optional accept dropdown items
+     *         seventh  --- optional decline dropdown items
+     *         eighth  --- class name of table
+     *         ninth   --- class name of entity
+     *         tenth    --- class name of decline table
      */
     const CLASS_TEMPLATE_NESTED = "BaseLivewireNested.txt";
     const BLADE_TEMPLATE_NESTED  = "base-template-nested.blade.php";

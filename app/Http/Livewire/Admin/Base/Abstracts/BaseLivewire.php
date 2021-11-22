@@ -31,7 +31,7 @@ abstract class BaseLivewire extends Component
         $this->checkBox = [];
     }
 
-    protected function getOptionalDropDown(): DropDownOptional
+    public function getOptionalDropDown(): DropDownOptional
     {
         return new DropDownOptional(
             [

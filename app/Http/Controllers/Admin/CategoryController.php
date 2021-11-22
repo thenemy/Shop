@@ -62,8 +62,13 @@ class CategoryController extends BaseController
         return $this->getIndex($request);
     }
 
+    public function edit(Request $request, CategoryEdit $category)
+    {
+        return $this->getEdit($request, $category, [$category]);
+    }
+
     public function createFiles()
     {
-//        CategoryCreator::createFiles();
+        CategoryCreator::createFiles();
     }
 }

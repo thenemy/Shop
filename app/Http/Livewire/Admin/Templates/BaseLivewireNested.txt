@@ -22,21 +22,29 @@ class %s extends BaseLivewireNested
              %s //5   --- variable to blade
         ];
     }
-    protected function getItemsToOptionalDropDown():array{
+
+    public function getItmsToDropDownAccept():array{
         return [
-            %s // 6  --- optional dropdown items
+            %s //6   --- accept optional dropdown
         ];
     }
+
+    public function getItmsToDropDownDecline():array{
+        return [
+            %s //7   --- decline optional dropdown
+        ];
+    }
+
     public function getTable(){
-        return '%s'; //7  --- class name of table
+        return '%s'; //8  --- class name of table
     }
 
     public function getEntity(){
-        return '%s'; //8  --- class name of entity
+        return '%s'; //9  --- class name of entity
     }
 
 
     public function getTableDecline():string {
-        return '%s';  // 9  --- class of table to decline
+        return '%s';  //10  --- class of table to decline
     }
 }

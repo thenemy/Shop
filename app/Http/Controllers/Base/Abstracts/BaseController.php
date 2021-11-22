@@ -112,12 +112,12 @@ abstract class BaseController extends Controller implements ControllerInterface
         $entity = $this->getEntity($id);
     }
 
-    public function getEdit(FormRequest $formRequest, $id, $params = [])
+    public function getEdit(Request $formRequest, $entity, $params = [])
     {
-        $entity = $this->getEditEntity()::find($id);
         return view($this->getPath() . RoutesInterface::EDIT,
             [
-                "form" => $this->form->update($params)
+                "form" => $this->form->update($params),
+                "entity" => $entity
             ]
         );
     }

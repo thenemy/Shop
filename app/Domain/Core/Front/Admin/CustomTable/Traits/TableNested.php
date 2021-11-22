@@ -14,7 +14,7 @@ trait TableNested
     public string $key_to_attach;
     public string $title_for_table;
 
-    public function __construct($key_to_attach, $title_for_table, array $attributes = [])
+    public function __construct(array $attributes = [], string $key_to_attach = "", string $title_for_table = "")
     {
         parent::__construct($attributes);
         $this->key_to_attach = $key_to_attach;
@@ -23,7 +23,7 @@ trait TableNested
 
     abstract public function getTableClass(): string;
 
-    abstract public function getDeclineTable(): string;
+    abstract public function tableDeclineClass(): string;
 
     public function livewireComponents(): LivewireAdditionalFunctions
     {
@@ -37,13 +37,26 @@ trait TableNested
         ]);
     }
 
-    public function getDeclineButtonAttribute(): ButtonRedLivewire
-    {
-        return new ButtonRedLivewire(__("Удалить"), "removeSpecific(" . $this->id . ")");
+    public function liviwireOptionalDropDownAccept():LivewireDropOptional {
+        return new LivewireDropOptional([
+
+        ]);
     }
 
-    public function getAcceptButtonAttribute(): ButtonGreenLivewire
+    public function liviwireOptionalDropDownDecline():LivewireDropOptional {
+        return new LivewireDropOptional([
+
+        ]);
+    }
+    public function getDeclineButtonAttribute(): string
     {
-        return new ButtonGreenLivewire(__("Добавить"), "addSpecific(" . $this->id . ")");
+        return (new ButtonRedLivewire(__("Удалить"),
+            "removeSpecific(" . $this->id . ")"))->generateHtml();
+    }
+
+    public function getAcceptButtonAttribute(): string
+    {
+        return (new ButtonGreenLivewire(__("Добавить"),
+            "addSpecific(" . $this->id . ")"))->generateHtml();
     }
 }

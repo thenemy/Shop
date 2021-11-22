@@ -46,7 +46,7 @@ abstract class MainFactoryCreator implements CreatorInterface
         $entity_edit = self::newClass($this->getEditEntity());
         new FileBladeCreatorEdit(
             $this->entity->class_name,
-            BladeGenerator::generation([$entity_edit->formAttributes()]),
+            $entity_edit->formAttributes(),
             $entity_edit
         );
     }

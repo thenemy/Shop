@@ -11,10 +11,9 @@ trait CategoryAttributeTable
     {
         return ImageAttribute::preGenerate($this, 'icon_value');
     }
-
     public function getIconValueAttribute(): string
     {
-        return "https://";
+        return "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/How_to_use_icon.svg/1200px-How_to_use_icon.svg.png";
     }
 
     public function getNameTableAttribute(): string

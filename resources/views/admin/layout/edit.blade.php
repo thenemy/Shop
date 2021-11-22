@@ -1,7 +1,6 @@
 @extends("layout.admin_layout")
 @section("content")
-
-    <x-admin.form.form :form="$form" :enctype="true" method="PUT">
+    <x-helper.form.form :form="$form" :enctype="true" method="PUT">
         @yield("action")
-    </x-admin.form.form>
+    </x-helper.form.form>
 @endsection

@@ -10,8 +10,8 @@ class FileLivewireNested extends FileLivewireCreator implements LivewireCreatorN
     {
         return sprintf("<livewire:admin.pages.%s.%s
                 :attachEntityId='%s'
-                :attachEntity='get_class(%s)
-                :keyToAttach='%s'
+                :attachEntity='get_class(%s)'
+                keyToAttach='%s'
                 />",
             $this->classNameBlade,
             $this->getBladeName(),
@@ -40,10 +40,16 @@ class FileLivewireNested extends FileLivewireCreator implements LivewireCreatorN
             $this->getBladePath(),
             $this->initializeVariables(),
             $this->getOptionalDropItems(),
+            $this->getOptionalDropItemsDecline(),
             $this->getTableClass(),
             $this->getEntityClass(),
             $this->getTableDeclineClass(),
         );
+    }
+
+    protected function getOptionalDropItemsDecline(): string
+    {
+        return $this->entity->liviwireOptionalDropDownDecline()->generateDropItems();
     }
 
     protected function formatBlade($file_from): string
