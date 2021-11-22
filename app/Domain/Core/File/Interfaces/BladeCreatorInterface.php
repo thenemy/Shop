@@ -26,9 +26,6 @@ interface BladeCreatorInterface
     const FROM_CHOOSE = self::FROM . self::CHOOSE;
 
 
-    public function openIndex();
+    public function openFile();
 
-    public function openCreate();
-
-    public function openEdit();
 }

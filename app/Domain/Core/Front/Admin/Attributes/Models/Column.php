@@ -4,8 +4,8 @@ namespace App\Domain\Core\Front\Admin\Attributes\Models;
 
 class Column
 {
-    public $column_name;
-    public $key_to_row;
+    public string $column_name;
+    public string $key_to_row;
 
     public function __construct($column_name, $key_to_row)
     {

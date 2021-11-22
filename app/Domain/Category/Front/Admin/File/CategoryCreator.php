@@ -1,0 +1,44 @@
+<?php
+
+namespace App\Domain\Category\Front\Admin\File;
+
+use App\Domain\Category\Entities\Category;
+use App\Domain\Category\Front\Models\CategoryCreate;
+use App\Domain\Category\Front\Models\CategoryEdit;
+use App\Domain\Category\Front\Models\CategoryIndex;
+use App\Domain\Core\File\Interfaces\CreatorInterface;
+use App\Domain\Core\File\Models\FileBladeCreatorIndex;
+use App\Domain\Core\File\Models\FileLivewireCreator;
+use App\Domain\Core\File\Models\FileLivewireNested;
+use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
+use App\Domain\Core\Main\Traits\FastInstantiation;
+
+class CategoryCreator implements CreatorInterface
+{
+
+
+    private function __construct()
+    {
+    }
+
+
+    public function getEntityClass(): string
+    {
+        return Category::class;
+    }
+
+    public function getIndexEntity(): string
+    {
+        return CategoryIndex::class;
+    }
+
+    public function getCreateEntity(): string
+    {
+        return CategoryCreate::class;
+    }
+
+    public function getEditEntity(): string
+    {
+        return CategoryEdit::class;
+    }
+}

@@ -9,7 +9,7 @@ use App\View\Components\Text\TextTableComponent;
 
 class TextAttribute extends BaseAttributes
 {
-    public function generateHtml()
+    public function generateHtml():string
     {
         $text = new TextTableComponent($this->getValueOfMainKey());
         return $text->render()->with($text->data());

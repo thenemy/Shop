@@ -30,8 +30,8 @@ abstract  class DeleteActionInterface extends BaseAbstractAction
         // TODO: Implement subActionRoute() method.
     }
 
-    public function buildRoute($route, $params)
+    public function generateHtml()
     {
-        // TODO: Implement buildRoute() method.
+        // TODO: Implement generateHtml() method.
     }
 }

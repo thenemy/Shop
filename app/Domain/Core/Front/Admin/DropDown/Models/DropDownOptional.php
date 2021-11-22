@@ -26,8 +26,6 @@ class DropDownOptional extends AbstractDropDown
 
     static public function getDropDown($name = null): AbstractDropDown
     {
-       return  new self([
-           new DropLivewireItem()
-       ]);
+       return  new self([]);
     }
 }

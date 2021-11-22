@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Domain\Category\Entities\Category;
 use App\Domain\Category\Front\Admin\CustomTable\Tables\CategoryTable;
+use App\Domain\Category\Front\Admin\File\CategoryCreator;
 use App\Domain\Category\Front\Models\CategoryCreate;
 use App\Domain\Category\Front\Models\CategoryEdit;
 use App\Domain\Category\Front\Models\CategoryIndex;
@@ -59,5 +60,10 @@ class CategoryController extends BaseController
     public function index(Request $request)
     {
         return $this->getIndex($request);
+    }
+
+    public function createFiles()
+    {
+//        CategoryCreator::createFiles();
     }
 }

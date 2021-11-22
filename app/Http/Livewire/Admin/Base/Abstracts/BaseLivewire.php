@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Base\Abstracts;
 
 use App\Domain\Core\Front\Admin\DropDown\Items\DropLivewireItem;
 use App\Domain\Core\Front\Admin\DropDown\Models\DropDownOptional;
+use App\Domain\Core\Front\Admin\DropDown\Models\PaginatorDefault;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -34,7 +35,7 @@ abstract class BaseLivewire extends Component
     {
         return new DropDownOptional(
             [
-                new DropLivewireItem("0", __("Удалить все"), "deleteIn(0)"),
+                new DropLivewireItem(__("Удалить выбранные"), "deleteIn()"),
                 ...$this->getItemsToOptionalDropDown()
             ]
         );
@@ -49,10 +50,6 @@ abstract class BaseLivewire extends Component
         return $entity::filterBy($this->filterBy)->paginate($this->paginate);
     }
 
-    public function checkAllRemove()
-    {
-
-    }
 
     public function updatingSearch()
     {
@@ -88,6 +85,7 @@ abstract class BaseLivewire extends Component
     {
         $to_blade = $this->getVariable();
         $to_blade['optional'] = $this->getOptionalDropDown();
+        $to_blade["paginator"] = PaginatorDefault::getDropDown();
         return view($this->getPath(), $to_blade);
     }
 

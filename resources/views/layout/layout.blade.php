@@ -28,7 +28,7 @@
 @yield("footer")
 
 </body>
-
+@yield("scripts")
 
 {{--<script src="{{asset("js/adding_file.js")}}"></script>--}}
 </html>

@@ -6,5 +6,4 @@ interface LivewireAdditionalFunctions
 {
     public function generateFunctions():string;
 
-    public function generateBlades():string;
 }

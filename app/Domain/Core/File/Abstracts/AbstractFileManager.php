@@ -16,7 +16,6 @@ abstract class AbstractFileManager
 
     public function createFolderIfExists()
     {
-        Log::info("THERE IS PATH" . $this->pathMain);
         $this->createDirectory($this->pathMain);
     }
 
@@ -25,14 +24,12 @@ abstract class AbstractFileManager
         return $this->checkFileExistence($this->pathMain);
     }
 
-    public
-    function getContents($path)
+    public function getContents($path)
     {
         return file_get_contents("../" . $path);
     }
 
-    public
-    function putContents($path, ...$variables)
+    public function putContents($path, ...$variables)
     {
         return file_put_contents("../" . $path, ...$variables);
     }
