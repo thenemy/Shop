@@ -6,11 +6,10 @@
 @endsection
 @section("body")
 
-    <div class="m-5 rounded">
+    <div class="mt-5 ml-5 rounded">
         <div x-data="{ sidebarOpen: false }" class="flex overflow-x-hidden">
-
-            <aside class="flex-shrink-0 lg:w-72 xl:w-80 flex  flex-col transition-all duration-300"
-                   :class="{ 'lg:-ml-72 xl:-ml-80': !sidebarOpen }"
+            <aside class="flex-shrink-0 lg:w-72 xl:w-96 flex  flex-col transition-all duration-300"
+                   :class="{ 'lg:-ml-72 xl:-ml-96': !sidebarOpen }"
             >
                 @yield("sidebar")
             </aside>
