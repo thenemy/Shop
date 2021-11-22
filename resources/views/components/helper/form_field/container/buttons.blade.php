@@ -1,4 +1,4 @@
-<div id="buttons" class="items-center justify-center w-auto flex flex-row">
+<div id="buttons" class="items-center mb-4 justify-center w-auto flex flex-row">
     <button onclick="createButton()"
             class="transform motion-safe:hover:scale-110 m-1 flex flex-row w-8 justify-center items-center mt-2">
         <img class="transform motion-safe:hover:scale-110 w-full w-6"
