@@ -18,7 +18,7 @@
 }
 
 .input-custom {
-    @apply border border-black border-opacity-40 focus:outline-none focus:ring focus:border-gray-500 focus:border-green-50 rounded-md p-2
+    @apply border border-black border-opacity-40 focus:outline-none focus:ring focus:border-gray-500 focus:border-green-50 rounded-md p-0.5
 }
 
 @responsive {

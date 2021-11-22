@@ -4,5 +4,5 @@ namespace App\Domain\Core\Front\Interfaces;
 
 interface HtmlInterface
 {
-    public function generateHtml();
+    public function generateHtml(): string;
 }

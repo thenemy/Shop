@@ -8,26 +8,16 @@ use App\Domain\Core\Front\Admin\CustomTable\Actions\Interfaces\ActionInterface;
 use App\Domain\Core\Front\Admin\Routes\Abstracts\RouteHandler;
 use App\View\Components\Actions\AcceptAction;
 
-abstract class AcceptActionAbstract extends BaseAbstractAction
+abstract class  AcceptActionAbstract extends BaseAbstractAction
 {
-    public function __construct($params = [])
-    {
-        parent::__construct($params);
-    }
-
-    public function getIcon(): int
-    {
-        return self::TYPE_ACTION;
-    }
-
     public function subActionRoute(): string
     {
         return self::ACCEPT;
     }
 
-    public function generateHtml()
+    public function generateHtml(): string
     {
-            $accept_action = new AcceptAction($this->event);
-            return $accept_action->render()->with($accept_action->data);
+        $accept_action = new AcceptAction($this->route);
+        return $accept_action->render()->with($accept_action->data());
     }
 }

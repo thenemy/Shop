@@ -2,12 +2,12 @@
 
 namespace App\Domain\Core\Front\Admin\DropDown\Models\Paginator;
 
-use App\Domain\Core\Front\Admin\Attributes\Interfaces\AttributeFormInterface;
 use App\Domain\Core\Front\Admin\DropDown\Abstracts\AbstractDropDown;
 use App\Domain\Core\Front\Admin\DropDown\Abstracts\AbstractLivewireDropDown;
 use App\Domain\Core\Front\Admin\DropDown\Items\DropLivewireItem;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Traits\FunctionGenerate;
 
+// example of additional drop down
 class PaginatorDropDown extends AbstractLivewireDropDown
 {
     use FunctionGenerate;
@@ -16,20 +16,18 @@ class PaginatorDropDown extends AbstractLivewireDropDown
     {
         return new self([
             new DropLivewireItem(
-                50,
-                50,
+                10,
                 sprintf(
                     self::FORMAT_CLICK,
                     self::getFunctionName(),
-                    50
+                    10
                 )),
             new DropLivewireItem(
-                40,
-                40,
+                2,
                 sprintf(
                     self::FORMAT_CLICK,
                     self::getFunctionName(),
-                    40
+                    2
                 )
             ),
         ], $name);

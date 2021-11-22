@@ -3,30 +3,32 @@
 namespace App\Domain\Core\File\Models;
 
 use App\Domain\Core\File\Abstracts\AbstractFileManager;
+use App\Domain\Core\File\Interfaces\CreatorInterface;
 use App\Domain\Core\File\Interfaces\LivewireCreatorInterface;
 use App\Domain\Core\File\Traits\FileManager;
+use App\Domain\Core\Front\Admin\Livewire\LivewireFiles\Interfaces\LivewireGeneratorInterface;
+use App\Domain\Core\Front\Interfaces\HtmlInterface;
 use App\Domain\Core\Text\Traits\CaseConverter;
 use App\Http\Controllers\Base\Abstracts\BaseController;
 
 // pass additional actions through constructor
 // could pass entity
-class FileLivewireCreator extends AbstractFileManager implements LivewireCreatorInterface
+class FileLivewireCreator extends AbstractFileManager
+    implements LivewireCreatorInterface, HtmlInterface
 {
-    protected $pathMainClass;
-    protected $className;
-    protected $controller;
-    private $entity;
 
-    public function __construct($className, BaseController $controller, $entity)
+    protected string $className;
+    protected $entity;
+
+    public function __construct($className, $entity)
     {
         $this->className = $className;
         $this->entity = $entity;
-        $this->controller = $controller;
         $this->classNameBlade = $this->toLivewireCase($className);
-        $this->openIndex();
+        $this->openFile();
     }
 
-    public function generateLivewire(): string
+    public function generateHtml(): string
     {
         return sprintf("<livewire:admin.pages.%s.%s/>", $this->classNameBlade, $this->getBladeName());
     }
@@ -37,86 +39,103 @@ class FileLivewireCreator extends AbstractFileManager implements LivewireCreator
     }
     // implement this function
     //to livewire class
-    private function getFunctions(): string
+    protected function getFunctions(): string
     {
-        return $this->entity->livewireComponents()->generateFunctions();
+        return $this->entity->livewireComponents()->generateFunctions()
+            . " "
+            . $this->entity->livewireOptionalDropDown()->generateFunctions();
+    }
+
+    protected function getOptionalDropItems(): string
+    {
+        return $this->entity->livewireOptionalDropDown()->generateDropItems();
     }
 
     // to blade in livewire
-    private function getFunctionComponents(): string
+    protected function getFunctionComponents(): string
     {
         return $this->entity->livewireComponents()->generateBlades();
     }
 
-    public function openIndex()
+    public function openFile()
     {
-        $this->openIndexBlade();
-        $this->openIndexClass();
+        $this->openFileBlade();
+        $this->openFileClass();
     }
 
     protected function getTableClass(): string
     {
-        return $this->controller->getTableClass();
+        return $this->entity->getTableClass();
     }
 
     protected function getEntityClass(): string
     {
-        return $this->controller->getIndexEntity();
+        return get_class($this->entity);
     }
 
-    protected function openIndexBlade()
+    protected function openFileBlade()
     {
         $this->setMainPath();
         $this->createFolderIfExists();
-        $this->createIndexBlade();
+        $this->createFileBlade();
     }
 
-    private function getBladePath(): string
+    protected function getBladePath(): string
     {
         return "livewire.admin.pages." . $this->classNameBlade . "." . $this->getBladeName();
     }
 
 
-    private function getBladeName(): string
+    protected function getBladeName(): string
     {
         return $this->toLivewireCase($this->getLivewireClassName());
     }
 
-    private function getNamespace(): string
+    protected function getNamespace(): string
     {
         return str_replace("/", "\\", self::BASE_CLASS . "Pages/" . $this->className . ";");
     }
 
-    private function getLivewireClassName(): string
+    protected function getLivewireClassName(): string
     {
-        return $this->className . self::INDEX;
+        return $this->entity->class_name;
     }
 
-    protected function openIndexClass()
+    protected function openFileClass()
     {
         $this->setMainPathClass();
         $this->createFolderIfExists();
-        $this->createIndexClass();
+        $this->createFileClass();
     }
 
-    private function createIndexClass()
+    private function createFileClass()
     {
         $file_to = $this->pathMain . $this->getLivewireClassName() . ".php";
-        $file_from = $this->getContents(self::FROM_CLASS);
+        $file_from = $this->getContents($this->getPathFromClass());
 
         $formatted_data = $this->formatClass($file_from);
         $this->putContents($file_to, $formatted_data);
     }
 
-    private function createIndexBlade()
+    protected function getPathFromClass(): string
+    {
+        return self::FROM_CLASS;
+    }
+
+    protected function getPathFromBlade(): string
+    {
+        return self::FROM_BLADE;
+    }
+
+    private function createFileBlade()
     {
         $file_to = $this->pathMain . $this->getBladeName() . ".blade.php";
-        $file_from = $this->getContents(self::FROM_BLADE);
+        $file_from = $this->getContents($this->getPathFromBlade());
         $formatted_data = $this->formatBlade($file_from);
         $this->putContents($file_to, $formatted_data);
     }
 
-    private function formatClass($file_from): string
+    protected function formatClass($file_from): string
     {
         return sprintf($file_from,
             $this->getNamespace(),
@@ -124,13 +143,13 @@ class FileLivewireCreator extends AbstractFileManager implements LivewireCreator
             $this->getFunctions(),
             $this->getBladePath(),
             $this->initializeVariables(),
+            $this->getOptionalDropItems(),
             $this->getTableClass(),
             $this->getEntityClass(),
-
         );
     }
 
-    private function formatBlade($file_from): string
+    protected function formatBlade($file_from): string
     {
         return sprintf($file_from,
             $this->getFunctionComponents()

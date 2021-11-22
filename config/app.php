@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -189,7 +189,7 @@ return [
     */
 
     'aliases' => [
-//        'Paginator'=> ,
+        'Paginator' => \App\Domain\Core\Front\Admin\DropDown\Models\PaginatorDefault::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,

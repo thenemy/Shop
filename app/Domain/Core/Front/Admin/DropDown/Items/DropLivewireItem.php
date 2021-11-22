@@ -5,13 +5,13 @@ namespace App\Domain\Core\Front\Admin\DropDown\Items;
 class DropLivewireItem extends DropItem
 {
     public $clicked;
-    public $classes;
+    public $class;
 
-    public function __construct($id, $name, $clicked, $classes = "")
+    public function __construct( $name, $clicked, $class = "")
     {
-        parent::__construct($id, $name);
+        parent::__construct("", $name);
         $this->clicked = $clicked;
-        $this->classes = $classes;
+        $this->class = $class;
     }
 
 }

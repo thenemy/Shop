@@ -4,21 +4,18 @@ namespace App\Domain\Category\Front\Models;
 
 use App\Domain\Category\Entities\Category;
 use App\Domain\Category\Entities\IconCat;
-use App\Domain\Core\Front\Admin\Attributes\Models\AttributeText;
-use App\Domain\Core\Front\Admin\Form\Interfaces\FrontAttributesInterface;
+use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\ImageAttribute;
+use App\Domain\Core\Front\Admin\Form\Interfaces\FormAttributesInterface;
+use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 
-class CategoryCreate extends Category implements FrontAttributesInterface
+class CategoryCreate extends Category implements FormAttributesInterface
 {
-    static public function generateEntity()
-    {
-        return new self();
-    }
 
-    public function formAttributes(): array
+    public function formAttributes(): BladeGenerator
     {
-        return [
-            new AttributeText('', "name", "", ""),
-        ];
+        return BladeGenerator::generation([
+            new ImageAttribute($this, "icon_image")
+        ]);
     }
 
     // move somewhere else

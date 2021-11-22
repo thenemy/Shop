@@ -2,13 +2,14 @@
 
 namespace App\Domain\Core\Front\Admin\Livewire\Functions\Abstracts;
 
-use App\Domain\Core\Front\Admin\Attributes\Interfaces\AttributeFormInterface;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\FunctionInterface;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Traits\FunctionFormatArg;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Traits\FunctionGenerate;
+use App\Domain\Core\Front\Interfaces\HtmlInterface;
 
-abstract class AbstractFunction implements FunctionInterface, AttributeFormInterface
+abstract class AbstractFunction implements FunctionInterface, HtmlInterface
 {
-    use FunctionGenerate;
+    use FunctionGenerate, FunctionFormatArg;
 
     public function generateFunction(): string
     {

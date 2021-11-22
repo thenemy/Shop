@@ -8,7 +8,7 @@ use App\Domain\Core\Front\Interfaces\HtmlInterface;
 
 abstract class BaseAttributes implements AttributeInterface, HtmlInterface
 {
-    public $key;
+    public string $key;
     public $entity;
 
     public function __construct($entity, $key)
@@ -25,10 +25,8 @@ abstract class BaseAttributes implements AttributeInterface, HtmlInterface
 
     static public function preGenerate($entity, $key): string
     {
-
         $class = get_called_class();
         $object = new $class($entity, $key);
         return $object->generateHtml();
     }
-
 }

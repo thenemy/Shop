@@ -5,6 +5,7 @@ namespace App\Domain\Category\Front\Admin\CustomTable\Tables;
 
 
 use App\Domain\Category\Front\Admin\CustomTable\Attributes\CategoryAttributes;
+use App\Domain\Category\Front\Admin\CustomTable\Traits\CommonCategoryTable;
 use App\Domain\Core\Front\Admin\Attributes\Models\Column;
 use App\Domain\Core\Front\Admin\CustomTable\Abstracts\AbstractTable;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Abstracts\AbstractAttributes;
@@ -12,13 +13,12 @@ use App\Domain\Core\Front\Admin\CustomTable\Attributes\Abstracts\AbstractAttribu
 // only this is needed
 class CategoryTable extends AbstractTable
 {
+    use CommonCategoryTable;
+
     public function getColumns(): array
     {
         return [
-            new Column(__("Иконка"), "icon_table"),
-            new Column(__("Название"), "name_table"),
-            new Column(__("Статус"), 'status_table'),
-            new Column(__("Подкатегории"), "under_category_table"),
+            ...$this->getCommonColumns(),
             new Column(__("Действия"), "action_table"),
         ];
     }

@@ -1,21 +1,21 @@
 <div class="table_checker space-y-5">
+
+
     <div class="flex flex-row justify-between">
         <x-helper.drop_down.drop_down_livewire :drop="$optional" class="hidden checkbox-show"/>
-
         <div class="remove-checks">
-            <x-helper.button.outline_button onclick="selectAll(this)" wire:click="checkAll"
+            <x-helper.button.outline_button type="button" onclick="selectAll(this)" wire:click="checkAll"
                                             class="hidden checkbox-show">
                 {{__("выбрать все")}}
             </x-helper.button.outline_button>
-            <x-helper.button.outline_button onclick="removeChecker(this)" wire:click="removeAll"
+            <x-helper.button.outline_button type="button" onclick="removeChecker(this)" wire:click="removeAll"
                                             class="hidden checkbox-show">
                 {{__("Отменить выделения")}}
             </x-helper.button.outline_button>
-            <x-helper.button.outline_button onclick="hideCheck(this)" class="hidden checkbox-show">
+            <x-helper.button.outline_button type="button" onclick="hideCheck(this)" class="hidden checkbox-show">
                 {{__("Выйти")}}
             </x-helper.button.outline_button>
         </div>
-
     </div>
     <table class="table-auto border-collapse border w-full ">
         <tr class="w-8/12">
@@ -48,51 +48,3 @@
     <x-helper.form_field.wrapper/>
 </div>
 {{$table->paginate->links()}}
-
-<script>
-    let pressTimer;
-    $(".longpress").mouseup(function () {
-        clearTimeout(pressTimer);
-        return false;
-    }).mousedown(function () {
-        // Set timeout
-        let current = this;
-        pressTimer = window.setTimeout(function () {
-            showing(current)
-        }, 600);
-        return false;
-    });
-
-    function findParent(current) {
-        return $(current).parents(".table_checker");
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-        Livewire.hook("element.updated", function (e) {
-                $(".table_checker").each(function () {
-                    let checkBox = $(this).find(".checkbox-show input[type=checkbox]:checked")
-                    if (checkBox.length > 0) {
-                        $(this).find(".checkbox-show").removeClass("hidden");
-                    }
-                });
-            }
-        )
-    });
-
-    function showing(current) {
-        findParent(current).find('.checkbox-show').removeClass('hidden')
-    }
-
-    function hideCheck(current) {
-
-        findParent(current).find('.checkbox-show').addClass('hidden')
-    }
-
-    function removeChecker(current) {
-        findParent(current).find('.checkbox-show input[type=checkbox]').prop('checked', false);
-    }
-
-    function selectAll(current) {
-        findParent(current).find('.checkbox-show input[type=checkbox]').prop('checked', true);
-    }
-</script>

@@ -1,18 +1,16 @@
 <?php
 // namespace  will start with
-namespace App\Http\Livewire\Admin\Pages\Category;  // 1
+namespace App\Http\Livewire\Admin\Pages\Category;  // 1  --- namespace
 
 use App\Http\Livewire\Admin\Base\Abstracts\BaseLivewire;
-//2
+//2 --- classname livewire
 class CategoryIndex extends BaseLivewire
 {
 
-    public $selected_value;  public function newClass($test){
-        $this->selected_value=$test;
-    } //3
+      public function activateChosen(){} //3   --- set of functions and variables
     public function getPath()
     {
-        return 'livewire.admin.pages.category.category-index'; //4
+        return 'livewire.admin.pages.category.category-index'; //4  --- path to blade
     }
 
     public function getVariable()
@@ -21,21 +19,20 @@ class CategoryIndex extends BaseLivewire
         $table = $this->getTable();
         return [
             "table" => new $table($this->getLists()),
-             
-'name_blade' => \App\Domain\Core\Front\Admin\DropDown\Models\Paginator\PaginatorDropDown::getDropDown($this->selected_value), //5
+              //5   --- variable to blade
         ];
     }
-    protected function getItemsToOptionalDropDown():array{
-        return [];
+    public function getItemsToOptionalDropDown():array{
+        return [
+            new \App\Domain\Core\Front\Admin\DropDown\OptionalItems\ActivateChooseItem(), // 6  --- optional dropdown items
+        ];
     }
     public function getTable(){
-        return 'App\Domain\Category\Front\Admin\CustomTable\Tables\CategoryTable'; //6
+        return 'App\Domain\Category\Front\Admin\CustomTable\Tables\CategoryTable'; //7  --- class name of table
     }
 
     public function getEntity(){
-        return 'App\Domain\Category\Front\Models\CategoryIndex'; //7
+        return 'App\Domain\Category\Front\Models\CategoryIndex'; //8  --- class name of entity
     }
-
-
 
 }

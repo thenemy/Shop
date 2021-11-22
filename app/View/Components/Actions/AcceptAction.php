@@ -8,6 +8,7 @@ use App\View\Components\Base\BaseComponent;
 
 class AcceptAction extends BaseComponent
 {
+
     protected function getPathToComponent(): string
     {
         return "components.helper.icon_button.accept_icon";

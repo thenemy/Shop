@@ -18,7 +18,4 @@ interface MainActionInterface
 
     public function buildRoute($route, $params);
 
-    const CREATE = "create";
-    const INDEX = "index";
-    const ACCEPT  = "accept";
 }

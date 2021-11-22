@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Base\Abstracts;
 
-use App\Domain\Core\File\Models\FileBladeCreator;
+use App\Domain\Core\File\Models\FileBladeCreatorIndex;
 use App\Domain\Core\File\Models\FileLivewireCreator;
 use App\Domain\Core\Front\Admin\CustomTable\Abstracts\AbstractTable;
 use App\Domain\Core\Front\Admin\Routes\Interfaces\RoutesInterface;
 use App\Domain\Core\Main\Entities\Entity;
+use App\Domain\Core\Main\Traits\FastInstantiation;
 use App\Domain\Core\Text\Traits\CaseConverter;
 use App\Http\Controllers\Base\Interfaces\ControllerInterface;
 use App\Http\Controllers\Controller;
@@ -29,7 +30,7 @@ use Illuminate\Http\Request;
 /// second create all blades
 abstract class BaseController extends Controller implements ControllerInterface
 {
-    use CaseConverter;
+    use CaseConverter, FastInstantiation;
 
     private $service;
 
@@ -48,6 +49,7 @@ abstract class BaseController extends Controller implements ControllerInterface
         $to_parts = explode("\\", $this->getEntityClass());
         return end($to_parts);
     }
+
 
     public function __construct()
     {
@@ -80,12 +82,11 @@ abstract class BaseController extends Controller implements ControllerInterface
     ///
     ///
     ///
+    abstract public function createFiles();
 
     public function getIndex(Request $request)
     {
-        $createLivewire = new FileLivewireCreator($this->getClassName(), $this, $this->getNewEntityIndex());
-        $createBlades = new FileBladeCreator($this->getClassName(), $createLivewire);
-
+        $this->createFiles();
         return view($this->getPath() . RoutesInterface::INDEX);
     }
 
@@ -111,12 +112,12 @@ abstract class BaseController extends Controller implements ControllerInterface
         $entity = $this->getEntity($id);
     }
 
-    public function getEdit(FormRequest $formRequest, $id, $params = [])
+    public function getEdit(Request $formRequest, $entity, $params = [])
     {
-        $entity = $this->getEntity($id);
         return view($this->getPath() . RoutesInterface::EDIT,
             [
-                "form" => $this->form->update($params)
+                "form" => $this->form->update($params),
+                "entity" => $entity
             ]
         );
     }

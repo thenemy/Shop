@@ -3,8 +3,9 @@
 namespace App\Domain\Core\Front\Admin\Livewire\Functions\Base;
 
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireAdditionalFunctions;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireBlades;
 
-class LivewireFunctions implements LivewireAdditionalFunctions
+class LivewireFunctions implements LivewireAdditionalFunctions , LivewireBlades
 {
     private $items;
 

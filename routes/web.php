@@ -25,7 +25,8 @@ Route::group([
     }
 );
 
-
-Route::get('/adminasd', function () {
-    return view('admin');
+Route::name("admin.")->group(function () {
+    Route::resource(
+        'category',
+        \App\Http\Controllers\Admin\CategoryController::class);
 });
