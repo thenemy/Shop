@@ -4,7 +4,7 @@ namespace App\Domain\Core\Front\Admin\Livewire\Functions\Traits;
 
 trait FunctionFormatArg
 {
-    private function formatArguments(): string
+    protected function formatArguments(): string
     {
         $new_array = [];
         foreach ($this->getArguments() as $argument) {

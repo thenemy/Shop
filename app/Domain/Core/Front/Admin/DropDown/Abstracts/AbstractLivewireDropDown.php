@@ -2,12 +2,17 @@
 
 namespace App\Domain\Core\Front\Admin\DropDown\Abstracts;
 
+use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\FunctionHelperStaticInterface;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\FunctionInterface;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Traits\FunctionFormatArg;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Traits\FunctionGenerate;
 use App\Domain\Core\Front\Interfaces\HtmlInterface;
 
-abstract class AbstractLivewireDropDown extends AbstractDropDown implements HtmlInterface
+abstract class AbstractLivewireDropDown extends AbstractDropDown
+    implements HtmlInterface, FunctionInterface , FunctionHelperStaticInterface
 {
-    use FunctionFormatArg;
+    use FunctionFormatArg, FunctionGenerate
+;
 
     private const TEMPLATE = "public function %s(%s){
         %s

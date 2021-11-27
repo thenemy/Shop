@@ -41,7 +41,9 @@ class Category extends Entity
     {
         return $this->belongsTo(Category::class, "parent_id");
     }
-
+    public function childsCategory() {
+        return $this->hasMany(Category::class, "parent_id");
+    }
     public function icon()
     {
         return $this->hasOne(IconCat::class, "id");

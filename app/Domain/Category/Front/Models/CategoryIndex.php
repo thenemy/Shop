@@ -12,6 +12,7 @@ use App\Domain\Core\Front\Admin\CustomTable\Actions\Base\AllActions;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Interfaces\TableInFront;
 use App\Domain\Core\Front\Admin\DropDown\OptionalItems\ActivateChooseItem;
+use App\Domain\Core\Front\Admin\DropDown\OptionalItems\DeactivateChooseItem;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Base\LivewireDropOptional;
 
 
@@ -32,12 +33,10 @@ class CategoryIndex extends Category implements FrontEntityInterface, TableInFro
 //
 
 
-
     public function getNameTableAttribute(): string
     {
         return TextAttribute::preGenerate($this, "name");
     }
-
 
     // call function which will have set of actions for this table
     public function getActionTableAttribute(): string
@@ -62,8 +61,9 @@ class CategoryIndex extends Category implements FrontEntityInterface, TableInFro
         return CategoryTable::class;
     }
 
-    public function getTitle(){
-        return  "Категории";
+    public function getTitle()
+    {
+        return "Категории";
     }
 
     public function livewireComponents(): LivewireAdditionalFunctions
@@ -76,7 +76,8 @@ class CategoryIndex extends Category implements FrontEntityInterface, TableInFro
     public function livewireOptionalDropDown(): LivewireDropOptional
     {
         return new LivewireDropOptional([
-            new ActivateChooseItem()
+             ActivateChooseItem::create('status'),
+             DeactivateChooseItem::create('status')
         ]);
     }
 }

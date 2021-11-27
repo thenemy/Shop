@@ -73,6 +73,6 @@ class CategoryController extends BaseController
 
     public function createFiles()
     {
-//        CategoryCreator::createFiles();
+        CategoryCreator::createFiles();
     }
 }

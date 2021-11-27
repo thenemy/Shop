@@ -15,25 +15,25 @@ use Symfony\Component\Console\Helper\Table;
  */
 abstract class BaseLivewireNested extends BaseLivewire
 {
+    const DETACH  = 0;
+    const ATTACH = 1;
     public bool $isAcceptMode = true;
 
     public $attachEntityId;
     public string $attachEntity;
     public string $keyToAttach;
 
-    public function mount()
-    {
-
-    }
-
     public function changeToAdd()
     {
         $this->isAcceptMode = true;
+        $this->checkBox = [];
     }
 
     public function changeToRemove()
     {
         $this->isAcceptMode = false;
+        $this->checkBox = [];
+
     }
 
     public function getTableToBlade()
@@ -54,18 +54,19 @@ abstract class BaseLivewireNested extends BaseLivewire
     private function getAcceptList()
     {
         $table = $this->getTable();
-        return new $table(parent::getLists());
+        $entity = $this->getEntity();
+        $withOutSearch = collect($this->filterBy);
+        $filterBy = [$this->keySearch => $withOutSearch->pull($this->keySearch)];
+        return new $table($entity::filterByNot($withOutSearch->toArray())
+            ->filterBy($filterBy)
+            ->paginate($this->paginate));
     }
 
     private function getDeclineList()
     {
         $table = $this->getTableDecline();
-        $entity = $this->getEntity();
+        return new $table(parent::getLists());
 
-        $withOutSearch = collect($this->filterBy);
-        $filterBy = [$this->keySearch => $withOutSearch->pull($this->keySearch)];
-
-        return new $table($entity::filterByNot($withOutSearch->toArray())->filterBy($filterBy)->paginate($this->paginate));
     }
 
     public function getItemsToOptionalDropDown(): array
@@ -91,24 +92,23 @@ abstract class BaseLivewireNested extends BaseLivewire
     {
         $this->addToEntity($this->checkBox);
     }
+    public function removeAllChecked()
+    {
+        $this->removeFromEntity($this->checkBox);
+    }
 
     private function addToEntity($adding)
     {
         $entity = $this->getAttachEntity();
         $keyToAttach = $this->keyToAttach;
-        $entity->$keyToAttach()->attach($adding);
+        $entity->$keyToAttach($adding, self::ATTACH);
     }
 
     private function removeFromEntity($adding)
     {
         $entity = $this->getAttachEntity();
         $keyToAttach = $this->keyToAttach;
-        $entity->$keyToAttach()->detach($adding);
-    }
-
-    public function removeAllChecked()
-    {
-        $this->removeFromEntity($this->checkBox);
+        $entity->$keyToAttach($adding, self::DETACH);
     }
 
     public function removeSpecific($id)

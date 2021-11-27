@@ -12,7 +12,7 @@ class FileLivewireNested extends FileLivewireCreator implements LivewireCreatorN
         return sprintf("<livewire:admin.pages.%s.%s
                 :attachEntityId='%s'
                 :attachEntity='get_class(%s)'
-                keyToFilter='%s'
+                keyToAttach='%s'
                 :filterBy='[\"%s\" => \"%s\"]'
                 />",
             $this->classNameBlade,

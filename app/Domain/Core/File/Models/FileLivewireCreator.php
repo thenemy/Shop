@@ -3,19 +3,17 @@
 namespace App\Domain\Core\File\Models;
 
 use App\Domain\Core\File\Abstracts\AbstractFileManager;
-use App\Domain\Core\File\Interfaces\CreatorInterface;
 use App\Domain\Core\File\Interfaces\LivewireCreatorInterface;
-use App\Domain\Core\File\Traits\FileManager;
-use App\Domain\Core\Front\Admin\Livewire\LivewireFiles\Interfaces\LivewireGeneratorInterface;
 use App\Domain\Core\Front\Interfaces\HtmlInterface;
-use App\Domain\Core\Text\Traits\CaseConverter;
-use App\Http\Controllers\Base\Abstracts\BaseController;
+use App\Domain\Core\Main\Traits\FastInstantiation;
+
 
 // pass additional actions through constructor
 // could pass entity
 class FileLivewireCreator extends AbstractFileManager
     implements LivewireCreatorInterface, HtmlInterface
 {
+    use  FastInstantiation;
 
     protected string $className;
     protected $entity;
@@ -42,8 +40,10 @@ class FileLivewireCreator extends AbstractFileManager
     protected function getFunctions(): string
     {
         return $this->entity->livewireComponents()->generateFunctions()
-            . " "
-            . $this->entity->livewireOptionalDropDown()->generateFunctions();
+            . "\n"
+            . $this->entity->livewireOptionalDropDown()->generateFunctions()
+            . "\n"
+            . self::newClass($this->entity->getTableClass())->generateFunctions();
     }
 
     protected function getOptionalDropItems(): string

@@ -35,4 +35,6 @@ class %s extends BaseLivewire
         return '%s'; //8  --- class name of entity
     }
 
+
+
 }

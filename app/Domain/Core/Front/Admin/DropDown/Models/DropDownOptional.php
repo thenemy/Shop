@@ -28,4 +28,9 @@ class DropDownOptional extends AbstractDropDown
     {
        return  new self([]);
     }
+
+    static public function formatClick($value)
+    {
+        // TODO: Implement formatClick() method.
+    }
 }

@@ -7,9 +7,19 @@ use App\Http\Livewire\Admin\Base\Abstracts\BaseLivewire;
 class CategoryIndex extends BaseLivewire
 {
 
-      public function activateChosen(){
-
-      } //3   --- set of functions and variables
+    
+ public function activateChosen(){$this->getEntity()::whereIn('id', $this->checkBox)
+            ->update(
+                ['status' => true]
+            );
+        $this->checkBox = [];} public function deactivateChosenItem(){$this->getEntity()::whereIn('id', $this->checkBox)
+            ->update(
+                ['status' => false]
+            );
+        $this->checkBox = [];}
+   public function statusTable($arg){$entity = $this->getEntity()::find($arg);
+             $entity->status = !$entity->status;
+             $entity->save();}   //3   --- set of functions and variables
     public function getPath()
     {
         return 'livewire.admin.pages.category.category-index'; //4  --- path to blade
@@ -26,7 +36,7 @@ class CategoryIndex extends BaseLivewire
     }
     public function getItemsToOptionalDropDown():array{
         return [
-            new \App\Domain\Core\Front\Admin\DropDown\OptionalItems\ActivateChooseItem(), // 6  --- optional dropdown items
+            new \App\Domain\Core\Front\Admin\DropDown\OptionalItems\DeactivateChooseItem(),new \App\Domain\Core\Front\Admin\DropDown\OptionalItems\ActivateChooseItem(), // 6  --- optional dropdown items
         ];
     }
     public function getTable(){
@@ -36,5 +46,7 @@ class CategoryIndex extends BaseLivewire
     public function getEntity(){
         return 'App\Domain\Category\Front\Models\CategoryIndex'; //8  --- class name of entity
     }
+
+
 
 }

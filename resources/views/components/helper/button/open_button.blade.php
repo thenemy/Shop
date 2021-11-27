@@ -3,6 +3,6 @@
         'newwindow',
         'width=800,height=500');
         return false;"
-    {{$attributes->merge(["class"=>"m-auto w-min font-semibold text-white rounded-lg"])}}>
+    {{$attributes->merge(["class"=>"m-auto w-min font-semibold text-white rounded"])}}>
     {{$slot}}
 </button>

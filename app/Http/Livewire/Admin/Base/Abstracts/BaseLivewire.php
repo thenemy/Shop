@@ -47,6 +47,7 @@ abstract class BaseLivewire extends Component
     protected function getLists()
     {
         $entity = $this->getEntity();
+
         return $entity::filterBy($this->filterBy)->paginate($this->paginate);
     }
 
@@ -72,9 +73,6 @@ abstract class BaseLivewire extends Component
         $entity::deleteIn($this->checkBox);
     }
 
-    abstract protected function getTable();
-
-    abstract protected function getEntity();
 
     public function setSearch($search)
     {
@@ -88,6 +86,7 @@ abstract class BaseLivewire extends Component
 
     public function render()
     {
+        $this->dispatchBrowserEvent('table_check');
         $to_blade = $this->getVariable();
         $to_blade['optional'] = $this->getOptionalDropDown();
         $to_blade["paginator"] = PaginatorDefault::getDropDown();
@@ -113,4 +112,8 @@ abstract class BaseLivewire extends Component
     abstract public function getPath();
 
     abstract public function getVariable();
+
+    abstract protected function getTable();
+
+    abstract protected function getEntity();
 }

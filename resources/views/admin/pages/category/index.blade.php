@@ -7,7 +7,7 @@
         {{--    give the title--}}
         <x-helper.text.title>{{__('Категории')}}</x-helper.text.title>
         {{--    insert name of the breadcrumbs and the arguments--}}
-    <!-- This example requires Tailwind CSS v2.0+ -->
-        <livewire:admin.pages.category.category-index/>
+        
+<livewire:admin.pages.category.category-index/>
     </div>
 @endsection

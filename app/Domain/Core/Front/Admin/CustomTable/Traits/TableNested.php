@@ -11,8 +11,13 @@ use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireAdditional
 
 trait TableNested
 {
+    // the method which will be called to detach or attach the objects
     public string $key_to_attach;
+
     public string $title_for_table;
+//    this is required for filtering data in nested component
+//    so we get all records that belongs to parent
+//   filterBy = [ $key_to_filter => parent_id ]
     public string $key_to_filter;
 
     static public function generate($key_to_attach, $title_for_table, $key_to_filter)
@@ -34,18 +39,15 @@ trait TableNested
         ]);
     }
 
+
+    /// accept drop down
     public function livewireOptionalDropDown(): LivewireDropOptional
     {
         return new LivewireDropOptional([
+             ActivateChooseItem::create("status")
         ]);
     }
 
-    public function liviwireOptionalDropDownAccept(): LivewireDropOptional
-    {
-        return new LivewireDropOptional([
-
-        ]);
-    }
 
     public function liviwireOptionalDropDownDecline(): LivewireDropOptional
     {

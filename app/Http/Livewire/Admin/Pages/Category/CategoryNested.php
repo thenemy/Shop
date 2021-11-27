@@ -8,7 +8,15 @@ use App\Http\Livewire\Admin\Base\Abstracts\BaseLivewireNested;
 class CategoryNested extends BaseLivewireNested
 {
 
-      //3   --- set of functions and variables
+    
+ public function activateChosen(){$this->getEntity()::whereIn('id', $this->checkBox)
+            ->update(
+                ['status' => true]
+            );
+        $this->checkBox = [];}
+   public function statusTable($arg){$entity = $this->getEntity()::find($arg);
+             $entity->status = !$entity->status;
+             $entity->save();}   //3   --- set of functions and variables
     public function getPath()
     {
         return 'livewire.admin.pages.category.category-nested'; //4  --- path to blade
@@ -25,7 +33,7 @@ class CategoryNested extends BaseLivewireNested
 
     public function getItmsToDropDownAccept():array{
         return [
-             //6   --- accept optional dropdown
+            new \App\Domain\Core\Front\Admin\DropDown\OptionalItems\ActivateChooseItem(), //6   --- accept optional dropdown
         ];
     }
 

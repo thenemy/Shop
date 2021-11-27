@@ -3,21 +3,20 @@
 namespace App\Domain\Core\Front\Admin\Livewire\Functions\Traits;
 
 use App\Domain\Core\Front\Admin\Livewire\Functions\Base\LivewireFunctions;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\FunctionStandardTemplate;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\FunctionInterface;
 
 trait FunctionGenerate
 {
-    abstract static public function getFunctionName(): string;
-
-    abstract static public function getArguments(): array;
-
     abstract static public function getVariable(): string;
 
     abstract static public function getVariableBlade(): string;
 
-    static public function toRealBlade(): string
+
+
+    static public function toRealBlade($variable_blade): string
     {
-        return "$" . self::getVariableBlade();
+        return "$" . $variable_blade;
     }
 
     protected function toThisVariable(): string
@@ -34,9 +33,8 @@ trait FunctionGenerate
 
     public function generateVariable(): string
     {
-        return sprintf(FunctionInterface::VARIABLE_TEMPLATE, $this->getVariable());
+        return sprintf(FunctionStandardTemplate::VARIABLE_TEMPLATE, $this->getVariable());
     }
 
-    abstract public function generateFunction(): string;
 
 }

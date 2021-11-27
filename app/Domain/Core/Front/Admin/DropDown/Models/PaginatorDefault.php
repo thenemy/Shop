@@ -37,4 +37,9 @@ class PaginatorDefault extends AbstractDropDown
     {
         return "";
     }
+
+    static public function formatClick($value)
+    {
+        // TODO: Implement formatClick() method.
+    }
 }

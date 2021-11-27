@@ -3,7 +3,6 @@
 namespace App\Domain\Core\Front\Admin\Livewire\Functions\Base;
 
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireAdditionalFunctions;
-use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireBlades;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireDropItem;
 
 class LivewireDropOptional implements LivewireAdditionalFunctions, LivewireDropItem

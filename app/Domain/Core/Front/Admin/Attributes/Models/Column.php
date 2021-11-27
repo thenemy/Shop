@@ -2,7 +2,10 @@
 
 namespace App\Domain\Core\Front\Admin\Attributes\Models;
 
-class Column
+use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\FunctionInterface;
+use App\Domain\Core\Front\Interfaces\HtmlInterface;
+
+class Column implements FunctionInterface
 {
     public string $column_name;
     public string $key_to_row;
@@ -11,5 +14,10 @@ class Column
     {
         $this->column_name = $column_name;
         $this->key_to_row = $key_to_row;
+    }
+
+    public function generateFunction(): string
+    {
+      return  "";
     }
 }

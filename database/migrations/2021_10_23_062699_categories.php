@@ -16,7 +16,9 @@ class Categories extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->json('name');
+            $table->boolean("status");
             $table->string("slug")->unique();
+
         });
         Schema::table('categories', function (Blueprint $table) {
             $table->foreignId('parent_id')->nullable()->constrained('categories')->onDelete('CASCADE')->onUpdate('CASCADE');
