@@ -4,11 +4,11 @@ namespace App\Domain\Core\Front\Admin\DropDown\OptionalItems;
 
 use App\Domain\Core\Front\Admin\DropDown\Items\DropLivewireOptional;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\FunctionStandardTemplate;
-use App\Domain\Core\Front\Admin\Livewire\Functions\Traits\HandleBody;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Traits\VariableTransform;
 
 class ActivateChooseItem extends DropLivewireOptional
 {
-    use HandleBody;
+    use VariableTransform;
 
     private string $variable;
 

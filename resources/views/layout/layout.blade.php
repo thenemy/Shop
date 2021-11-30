@@ -15,9 +15,10 @@
     <livewire:styles/>
     @livewireStyles
     @livewireScripts
-    <script src="{{ mix('js/app.js') }}"></script>
+
+    <script src="{{ mix('js/app.js') }}" defer></script>
 {{--    <script src="{{asset("js/long-press.min.js")}}"></script>--}}
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+{{--    <script  src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>--}}
 </head>
 <body>
 
@@ -31,5 +32,7 @@
 @yield("scripts")
 
 <script src="{{asset("js/table_action.js")}}"></script>
-
+<script>
+    $('.hide_during_loading').removeClass("hidden");
+</script>
 </html>

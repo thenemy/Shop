@@ -19,10 +19,16 @@ class PaginatorDropDown extends AbstractLivewireDropDown
             new DropLivewireItem(
                 10,
                 self::formatClick(10),
-                new DropLivewireItem(
-                    2,
-                    self::formatClick(2)
-                )),
+            ),
+            new DropLivewireItem(
+                2,
+                self::formatClick(2)
+            ),
+            new DropLivewireItem(
+                2,
+                self::formatClick(2)
+            )
+            ,
         ], $name);
     }
 

@@ -19,4 +19,10 @@ abstract class RouteHandler
         $exploded[1] = $this->getName();
         return implode(".", $exploded);
     }
+
+    static function new()
+    {
+        $class =get_called_class();
+        return new $class();
+    }
 }

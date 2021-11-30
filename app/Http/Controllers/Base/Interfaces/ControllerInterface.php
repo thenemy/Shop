@@ -9,20 +9,11 @@ use App\Domain\Core\Main\Services\BaseService;
 
 interface ControllerInterface
 {
-
+//
     public function getEntityClass(): string;
-
-    public function getIndexEntity(): string;
-
-    public function getCreateEntity(): string;
-
-    public function getEditEntity(): string;
 
     public function getService(): BaseService;
 
-    public function getTableClass(): string;
-
     public function getForm(): AbstractForm;
-
 
 }

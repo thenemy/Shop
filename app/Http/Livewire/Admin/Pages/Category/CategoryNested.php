@@ -48,7 +48,7 @@ class CategoryNested extends BaseLivewireNested
     }
 
     public function getEntity(){
-        return 'App\Domain\Category\Front\Models\CategoryNested'; //9  --- class name of entity
+        return 'App\Domain\Category\Front\Nested\CategoryNested'; //9  --- class name of entity
     }
 
 

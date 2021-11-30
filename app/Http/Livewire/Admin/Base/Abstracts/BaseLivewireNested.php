@@ -15,13 +15,21 @@ use Symfony\Component\Console\Helper\Table;
  */
 abstract class BaseLivewireNested extends BaseLivewire
 {
-    const DETACH  = 0;
+    const DETACH = 0;
     const ATTACH = 1;
     public bool $isAcceptMode = true;
-
     public $attachEntityId;
     public string $attachEntity;
     public string $keyToAttach;
+
+    public function checkAll()
+    {
+        if ($this->isAcceptMode) {
+            $this->checkBox = $this->getListAccept()->pluck('id')->toArray();
+        } else {
+            parent::checkAll();
+        }
+    }
 
     public function changeToAdd()
     {
@@ -39,9 +47,9 @@ abstract class BaseLivewireNested extends BaseLivewire
     public function getTableToBlade()
     {
         if ($this->isAcceptMode) {
-            return $this->getAcceptList();
+            return $this->getAcceptTableBlade();
         }
-        return $this->getDeclineList();
+        return $this->getDeclineTableBlade();
     }
 
     public function getOptionalDropDown(): DropDownOptional
@@ -51,18 +59,25 @@ abstract class BaseLivewireNested extends BaseLivewire
         );
     }
 
-    private function getAcceptList()
+    private function getListAccept()
     {
-        $table = $this->getTable();
         $entity = $this->getEntity();
         $withOutSearch = collect($this->filterBy);
         $filterBy = [$this->keySearch => $withOutSearch->pull($this->keySearch)];
-        return new $table($entity::filterByNot($withOutSearch->toArray())
+        return $entity::filterByNot($withOutSearch->toArray())
             ->filterBy($filterBy)
-            ->paginate($this->paginate));
+            ->paginate($this->paginate);
     }
 
-    private function getDeclineList()
+    private function getAcceptTableBlade()
+    {
+        $table = $this->getTable();
+
+
+        return new $table($this->getListAccept());
+    }
+
+    private function getDeclineTableBlade()
     {
         $table = $this->getTableDecline();
         return new $table(parent::getLists());
@@ -92,6 +107,7 @@ abstract class BaseLivewireNested extends BaseLivewire
     {
         $this->addToEntity($this->checkBox);
     }
+
     public function removeAllChecked()
     {
         $this->removeFromEntity($this->checkBox);

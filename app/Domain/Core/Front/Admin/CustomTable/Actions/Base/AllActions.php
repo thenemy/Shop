@@ -22,4 +22,9 @@ class AllActions implements HtmlInterface
         $str = $str . " " . "</div>";
         return $str;
     }
+
+    public static function new(array $items)
+    {
+        return (new self($items))->generateHtml();
+    }
 }

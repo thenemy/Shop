@@ -11,12 +11,13 @@ class Basket extends Migration
      *
      * @return void
      */
+
+    // from basket goes to user order if user purchase the product
     public function up()
     {
         Schema::create('basket', function (Blueprint $table) {
             $table->foreignId("order_id")->primary()->constrained("orders");
             $table->foreignId("user_id")->constrained("users");
-
         });
     }
 

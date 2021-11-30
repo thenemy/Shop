@@ -53,48 +53,48 @@ abstract class BaseController extends Controller implements ControllerInterface
 
     public function __construct()
     {
-        $this->entity = $this->getNewEntity();
+//        $this->entity = $this->getNewEntity();
         $this->form = $this->getForm();
         $this->service = $this->getService();
 
     }
 
 
-    private function getEntity($id)
-    {
-        return $this->getEntityClass()::find($id);
-    }
-
-    private function getNewEntity()
-    {
-        $base = $this->getEntityClass();
-        return new $base();
-    }
-
-    private function getNewEntityIndex()
-    {
-        $base = $this->getIndexEntity();
-        return new $base();
-    }
-
+//    private function getEntity($id)
+//    {
+//        return $this->getEntityClass()::find($id);
+//    }
+//
+//    private function getNewEntity()
+//    {
+//        $base = $this->getEntityClass();
+//        return new $base();
+//    }
+//
+//    private function getNewEntityIndex()
+//    {
+//        $base = $this->getIndexEntity();
+//        return new $base();
+//    }
+//
 
     //// MAIN FUNCTIONS
     ///
     ///
     ///
-    abstract public function createFiles();
 
-    public function getIndex(Request $request)
+    public function getIndex($request, $variables = [])
     {
-        $this->createFiles();
-        return view($this->getPath() . RoutesInterface::INDEX);
+        return view($this->getPath() . RoutesInterface::INDEX, $variables);
     }
 
-    public function getCreate($params = [])
+    public function getCreate($request, $params = [], $variables = [])
     {
-        return view($this->getPath() . RoutesInterface::CREATE, [
-            "form" => $this->form->create()
-        ]);
+        $params = [
+            "form" => $this->form->create($params),
+        ];
+
+        return view($this->getPath() . RoutesInterface::CREATE, array_merge($variables, $params));
     }
 
     protected function getStore(FormRequest $request): \Illuminate\Http\RedirectResponse
@@ -107,18 +107,18 @@ abstract class BaseController extends Controller implements ControllerInterface
         }
     }
 
-    public function getUpdate(FormRequest $request, $id)
-    {
-        $entity = $this->getEntity($id);
-    }
+//    public function getUpdate(FormRequest $request, $id)
+//    {
+//        $entity = $this->getEntity($id);
+//    }
 
-    public function getEdit(Request $formRequest, $entity, $params = [])
+    public function getEdit(Request $formRequest, $entity, $params = [], $variables = [])
     {
         return view($this->getPath() . RoutesInterface::EDIT,
-            [
+            array_merge([
                 "form" => $this->form->update($params),
                 "entity" => $entity
-            ]
+            ], $variables)
         );
     }
 

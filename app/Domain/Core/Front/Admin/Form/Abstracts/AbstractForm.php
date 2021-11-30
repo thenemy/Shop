@@ -5,9 +5,9 @@ namespace App\Domain\Core\Front\Admin\Form\Abstracts;
 
 
 use App\Domain\Core\Front\Admin\Routes\Abstracts\RouteHandler;
-use App\View\Helper\PATH\Interfaces\Admin\AdminBasicRoutesName;
+use App\Domain\Core\Front\Admin\Routes\Interfaces\RoutesInterface;
 
-abstract class AbstractForm implements AdminBasicRoutesName
+abstract class AbstractForm implements RoutesInterface
 {
     public string $title;
     public string $route_back;

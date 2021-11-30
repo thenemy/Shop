@@ -44,7 +44,7 @@ trait FileManager
     public function createDirectory($path)
     {
         try {
-            mkdir("../" . $path);
+            mkdir( $path);
         } catch (\Exception $exception) {
 
         }

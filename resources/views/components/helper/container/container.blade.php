@@ -1,8 +1,8 @@
-<div x-data="{open:false}" class="flex flex-col space-y-5 w-full">
+<div x-data="{open:false}" class="flex flex-col space-y-2 w-full">
     <div class="flex flex-col cursor-pointer">
         <div @click="open = ! open" class="flex flex-row justify-between items-center">
             <div>
-                <span>{{$title}}</span>
+                <x-helper.text.text_lg>{{$title}}</x-helper.text.text_lg>
             </div>
             <div class="w-5">
                 <img class="w-4/5 transform transition rotate-0 duration-300" :class="{'rotate-180': open}"

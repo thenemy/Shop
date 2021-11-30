@@ -4,6 +4,7 @@ namespace App\Domain\Core\Front\Admin\Form\Attributes\Base;
 
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Abstracts\BaseAttributes;
 use App\Domain\Core\Front\Interfaces\HtmlInterface;
+use function Symfony\Component\Translation\t;
 
 // difference between attributes in custom table and from
 // that in custom table attributes generated in run time
@@ -13,11 +14,13 @@ use App\Domain\Core\Front\Interfaces\HtmlInterface;
 // sprintf('$entity->%s', $key);
 abstract class BaseAttributeForm implements HtmlInterface
 {
+    public string $label;
     public string $key;
 
-    public function __construct(string $key)
+    public function __construct(string $key, string $label)
     {
         $this->key = $key;
+        $this->label = $label;
     }
 
     protected function getVariable(): string

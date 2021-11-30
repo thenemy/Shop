@@ -14,7 +14,6 @@ class ProductBrands extends Migration
     public function up()
     {
         Schema::create('product_brands', function (Blueprint $table) {
-
             $table->foreignId("product_id")->constrained("products");
             $table->foreignId("brand_id")->constrained("brands");
         });

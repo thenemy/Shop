@@ -6,6 +6,8 @@ interface BladeCreatorInterface
 {
     const BASE = "resources/views/admin/";
     const FROM = self::BASE . "template/base/";
+    const FROM_OPEN = self::BASE . "template/open_base/";
+
     const TO = self::BASE . "pages/";
 
     const INDEX = "index.blade.php";
@@ -18,13 +20,14 @@ interface BladeCreatorInterface
      *          second --- Livewire
      */
     const FROM_INDEX = self::FROM . self::INDEX; // include livewire
-
-
-
     const FROM_EDIT = self::FROM . self::EDIT;
     const FROM_CREATE = self::FROM . self::CREATE;
     const FROM_CHOOSE = self::FROM . self::CHOOSE;
 
+    const FROM_INDEX_OPEN = self::FROM_OPEN . self::INDEX; // include livewire
+    const FROM_EDIT_OPEN = self::FROM_OPEN . self::EDIT;
+    const FROM_CREATE_OPEN = self::FROM_OPEN . self::CREATE;
+    const FROM_CHOOSE_OPEN = self::FROM_OPEN . self::CHOOSE;
 
     public function openFile();
 

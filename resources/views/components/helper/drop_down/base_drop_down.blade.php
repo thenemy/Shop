@@ -17,7 +17,7 @@
     <div
         x-show="isOpen"
         @click.away="isOpen = false"
-        class="drop-down-block">
+        class="drop-down-block ">
         <div class="py-1" role="none">
             <input class="selected_input hidden" type="{{$drop->type}}" name="{{$drop->key}}"
                    @if($chosen) value="{{$chosen->id}}" @endif/>

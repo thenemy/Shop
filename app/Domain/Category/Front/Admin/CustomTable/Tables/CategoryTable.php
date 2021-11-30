@@ -4,14 +4,14 @@
 namespace App\Domain\Category\Front\Admin\CustomTable\Tables;
 
 
-use App\Domain\Category\Front\Admin\CustomTable\Attributes\CategoryAttributes;
 use App\Domain\Category\Front\Admin\CustomTable\Traits\CommonCategoryTable;
+use App\Domain\Category\Front\Admin\Path\CategoryRouteHandler;
 use App\Domain\Core\Front\Admin\Attributes\Models\Column;
-use App\Domain\Core\Front\Admin\CustomTable\Abstracts\AbstractTable;
-use App\Domain\Core\Front\Admin\CustomTable\Attributes\Abstracts\AbstractAttributes;
+use App\Domain\Core\Front\Admin\CustomTable\Abstracts\AbstractCreateTable;
+use App\Domain\Core\Front\Admin\Routes\Abstracts\RouteHandler;
 
 // only this is needed
-class CategoryTable extends AbstractTable
+class CategoryTable extends AbstractCreateTable
 {
     use CommonCategoryTable;
 
@@ -23,4 +23,8 @@ class CategoryTable extends AbstractTable
         ];
     }
 
+    public function getRouteHandler(): RouteHandler
+    {
+        return CategoryRouteHandler::new();
+    }
 }

@@ -26,12 +26,12 @@ abstract class AbstractFileManager
 
     public function getContents($path)
     {
-        return file_get_contents("../" . $path);
+        return file_get_contents( $path);
     }
 
     public function putContents($path, ...$variables)
     {
-        return file_put_contents("../" . $path, ...$variables);
+        return file_put_contents( $path, ...$variables);
     }
 
     abstract protected function setMainPath();

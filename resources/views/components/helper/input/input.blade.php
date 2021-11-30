@@ -1,4 +1,10 @@
 @props([
-    'type'=>'text',
+'type'=>'text',
 ])
-<input type="{{$type}}"  {{$attributes->merge(["class"=>"input-custom"])}}/>
+<div class="flex flex-col items-start">
+    <label for="in" class="block text-gray-700 text-sm font-bold mb-1">
+        {{$attributes['label']}}
+    </label>
+    <input id="in" type="{{$type}}" {{$attributes->merge(["class"=>"input-custom"])}}/>
+</div>
+

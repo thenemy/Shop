@@ -6,9 +6,9 @@ abstract class BaseAttributeFromText extends BaseAttributeForm
 {
     public string $type;
 
-    public function __construct(string $key, string $type)
+    public function __construct(string $key, string $type, string $label)
     {
-        parent::__construct($key);
+        parent::__construct($key, $label);
         $this->type = $type;
     }
 }

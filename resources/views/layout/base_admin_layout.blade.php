@@ -9,18 +9,7 @@
     <div class="p-5 rounded">
         <div x-data="{ sidebarOpen: true }" class="flex overflow-x-hidden">
             <aside class="flex-shrink flex flex-col transition-custom"
-                   :class=" sidebarOpen && 'width-sidebar' "
-                {{--                   x-show="sidebarOpen"--}}
-                {{--                   x-transition:enter="transition-custom"--}}
-                {{--                   x-transition:enter-start="w-0"--}}
-                {{--                   x-transition:enter-end="w-100"--}}
-                {{--                   x-transition:leave="transition-custom"--}}
-                {{--                   x-transition:leave-start="w-100"--}}
-                {{--                   x-transition:leave-end="w-0"--}}
-                {{--                   :class="--}}
-                {{--                        sidebarOpen ?'transition-width transition-slowest ease' :--}}
-                {{--                        'transition  duration-300 transform translate-x-0 w-max'"--}}
-            >
+                   :class=" sidebarOpen && 'width-sidebar' ">
                 @yield("sidebar")
             </aside>
             <div class="flex-1 m-4 flex-row transition"

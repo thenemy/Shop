@@ -4,8 +4,8 @@ namespace App\Domain\Core\Main\Traits;
 
 trait FastInstantiation
 {
-    static private function newClass(string $class)
+    static protected function newClass(string $class, ...$args)
     {
-        return new $class();
+        return new $class(...$args);
     }
 }

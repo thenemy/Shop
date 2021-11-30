@@ -18,6 +18,7 @@
         "tailwindcss": "^2.2.19"
     },
     "dependencies": {
+        "alpinejs": "^3.5.2",
         "long-press-event": "^2.4.4"
     }
 }

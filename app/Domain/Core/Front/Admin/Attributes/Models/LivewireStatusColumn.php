@@ -3,11 +3,11 @@
 namespace App\Domain\Core\Front\Admin\Attributes\Models;
 
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\FunctionStandardTemplate;
-use App\Domain\Core\Front\Admin\Livewire\Functions\Traits\HandleBody;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Traits\VariableTransform;
 
 class LivewireStatusColumn extends LivewireColumn
 {
-    use HandleBody;
+    use VariableTransform;
 
     private string $actual_key;
 

@@ -2,10 +2,13 @@
 
 namespace App\Domain\Category\Front\Traits;
 
+use App\Domain\Category\Front\Admin\Path\CategoryOpenRouteHandler;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\ImageAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\OpenAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\StatusAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
+use App\Domain\Core\Front\Admin\Routes\Abstracts\RouteHandler;
+use App\Domain\Core\Front\Admin\Routes\Interfaces\RoutesInterface;
 
 trait CategoryAttributeTable
 {
@@ -34,7 +37,8 @@ trait CategoryAttributeTable
     // get Open button with all required data
     public function getUnderCategoryTableAttribute()
     {
-        return (new OpenAttribute("", $this->childsCategory()->count()
+
+        return (new OpenAttribute(CategoryOpenRouteHandler::new(), $this, $this->childsCategory()->count()
         ))->generateHtml();
     }
 }

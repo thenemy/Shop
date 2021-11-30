@@ -16,7 +16,7 @@ class Credits extends Migration
         Schema::create('credits', function (Blueprint $table) {
             $table->id();
             $table->smallInteger("percent");
-            $table->smallInteger("month");
+            $table->smallInteger("month"); // number of month
         });
     }
 

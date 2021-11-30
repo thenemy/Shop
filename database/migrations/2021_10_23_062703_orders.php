@@ -11,8 +11,25 @@ class Orders extends Migration
      *
      * @return void
      */
+
+    /**
+     *   can be added the status of the product
+     *
+     *  added to basket
+     *  purchased
+     *  in payment
+     *  failed
+     *
+     */
     public function up()
     {
+        /**
+            order will contain all required infromation about the product
+         *  not about how this product wiil be served by our service
+         *  so it will give what the color of the product
+         *  how many the similiar product wanted to buy
+         *  but not anything about the transaction
+         */
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->timestamps();

@@ -2,7 +2,6 @@
 
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\View;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
@@ -27,6 +26,9 @@ Route::group([
 
 Route::name("admin.")->group(function () {
     Route::resource(
-        'category',
+        \App\Domain\Core\Front\Admin\Routes\Admin\AdminRoutesInterface::CATEGORY,
         \App\Http\Controllers\Admin\CategoryController::class);
+    Route::resource(
+        \App\Domain\Core\Front\Admin\Routes\Admin\AdminRoutesInterface::CATEGORY_OPEN,
+        \App\Http\Controllers\Admin\CategoryChildController::class);
 });

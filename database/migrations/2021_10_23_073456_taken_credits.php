@@ -11,6 +11,7 @@ class TakenCredits extends Migration
      *
      * @return void
      */
+    // only products which was purchased can be taken to the credits
     public function up()
     {
         Schema::create('taken_credits', function (Blueprint $table) {
@@ -20,14 +21,21 @@ class TakenCredits extends Migration
             $table->bigInteger('initial_price');
             $table->dateTime('date_taken');
             $table->dateTime('date_finish');
-            $table->smallInteger("day_payment");
+            $table->smallInteger("day_payment"); // may be not necessary because it was need for
+            // recursion payment
             $table->time("time_payment"); // from hh:mm:ss to HH:mm
-            $table->foreignId("user_credit_data_id")->constrained("user_credit_datas")
-                ->onDelete("restrict");
-            $table->foreignUuid("plastic_id")->constrained("plastic_user_cards")
-                ->onDelete("restrict");
-            $table->foreignId("credit_id")->constrained("credits")->onDelete("restrict");
-            $table->foreignId('order_id')->constrained('orders')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreignId("user_credit_data_id")
+                ->constrained("user_credit_datas")
+                ->restrictOnDelete();
+            $table->foreignUuid("plastic_id")
+                ->constrained("plastic_user_cards")
+                ->restrictOnDelete();
+            $table->foreignId("credit_id")
+                ->constrained("credits")
+                ->restrictOnDelete();
+            $table->foreignId("users_order_id")
+                ->unique()->constrained("users_order")
+                ->restrictOnDelete();
 
         });
     }

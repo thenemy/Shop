@@ -3,9 +3,9 @@
 namespace App\Domain\Category\Front\Admin\File;
 
 use App\Domain\Category\Entities\Category;
-use App\Domain\Category\Front\Models\CategoryCreate;
-use App\Domain\Category\Front\Models\CategoryEdit;
-use App\Domain\Category\Front\Models\CategoryIndex;
+use App\Domain\Category\Front\Main\CategoryCreate;
+use App\Domain\Category\Front\Main\CategoryEdit;
+use App\Domain\Category\Front\Main\CategoryIndex;
 use App\Domain\Core\File\Factory\MainFactoryCreator;
 use App\Domain\Core\File\Interfaces\CreatorInterface;
 use App\Domain\Core\File\Models\FileBladeCreatorIndex;

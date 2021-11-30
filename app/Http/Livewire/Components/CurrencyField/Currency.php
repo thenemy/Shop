@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class Currency extends Component
 {
-    public $ttt = "Default";
+    public string $currency = "";
 
     public function render()
     {

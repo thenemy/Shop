@@ -20,7 +20,7 @@
 }
 
 .drop-down-block {
-    @apply z-10 origin-top-right absolute left-0 mt-2 w-max rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
+    @apply z-50 origin-top-right absolute left-0 mt-2 w-max rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
 }
 
 .drop-down-item {
@@ -32,7 +32,7 @@
 }
 
 .input-custom {
-    @apply border border-black border-opacity-40 focus:outline-none focus:ring focus:border-gray-500 focus:border-green-50 rounded-md p-0.5
+    @apply border border-black border-opacity-40 focus:outline-none focus:ring focus:border-gray-500 focus:border-green-50 rounded p-0.5
 }
 
 @responsive {
