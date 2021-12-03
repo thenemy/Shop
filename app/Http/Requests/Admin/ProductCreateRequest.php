@@ -24,11 +24,12 @@ class ProductCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            "title.*"=>"required",
+            "title.*" => "required",
             'title' => 'required|array',
-            "price" =>"required",
+            "price" => "required",
             "currency" => "required",
-            "number" =>"required",
+            "number" => "required",
+            "shop_id" => "required",
             "category_id" => "required",
         ];
     }

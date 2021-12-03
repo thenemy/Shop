@@ -61,7 +61,7 @@ class FilesAttributes extends BaseFileAttribute
 
     public function show(): array
     {
-        $key = $this->storeKey;
+        $key = $this->key;
         return $this->entity->$key;
     }
 }

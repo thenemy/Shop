@@ -5,6 +5,8 @@ namespace App\Domain\Category\Front\Main;
 use App\Domain\Category\Entities\Category;
 use App\Domain\Category\Entities\IconCat;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\ImageAttribute;
+use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputAttribute;
+use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputLangAttribute;
 use App\Domain\Core\Front\Admin\Form\Interfaces\CreateAttributesInterface;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 
@@ -28,8 +30,8 @@ class CategoryCreate extends Category implements CreateAttributesInterface
 
     public function generateAttributes(): BladeGenerator
     {
-       return  BladeGenerator::generation([
+        return BladeGenerator::generation([
 
-       ]);
+        ]);
     }
 }

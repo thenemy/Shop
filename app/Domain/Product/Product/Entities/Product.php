@@ -38,7 +38,7 @@ class Product extends Entity implements ProductInterface
 
     public function getImagesAttribute()
     {
-        return $this->getManyMedia("productImage", "images");
+        return $this->getManyMedia("productImage", "image");
     }
 
     public function category()

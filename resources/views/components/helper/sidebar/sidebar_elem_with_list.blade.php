@@ -26,15 +26,17 @@
         </div>
 
         @foreach($item->sublist as $sublist)
-            <div x-show="open" class="@if($sublist->isCurrentRoute())
-                bg-blue-400 rounded-md p-1
-                text-white
+            <div x-show="open"
+                 onclick="window.location = '{{$sublist->route_name}}'"
+                 class="@if($sublist->isCurrentRoute())
+                     bg-blue-400 rounded-md p-1
+                     text-white
 @else
-                text-gray-500 hover:text-gray-800
+                     text-gray-500 hover:text-gray-800
 @endif ml-4 ">
                 <div class="py-1 ml-3 transform text-sm font-medium hover:translate-x-2
                 transition-transform ease-in duration-200">
-                    <a href="{{$sublist->route_name}}">{{$sublist->name}}</a>
+                    <span>{{$sublist->name}}</span>
                 </div>
             </div>
         @endforeach

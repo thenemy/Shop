@@ -34,7 +34,7 @@ class CategoryOpen extends BaseLivewire
         return [
             "table" => new $table($this->getLists()),
              
-'name_blade' => \App\Domain\Core\Front\Admin\DropDown\Models\Paginator\PaginatorDropDown::getDropDown($this->selected_value), //5   --- variable to blade
+'name_blade' => \App\Domain\Core\Front\Admin\DropDown\Models\Paginator\PaginatorDropDown::getDropDown($this->selected_value) //5   --- variable to blade
         ];
     }
     public function getItemsToOptionalDropDown():array{

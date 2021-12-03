@@ -22,12 +22,12 @@ class ProductIndex extends Product implements TableInFront, CreateAttributesInte
 {
     public function getCurrencyIndexAttribute(): string
     {
-        return TextAttribute::preGenerate($this, "currency");
+        return TextAttribute::preGenerate($this, self::DB_TO_TEXT[$this->currency], true);
     }
 
     public function getNumberIndexAttribute(): string
     {
-        return TextAttribute::preGenerate($this, "number_index");
+        return TextAttribute::preGenerate($this, "number");
     }
 
     public function getShopIndexAttribute(): string
@@ -49,9 +49,6 @@ class ProductIndex extends Product implements TableInFront, CreateAttributesInte
     {
         return TextAttribute::preGenerate($this, "price");
     }
-
-
-
 
     public function generateAttributes(): BladeGenerator
     {

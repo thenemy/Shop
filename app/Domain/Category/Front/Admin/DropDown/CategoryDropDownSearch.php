@@ -11,7 +11,7 @@ class CategoryDropDownSearch extends BaseDropDownSearchAttribute
     public static function newCat(
         bool $create = true, array $filterBy = [])
     {
-        return self::new("name", "категорий",
+        return self::new("name", "названию Категорий",
             $create, $filterBy);
     }
 

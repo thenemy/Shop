@@ -19,11 +19,13 @@ abstract class BaseAttributeForm implements HtmlInterface
 
     public string $label;
     public string $key;
+    protected string $create;
 
-    public function __construct(string $key, string $label)
+    public function __construct(string $key, string $label, bool $create = true)
     {
         $this->key = $key;
         $this->label = $label;
+        $this->create = $create;
     }
 
     protected function getVariable(): string

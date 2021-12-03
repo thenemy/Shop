@@ -19,13 +19,13 @@ class Image extends Entity
 
     public function getImageAttribute($value): \App\Domain\Core\Media\Models\Media
     {
-        return $this->getMedia('image', $value);
+        return $this->getMedia('image', $value, $this->id);
     }
 
 
     public function setImageAttribute($value)
     {
-        $this->setPublicMedia('image', $value);
+        $this->setMedia('image', $value, $this->id ?? 0);
     }
 
     public function getMediaPathStorages(): string

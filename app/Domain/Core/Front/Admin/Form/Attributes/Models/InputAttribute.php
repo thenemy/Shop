@@ -14,7 +14,7 @@ class InputAttribute extends BaseAttributeFromText
             $this->key,
             $this->type,
             $this->label,
-          $this->create ? "" : $this->getVariable(),
+            $this->create ? sprintf('{{old("%s") ?? ""}}', $this->key) : $this->getVariable(),
         );
     }
 }

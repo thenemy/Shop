@@ -12,7 +12,7 @@ class TextAreaAttribute extends BaseAttributeForm
     {
         return sprintf("<x-helper.text_area.text_area name='%s'>%s</x-helper.text_area.text_area>",
             $this->key,
-            $this->getVariable()
+            $this->create ? sprintf('{{old("%s")}}', $this->key) : $this->getVariable()
         );
     }
 }

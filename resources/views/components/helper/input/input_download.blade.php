@@ -6,7 +6,8 @@
 "uniqueId"
 ]
 )
-<div x-data="init('{{$uniqueId}}')"
+<div x-data="init('{{$uniqueId}}', @this)"
+     id="{{$uniqueId}}"
      uniqueId="{{$uniqueId}}"
      class="w-full file_upload">
     <main
@@ -41,7 +42,8 @@
                         <span> {{__("Загрузите ")}} {{$label}}</span>
                     </p>
                     <input
-                        wire:model="file"
+                        id="{{$uniqueId}}"
+
                         type="file"
                         @if($multiple) multiple @endif
                         class="hidden hidden-input"/>
@@ -50,18 +52,19 @@
                         {{__('Нажмите для загрузки')}}
                     </button>
                 </header>
-                <h1 class="pt-8 pb-3 font-semibold sm:text-lg text-gray-900">
-                    {{__("Файлы")}}
-                </h1>
-                <ul class="gallery flex flex-1 flex-wrap -m-1">
-                    @if($file)
+
+                @if(!empty($file) && $file[0] && $file[0]->exists())
+                    <h1 class="pt-8 pb-3 font-semibold sm:text-lg text-gray-900">
+                        {{__("Файлы")}}
+                    </h1>
+                    <ul class="gallery flex flex-1 flex-wrap -m-1">
                         @foreach($file as $temp)
                             <li>
                                 <x-helper.file.file :file="$temp"/>
                             </li>
                         @endforeach
-                    @endif
-                </ul>
+                    </ul>
+                @endif
             </section>
         </article>
 
@@ -87,49 +90,7 @@
 
 <!-- using two similar templates for simplicity in js code -->
 
-<script>
 
-    window.livewire.on("file-dropped", (event) => {
-        let files = event.dataTransfer.files;
-        downloadFile(event.target, files)
-    })
-    $('.file_upload .hidden-input').on("change", function (e) {
-        let main = e.target;
-        let files = main.files;
-        downloadFile(main, files)
-    });
-
-    function downloadFile(main, files) {
-        let id_some = $(main).parents(".file_upload").attr("uniqueId");
-        $dispatch("change-progress-start", {
-            data: {
-                id: id_some
-            }
-        });
-    @this.uploadMultiple('file', files,
-        (uploadedFilename) => {
-            $dispatch("change-progress-finish", {
-                data: {
-                    id: id_some
-                }
-            });
-        }, () => {
-            $dispatch("change-progress-error", {
-                data: {
-                    id: id_some
-                }
-            });
-        }, (event) => {
-            $dispatch("change-progress", {
-                data: {
-                    progress: event.detail.progress,
-                    id: id_some
-                }
-            });
-        })
-    }
-
-</script>
 <style>
     .hasImage:hover section {
         background-color: rgba(5, 5, 5, 0.4);

@@ -26,7 +26,7 @@ abstract class BaseDropDownAttribute extends AbstractDropDown implements HtmlInt
     {
         return sprintf("<x-helper.drop_down.drop_down :drop='%s'/>",
             $this->initGetDropDown(
-                $this->create ? "" : $this->getAttributeVariable($this->key)
+                $this->create ? "" : $this->getWithoutScopeAtrVariable($this->key)
             ));
     }
 }

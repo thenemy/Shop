@@ -38,7 +38,12 @@ class InputLangAttribute extends BaseAttributeFromText
             $this->key,
             $lang,
             $labelContinue,
-            $this->create ? "" : $this->getVariable() . '[\'' . $lang . '\']'
+            $this->create ? sprintf(
+                '{{old("%s") ? old("%s")["%s"] ?? "" : ""}}',
+                $this->key,
+                $this->key,
+                $lang,
+            ) : $this->getVariable() . '[\'' . $lang . '\']'
         );
     }
 }

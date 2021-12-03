@@ -6,12 +6,17 @@ trait InitStaticDropFunction
 {
     protected function initGetDropDown($value): string
     {
-        return $this->getDropDownInit(get_called_class(), $value);
+        return $this->getDropDowInitial(get_called_class(), $value);
 //        return "\\" . get_called_class() . "::" . "getDropDown(" . $value . "),";
     }
 
     public function getDropDownInit($class, $value): string
     {
-        return '\\' . $class . "::" . "getDropDown(" . $value . "),";
+        return $this->getDropDowInitial($class, $value) . ",";
+    }
+
+    private function getDropDowInitial($class, $value): string
+    {
+        return '\\' . $class . "::" . "getDropDown(" . $value . ")";
     }
 }

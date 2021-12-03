@@ -9,6 +9,7 @@ use App\Domain\Core\Front\Admin\Form\Interfaces\CreateAttributesInterface;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\Product\Product\Entities\Product;
 use App\Domain\Product\Product\Front\Admin\DropDown\CurrencyDropDown;
+use App\Domain\Shop\Front\Admin\DropDown\ShopDropDownSearch;
 
 class ProductCreate extends Product implements CreateAttributesInterface
 {
@@ -20,7 +21,8 @@ class ProductCreate extends Product implements CreateAttributesInterface
             new InputAttribute("price", "number", __("Введите цену")),
             CurrencyDropDown::new(),
             new InputAttribute("number", "number", __("Введите колиство данного товара")),
-            CategoryDropDownSearch::new("name", "названию Категорий"),
+            CategoryDropDownSearch::newCat(),
+            ShopDropDownSearch::newShop()
         ]);
     }
 }

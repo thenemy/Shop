@@ -18,7 +18,7 @@
     <script src="{{ mix('js/app.js') }}" defer></script>
 
 </head>
-<body>
+<body class="mb-5">
 
 @yield("header")
 

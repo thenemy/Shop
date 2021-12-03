@@ -10,9 +10,9 @@ class ImageAttribute extends BaseAttributes
 {
 
 
-    public function __construct($entity, $key = "image")
+    public function __construct($entity, $key = "image", $value = false)
     {
-        parent::__construct($entity, $key);
+        parent::__construct($entity, $key, $value);
     }
 
     public function generateHtml(): string

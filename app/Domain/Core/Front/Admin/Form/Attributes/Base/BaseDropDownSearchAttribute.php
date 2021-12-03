@@ -46,14 +46,18 @@ abstract class BaseDropDownSearchAttribute extends AbstractDropDownSearch implem
              />",
             $this->searchByKey,
             $dropDownClass,
-            !$this->create ? ":initial=\"" . $this->getAttributeVariable($this->key) . "\"" :  '',
+            !$this->create ? ":initial=\"" . $this->getWithoutScopeAtrVariable($this->key) . "\"" : '',
             $this->searchLabel
         );
     }
 
-    static public function getDropDown($initial, array $filterBy, string $class, string $attribute): CategoryDropDownSearch
+    /**
+     * attribute -- what will be displayed to user
+     * key --- is what will be assigned to entity
+     */
+    static public function getDropDown($initial, array $filterBy, string $class, string $attribute)
     {
-        $items = $class::filterBy($filterBy)->get()->map(function ($item)use ($attribute) {
+        $items = $class::filterBy($filterBy)->get()->map(function ($item) use ($attribute) {
             return new DropItem($item->id, $item->$attribute);
         })->toArray();
         $init = $class::find($initial) ?? new $class();

@@ -30,12 +30,8 @@ class CurrencyDropDown extends BaseDropDownAttribute
         return new self([
             new DropItem(ProductInterface::CURRENCY_USD_DB, ProductInterface::CURRENCY_USD_TEXT),
             new DropItem(ProductInterface::CURRENCY_UZS_DB, ProductInterface::CURRENCY_UZS_TEXT)
-        ], $name ? ProductInterface::DB_TO_TEXT[$name] : null);
+        ], ProductInterface::DB_TO_TEXT[$name] ?? null);
     }
 
 
-    public function getDropDownSearch($initial, $filterBy): string
-    {
-        // TODO: Implement getDropDownSearch() method.
-    }
 }
