@@ -8,25 +8,32 @@ use App\Domain\Core\Front\Interfaces\HtmlInterface;
 
 abstract class BaseAttributes implements AttributeInterface, HtmlInterface
 {
-    public string $key;
+    public $key = "";
     public $entity;
+//   value false --- key is property of entity
+//  value true ---  key is the actual value to use
+    public bool $value;
 
-    public function __construct($entity, $key)
+    public function __construct($entity, $key, $value = false)
     {
         $this->entity = $entity;
         $this->key = $key;
+        $this->value = $value;
     }
 
-    public function getValueOfMainKey()
+    public function getValueOfMainKey(): string
     {
+        if ($this->value) {
+            return $this->key ?? "";
+        }
         $key = $this->key;
-        return $this->entity->$key;
+        return $this->entity->$key ?? "";
     }
 
-    static public function preGenerate($entity, $key): string
+    static public function preGenerate($entity, $key, $value = false): string
     {
         $class = get_called_class();
-        $object = new $class($entity, $key);
+        $object = new $class($entity, $key, $value);
         return $object->generateHtml();
     }
 }

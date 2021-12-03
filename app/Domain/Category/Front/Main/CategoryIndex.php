@@ -44,7 +44,7 @@ class CategoryIndex extends Category implements
     }
 
     // call function which will have set of actions for this table
-    public function getActionTableAttribute(): string
+    public function getActionsAttribute(): string
     {
         return (new AllActions(
             [
@@ -66,7 +66,7 @@ class CategoryIndex extends Category implements
         return CategoryTable::class;
     }
 
-    public function getTitle()
+    public function getTitle():string
     {
         return "Категории";
     }

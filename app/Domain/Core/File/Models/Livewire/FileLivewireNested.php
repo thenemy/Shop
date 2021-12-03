@@ -3,9 +3,12 @@
 namespace App\Domain\Core\File\Models\Livewire;
 
 use App\Domain\Core\File\Interfaces\LivewireCreatorNestedInterface;
+use App\Domain\Core\Front\Admin\Form\Traits\AttributeGetVariable;
 
 class FileLivewireNested extends FileLivewireCreator implements LivewireCreatorNestedInterface
 {
+    use AttributeGetVariable;
+
     public function generateHtml(): string
     {
 
@@ -17,11 +20,11 @@ class FileLivewireNested extends FileLivewireCreator implements LivewireCreatorN
                 />",
             $this->classNameBlade,
             $this->getBladeName(),
-            "$" . "entity->id",
-            "$" . "entity",
+            $this->getWithoutScopeAtrVariable("id"),
+            $this->getEntityVariable(),
             $this->entity->key_to_attach,
             $this->entity->key_to_filter,
-            "$" . "entity->id",
+            $this->getWithoutScopeAtrVariable("id"),
         );
     }
 

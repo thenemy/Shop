@@ -3,7 +3,7 @@
 "enctype" => false,
 "method" => "POST",
 ])
-<div class="flex flex-col mx-auto text-center space-y-10 w-full">
+<div class="flex flex-col   mx-auto text-center space-y-4 w-full">
     <x-helper.text.title>
         {{$form->title}}
     </x-helper.text.title>
@@ -14,7 +14,7 @@
               @if($enctype == true) enctype=multipart/form-data @endif>
             @method($method)
             @csrf
-            <div class="flex flex-wrap justify-start space-x-3 space-y-5 w-full">
+            <div class="flex flex-wrap justify-start items-end space-x-3 space-y-5 w-11/12">
                 <div class="w-full"></div>
                 {{$slot}}
             </div>
@@ -38,7 +38,6 @@
 </div>
 <script>
     $('#form').submit(function (e) {
-        console.log(e.currentTarget);
         e.preventDefault();
     });
     $("#real_submit").on("click", function () {

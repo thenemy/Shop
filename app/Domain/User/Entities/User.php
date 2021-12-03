@@ -7,6 +7,7 @@ namespace App\Domain\User\Entities;
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Order\Entities\Order;
 use App\Domain\Product\Product\Entities\Product;
+use App\Domain\User\Builders\UserBuilder;
 use App\Domain\User\Traits\SmsTrait;
 
 class User extends Entity
@@ -14,6 +15,11 @@ class User extends Entity
     use SmsTrait;
 
     protected $table = 'users';
+    public $timestamps = true;
+    public function newEloquentBuilder($query): UserBuilder
+    {
+        return new UserBuilder($query);
+    }
 
     public function plasticCard(): \Illuminate\Database\Eloquent\Relations\HasMany
     {

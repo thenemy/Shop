@@ -13,7 +13,9 @@ class LivewireDropOptional implements LivewireAdditionalFunctions, LivewireDropI
     {
         $this->items = $items;
     }
-
+    public static  function new(array $items) {
+        return new self($items);
+    }
     public function generateFunctions(): string
     {
         $str_functions = "";

@@ -3,6 +3,7 @@
 namespace App\Domain\Core\Front\Admin\Form\Attributes\Base;
 
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Abstracts\BaseAttributes;
+use App\Domain\Core\Front\Admin\Form\Traits\AttributeGetVariable;
 use App\Domain\Core\Front\Interfaces\HtmlInterface;
 use function Symfony\Component\Translation\t;
 
@@ -14,6 +15,8 @@ use function Symfony\Component\Translation\t;
 // sprintf('$entity->%s', $key);
 abstract class BaseAttributeForm implements HtmlInterface
 {
+    use AttributeGetVariable;
+
     public string $label;
     public string $key;
 
@@ -25,6 +28,6 @@ abstract class BaseAttributeForm implements HtmlInterface
 
     protected function getVariable(): string
     {
-        return sprintf('{{$entity->%s}}', $this->key);
+        return $this->getAttributeVariable($this->key);
     }
 }

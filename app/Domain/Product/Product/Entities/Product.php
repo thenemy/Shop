@@ -2,19 +2,57 @@
 
 namespace App\Domain\Product\Product\Entities;
 
-class Product extends Entity
+use App\Domain\Category\Entities\Category;
+use App\Domain\Core\Language\Traits\Translatable;
+use App\Domain\Core\Main\Entities\Entity;
+use App\Domain\Core\Media\Traits\MediaManyTrait;
+use App\Domain\Core\Slug\Traits\Sluggable;
+use App\Domain\Product\HeaderComponent\Header\Entities\HeaderComponent;
+use App\Domain\Product\HeaderTable\Entities\HeaderTable;
+use App\Domain\Product\HeaderText\Entities\HeaderText;
+use App\Domain\Product\Images\Entities\Image;
+use App\Domain\Product\Product\Builders\ProductBuilder;
+use App\Domain\Product\Product\Interfaces\ProductInterface;
+use App\Domain\Shop\Entities\Shop;
+use App\Domain\User\Entities\User;
+use CardImages;
+use Discounts;
+use ProductStats;
+
+class Product extends Entity implements ProductInterface
 {
-    use Translatable, Sluggable;
+    use Translatable, Sluggable, MediaManyTrait;
 
     public $guarded = [];
     protected $table = "products";
+
+    public function newEloquentBuilder($query): ProductBuilder
+    {
+        return new ProductBuilder($query);
+    }
+
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class, "shop_id");
+    }
+
+    public function getImagesAttribute()
+    {
+        return $this->getManyMedia("productImage", "images");
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, "category_id");
+    }
 
     public function user_favourites(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class, "favourites");
     }
 
-    public function productProductStatus(){
+    public function productProductStatus()
+    {
         return $this->belongsToMany(ProductStats::class);
     }
 
@@ -35,7 +73,7 @@ class Product extends Entity
 
     public function productKey(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Key::class, 'product_id');
+//        return $this->hasMany(Key::class, 'product_id');
     }
 
     public function productHeaderText(): \Illuminate\Database\Eloquent\Relations\HasMany
@@ -75,19 +113,5 @@ class Product extends Entity
         ];
     }
 
-    public function getColumns(): array
-    {
-        // TODO: Implement getColumns() method.
-    }
-
-    public function livewireComponents(): array
-    {
-        // TODO: Implement livewireComponents() method.
-    }
-
-    public function getTableRows(): array
-    {
-        // TODO: Implement getTableRows() method.
-    }
 }
 

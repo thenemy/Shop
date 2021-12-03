@@ -4,6 +4,8 @@
 namespace App\View\Helper\Sidebar\Items;
 
 
+use Illuminate\Support\Facades\Route;
+
 class Sidebar extends SideBarBase
 {
     public function __construct($name, $route_name)
@@ -16,8 +18,10 @@ class Sidebar extends SideBarBase
         return self::USUAL_SIDEBAR;
     }
 
-    public function isCurrentRoute(): bool // check
+
+    public function isCurrentRoute(): bool
     {
-        return true;
+
+        return Route::is($this->current_name);
     }
 }

@@ -2,17 +2,32 @@
 
 namespace App\View\Helper\Sidebar\Items;
 
-class SideBarList extends SideBarBase
+use App\View\Helper\Sidebar\Interfaces\SideBarInterface;
+
+class SideBarList implements SideBarInterface
 {
-    public $sublist;
-    public function __construct($name, $sublist, $route_name)
+    public string $name;
+    public array $sublist;
+
+    public function __construct(array $sublist, $name = "")
     {
-        parent::__construct($name, $route_name);
         $this->sublist = $sublist;
+        $this->name = $name;
     }
 
-    public function getType():int
+
+    public function getType(): int
     {
         return self::LIST_SIDEBAR;
+    }
+
+    public function isCurrentRoute(): bool
+    {
+        foreach ($this->sublist as $item) {
+            if ($item->isCurrentRoute()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

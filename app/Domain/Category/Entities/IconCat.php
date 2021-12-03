@@ -21,7 +21,7 @@ class IconCat extends Entity
 
     public function setIconAttribute($value)
     {
-        $this->setPublicMedia("icon", $value);
+        $this->setMedia("icon", $value, $this->category_id);
     }
 
     public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo

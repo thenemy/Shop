@@ -11,6 +11,13 @@ class FileBladeCreatorCreate extends AbstractFileManagerBlade
     {
         return $this->pathMain . self::CREATE;
     }
+    protected function formatFile($file_from): string
+    {
+        return sprintf($file_from,
+            $this->bladeGenerator->generateHtml(),
+        );
+    }
+
 
     protected function getTemplatePath(): string
     {

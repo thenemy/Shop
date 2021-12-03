@@ -6,6 +6,7 @@ namespace App\Domain\Core\Front\Admin\Routes\Admin;
 
 interface AdminRoutesInterface
 {
+    const ADMIN = "admin";
     const CATEGORY = 'category';
     const USER = "user";
     const SHOP = "shop";

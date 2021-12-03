@@ -19,6 +19,7 @@
     },
     "dependencies": {
         "alpinejs": "^3.5.2",
+        "jquery": "^3.6.0",
         "long-press-event": "^2.4.4"
     }
 }

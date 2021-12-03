@@ -12,4 +12,9 @@ interface TableInFront
     public function livewireComponents(): LivewireAdditionalFunctions;
 
     public function livewireOptionalDropDown(): LivewireDropOptional;
+
+    public function getTitle(): string;
+
+    public function getActionsAttribute():string;
+
 }

@@ -18,6 +18,11 @@ class Column implements FunctionInterface
 
     public function generateFunction(): string
     {
-      return  "";
+        return "";
+    }
+
+    public static function new($column_name, $key_to_row): Column
+    {
+        return new self($column_name, $key_to_row);
     }
 }

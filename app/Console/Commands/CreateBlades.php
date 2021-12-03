@@ -4,6 +4,10 @@ namespace App\Console\Commands;
 
 use App\Domain\Category\Front\Admin\File\CategoryCreator;
 use App\Domain\Category\Front\Admin\File\CategoryOpenCreator;
+use App\Domain\Product\Product\Front\Admin\File\ProductCreator;
+use App\Domain\Shop\Front\Admin\File\ShopFileCreator;
+use App\Domain\Shop\Front\Main\ShopCreate;
+use App\Domain\User\Front\Admin\File\UserFileCreator;
 use Illuminate\Console\Command;
 
 class CreateBlades extends Command
@@ -41,6 +45,10 @@ class CreateBlades extends Command
     {
         CategoryCreator::createFiles();
         CategoryOpenCreator::createFiles();
+        UserFileCreator::createFiles();
+        ProductCreator::createFiles();
+        ShopFileCreator::createFiles();
+
         return 0;
     }
 }

@@ -4,28 +4,33 @@
 namespace App\View\Helper\Sidebar\Items;
 
 
+use App\Domain\Core\Front\Admin\Routes\Abstracts\RouteHandler;
+use App\Domain\Core\Front\Admin\Routes\Interfaces\RoutesInterface;
 use App\View\Helper\Sidebar\Interfaces\SideBarInterface;
 
 abstract class SideBarBase implements SideBarInterface
 {
-    public $name;
-    public $route_name;
-    public $route_also;
+    public string $name;
+    public string $route_name;
+    protected string $current_name;
     public $type;
 
-    public function __construct($name, $route_name)
+    public function __construct($name, RouteHandler $route_name)
     {
         $this->name = $name;
-        $this->route_name = route($route_name);
-        $this->route_also = $this->getOtherRoutes($route_name);
+        $this->current_name = $route_name->getRoute(RoutesInterface::INDEX_ROUTE);
+        $this->route_name = route($this->current_name);
         $this->type = $this->getType();
     }
 
-    private function getOtherRoutes($route_name): string
+    public function getType(): int
     {
-        $split_name = explode(".", $route_name);
-        $split_name[count($split_name) - 1] = "*";
-        return implode(".", $split_name);
+        return self::USUAL_SIDEBAR;
     }
 
+    public static function new($name, $route_name)
+    {
+        $self = get_called_class();
+        return new $self($name, $route_name);
+    }
 }

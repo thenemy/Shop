@@ -4,8 +4,9 @@ namespace App\Domain\Product\Header\Entities;
 
 use App\Domain\Core\Language\Traits\Translatable;
 use App\Domain\Core\Main\Entities\Entity;
-use App\Domain\Product\Entities\HeaderTable\Entities\HeaderTable;
-use App\Domain\Product\Entities\Product;
+use App\Domain\Product\HeaderTable\Entities\HeaderTable;
+use App\Domain\Product\Product\Entities\Product;
+
 
 class Header extends Entity
 {

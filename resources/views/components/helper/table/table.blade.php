@@ -10,9 +10,6 @@
                                             class="hidden checkbox-show">
                 {{__("Выйти")}}
             </x-helper.button.outline_button>
-            {{--            <x-helper.button.outline_button type="button" onclick="hideCheck(this)" class="hidden checkbox-show">--}}
-            {{--                {{__("Выйти")}}--}}
-            {{--            </x-helper.button.outline_button>--}}
         </div>
     </div>
     <table class="table-auto border-collapse border w-full my-2.5" wire:loading.class="opacity-80">

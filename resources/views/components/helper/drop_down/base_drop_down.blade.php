@@ -2,7 +2,8 @@
 "drop",
 "chosen"=>""
 ])
-<div {{$attributes->merge(["class"=>"relative inline-block text-left w-max","x-data"=>"{ isOpen: false, selected: ''}" ])}}>
+<div
+    x-data="{ isOpen: false}" {{$attributes->merge(["class"=>"relative drop_down_init inline-block text-left w-max" ])}}>
     <div>
         <x-helper.button.drop_down_button
             type="button"
@@ -27,9 +28,17 @@
 </div>
 
 <script>
+
     $(".drop-down-item").click(function () {
         const parent = $(this).parents();
         $(parent[2]).find(".helper_text").text($(this).text())
         $(parent[0]).find(".selected_input").val($(this).attr("value"))
     });
+    window.addEventListener("search_event", function () {
+        $(".drop-down-item").click(function () {
+            const parent = $(this).parents();
+            $(parent[2]).find(".helper_text").text($(this).text())
+            $(parent[0]).find(".selected_input").val($(this).attr("value"))
+        });
+    })
 </script>

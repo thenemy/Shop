@@ -7,17 +7,11 @@
                 keyToAttach='attachCategory'
                 :filterBy='["parent_id" => "$entity->id"]'
                 />
-<livewire:admin.pages.category.category-nested
-                :attachEntityId='$entity->id'
-                :attachEntity='get_class($entity)'
-                keyToAttach='attachCategory'
-                :filterBy='["parent_id" => "$entity->id"]'
-                />
-<x-helper.input.input name='name' type='text' value='{{$entity->name}}' label='Имя категории'/>
-<x-helper.input.input name='name' type='text' value='{{$entity->name}}' label='Имя категории'/>
-<x-helper.input.input name='name' type='text' value='{{$entity->name}}' label='Имя категории'/>
-<x-helper.input.input name='name' type='text' value='{{$entity->name}}' label='Имя категории'/>
-<x-helper.input.input name='name' type='text' value='{{$entity->name}}' label='Имя категории'/>
-<x-helper.input.input name='name' type='text' value='{{$entity->name}}' label='Имя категории'/>
-<x-helper.input.input name='name' type='text' value='{{$entity->name}}' label='Имя категории'/>
+<livewire:components.file.file-uploading
+                    :entityId='$entity->id'
+                    mediaKey='icon_file'
+                    entityClass='App\Domain\Category\Front\Main\CategoryEdit'
+                    :multiple='false'
+                    label='Иконка'
+                     />
 @endsection

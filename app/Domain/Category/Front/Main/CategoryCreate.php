@@ -11,12 +11,6 @@ use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 class CategoryCreate extends Category implements CreateAttributesInterface
 {
 
-    public function createAttributes(): BladeGenerator
-    {
-        return BladeGenerator::generation([
-            new ImageAttribute($this, "icon_image")
-        ]);
-    }
 
     // move somewhere else
     public function setIconImageAttribute($value)
@@ -34,6 +28,8 @@ class CategoryCreate extends Category implements CreateAttributesInterface
 
     public function generateAttributes(): BladeGenerator
     {
-        // TODO: Implement generateAttributes() method.
+       return  BladeGenerator::generation([
+
+       ]);
     }
 }

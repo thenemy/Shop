@@ -11,5 +11,5 @@ interface AttributeInterface
     public function getValueOfMainKey();
 
 
-    static public function preGenerate($entity, $key);
+    static public function preGenerate($entity, $key, $value = false);
 }

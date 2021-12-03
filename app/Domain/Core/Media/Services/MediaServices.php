@@ -9,16 +9,16 @@ namespace App\Domain\Core\Media\Services;
 
 
 use App\Domain\Core\Media\Models\Media;
-use GuzzleHttp\Psr7\UploadedFile;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
 class MediaServices
 {
-    public static function createMedia($path, UploadedFile $file, string $key): Media
+    public static function createMedia($path, UploadedFile $file, string $key , $id): Media
     {
         $filename = self::generateName($path, $file->getClientOriginalName());
         $file->storeAs($path, $filename);
-        return new Media (self::getPathToStore($path, $filename), $key);
+        return new Media (self::getPathToStore($path, $filename), $key, $id);
     }
 
     public static function getPathToStore($path, $filename)

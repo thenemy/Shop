@@ -14,6 +14,7 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
+
         Category::create([
             "name" => "First category",
             "status" => true,

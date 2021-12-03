@@ -189,7 +189,7 @@ return [
     */
 
     'aliases' => [
-        'Admin'=> \App\Domain\Core\Front\Admin\Routes\Admin\AdminRoutesInterface::class ,
+        'AdminRoute'=> \App\Domain\Core\Front\Admin\Routes\Admin\AdminRoutesInterface::class ,
         'Paginator' => \App\Domain\Core\Front\Admin\DropDown\Models\PaginatorDefault::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,

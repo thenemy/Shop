@@ -16,11 +16,13 @@ class Media implements MediaInterface
 {
     private $path;
     public $key;
+    public $id;
 
-    public function __construct($path, $key)
+    public function __construct($path, $key, $id)
     {
         $this->path = $path;
         $this->key = $key;
+        $this->id = $id;
     }
 
     private function getFileName(): ?string
@@ -40,8 +42,7 @@ class Media implements MediaInterface
 
     public function delete(): bool
     {
-        Log::error("SECOND" . $this->path);
-        Log::error(isset($this->path));
+
         if (isset($this->path)) {
             return Storage::delete($this->path) && !($this->path = "");
 
@@ -49,7 +50,7 @@ class Media implements MediaInterface
         return false;
     }
 
-    public function storage()
+    public function storage(): string
     {
         return Storage::url($this->path);
     }
@@ -61,7 +62,7 @@ class Media implements MediaInterface
                 return $this->getFileName();
             case "path":
                 return $this->getFilePath();
-       }
-       return null;
+        }
+        return null;
     }
 }

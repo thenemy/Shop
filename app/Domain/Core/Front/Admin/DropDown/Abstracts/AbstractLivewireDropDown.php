@@ -2,6 +2,7 @@
 
 namespace App\Domain\Core\Front\Admin\DropDown\Abstracts;
 
+use App\Domain\Core\Front\Admin\DropDown\Traits\InitStaticDropFunction;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\FunctionHelperStaticInterface;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\FunctionInterface;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Traits\FunctionFormatArg;
@@ -9,10 +10,9 @@ use App\Domain\Core\Front\Admin\Livewire\Functions\Traits\FunctionGenerate;
 use App\Domain\Core\Front\Interfaces\HtmlInterface;
 
 abstract class AbstractLivewireDropDown extends AbstractDropDown
-    implements HtmlInterface, FunctionInterface , FunctionHelperStaticInterface
+    implements HtmlInterface, FunctionInterface, FunctionHelperStaticInterface
 {
-    use FunctionFormatArg, FunctionGenerate
-;
+    use FunctionFormatArg, FunctionGenerate, InitStaticDropFunction;
 
     private const TEMPLATE = "public function %s(%s){
         %s
@@ -35,7 +35,7 @@ abstract class AbstractLivewireDropDown extends AbstractDropDown
 
     protected function initializeFunction(): string
     {
-        return "\\" . get_called_class() . "::" . "getDropDown(" . $this->toThisVariable() . "),";
+        return $this->initGetDropDown($this->toThisVariable());
     }
 
     public function setKey(): string
@@ -47,4 +47,7 @@ abstract class AbstractLivewireDropDown extends AbstractDropDown
     {
         return "";
     }
+
+    abstract static public function formatClick($value);
+
 }

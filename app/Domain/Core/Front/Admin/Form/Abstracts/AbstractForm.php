@@ -27,7 +27,7 @@ abstract class AbstractForm implements RoutesInterface
     public function create($params = []): AbstractForm
     {
         $this->title = __("Создать новый") . " " . $this->getTitle();
-        $this->name_save_button = __("Cоздать новый и продолжить заполнение");
+        $this->name_save_button = __("Cоздать и продолжить");
         $this->route_save = route($this->route_handler->getRoute(self::STORE_ROUTE), $params);
         return $this;
     }
@@ -41,4 +41,5 @@ abstract class AbstractForm implements RoutesInterface
         $this->route_save = route($this->route_handler->getRoute(self::UPDATE_ROUTE), $params);
         return $this;
     }
+
 }

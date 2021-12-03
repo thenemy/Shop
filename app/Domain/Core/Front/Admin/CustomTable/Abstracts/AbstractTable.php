@@ -4,6 +4,7 @@
 namespace App\Domain\Core\Front\Admin\CustomTable\Abstracts;
 
 
+use App\Domain\Core\Front\Admin\Attributes\Models\Column;
 use App\Domain\Core\Front\Admin\CustomTable\Interfaces\TableInterface;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Base\LivewireFunctions;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireAdditionalFunctions;
@@ -19,7 +20,7 @@ abstract class AbstractTable implements TableInterface, LivewireAdditionalFuncti
     {
         $this->list = $entities;
         $this->paginate = $entities;
-        $this->columns = $this->getColumns();
+        $this->columns = [...$this->getColumns(), Column::new(__("Действия"), "actions")];
     }
 
     public function generateFunctions(): string

@@ -26,4 +26,10 @@ class FormForModel extends AbstractForm
     {
         return $this->const_title;
     }
+
+    public static function new(RouteHandler $route, string $const_title)
+    {
+
+        return new self($route, $const_title);
+    }
 }

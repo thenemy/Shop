@@ -24,11 +24,4 @@ Route::group([
     }
 );
 
-Route::name("admin.")->group(function () {
-    Route::resource(
-        \App\Domain\Core\Front\Admin\Routes\Admin\AdminRoutesInterface::CATEGORY,
-        \App\Http\Controllers\Admin\CategoryController::class);
-    Route::resource(
-        \App\Domain\Core\Front\Admin\Routes\Admin\AdminRoutesInterface::CATEGORY_OPEN,
-        \App\Http\Controllers\Admin\CategoryChildController::class);
-});
+include 'admin.php';

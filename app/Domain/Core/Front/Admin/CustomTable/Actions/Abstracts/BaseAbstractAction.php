@@ -27,4 +27,10 @@ abstract class BaseAbstractAction implements ActionInterface, HtmlInterface
 
     // get route handler
     abstract public function getRouteHandler(): RouteHandler;
+
+    public static function new($params = [])
+    {
+        $new = get_called_class();
+        return new $new($params);
+    }
 }

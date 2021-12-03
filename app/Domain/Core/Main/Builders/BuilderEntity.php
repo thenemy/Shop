@@ -8,12 +8,16 @@ use Illuminate\Database\Eloquent\Builder;
 
 abstract class BuilderEntity extends Builder implements BuilderInterface
 {
-    protected function getParent():string{
-        return  "parent_id";
+    protected function getParent(): string
+    {
+        return "parent_id";
     }
-    protected function getSearch():string {
-        return  "search";
+
+    protected function getSearch(): string
+    {
+        return "search";
     }
+
     public function filterByNot($filter)
     {
         return $this;
@@ -21,6 +25,9 @@ abstract class BuilderEntity extends Builder implements BuilderInterface
 
     public function filterBy($filter)
     {
+        if (isset($filter[$this->getSearch()])) {
+            $filter['search'] = $filter[$this->getSearch()];
+        }
         if (isset($filter["search"])) {
             $search = $filter["search"];
             $this->where($this->getSearch(), "LIKE", "%" . $search . "%");

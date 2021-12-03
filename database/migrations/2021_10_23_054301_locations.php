@@ -17,6 +17,7 @@ class Locations extends Migration
             $table->foreignId('id')->primary()->constrained('users')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->float('longitude');
             $table->float('latitude');
+
         });
     }
 

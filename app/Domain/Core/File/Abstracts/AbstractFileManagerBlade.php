@@ -5,7 +5,7 @@ namespace App\Domain\Core\File\Abstracts;
 use App\Domain\Core\File\Interfaces\BladeCreatorInterface;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 
-abstract class AbstractFileManagerBlade extends AbstractFileManager implements BladeCreatorInterface
+abstract class  AbstractFileManagerBlade extends AbstractFileManager implements BladeCreatorInterface
 {
     protected BladeGenerator $bladeGenerator;
     protected $entity;

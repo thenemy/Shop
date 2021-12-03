@@ -10,4 +10,6 @@ interface SideBarInterface
     const USUAL_SIDEBAR = 0;
 
     public function getType();
+
+    public function isCurrentRoute(): bool;
 }

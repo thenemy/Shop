@@ -11,7 +11,7 @@ class LivewireStatusColumn extends LivewireColumn
 
     private string $actual_key;
 
-    public function __construct($column_name, $key_to_row, $actual_key)
+        public function __construct($column_name, $key_to_row, $actual_key)
     {
         $this->actual_key = $actual_key;
         parent::__construct($column_name, $key_to_row);
