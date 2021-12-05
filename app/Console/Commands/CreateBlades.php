@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Domain\Category\Front\Admin\File\CategoryCreator;
 use App\Domain\Category\Front\Admin\File\CategoryOpenCreator;
+use App\Domain\CreditProduct\Front\Admin\File\MainCreditCreator;
 use App\Domain\Product\Product\Front\Admin\File\ProductCreator;
 use App\Domain\Shop\Front\Admin\File\ShopFileCreator;
 use App\Domain\Shop\Front\Main\ShopCreate;
@@ -43,12 +44,12 @@ class CreateBlades extends Command
      */
     public function handle()
     {
-        CategoryCreator::createFiles();
-        CategoryOpenCreator::createFiles();
-        UserFileCreator::createFiles();
-        ProductCreator::createFiles();
-        ShopFileCreator::createFiles();
-
+//        CategoryCreator::createFiles();
+//        CategoryOpenCreator::createFiles();
+//        UserFileCreator::createFiles();
+//        ProductCreator::createFiles();
+//        ShopFileCreator::createFiles();
+        MainCreditCreator::createFiles();
         return 0;
     }
 }

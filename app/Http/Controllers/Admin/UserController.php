@@ -43,7 +43,7 @@ class UserController extends BaseController
 
     public function store(UserRequest $request)
     {
-        return $this->getStore($request);
+        return $this->getStore($request->validated());
     }
 
     public function edit(Request $request, User $user)
@@ -53,6 +53,6 @@ class UserController extends BaseController
 
     public function update(UserRequest $request, User $user)
     {
-        return $this->getUpdate($request, $user);
+        return $this->getUpdate($request->validated(), $user);
     }
 }

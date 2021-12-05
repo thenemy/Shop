@@ -32,16 +32,7 @@ abstract class  MainFactoryCreator implements CreatorInterface
 
     protected function createIndex()
     {
-
         $this->create($this->getIndexEntity(), $this->getIndexBladeCreator());
-//        if ($this->getIndexEntity()) {
-//            $entity_index = self::newClass($this->getIndexEntity());
-//            self::newClass($this->getIndexBladeCreator(),
-//                $this->entity->class_name,
-//                $entity_index->generateAttributes(),
-//                $entity_index
-//            );
-//        }
     }
 
     protected function getIndexBladeCreator(): string
@@ -62,13 +53,11 @@ abstract class  MainFactoryCreator implements CreatorInterface
     protected function createEdit()
     {
         $this->create($this->getEditEntity(), $this->getEditBladeCreator());
-//        $entity_edit = self::newClass($this->getEditEntity());
-//        self::newClass(
-//            $this->getEditBladeCreator(),
-//            $this->entity->class_name,
-//            $entity_edit->generateAttributes(),
-//            $entity_edit
-//        );
+    }
+
+    protected function createCreate()
+    {
+        $this->create($this->getCreateEntity(), $this->getCreateBladeCreator());
     }
 
     protected function create(string $getMethodEntity, string $getBladeEntity)
@@ -82,17 +71,5 @@ abstract class  MainFactoryCreator implements CreatorInterface
                 $entity_method
             );
         }
-    }
-
-    protected function createCreate()
-    {
-        $this->create($this->getCreateEntity(), $this->getCreateBladeCreator());
-//        $entity_edit = self::newClass($this->getCreateEntity());
-//        self::newClass(
-//            $this->getCreateBladeCreator(),
-//            $this->entity->class_name,
-//            $entity_edit->generateAttributes(),
-//            $entity_edit
-//        );
     }
 }

@@ -19,7 +19,6 @@ class CategoryTable extends AbstractCreateTable
     {
         return [
             ...$this->getCommonColumns(),
-            new Column(__("Действия"), "action_table"),
         ];
     }
 

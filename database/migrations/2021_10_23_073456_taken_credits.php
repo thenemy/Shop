@@ -21,9 +21,9 @@ class TakenCredits extends Migration
             $table->bigInteger('initial_price');
             $table->dateTime('date_taken');
             $table->dateTime('date_finish');
-            $table->smallInteger("day_payment"); // may be not necessary because it was need for
-            // recursion payment
-            $table->time("time_payment"); // from hh:mm:ss to HH:mm
+//            $table->smallInteger("day_payment");// may be not necessary because it was need for
+//            // recursion payment
+//            $table->time("time_payment"); // from hh:mm:ss to HH:mm
             $table->foreignId("user_credit_data_id")
                 ->constrained("user_credit_datas")
                 ->restrictOnDelete();
@@ -33,10 +33,9 @@ class TakenCredits extends Migration
             $table->foreignId("credit_id")
                 ->constrained("credits")
                 ->restrictOnDelete();
-            $table->foreignId("users_order_id")
-                ->unique()->constrained("users_order")
+            $table->foreignId("purchase_id")
+                ->unique()->constrained("purchases")
                 ->restrictOnDelete();
-
         });
     }
 

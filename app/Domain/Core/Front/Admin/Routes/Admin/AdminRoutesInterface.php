@@ -14,4 +14,5 @@ interface AdminRoutesInterface
     const ORDER = "order";
     const COURIER = 'courier';
     const CATEGORY_OPEN = "category_open";
+    const MAIN_CREDIT = "main_credit";
 }

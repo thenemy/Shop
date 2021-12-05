@@ -5,7 +5,7 @@ namespace App\Domain\Core\Front\Admin\CustomTable\Abstracts;
 use App\Domain\Core\Front\Admin\Attributes\Models\Column;
 use App\Domain\Core\Front\Admin\CustomTable\Interfaces\TableNested;
 
-abstract class AbstractNestedTableAccept extends AbstractTable implements TableNested
+abstract class AbstractNestedTableAccept extends BaseTable implements TableNested
 {
     public function getColumns(): array
     {

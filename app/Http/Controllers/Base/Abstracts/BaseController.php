@@ -97,21 +97,33 @@ abstract class BaseController extends Controller implements ControllerInterface
         return view($this->getPath() . RoutesInterface::CREATE, array_merge($variables, $params));
     }
 
-    protected function getStore($request): \Illuminate\Http\RedirectResponse
+    protected function getStore($object): \Illuminate\Http\RedirectResponse
     {
         try {
-            $this->service->create($request->validated());
+            $this->service->create($object);
             return back()->with("success", __("Добавлено успешно"));;
         } catch (\Exception $e) {
             return back()->withErrors($e->getMessage())->withInput();
         }
     }
 
-    public function getUpdate($request, $entity): \Illuminate\Http\RedirectResponse
+    public function getStoreValidation(Request $request)
+    {
+        $request->validate($this->getEntityClass()::getRules());
+        return $this->getStore($request->all());
+    }
+
+    public function getUpdateValidation(Request $request, ...$values)
+    {
+        $request->validate($this->getEntityClass()::getUpdateRules());
+        return $this->getUpdate($request->all(), ...$values);
+    }
+
+    public function getUpdate($object, $entity): \Illuminate\Http\RedirectResponse
     {
         try {
-            $this->service->update($entity, $request->validated());
-            return back()->with("success", __("Добавлено успешно"));
+            $this->service->update($entity, $object);
+            return back()->with("success", __("Обнавлено успешно"));
         } catch (\Exception $e) {
             return back()->withErrors($e->getMessage())->withInput();
         }

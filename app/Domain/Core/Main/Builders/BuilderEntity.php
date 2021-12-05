@@ -40,4 +40,9 @@ abstract class BuilderEntity extends Builder implements BuilderInterface
     {
         return $this->whereIn("id", $keys)->delete();
     }
+    public static function new($query)
+    {
+        $class = get_called_class();
+        return new $class($query);
+    }
 }

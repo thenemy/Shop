@@ -21,7 +21,7 @@ class CategoryIndex extends BaseLivewire
         $this->checkBox = [];}
    public function statusTable($arg){$entity = $this->getEntity()::find($arg);
              $entity->status = !$entity->status;
-             $entity->save();}   //3   --- set of functions and variables
+             $entity->save();}  //3   --- set of functions and variables
     public function getPath()
     {
         return 'livewire.admin.pages.category.category-index'; //4  --- path to blade

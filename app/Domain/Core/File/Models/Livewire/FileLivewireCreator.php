@@ -6,6 +6,7 @@ use App\Domain\Core\File\Abstracts\AbstractFileManager;
 use App\Domain\Core\File\Interfaces\LivewireCreatorInterface;
 use App\Domain\Core\Front\Interfaces\HtmlInterface;
 use App\Domain\Core\Main\Traits\FastInstantiation;
+use Illuminate\Support\Facades\Log;
 
 
 // pass additional actions through constructor
@@ -29,7 +30,6 @@ class FileLivewireCreator extends AbstractFileManager
             $this->getEntityClass(),
         );
     }
-
 
     protected string $className;
     protected $entity;
@@ -129,15 +129,6 @@ class FileLivewireCreator extends AbstractFileManager
         $this->createFileClass();
     }
 
-    protected function getPathFromClass(): string
-    {
-        return self::FROM_CLASS;
-    }
-
-    protected function getPathFromBlade(): string
-    {
-        return self::FROM_BLADE;
-    }
 
 
     private function createFileClass()
@@ -152,7 +143,10 @@ class FileLivewireCreator extends AbstractFileManager
     private function createFileBlade()
     {
         $file_to = $this->pathMain . $this->getBladeName() . ".blade.php";
+        Log::info(get_called_class());
+        Log::info($this->getPathFromBlade());
         $file_from = $this->getContents($this->getPathFromBlade());
+        Log::info($file_from);
         $formatted_data = $this->formatBlade($file_from);
         $this->putContents($file_to, $formatted_data);
     }
@@ -164,6 +158,17 @@ class FileLivewireCreator extends AbstractFileManager
             $this->getTableToBlade()
         );
     }
+
+    protected function getPathFromClass(): string
+    {
+        return self::FROM_CLASS;
+    }
+
+    protected function getPathFromBlade(): string
+    {
+        return self::FROM_BLADE;
+    }
+
 
     protected function getTableToBlade()
     {

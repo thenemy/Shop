@@ -17,6 +17,9 @@ class Credits extends Migration
             $table->id();
             $table->smallInteger("percent");
             $table->smallInteger("month"); // number of month
+            $table->foreignId("main_credit_id")
+                ->constrained("main_credits")
+                ->restrictOnDelete();
         });
     }
 

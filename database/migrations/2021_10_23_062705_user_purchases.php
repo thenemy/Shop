@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UsersOrder extends Migration
+class UserPurchases extends Migration
 {
     /**
      * Run the migrations.
@@ -21,6 +21,7 @@ class UsersOrder extends Migration
      * by credits, cash , or instance payment
      * where this product must be delivered
      *
+     *  orderNumberInternal will be generated id + shop_id
      */
     public function up()
     {
@@ -31,13 +32,11 @@ class UsersOrder extends Migration
          * 1000000010
          * 1000000100
          * 1000001000
-        */
-        Schema::create('users_order', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId("order_id")->constrained("orders");
+         */
+        Schema::create('user_purchases', function (Blueprint $table) {
+            $table->unsignedBigInteger("id" )->primary();/*this id will be generated automatically from 1000 */
             $table->smallInteger("status");
             $table->foreignId("user_id")->constrained("users")->onDelete('CASCADE')->onUpdate('CASCADE');
-            $table->unique(['order_id', 'user_id']);
         });
     }
 

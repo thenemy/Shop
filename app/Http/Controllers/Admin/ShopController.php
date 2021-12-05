@@ -47,7 +47,7 @@ class ShopController extends BaseController
 
     public function store(ShopCreateRequest $request)
     {
-        return $this->getStore($request);
+        return $this->getStore($request->validated());
     }
 
     public function edit(Request $request, Shop $shop)
@@ -57,6 +57,6 @@ class ShopController extends BaseController
 
     public function update(ShopEditRequest $request, Shop $shop)
     {
-        return $this->getUpdate($request, $shop);
+        return $this->getUpdate($request->validated(), $shop);
     }
 }

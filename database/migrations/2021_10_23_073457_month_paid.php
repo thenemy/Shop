@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class DeliveryDataProduct extends Migration
+class MonthPaid extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,16 @@ class DeliveryDataProduct extends Migration
      */
     public function up()
     {
-        Schema::create('delivery_data_product', function (Blueprint $table) {
+        Schema::create('month_paid', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->float("must_pay");
+            $table->float("paid");
+            $table->integer("month");
+            $table->foreignId("taken_credit_id")
+                ->constrained("taken_credits")
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
         });
     }
 
@@ -26,6 +33,6 @@ class DeliveryDataProduct extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('delivery_data_product');
+        Schema::dropIfExists('month_paid');
     }
 }

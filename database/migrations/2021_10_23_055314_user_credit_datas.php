@@ -17,9 +17,11 @@ class UserCreditDatas extends Migration
         Schema::create('user_credit_datas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->unique()->constrained('users')->onDelete('CASCADE')->onUpdate('CASCADE');
-            $table->string('passport');
-            $table->string('inn');
-            $table->string('pnfl');
+            $table->foreignId("crucial_data_id")
+                ->constrained("crucial_data")
+                ->restrictOnUpdate()
+                ->restrictOnDelete();
+            $table->string("additional_phone");
         });
     }
 

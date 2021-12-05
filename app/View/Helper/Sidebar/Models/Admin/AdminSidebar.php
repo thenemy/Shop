@@ -8,6 +8,7 @@ use App\Domain\Category\Front\Admin\Path\CategoryRouteHandler;
 use App\Domain\Core\Front\Admin\Routes\Abstracts\RouteHandler;
 use App\Domain\Core\Front\Admin\Routes\Interfaces\RoutesInterface;
 
+use App\Domain\CreditProduct\Front\Admin\Path\MainCreditRouteHandler;
 use App\Domain\Product\Product\Front\Admin\Path\ProductRouteHandler;
 use App\Domain\Shop\Front\Admin\Path\ShopRouteHandler;
 use App\Domain\User\Front\Admin\Path\UserRouteHandler;
@@ -39,6 +40,11 @@ class AdminSidebar implements SideBarFactoryInterface
                     new SideBarDrop(__("Категории"), CategoryRouteHandler::new()),
                 ],
                     "Раздел Категорий"
+                ),
+                new SideBarList([
+                    new SideBarDrop(__("Ввиды рассрочки"), MainCreditRouteHandler::new()),
+                ],
+                    "Рассрочка"
                 ),
             ],
         );

@@ -21,7 +21,11 @@ class Shops extends Migration
             $table->string("director_passport")->default("");
             $table->string("image")->default("");
             $table->string("logo")->default("");
+            $table->boolean("self_delivery")->default(false);// can be done or not
             $table->string("slug")->unique();
+            $table->string("interval_working_time");
+            // for delivery time and
+            // also to shop for self delivery
         });
     }
 
