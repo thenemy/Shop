@@ -1,21 +1,6 @@
-let pressTimer;
-$(".longpress").mouseup(function () {
-    clearTimeout(pressTimer);
-    return false;
-}).mousedown(function () {
-    // Set timeout
-    let current = this;
-    pressTimer = window.setTimeout(function () {
-        showing(current)
-    }, 600);
-    return false;
-});
-function findParent(current) {
-    return $(current).parents(".table_checker");
-}
-
-window.addEventListener('table_check',function(e) {
+function table_init() {
     let pressTimer;
+
     $(".longpress").mouseup(function () {
         clearTimeout(pressTimer);
         return false;
@@ -27,19 +12,42 @@ window.addEventListener('table_check',function(e) {
         }, 600);
         return false;
     });
-});
 
-document.addEventListener("DOMContentLoaded", () => {
-    Livewire.hook("element.updated", function (e) {
-            $(".table_checker").each(function () {
-                let checkBox = $(this).find(".checkbox-show input[type=checkbox]:checked")
-                if (checkBox.length > 0) {
-                    $(this).find(".checkbox-show").removeClass("hidden");
-                }
-            });
-        }
-    )
-});
+
+    window.addEventListener('table_check', function (e) {
+        let pressTimer;
+        $(".longpress").mouseup(function () {
+            clearTimeout(pressTimer);
+            return false;
+        }).mousedown(function () {
+            // Set timeout
+            let current = this;
+            pressTimer = window.setTimeout(function () {
+                showing(current)
+            }, 600);
+            return false;
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        Livewire.hook("element.updated", function (e) {
+                $(".table_checker").each(function () {
+                    let checkBox = $(this).find(".checkbox-show input[type=checkbox]:checked")
+                    if (checkBox.length > 0) {
+                        $(this).find(".checkbox-show").removeClass("hidden");
+                    }
+                });
+            }
+        )
+    });
+
+
+    return {}
+}
+
+function findParent(current) {
+    return $(current).parents(".table_checker");
+}
 
 function showing(current) {
     findParent(current).find('.checkbox-show').removeClass('hidden')
@@ -57,3 +65,5 @@ function removeChecker(current) {
 function selectAll(current) {
     findParent(current).find('.checkbox-show input[type=checkbox]').prop('checked', true);
 }
+
+

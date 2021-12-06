@@ -9,11 +9,12 @@ class InputComponent extends Component
     public string $type;
     public string $name;
 
-    public function __construct($name, $type, $model)
+    public function __construct($name, $type, $model, $key)
     {
         $this->name = $name;
         $this->type = $type;
         $this->attributes["wire:model"] = $model;
+        $this->attributes['wire:key'] = $key;
     }
 
     public function render()

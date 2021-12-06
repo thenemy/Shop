@@ -1,4 +1,4 @@
-<div class="table_checker my-2.5">
+<div x-data="table_init()" class="table_checker my-2.5">
     <div class="flex flex-row justify-between">
         <x-helper.drop_down.drop_down_livewire_modal :drop="$optional" class="hidden checkbox-show"/>
         <div class="remove-checks">

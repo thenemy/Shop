@@ -5,6 +5,7 @@ namespace App\Domain\Core\Front\Admin\CustomTable\Traits;
 use App\Domain\Core\File\Models\Livewire\FileLivewireDynamic;
 use App\Domain\Core\Front\Admin\Button\ModelInRunTime\ButtonGrayLivewire;
 use App\Domain\Core\Front\Admin\Button\ModelInRunTime\ButtonGreenLivewire;
+use App\Domain\Core\Front\Admin\Button\ModelInRunTime\ButtonRedLivewire;
 use App\Domain\Core\Front\Admin\CustomTable\Actions\Base\AllActions;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\InputTableAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
@@ -14,19 +15,40 @@ use App\Domain\CreditProduct\Services\CreditService;
 trait TableDynamic
 {
     public $inputs = [];
+    public $front_attribute = [];
 
     public function getInputs($name)
     {
-        $real_attribute = explode('_', $name);
+        $real_attribute = explode('-', $name);
         if (empty($this->inputs)) {
             $this->inputs['id'] = TextAttribute::preGenerate($this, 'id');
             $this->generateInput();
             $this->inputs['actions'] = AllActions::new([
-                ButtonGreenLivewire::generate(__("Обновить"), "update('" . $this->id . "')"),
-                ButtonGrayLivewire::generate(__("Отменить"), "cancel('" . $this->id . "')")
+                ButtonGreenLivewire::new(__("Обновить"), "update('" . $this->id . "')"),
+                ButtonGrayLivewire::new(__("Отменить"), "cancel('" . $this->id . "')")
             ]);
         }
         return $this->inputs[$real_attribute[0]];
+    }
+
+    public function getFrontAttributes($name)
+    {
+        $real_attribute = explode('-', $name);
+        if (empty($this->front_attribute)) {
+            $this->front_attribute['id'] = TextAttribute::preGenerate($this, 'id');
+            $this->generateAttributes();
+            $this->front_attribute['actions'] = $this->getActionsAttribute();
+        }
+        return $this->front_attribute[$real_attribute[0]];
+    }
+
+    public function getInputsDecision($name, $decide)
+    {
+        if ($decide) {
+            return $this->getInputs($name);
+        } else {
+            return $this->getFrontAttributes($name);
+        }
     }
 
     private function generateInput()
@@ -42,13 +64,26 @@ trait TableDynamic
             $this->inputs[$key] = InputTableAttribute::generate(
                 $key,
                 $is_number ? "number" : "text",
-                "collection." . $this->id . $key);
+                "collection." . $this->id . '.' . $key);
+        }
+    }
+
+    private function generateAttributes()
+    {
+        foreach ($this->getRules() as $key => $value) {
+            $this->front_attribute[$key] = TextAttribute::preGenerate(
+                $this,
+                $key
+            );
         }
     }
 
     public function getActionsAttribute(): string
     {
-        return ButtonGreenLivewire::generate(__("Добавить"), "addToUpdate('" . $this->id . "')");
+        return AllActions::new([
+            ButtonGreenLivewire::new(__("Изменить"), "addToUpdate('" . $this->id . "')"),
+            ButtonRedLivewire::new(__("Удалить"), sprintf("delete('%s')", $this->id))
+        ]);
     }
 
     /**

@@ -44,11 +44,11 @@ class CreateBlades extends Command
      */
     public function handle()
     {
-//        CategoryCreator::createFiles();
-//        CategoryOpenCreator::createFiles();
-//        UserFileCreator::createFiles();
-//        ProductCreator::createFiles();
-//        ShopFileCreator::createFiles();
+        CategoryCreator::createFiles();
+        CategoryOpenCreator::createFiles();
+        UserFileCreator::createFiles();
+        ProductCreator::createFiles();
+        ShopFileCreator::createFiles();
         MainCreditCreator::createFiles();
         return 0;
     }

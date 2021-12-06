@@ -9,6 +9,9 @@ use App\Domain\Order\Entities\Order;
 use App\Domain\User\Entities\PlasticUserCard;
 use App\Domain\User\Entities\UserCreditData;
 
+/**
+ * made tomorrow the installment
+ */
 class TakenCredit extends Entity
 {
     protected $table = "taken_credits";

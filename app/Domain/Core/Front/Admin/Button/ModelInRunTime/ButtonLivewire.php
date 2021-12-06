@@ -34,7 +34,7 @@ class ButtonLivewire extends BaseButton
     {
         $self = get_called_class();
         $class = new $self($name, $click);
-        return $class->genereateHtml();
+        return $class;
     }
 
     public static function generate($name, $click, $type = "button"): string

@@ -6,7 +6,7 @@
 "uniqueId"
 ]
 )
-<div x-data="init('{{$uniqueId}}', @this)"
+    <div x-data="init('{{$uniqueId}}', @this)"
      id="{{$uniqueId}}"
      uniqueId="{{$uniqueId}}"
      class="w-full file_upload">
@@ -86,9 +86,6 @@
         </div>
     </main>
 </div>
-
-
-<!-- using two similar templates for simplicity in js code -->
 
 
 <style>

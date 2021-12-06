@@ -32,6 +32,9 @@ abstract class BuilderEntity extends Builder implements BuilderInterface
             $search = $filter["search"];
             $this->where($this->getSearch(), "LIKE", "%" . $search . "%");
         }
+        if (isset($filter[$this->getParent()])) {
+            $this->where($this->getParent(), '=', $filter[$this->getParent()]);
+        }
 
         return $this;
     }
@@ -40,6 +43,7 @@ abstract class BuilderEntity extends Builder implements BuilderInterface
     {
         return $this->whereIn("id", $keys)->delete();
     }
+
     public static function new($query)
     {
         $class = get_called_class();

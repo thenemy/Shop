@@ -23,7 +23,7 @@ class Credit extends Entity
     static public function getRules(): array
     {
         return [
-            'percent' => "required",
+            'percent' => "required|numeric|max:30",
             'month' => "required",
         ];
     }

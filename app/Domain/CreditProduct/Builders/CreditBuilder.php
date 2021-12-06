@@ -10,4 +10,10 @@ class CreditBuilder extends BuilderEntity
     {
         return "percent";
     }
+
+    protected function getParent(): string
+    {
+        return "main_credit_id";
+    }
+
 }

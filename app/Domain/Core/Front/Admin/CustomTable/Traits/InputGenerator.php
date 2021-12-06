@@ -22,7 +22,9 @@ trait InputGenerator
             $inputs[$key] = InputTableAttribute::generate(
                 $key,
                 !$is_numeric ? "text" : "number",
-                $model . $key);
+                $model . $key,
+                "input_table_" . $key
+            );
         }
         return $inputs;
     }

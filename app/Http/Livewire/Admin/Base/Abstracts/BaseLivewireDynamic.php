@@ -16,21 +16,25 @@ abstract class BaseLivewireDynamic extends BaseLivewire
 
     public $parentId;
     public string $parentKey;
-    public $entity;
+    public Collection $entity;
     public Collection $collection;
-    protected $rules = [];
+    public array $rules = [];
+    public array $storedValues = [];
 
     public function mount()
     {
-        $this->entity = self::newClass($this->getEntity());
+        $this->entity = collect([]);
         $this->generateRules('entity.');
         $this->collection = collect([]);
+        $table = self::newClass($this->getTable(), []);
+        $this->storedValues = $table->inputs;
+        $this->filterBy[$this->parentKey] = $this->parentId;
     }
+
 
     private function generateRules($parent)
     {
         $new_rules = [];
-
         foreach ($this->getEntity()::getRules() as $key => $value) {
             $new_rules[$parent . $key] = $value;
         }
@@ -39,31 +43,52 @@ abstract class BaseLivewireDynamic extends BaseLivewire
 
     public function update($id)
     {
+        $this->validateRules('collection.' . $id . ".");
         $object = $this->collection->pull($id);
-        $entity = self::newClass($this->getEntity(), $object);
+        $entity = $this->getEntity()::find($id);
         $this->getService()->update($entity, $object);
+        $this->dispatchBrowserEvent('show-inputs', ['id' => $id, 'show' => false]);
+    }
+
+    public function delete($id)
+    {
+        $entity = $this->getEntity()::find($id);
+        $this->getService()->destroy($entity);
+    }
+
+    private function validateRules(string $rules)
+    {
+        $new_rules = [];
+        foreach ($this->getEntity()::getRules() as $key => $value) {
+            $new_rules[$rules . $key] = $value;
+        }
+        $this->validate($new_rules);
     }
 
     public function cancel($id)
     {
+
         $this->collection->pull($id);
+        $this->dispatchBrowserEvent('show-inputs', ['id' => $id, 'show' => false]);
     }
 
     public function addToUpdate($id)
     {
+
         $entity = $this->getEntity()::find($id);
         $this->collection[$id] = $entity->attributesToArray();
         $this->generateRules("collection." . $id . ".");
+        $this->dispatchBrowserEvent('show-inputs', ['id' => $id, 'show' => true]);
     }
 
     public function save()
     {
-        $new_entity = $this->entity->attributesToArray();
-        $relation = [
-            $this->parentKey => $this->parentId
-        ];
-        $this->getService()->create(array_merge($new_entity, $relation));
+        $this->validateRules('entity.');
+        $this->entity[$this->parentKey] = $this->parentId;
+        $this->getService()->create($this->entity->toArray());
+        $this->entity = collect([]);
     }
+
 
     public function getService(): BaseService
     {

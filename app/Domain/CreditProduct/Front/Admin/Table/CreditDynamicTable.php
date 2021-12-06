@@ -17,8 +17,8 @@ class CreditDynamicTable extends AbstractDynamicTable
     public function getColumns(): array
     {
         return [
-            new Column(__("Процент"), "percent_index"),
-            new Column(__("На сколько месяцев"), "month_index")
+            new Column(__("Процент"), "percent-index"),
+            new Column(__("Месяц"), "month-index")
         ];
     }
 }

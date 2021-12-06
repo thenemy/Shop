@@ -8,6 +8,6 @@ class UserBuilder extends BuilderEntity
 {
     protected function getSearch(): string
     {
-        return "name";
+        return "phone";
     }
 }

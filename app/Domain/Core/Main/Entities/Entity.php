@@ -31,6 +31,8 @@ class Entity extends Model implements RuleInterface
         return [];
     }
 
+
+
     static public function getUpdateRules(): array
     {
         return [];
