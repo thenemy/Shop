@@ -41,9 +41,9 @@ class UserController extends BaseController
         return $this->getCreate($request);
     }
 
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
-        return $this->getStore($request->validated());
+        return $this->getStoreValidation($request);
     }
 
     public function edit(Request $request, User $user)
@@ -51,8 +51,8 @@ class UserController extends BaseController
         return $this->getEdit($request, $user, [$user]);
     }
 
-    public function update(UserRequest $request, User $user)
+    public function update(Request $request, User $user)
     {
-        return $this->getUpdate($request->validated(), $user);
+        return $this->getUpdateValidation($request, $user);
     }
 }

@@ -17,13 +17,15 @@ class CrucialData extends Migration
         Schema::create('crucial_data', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string("firstname");
-            $table->string("lastname");
-            $table->string("father_name");
-            $table->string("user_passport");// photo with passport
-            $table->string('passport');
-            $table->string('series');
-            $table->string('pnfl');
+            $table->string("firstname")->default("");
+            $table->string("lastname")->default("");
+            $table->string("father_name")->default("");
+            $table->date('date_of_birth')->nullable();
+            $table->string("user_passport")->default("");// photo with passport
+            $table->string("passport_reverse")->default("");
+            $table->string('passport')->default("");
+            $table->string('series')->default("");
+            $table->string('pnfl')->default("");
         });
     }
 

@@ -6,7 +6,7 @@ use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\InputTableAttr
 
 trait InputGenerator
 {
-    protected function generateInput(array $rules, string $model)
+    protected function generateInput(array $rules, string $model = 'entity.')
     {
         $inputs = [];
         foreach ($rules as $key => $rule) {

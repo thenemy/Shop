@@ -7,9 +7,8 @@ use App\Http\Livewire\Admin\Base\Abstracts\BaseLivewire;
 class CategoryOpen extends BaseLivewire
 {
 
-    public $selected_value;  public function newClass($test){
-        $this->selected_value=$test;
-    }
+    public $selected_value;  public function newClass($test){$this->selected_value=$test;}
+
  public function activateChosen(){$this->getEntity()::whereIn('id', $this->checkBox)
             ->update(
                 ['status' => true]

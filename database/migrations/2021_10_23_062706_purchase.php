@@ -20,7 +20,7 @@ class Purchase extends Migration
             $table->timestamps();
             $table->integer('quantity');
             $table->json('order');
-            $table->integer('price');
+            $table->bigInteger('price');
             $table->foreignId("product_id")->constrained("products")
                 ->restrictOnDelete()
                 ->restrictOnUpdate();

@@ -5,9 +5,11 @@ namespace App\Console\Commands;
 use App\Domain\Category\Front\Admin\File\CategoryCreator;
 use App\Domain\Category\Front\Admin\File\CategoryOpenCreator;
 use App\Domain\CreditProduct\Front\Admin\File\MainCreditCreator;
+use App\Domain\Installment\Front\Admin\Files\TakenCreditCreator;
 use App\Domain\Product\Product\Front\Admin\File\ProductCreator;
 use App\Domain\Shop\Front\Admin\File\ShopFileCreator;
 use App\Domain\Shop\Front\Main\ShopCreate;
+use App\Domain\User\Front\Admin\File\SuretyFileCreator;
 use App\Domain\User\Front\Admin\File\UserFileCreator;
 use Illuminate\Console\Command;
 
@@ -50,6 +52,8 @@ class CreateBlades extends Command
         ProductCreator::createFiles();
         ShopFileCreator::createFiles();
         MainCreditCreator::createFiles();
+        TakenCreditCreator::createFiles();
+        SuretyFileCreator::createFiles();
         return 0;
     }
 }

@@ -7,6 +7,10 @@ use App\Domain\Core\Front\Admin\File\Interfaces\FileInterface;
 use App\Domain\Core\Main\Traits\FastInstantiation;
 
 /**
+ * actually this already depricated because  MediaMainTrait could handle this
+ * and its enough to use FileAttribute
+ *
+ *
  *   this type of attributes will be in mutators
  *  so this is differnce between Custom Table Attributes , and Form Attributes
  *

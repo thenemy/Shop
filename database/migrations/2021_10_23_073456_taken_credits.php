@@ -19,8 +19,9 @@ class TakenCredits extends Migration
             $table->timestamps();
             $table->boolean('is_paid');
             $table->bigInteger('initial_price');
-            $table->dateTime('date_taken');
-            $table->dateTime('date_finish');
+            $table->boolean("status")->default(false); /// accepted the credit or not is the important
+            $table->dateTime('date_taken')->nullable();
+            $table->dateTime('date_finish')->nullable();
 //            $table->smallInteger("day_payment");// may be not necessary because it was need for
 //            // recursion payment
 //            $table->time("time_payment"); // from hh:mm:ss to HH:mm
@@ -28,7 +29,15 @@ class TakenCredits extends Migration
                 ->constrained("user_credit_datas")
                 ->restrictOnDelete();
             $table->foreignUuid("plastic_id")
-                ->constrained("plastic_user_cards")
+                ->constrained("plastic_card")
+                ->restrictOnDelete();
+            $table->foreignId('surety_id')
+                ->constrained("surety_data")
+                ->restrictOnDelete()
+                ->restrictOnUpdate();
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->restrictOnUpdate()
                 ->restrictOnDelete();
             $table->foreignId("credit_id")
                 ->constrained("credits")

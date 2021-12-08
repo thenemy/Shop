@@ -10,6 +10,9 @@ class Shops extends Migration
      * Run the migrations.
      *
      * @return void
+     *
+     * interval of working time can be found at
+     * shop_address
      */
     public function up()
     {
@@ -23,7 +26,6 @@ class Shops extends Migration
             $table->string("logo")->default("");
             $table->boolean("self_delivery")->default(false);// can be done or not
             $table->string("slug")->unique();
-            $table->string("interval_working_time");
             // for delivery time and
             // also to shop for self delivery
         });

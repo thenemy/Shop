@@ -9,46 +9,21 @@ use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Interfaces\AttributeInterface;
 use App\Domain\Core\Front\Admin\CustomTable\Interfaces\TableInFront;
 use App\Domain\Core\Front\Admin\Form\Interfaces\CreateAttributesInterface;
-use App\Domain\Core\Front\Admin\Livewire\Functions\Base\LivewireDropOptional;
-use App\Domain\Core\Front\Admin\Livewire\Functions\Base\LivewireFunctions;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireFunctions;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireOptionalDropDown;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireComponents;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireAdditionalFunctions;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireComponents;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\Product\Product\Entities\Product;
 use App\Domain\Product\Product\Front\Admin\CustomTable\Actions\ProductDeleteAction;
 use App\Domain\Product\Product\Front\Admin\CustomTable\Actions\ProductEditAction;
 use App\Domain\Product\Product\Front\Admin\CustomTable\Tables\ProductTable;
+use App\Domain\Product\Product\Front\Traits\ProductCommonTableAttributes;
 
 class ProductIndex extends Product implements TableInFront, CreateAttributesInterface
 {
-    public function getCurrencyIndexAttribute(): string
-    {
-        return TextAttribute::preGenerate($this, self::DB_TO_TEXT[$this->currency], true);
-    }
-
-    public function getNumberIndexAttribute(): string
-    {
-        return TextAttribute::preGenerate($this, "number");
-    }
-
-    public function getShopIndexAttribute(): string
-    {
-        return TextAttribute::preGenerate($this, $this->shop->name, true);
-    }
-
-    public function getCategoryIndexAttribute(): string
-    {
-        return TextAttribute::preGenerate($this, $this->category->name, true);
-    }
-
-    public function getNameIndexAttribute(): string
-    {
-        return TextAttribute::preGenerate($this, 'title');
-    }
-
-    public function getPriceIndexAttribute(): string
-    {
-        return TextAttribute::preGenerate($this, "price");
-    }
+   use ProductCommonTableAttributes;
 
     public function generateAttributes(): BladeGenerator
     {
@@ -62,16 +37,16 @@ class ProductIndex extends Product implements TableInFront, CreateAttributesInte
         return ProductTable::class;
     }
 
-    public function livewireComponents(): LivewireAdditionalFunctions
+    public function livewireComponents(): LivewireComponents
     {
-        return LivewireFunctions::new([
+        return AllLivewireComponents::generation([
 
         ]);
     }
 
-    public function livewireOptionalDropDown(): LivewireDropOptional
+    public function livewireOptionalDropDown(): AllLivewireOptionalDropDown
     {
-        return LivewireDropOptional::new([
+        return AllLivewireOptionalDropDown::generation([
 
         ]);
     }
@@ -83,9 +58,16 @@ class ProductIndex extends Product implements TableInFront, CreateAttributesInte
 
     public function getActionsAttribute(): string
     {
-        return AllActions::new([
+        return AllActions::generation([
             ProductEditAction::new([$this->id]),
             ProductDeleteAction::new([$this->id]),
+        ]);
+    }
+
+    public function livewireFunctions(): LivewireAdditionalFunctions
+    {
+        return AllLivewireFunctions::generation([
+
         ]);
     }
 }

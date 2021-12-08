@@ -9,6 +9,7 @@ class ProductIndex extends BaseLivewire
 
     
 
+
        //3   --- set of functions and variables
     public function getPath()
     {

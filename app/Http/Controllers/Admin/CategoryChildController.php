@@ -8,10 +8,10 @@ use App\Domain\Category\Services\CategoryService;
 use App\Domain\Core\Front\Admin\Form\Abstracts\AbstractForm;
 use App\Domain\Core\Front\Admin\Form\Models\FormForModel;
 use App\Domain\Core\Main\Services\BaseService;
-use App\Http\Controllers\Base\Abstracts\BaseNestedController;
+use App\Http\Controllers\Base\Abstracts\BaseOpenController;
 use App\Http\Requests\Admin\ParamsRequest;
 
-class CategoryChildController extends BaseNestedController
+class CategoryChildController extends BaseOpenController
 {
     public function getEntityClass(): string
     {

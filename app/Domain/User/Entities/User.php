@@ -6,24 +6,23 @@ namespace App\Domain\User\Entities;
 
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Order\Entities\Order;
+use App\Domain\Order\Entities\UserPurchase;
 use App\Domain\Product\Product\Entities\Product;
 use App\Domain\User\Builders\UserBuilder;
+use App\Domain\User\Interfaces\UserRelationInterface;
 use App\Domain\User\Traits\SmsTrait;
 
-class User extends Entity
+class User extends Entity implements UserRelationInterface
 {
     use SmsTrait;
 
     protected $table = 'users';
+
     public $timestamps = true;
+
     public function newEloquentBuilder($query): UserBuilder
     {
         return new UserBuilder($query);
-    }
-
-    public function plasticCard(): \Illuminate\Database\Eloquent\Relations\HasMany
-    {
-        return $this->hasMany(PlasticUserCard::class);
     }
 
     public function basket(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -31,9 +30,38 @@ class User extends Entity
         return $this->belongsToMany(Order::class, 'basket');
     }
 
-    public function userOrder(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function userPurchase(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->belongsToMany(Order::class, "users_order");
+        return $this->hasMany(UserPurchase::class, "user_id");
     }
 
+    public function userCreditData(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(UserCreditData::class, "user_id");
+    }
+
+    public function plasticCard(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(
+            PlasticCard::class,
+            "plastic_user_cards",
+            "user_id",
+            "plastic_id"
+        );
+    }
+
+    public function surety(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Surety::class, 'user_id');
+    }
+
+    public function role(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(UserRole::class, 'user_id');
+    }
+
+    public function avatar(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(UserAvatar::class, "user_id");
+    }
 }

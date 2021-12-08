@@ -29,23 +29,56 @@ abstract class BaseService implements ServiceInterface
 
     public function create(array $object_data)
     {
-
-        return $this->entity->create($object_data);
+        $filtered = $this->filterRecursive($object_data);
+        return $this->entity->create($filtered);
     }
 
     public function update($object, array $object_data)
     {
-        $object->update($object_data);
+        $filtered = $this->filterRecursive($object_data);
+        $object->update($filtered);
         return $object;
     }
 
+    protected function changeKey(&$object_array, $new, $old = 'params')
+    {
+        $object_array[$new] = $object_array[$old];
+        unset($object_array[$old]);
+    }
+
+    public function filterRecursive(array $data, callable $filter = null): array
+    {
+        return array_filter($data, function ($item) use ($filter) {
+            $item = is_array($item) ? $this->filterRecursive($item, $filter) : $item;
+            return isset($filter) ? $filter($item) : isset($item) && !empty($item);
+        });
+    }
+
+    /**
+     * when popCondition used
+     * order of inserting nested entities is important
+     * namely,
+     * given array %f =  [ 's->d->asd' => 'somedata' ]
+     * so first $s =  popCondition($f , 's')
+     * output $s [ 'd->asd'=> 'somedata']
+     * then $d = popCondition($s , 'd')
+     * output $d [ 'asd' => "somedata"]
+     */
     public function popCondition(array &$array, string $check_key): array
     {
         $new_array = [];
         foreach ($array as $key => $value) {
-            $key_value = explode("_", $key);
-            if (end($key_value) == $check_key) {
-                $new_array[$key_value[0]] = $value;
+            $key_value = explode(\CR::CR, $key);
+            /**
+             * we are taking first element
+             * because we are putting key element at the last
+             */
+            if ($key_value[0] == $check_key) {
+                /**
+                 * we are connecting remainder keys
+                 */
+                $connect_rest = implode(\CR::CR, array_splice($key_value, 1));
+                $new_array[$connect_rest] = $value;
                 unset($array[$key]);
             }
         }

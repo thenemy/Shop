@@ -12,6 +12,7 @@ class InputFileAttribute extends BaseAttributeForm
 {
     public string $class;
     public bool $multiple;
+    public string $id;
 
     /**
      * $key -- the key to access file attribute
@@ -19,10 +20,15 @@ class InputFileAttribute extends BaseAttributeForm
      * $class -- class of entity which is accessed self::class
      * $multiple -- multiple file upload or not
      */
-    public function __construct(string $key, string $label, string $class, bool $multiple = false)
+    public function __construct(string $key,
+                                string $label,
+                                string $class,
+                                string $id = 'id',
+                                bool   $multiple = false)
     {
         parent::__construct($key, $label);
         $this->class = $class;
+        $this->id = $id;
         $this->multiple = $multiple;
     }
 
@@ -35,7 +41,7 @@ class InputFileAttribute extends BaseAttributeForm
                     :multiple='%s'
                     label='%s'
                      />",
-            $this->getWithoutScopeAtrVariable("id"),
+            $this->getWithoutScopeAtrVariable($this->id),
             $this->key,
             $this->class,
             $this->multiple ? "true" : 'false',

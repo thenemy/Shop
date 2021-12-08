@@ -15,7 +15,9 @@ Route::name("admin.")->group(function () {
             AdminRoutesInterface::CATEGORY_OPEN => \App\Http\Controllers\Admin\CategoryChildController::class,
             AdminRoutesInterface::PRODUCT => \App\Http\Controllers\Admin\ProductController::class,
             AdminRoutesInterface::SHOP => \App\Http\Controllers\Admin\ShopController::class,
-            AdminRoutesInterface::MAIN_CREDIT => \App\Http\Controllers\Admin\MainCreditController::class
+            AdminRoutesInterface::MAIN_CREDIT => \App\Http\Controllers\Admin\MainCreditController::class,
+            AdminRoutesInterface::TAKEN_CREDIT => \App\Http\Controllers\Admin\TakenCreditController::class,
+            AdminRoutesInterface::SURETY => \App\Http\Controllers\Admin\SuretyController::class
         ]
     );
 });

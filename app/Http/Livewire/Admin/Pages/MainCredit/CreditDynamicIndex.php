@@ -12,6 +12,7 @@ class CreditDynamicIndex extends BaseLivewireDynamic
 
  
 
+
    //3   --- set of functions and variables
     public function getPath()
     {

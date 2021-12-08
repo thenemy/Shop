@@ -4,9 +4,13 @@ namespace App\Domain\User\Front\Main;
 
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
 use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputAttribute;
+use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputFileAttribute;
+use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputFileTempAttribute;
 use App\Domain\Core\Front\Admin\Form\Interfaces\CreateAttributesInterface;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
+use App\Domain\File\Traits\FileUploadTemp;
 use App\Domain\User\Entities\User;
+use App\Domain\User\Interfaces\UserRelationInterface;
 use Illuminate\Validation\Rules\In;
 
 class UserCreate extends User implements CreateAttributesInterface
@@ -15,9 +19,56 @@ class UserCreate extends User implements CreateAttributesInterface
     public function generateAttributes(): BladeGenerator
     {
         return BladeGenerator::generation([
-            new InputAttribute("name", "text", "Имя пользователя"),
+            new InputAttribute("phone", "text", "Телефон пользователя"),
             new InputAttribute("password", "password", "Пароль"),
-            new InputAttribute("phone", "text", "Телефон пользователя")
+            new InputAttribute(UserRelationInterface::USER_DATA
+                . 'additional_phone',
+                "text",
+                "Дополнительный телефон"),
+            new InputAttribute(
+                UserRelationInterface::CRUCIAL_DATA
+                . "firstname",
+                "text", "Имя пользователя"),
+            new InputAttribute(
+                UserRelationInterface::CRUCIAL_DATA
+                . "lastname",
+                "text", "Фамилия пользователя"),
+            new InputAttribute(
+                UserRelationInterface::CRUCIAL_DATA
+                . "father_name",
+                "text", "Отчество пользователя"),
+            new InputAttribute(
+                UserRelationInterface::CRUCIAL_DATA
+                . 'series',
+                "text", "Паспорт серия"),
+            new InputAttribute(
+                UserRelationInterface::CRUCIAL_DATA
+                . 'date_of_birth',
+                "date", "Дата рождения"),
+            new InputAttribute(
+                UserRelationInterface::CRUCIAL_DATA
+                . 'pnfl',
+                "text", "ПНФЛ"),
+            new InputFileTempAttribute(
+                UserRelationInterface::AVATAR_DATA
+                . 'avatar',
+                "Аватар"),
+            new InputFileTempAttribute(
+                UserRelationInterface::CRUCIAL_DATA
+                . "passport_reverse",
+                "Прописка"),
+            new InputFileTempAttribute(
+                UserRelationInterface::CRUCIAL_DATA
+                . "user_passport",
+                "Паспорт c пользователем"),
+
+            new InputFileTempAttribute(
+                UserRelationInterface::CRUCIAL_DATA
+                . 'passport',
+                "Паспорт пользователя"),
+
         ]);
     }
+
+
 }

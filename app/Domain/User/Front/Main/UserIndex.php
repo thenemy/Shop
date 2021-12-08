@@ -4,36 +4,51 @@ namespace App\Domain\User\Front\Main;
 
 use App\Domain\Core\File\Models\Livewire\FileLivewireCreator;
 use App\Domain\Core\Front\Admin\CustomTable\Actions\Base\AllActions;
+use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\ImageAttribute;
+use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\OpenAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Interfaces\TableInFront;
 use App\Domain\Core\Front\Admin\Form\Interfaces\CreateAttributesInterface;
-use App\Domain\Core\Front\Admin\Livewire\Functions\Base\LivewireDropOptional;
-use App\Domain\Core\Front\Admin\Livewire\Functions\Base\LivewireFunctions;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireFunctions;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireOptionalDropDown;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireComponents;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireAdditionalFunctions;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireComponents;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\Core\Front\Interfaces\FrontEntityInterface;
 use App\Domain\User\Entities\User;
 use App\Domain\User\Front\Admin\CustomTable\Action\UserEditAction;
 use App\Domain\User\Front\Admin\CustomTable\Tables\UserTable;
+use App\Domain\User\Front\Admin\Path\SuretyRouteHandler;
 
 class UserIndex extends User implements
     CreateAttributesInterface,
     TableInFront
 {
 
+    public function getAvatarIndexAttribute(): string
+    {
+        return ImageAttribute::generation($this, $this[self::AVATAR_SERVICE]->avatar->storage(), true);
+    }
+
+    public function getSuretyIndexAttribute(): string
+    {
+        return OpenAttribute::generation(SuretyRouteHandler::new(), $this, $this->surety()->count());
+    }
+
     public function getDataIndexAttribute(): string
     {
-        return TextAttribute::preGenerate($this, "created_at");
+        return TextAttribute::generation($this, "created_at");
     }
 
     public function getNameIndexAttribute(): string
     {
-        return TextAttribute::preGenerate($this, 'name');
+        return TextAttribute::generation($this, $this->userCreditData->name, true);
     }
 
     public function getPhoneIndexAttribute(): string
     {
-        return TextAttribute::preGenerate($this, "phone");
+        return TextAttribute::generation($this, "phone");
     }
 
     public function generateAttributes(): BladeGenerator
@@ -48,16 +63,16 @@ class UserIndex extends User implements
         return UserTable::class;
     }
 
-    public function livewireComponents(): LivewireAdditionalFunctions
+    public function livewireComponents(): LivewireComponents
     {
-        return new LivewireFunctions([
+        return new AllLivewireComponents([
 
         ]);
     }
 
-    public function livewireOptionalDropDown(): LivewireDropOptional
+    public function livewireOptionalDropDown(): AllLivewireOptionalDropDown
     {
-        return new LivewireDropOptional([
+        return new AllLivewireOptionalDropDown([
 
         ]);
     }
@@ -65,13 +80,20 @@ class UserIndex extends User implements
 
     public function getActionsAttribute(): string
     {
-        return AllActions::new([
-            UserEditAction::new($this->id)
+        return AllActions::generation([
+            UserEditAction::new([$this->id])
         ]);
     }
 
     public function getTitle(): string
     {
         return "Пользователи";
+    }
+
+    public function livewireFunctions(): LivewireAdditionalFunctions
+    {
+        return AllLivewireFunctions::generation([
+
+        ]);
     }
 }

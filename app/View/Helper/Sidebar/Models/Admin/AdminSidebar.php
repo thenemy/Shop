@@ -9,6 +9,7 @@ use App\Domain\Core\Front\Admin\Routes\Abstracts\RouteHandler;
 use App\Domain\Core\Front\Admin\Routes\Interfaces\RoutesInterface;
 
 use App\Domain\CreditProduct\Front\Admin\Path\MainCreditRouteHandler;
+use App\Domain\Installment\Front\Admin\Path\TakenCreditRouteHandler;
 use App\Domain\Product\Product\Front\Admin\Path\ProductRouteHandler;
 use App\Domain\Shop\Front\Admin\Path\ShopRouteHandler;
 use App\Domain\User\Front\Admin\Path\UserRouteHandler;
@@ -24,7 +25,6 @@ class AdminSidebar implements SideBarFactoryInterface
     {
         return new SideBarList(
             [
-//                SideBarDrop::new(__("Магазины") , ShopRouteHandler::new()),
                 new SideBarList([
                     new SideBarDrop(__("Пользователи"), UserRouteHandler::new()),
                     new SideBarDrop(__("Магазин"), ShopRouteHandler::new()),
@@ -42,9 +42,16 @@ class AdminSidebar implements SideBarFactoryInterface
                     "Раздел Категорий"
                 ),
                 new SideBarList([
-                    new SideBarDrop(__("Ввиды рассрочки"), MainCreditRouteHandler::new()),
+                    new SideBarDrop(__("Виды рассрочки"), MainCreditRouteHandler::new()),
+                    new SideBarDrop(__("Рассрочка"), TakenCreditRouteHandler::new()),
                 ],
                     "Рассрочка"
+                ),
+                new SideBarList([
+//                    new SideBarDrop(__("Виды рассрочки"), MainCreditRouteHandler::new()),
+//                    new SideBarDrop(__("Рассрочка"), TakenCreditRouteHandler::new()),
+                ],
+                    "Доставка"
                 ),
             ],
         );

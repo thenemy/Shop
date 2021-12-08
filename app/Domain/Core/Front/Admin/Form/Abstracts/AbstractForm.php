@@ -6,6 +6,7 @@ namespace App\Domain\Core\Front\Admin\Form\Abstracts;
 
 use App\Domain\Core\Front\Admin\Routes\Abstracts\RouteHandler;
 use App\Domain\Core\Front\Admin\Routes\Interfaces\RoutesInterface;
+use Illuminate\Support\Facades\Request;
 
 abstract class AbstractForm implements RoutesInterface
 {
@@ -21,7 +22,7 @@ abstract class AbstractForm implements RoutesInterface
     {
 
         $this->route_handler = $this->getRouteHandler();
-        $this->route_back = route($this->route_handler->getRoute(self::INDEX_ROUTE));
+        $this->route_back = route($this->route_handler->getRoute(self::INDEX_ROUTE), Request::all());
     }
 
     public function create($params = []): AbstractForm

@@ -3,13 +3,13 @@
 "enctype" => false,
 "method" => "POST",
 ])
-<div class="flex flex-col   mx-auto text-center space-y-4 w-full">
+<div class="flex flex-col pb-10 items-center justify-center text-center space-y-4 w-full">
     <x-helper.text.title>
         {{$form->title}}
     </x-helper.text.title>
     <div class="self-stretch">
         <x-helper.error.error :errors="$errors"/>
-        <form method="POST" id="form" class="flex flex-col justify-start space-y-5 w-full"
+        <form method="POST" id="form" class="flex flex-col justify-center items-center space-y-5 w-full"
               action="{{$form->route_save}}"
               @if($enctype == true) enctype=multipart/form-data @endif>
             @method($method)
@@ -19,7 +19,7 @@
                 {{$slot}}
             </div>
 
-            <div class="flex flex-row justify-start space-x-5">
+            <div class="self-start flex flex-row justify-start space-x-5">
                 <div>
                     <x-helper.button.main_button type="submit"
                                                  id="real_submit"

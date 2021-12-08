@@ -9,9 +9,11 @@ use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\OpenAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Interfaces\TableInFront;
 use App\Domain\Core\Front\Admin\Form\Interfaces\CreateAttributesInterface;
-use App\Domain\Core\Front\Admin\Livewire\Functions\Base\LivewireDropOptional;
-use App\Domain\Core\Front\Admin\Livewire\Functions\Base\LivewireFunctions;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireFunctions;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireOptionalDropDown;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireComponents;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireAdditionalFunctions;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireComponents;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\Shop\Entities\Shop;
 use App\Domain\Shop\Front\Admin\CustomTable\Actions\ShopDeleteAction;
@@ -22,22 +24,22 @@ class ShopIndex extends Shop implements TableInFront, CreateAttributesInterface
 {
     public function getLogoIndexAttribute(): string
     {
-        return ImageAttribute::preGenerate($this, $this->logo->storage(), true);
+        return ImageAttribute::generation($this, $this->logo->storage(), true);
     }
 
     public function getNameIndexAttribute()
     {
-        return TextAttribute::preGenerate($this, "name");
+        return TextAttribute::generation($this, "name");
     }
 
     public function getPhoneIndexAttribute()
     {
-        return TextAttribute::preGenerate($this, $this->user->phone, true);
+        return TextAttribute::generation($this, $this->user->phone, true);
     }
 
     public function getProductIndexAttribute()
     {
-        return TextAttribute::preGenerate($this, "asd", true);
+        return TextAttribute::generation($this, "asd", true);
     }
 
     public function getTableClass(): string
@@ -45,16 +47,16 @@ class ShopIndex extends Shop implements TableInFront, CreateAttributesInterface
         return ShopTable::class;
     }
 
-    public function livewireComponents(): LivewireAdditionalFunctions
+    public function livewireComponents(): LivewireComponents
     {
-        return LivewireFunctions::new([
+        return AllLivewireComponents::generation([
 
         ]);
     }
 
-    public function livewireOptionalDropDown(): LivewireDropOptional
+    public function livewireOptionalDropDown(): AllLivewireOptionalDropDown
     {
-        return LivewireDropOptional::new([
+        return AllLivewireOptionalDropDown::generation([
 
         ]);
     }
@@ -66,7 +68,7 @@ class ShopIndex extends Shop implements TableInFront, CreateAttributesInterface
 
     public function getActionsAttribute(): string
     {
-        return AllActions::new([
+        return AllActions::generation([
             ShopEditAction::new([$this->id]),
             ShopDeleteAction::new([$this->id])
         ]);
@@ -77,5 +79,12 @@ class ShopIndex extends Shop implements TableInFront, CreateAttributesInterface
         return BladeGenerator::generation([
             new FileLivewireCreator("Shop", $this)
         ]);
+    }
+
+    public function livewireFunctions(): LivewireAdditionalFunctions
+    {
+       return  AllLivewireFunctions::generation([
+
+       ]);
     }
 }

@@ -1,10 +1,9 @@
 @extends("admin.layout.edit")
 @section("action")
     
-<x-helper.input.input name='name_user' type='text'  label='Имя пользователя' value='{{$entity->name_user}}'/>
-<x-helper.input.input name='password_user' type='password'  label='Пароль' value='{{old("password_user") ?? ""}}'/>
-<x-helper.input.input name='phone_user' type='text'  label='Телефон пользователя' value='{{$entity->phone_user}}'/>
-<x-helper.input.input name='name' type='text'  label='Введите название' value='{{$entity->name}}'/>
+<x-helper.input.input name='name' type='text'  label='Имя Магазина' value='{{$entity->name}}'/>
+<x-helper.input.input name='user->phone' type='text'  label='Телефон пользователя' value='{{$entity->user->phone}}'/>
+<x-helper.input.input name='user->password' type='password'  label='Пароль' value='{{old("user->password") ?? ""}}'/>
 <livewire:components.file.file-uploading
                     :entityId='$entity->id'
                     mediaKey='image_file'

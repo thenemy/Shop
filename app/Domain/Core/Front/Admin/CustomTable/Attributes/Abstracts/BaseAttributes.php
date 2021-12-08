@@ -30,7 +30,7 @@ abstract class BaseAttributes implements AttributeInterface, HtmlInterface
         return $this->entity->$key ?? "";
     }
 
-    static public function preGenerate($entity, $key, $value = false): string
+    static public function generation($entity, $key, $value = false): string
     {
         $class = get_called_class();
         $object = new $class($entity, $key, $value);

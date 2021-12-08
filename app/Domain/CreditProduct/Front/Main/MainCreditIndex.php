@@ -8,9 +8,11 @@ use App\Domain\Core\Front\Admin\CustomTable\Actions\Base\AllActions;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Interfaces\TableInFront;
 use App\Domain\Core\Front\Admin\Form\Interfaces\CreateAttributesInterface;
-use App\Domain\Core\Front\Admin\Livewire\Functions\Base\LivewireDropOptional;
-use App\Domain\Core\Front\Admin\Livewire\Functions\Base\LivewireFunctions;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireFunctions;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireOptionalDropDown;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireComponents;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireAdditionalFunctions;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireComponents;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\CreditProduct\Entity\MainCredit;
 use App\Domain\CreditProduct\Front\Admin\Actions\MainCreditEditAction;
@@ -27,12 +29,12 @@ class MainCreditIndex extends MainCredit implements TableInFront, CreateAttribut
 
     public function getNameIndexAttribute()
     {
-        return TextAttribute::preGenerate($this, "name");
+        return TextAttribute::generation($this, "name");
     }
 
     public function getInitialPriceIndexAttribute()
     {
-        return TextAttribute::preGenerate($this, $this->initial_percent . " " . "%", true);
+        return TextAttribute::generation($this, $this->initial_percent . " " . "%", true);
     }
 
     public function getInitialMonthIndexAttribute()
@@ -47,7 +49,7 @@ class MainCreditIndex extends MainCredit implements TableInFront, CreateAttribut
             }
         }
 
-        return TextAttribute::preGenerate($this, $text, true);
+        return TextAttribute::generation($this, $text, true);
     }
 
     public function getTableClass(): string
@@ -55,16 +57,16 @@ class MainCreditIndex extends MainCredit implements TableInFront, CreateAttribut
         return MainCreditTable::class;
     }
 
-    public function livewireComponents(): LivewireAdditionalFunctions
+    public function livewireComponents(): LivewireComponents
     {
-        return LivewireFunctions::new([
+        return AllLivewireComponents::generation([
 
         ]);
     }
 
-    public function livewireOptionalDropDown(): LivewireDropOptional
+    public function livewireOptionalDropDown(): AllLivewireOptionalDropDown
     {
-        return LivewireDropOptional::new([
+        return AllLivewireOptionalDropDown::generation([
 
         ]);
     }
@@ -76,8 +78,15 @@ class MainCreditIndex extends MainCredit implements TableInFront, CreateAttribut
 
     public function getActionsAttribute(): string
     {
-        return AllActions::new([
+        return AllActions::generation([
             MainCreditEditAction::new([$this->id]),
+        ]);
+    }
+
+    public function livewireFunctions(): LivewireAdditionalFunctions
+    {
+        return AllLivewireFunctions::generation([
+
         ]);
     }
 }

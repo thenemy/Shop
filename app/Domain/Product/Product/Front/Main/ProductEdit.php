@@ -31,7 +31,8 @@ class ProductEdit extends Product implements CreateAttributesInterface
                 "image_product",
                 "Картинки для товара",
                 self::class,
-                true)
+                true
+            )
         ]);
     }
 

@@ -18,16 +18,12 @@ class SuretyData extends Migration
             $table->foreignId('user_id')->constrained('users')
                 ->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
-            $table->foreignUuid("plastic_id")
-                ->constrained("plastic_user_cards")
-                ->restrictOnDelete();
             $table->foreignId("crucial_data_id")
                 ->constrained("crucial_data")
                 ->restrictOnUpdate()
                 ->restrictOnDelete();
             $table->string("phone");
             $table->string("additional_phone");
-            $table->unique(['plastic_id', "user_id"]);
         });
     }
 

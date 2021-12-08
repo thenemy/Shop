@@ -11,4 +11,18 @@ trait MediaManyTrait
         })->toArray();
         return $images;
     }
+
+    public function setManyMedia($inputs,
+                                 $childClass,
+                                 $key,
+                                 $associate
+    )
+    {
+        foreach ($inputs as $input) {
+            $childEntity = new $childClass();
+            $childEntity->$key = $input;
+            $childEntity->$associate = $this->id;
+            $childEntity->save();
+        }
+    }
 }

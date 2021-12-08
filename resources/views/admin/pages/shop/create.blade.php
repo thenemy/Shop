@@ -1,8 +1,47 @@
 @extends("admin.layout.create")
 @section("action")
     
-<x-helper.input.input name='name_user' type='text'  label='Имя пользователя' value='{{old("name_user") ?? ""}}'/>
-<x-helper.input.input name='password_user' type='password'  label='Пароль' value='{{old("password_user") ?? ""}}'/>
-<x-helper.input.input name='phone_user' type='text'  label='Телефон пользователя' value='{{old("phone_user") ?? ""}}'/>
-<x-helper.input.input name='name' type='text'  label='Введите название магазина' value='{{old("name") ?? ""}}'/>
+<x-helper.input.input name='name' type='text'  label='Имя Магазина' value='{{old("name") ?? ""}}'/>
+<x-helper.input.input name='user->phone' type='text'  label='Телефон пользователя' value='{{old("user->phone") ?? ""}}'/>
+<x-helper.input.input name='user->password' type='password'  label='Пароль' value='{{old("user->password") ?? ""}}'/>
+<livewire:components.file.file-uploading-without-entity
+                    keyToAttach='image'
+                    mediaKey='file_create'
+                    entityClass='App\Domain\File\Entities\FileTemp'
+                    :multiple='false'
+                    label='Фото магазина'
+                    :entityId='old("file->id_file->image") ?? ""'
+                     />
+<livewire:components.file.file-uploading-without-entity
+                    keyToAttach='logo'
+                    mediaKey='file_create'
+                    entityClass='App\Domain\File\Entities\FileTemp'
+                    :multiple='false'
+                    label='Лого Магазина'
+                    :entityId='old("file->id_file->logo") ?? ""'
+                     />
+<livewire:components.file.file-uploading-without-entity
+                    keyToAttach='document'
+                    mediaKey='file_create'
+                    entityClass='App\Domain\File\Entities\FileTemp'
+                    :multiple='false'
+                    label='Документы'
+                    :entityId='old("file->id_file->document") ?? ""'
+                     />
+<livewire:components.file.file-uploading-without-entity
+                    keyToAttach='licence'
+                    mediaKey='file_create'
+                    entityClass='App\Domain\File\Entities\FileTemp'
+                    :multiple='false'
+                    label='Лицензия'
+                    :entityId='old("file->id_file->licence") ?? ""'
+                     />
+<livewire:components.file.file-uploading-without-entity
+                    keyToAttach='director_passport'
+                    mediaKey='file_create'
+                    entityClass='App\Domain\File\Entities\FileTemp'
+                    :multiple='false'
+                    label='Паспорт директора'
+                    :entityId='old("file->id_file->director_passport") ?? ""'
+                     />
 @endsection

@@ -34,9 +34,13 @@ class UserPurchases extends Migration
          * 1000001000
          */
         Schema::create('user_purchases', function (Blueprint $table) {
-            $table->unsignedBigInteger("id" )->primary();/*this id will be generated automatically from 1000 */
+            $table->unsignedBigInteger("id")->primary();/*this id will be generated automatically from 1000 */
             $table->smallInteger("status");
             $table->foreignId("user_id")->constrained("users")->onDelete('CASCADE')->onUpdate('CASCADE');
+            $table->foreignId("delivery_address_id")
+                ->constrained('delivery_address')
+                ->restrictOnUpdate()
+                ->restrictOnDelete();
         });
     }
 

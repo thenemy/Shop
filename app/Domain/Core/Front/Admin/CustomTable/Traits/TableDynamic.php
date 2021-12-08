@@ -21,9 +21,9 @@ trait TableDynamic
     {
         $real_attribute = explode('-', $name);
         if (empty($this->inputs)) {
-            $this->inputs['id'] = TextAttribute::preGenerate($this, 'id');
+            $this->inputs['id'] = TextAttribute::generation($this, 'id');
             $this->generateInput();
-            $this->inputs['actions'] = AllActions::new([
+            $this->inputs['actions'] = AllActions::generation([
                 ButtonGreenLivewire::new(__("Обновить"), "update('" . $this->id . "')"),
                 ButtonGrayLivewire::new(__("Отменить"), "cancel('" . $this->id . "')")
             ]);
@@ -35,7 +35,7 @@ trait TableDynamic
     {
         $real_attribute = explode('-', $name);
         if (empty($this->front_attribute)) {
-            $this->front_attribute['id'] = TextAttribute::preGenerate($this, 'id');
+            $this->front_attribute['id'] = TextAttribute::generation($this, 'id');
             $this->generateAttributes();
             $this->front_attribute['actions'] = $this->getActionsAttribute();
         }
@@ -71,7 +71,7 @@ trait TableDynamic
     private function generateAttributes()
     {
         foreach ($this->getRules() as $key => $value) {
-            $this->front_attribute[$key] = TextAttribute::preGenerate(
+            $this->front_attribute[$key] = TextAttribute::generation(
                 $this,
                 $key
             );
@@ -80,10 +80,16 @@ trait TableDynamic
 
     public function getActionsAttribute(): string
     {
-        return AllActions::new([
+        return AllActions::generation([
+            ...$this->getAddingCustom(),
             ButtonGreenLivewire::new(__("Изменить"), "addToUpdate('" . $this->id . "')"),
-            ButtonRedLivewire::new(__("Удалить"), sprintf("delete('%s')", $this->id))
+            ButtonRedLivewire::new(__("Удалить"), sprintf("delete('%s')", $this->id)),
         ]);
+    }
+
+    public function getAddingCustom(): array
+    {
+        return [];
     }
 
     /**
@@ -98,9 +104,15 @@ trait TableDynamic
         return new FileLivewireDynamic(
             $className,
             new $class(),
-            CreditService::class,
-            self::getDynamicParentKey());
+            self::getBaseService(),
+            self::getDynamicParentKey()
+        );
     }
 
+    abstract public static function getBaseService(): string;
+
+    /**
+     * for filtration and insertion
+     */
     abstract public static function getDynamicParentKey(): string;
 }

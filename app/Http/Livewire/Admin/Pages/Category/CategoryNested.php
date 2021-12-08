@@ -9,6 +9,7 @@ class CategoryNested extends BaseLivewireNested
 {
 
     
+
  public function activateChosen(){$this->getEntity()::whereIn('id', $this->checkBox)
             ->update(
                 ['status' => true]

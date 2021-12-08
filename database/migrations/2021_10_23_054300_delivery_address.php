@@ -28,9 +28,6 @@ class DeliveryAddress extends Migration
             $table->string("street");
             $table->string("house")->nullable();
             $table->string('flat')->nullable();
-
-            $table->string("dinnerTimeFrom")->nullable();
-            $table->string("dinnerTimeTo")->nullable();
             $table->string("instructions"); //additional instructions for courier to get the product
             $table->foreignId("city_id")->constrained(
                 "available_cities")

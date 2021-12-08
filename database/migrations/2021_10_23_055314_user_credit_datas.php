@@ -18,6 +18,7 @@ class UserCreditDatas extends Migration
             $table->id();
             $table->foreignId('user_id')->unique()->constrained('users')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->foreignId("crucial_data_id")
+                ->unique()
                 ->constrained("crucial_data")
                 ->restrictOnUpdate()
                 ->restrictOnDelete();

@@ -59,10 +59,11 @@ abstract class BaseLivewireNested extends BaseLivewire
         );
     }
 
-    private function getListAccept()
+    protected function getListAccept()
     {
         $entity = $this->getEntity();
-        $withOutSearch = collect($this->filterBy);
+
+        $withOutSearch = collect($this->filterBy);// original filterBy except there is no search values
         $filterBy = [$this->keySearch => $withOutSearch->pull($this->keySearch)];
         return $entity::filterByNot($withOutSearch->toArray())
             ->filterBy($filterBy)
@@ -113,14 +114,14 @@ abstract class BaseLivewireNested extends BaseLivewire
         $this->removeFromEntity($this->checkBox);
     }
 
-    private function addToEntity($adding)
+    protected  function addToEntity($adding)
     {
         $entity = $this->getAttachEntity();
         $keyToAttach = $this->keyToAttach;
         $entity->$keyToAttach($adding, self::ATTACH);
     }
 
-    private function removeFromEntity($adding)
+    protected function removeFromEntity($adding)
     {
         $entity = $this->getAttachEntity();
         $keyToAttach = $this->keyToAttach;

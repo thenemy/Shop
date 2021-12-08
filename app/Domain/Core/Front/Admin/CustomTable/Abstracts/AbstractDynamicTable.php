@@ -4,8 +4,10 @@ namespace App\Domain\Core\Front\Admin\CustomTable\Abstracts;
 
 use App\Domain\Category\Front\Admin\Path\CategoryRouteHandler;
 use App\Domain\Core\Front\Admin\Attributes\Models\Column;
+use App\Domain\Core\Front\Admin\Attributes\Models\EmptyAttribute;
 use App\Domain\Core\Front\Admin\Attributes\Models\LivewireStatusColumn;
 use App\Domain\Core\Front\Admin\Button\ModelInRunTime\ButtonGreenLivewire;
+use App\Domain\Core\Front\Admin\CustomTable\Actions\Base\AllActions;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\InputTableAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Traits\InputGenerator;
@@ -33,10 +35,20 @@ abstract class AbstractDynamicTable extends BaseTable
             Column::new(__("Действия"), "actions")
         ];
         $inputs = [
-            'id' => TextAttribute::preGenerate($this, 'Новый', true),
-            'actions' => ButtonGreenLivewire::generate("Добавить", "save")
+            'id' => TextAttribute::generation($this, 'Новый', true),
+            'actions' => AllActions::generation([
+                ...$this->getActions(),
+                ButtonGreenLivewire::new("Добавить", "save")
+            ])
         ];
         $this->inputs = array_merge($inputs, $this->getInputs());
+    }
+
+    public function getActions()
+    {
+        return [
+            EmptyAttribute::new()
+        ];
     }
 
     public function generateHtml(): string

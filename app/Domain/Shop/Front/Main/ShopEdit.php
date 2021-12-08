@@ -15,10 +15,12 @@ class ShopEdit extends Shop implements CreateAttributesInterface
     public function generateAttributes(): BladeGenerator
     {
         return BladeGenerator::generation([
-            new InputAttribute("name_user", "text", "Имя пользователя", false),
-            new InputAttribute("password_user", "password", "Пароль"),
-            new InputAttribute("phone_user", "text", "Телефон пользователя", false),
-            new InputAttribute("name", "text", "Введите название", false),
+            new InputAttribute("name", "text",
+                "Имя Магазина", false),
+            new InputAttribute(self::USER_TO . "phone", "text",
+                "Телефон пользователя", false),
+            new InputAttribute(self::USER_TO . "password", "password",
+                "Пароль"),
             new InputFileAttribute("image_file", "Фото магазина", self::class),
             new InputFileAttribute("logo_file", "Лого Магазина", self::class),
             new InputFileAttribute("document_file", "Документы", self::class),

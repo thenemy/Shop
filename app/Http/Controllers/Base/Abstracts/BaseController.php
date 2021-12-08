@@ -101,7 +101,7 @@ abstract class BaseController extends Controller implements ControllerInterface
     {
         try {
             $this->service->create($object);
-            return back()->with("success", __("Добавлено успешно"));;
+            return back()->with("success", __("Добавлено успешно"));
         } catch (\Exception $e) {
             return back()->withErrors($e->getMessage())->withInput();
         }
@@ -109,7 +109,7 @@ abstract class BaseController extends Controller implements ControllerInterface
 
     public function getStoreValidation(Request $request)
     {
-        $request->validate($this->getEntityClass()::getRules());
+        $request->validate($this->getEntityClass()::getCreateRules());
         return $this->getStore($request->all());
     }
 

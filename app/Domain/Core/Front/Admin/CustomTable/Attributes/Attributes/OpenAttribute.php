@@ -21,6 +21,12 @@ class OpenAttribute implements HtmlInterface
             ['params' => $entity->id]);
     }
 
+    public static function generation(RouteHandler $handler, $entity, string $slot): string
+    {
+        $self = new self($handler, $entity, $slot);
+        return $self->generateHtml();
+    }
+
     public function generateHtml(): string
     {
         $button = new BlueOpen($this->slot, $this->href);

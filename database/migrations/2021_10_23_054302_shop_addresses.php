@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class ShopAddresses extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations
      * from delivery place
      * @return void
      */
@@ -16,12 +16,16 @@ class ShopAddresses extends Migration
         Schema::create('shop_addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
-                ->constrained('users')->onDelete('CASCADE')->onUpdate('CASCADE');
+                ->constrained('users')
+                ->onDelete('CASCADE')
+                ->onUpdate('CASCADE');
             $table->foreignId("delivery_address_id")
                 ->unique()
                 ->constrained("delivery_address");
             $table->float("longitude");
             $table->float("latitude");
+            $table->string("dinnerTimeFrom")->nullable();
+            $table->string("dinnerTimeTo")->nullable();
         });
     }
 

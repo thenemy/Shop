@@ -5,8 +5,9 @@ namespace App\Domain\Installment\Entities;
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\CreditProduct\Entity\Credit;
 
-use App\Domain\Order\Entities\Order;
-use App\Domain\User\Entities\PlasticUserCard;
+use App\Domain\Installment\Builders\TakenCreditBuilder;
+use App\Domain\Order\Entities\Purchase;
+use App\Domain\User\Entities\PlasticCard;
 use App\Domain\User\Entities\UserCreditData;
 
 /**
@@ -14,7 +15,13 @@ use App\Domain\User\Entities\UserCreditData;
  */
 class TakenCredit extends Entity
 {
+    public $timestamps = true;
     protected $table = "taken_credits";
+
+    public function newEloquentBuilder($query)
+    {
+        return TakenCreditBuilder::new($query);
+    }
 
     public function userData(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
@@ -24,7 +31,7 @@ class TakenCredit extends Entity
 
     public function plastic(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(PlasticUserCard::class,
+        return $this->belongsTo(PlasticCard::class,
             "plastic_id");
     }
 
@@ -33,9 +40,15 @@ class TakenCredit extends Entity
         return $this->belongsTo(Credit::class, "credit_id");
     }
 
-    public function order(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function purchase(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Order::class, "");
+        return $this->belongsTo(Purchase::class, "purchase_id");
     }
 
+    public static function getRules(): array
+    {
+        return [
+
+        ];
+    }
 }

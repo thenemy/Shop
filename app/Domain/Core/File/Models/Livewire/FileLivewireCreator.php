@@ -61,6 +61,8 @@ class FileLivewireCreator extends AbstractFileManager
     {
         return $this->entity->livewireComponents()->generateFunctions()
             . "\n"
+            . $this->entity->livewireFunctions()->generateFunctions()
+            . "\n"
             . $this->entity->livewireOptionalDropDown()->generateFunctions()
             . "\n"
             . self::newClass($this->entity->getTableClass())->generateFunctions();
@@ -128,7 +130,6 @@ class FileLivewireCreator extends AbstractFileManager
         $this->createFolderIfExists();
         $this->createFileClass();
     }
-
 
 
     private function createFileClass()

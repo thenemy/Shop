@@ -12,10 +12,11 @@ class FileAttribute extends BaseFileAttribute
     public function upload($input)
     {
         $key = $this->key;
+
+
         if (gettype($input) == "array") {
             $this->entity->$key = $input[0];
-        }
-        else {
+        } else {
             $this->entity->$key = $input;
         }
         $this->entity->save();
@@ -37,7 +38,6 @@ class FileAttribute extends BaseFileAttribute
     public function show(): array
     {
         $key = $this->key;
-
         return [$this->entity->$key];
     }
 }

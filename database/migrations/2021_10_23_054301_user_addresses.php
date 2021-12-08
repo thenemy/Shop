@@ -20,6 +20,9 @@ class UserAddresses extends Migration
             $table->foreignId("delivery_address_id")
                 ->unique()
                 ->constrained("delivery_address");
+            /**
+             * no two same address could exist
+             */
         });
     }
 

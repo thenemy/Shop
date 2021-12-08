@@ -1,5 +1,4 @@
-<div>
-
+<div class="w-full">
     <div class="shadow-lg">
         <div class="bg-white rounded-r-3xl overflow-hidden">
             <ul class="w-full py-4">

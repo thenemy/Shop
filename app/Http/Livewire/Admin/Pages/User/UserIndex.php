@@ -9,7 +9,8 @@ class UserIndex extends BaseLivewire
 
     
 
-     //3   --- set of functions and variables
+
+      //3   --- set of functions and variables
     public function getPath()
     {
         return 'livewire.admin.pages.user.user-index'; //4  --- path to blade

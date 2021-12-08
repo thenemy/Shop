@@ -10,11 +10,11 @@ use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
 use App\Domain\Core\Front\Admin\Routes\Abstracts\RouteHandler;
 use App\Domain\Core\Front\Admin\Routes\Interfaces\RoutesInterface;
 
-trait CategoryAttributeTable
+trait   CategoryAttributeTable
 {
     public function getIconTableAttribute(): string
     {
-        return ImageAttribute::preGenerate($this, 'icon_value');
+        return ImageAttribute::generation($this, 'icon_value');
     }
 
     public function getIconValueAttribute(): string
@@ -26,7 +26,7 @@ trait CategoryAttributeTable
 
     public function getNameTableAttribute(): string
     {
-        return TextAttribute::preGenerate($this, "name");
+        return TextAttribute::generation($this, "name");
     }
 
     public function getStatusTableAttribute(): string
@@ -37,10 +37,8 @@ trait CategoryAttributeTable
 
 
     // get Open button with all required data
-    public function getUnderCategoryTableAttribute()
+    public function getUnderCategoryTableAttribute(): string
     {
-
-        return (new OpenAttribute(CategoryOpenRouteHandler::new(), $this, $this->childsCategory()->count()
-        ))->generateHtml();
+        return OpenAttribute::generation(CategoryOpenRouteHandler::new(), $this, $this->childsCategory()->count());
     }
 }

@@ -19,8 +19,13 @@ class Delivery extends Migration
     {
         Schema::create('delivery', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("user_purchase_id")->constrained("user_purchases");
+            $table->foreignId("user_purchase_id")
+                ->constrained("user_purchases")
+                ->restrictOnDelete()
+                ->restrictOnDelete();
             $table->string("orderNum");
+            $table->integer("status"); //// all status that possible for delivery
+            ///
         });
     }
 

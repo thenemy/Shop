@@ -2,7 +2,7 @@
 
 namespace App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces;
 
-class FunctionStandardTemplate
+interface FunctionStandardTemplate
 {
     const FUNCTION_TEMPLATE = "public function %s(%s){}";
     const FUNCTION_BODY = "public function %s(%s){%s}";

@@ -16,14 +16,14 @@ use App\Domain\Core\Front\Admin\DropDown\Models\Paginator\PaginatorDropDown;
 use App\Domain\Core\Front\Admin\DropDown\OptionalItems\ActivateChooseItem;
 use App\Domain\Core\Front\Admin\DropDown\OptionalItems\DeactivateChooseItem;
 use App\Domain\Core\Front\Admin\Form\Interfaces\CreateAttributesInterface;
-use App\Domain\Core\Front\Admin\Livewire\Functions\Base\LivewireDropOptional;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireFunctions;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireOptionalDropDown;
 
 
-use App\Domain\Core\Front\Admin\Livewire\Functions\Base\LivewireFunctions;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireComponents;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireAdditionalFunctions;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireComponents;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
-use App\Domain\Core\Front\Interfaces\FrontEntityInterface;
-use App\View\Components\Actions\DenyAction;
 
 
 class CategoryIndex extends Category implements
@@ -40,7 +40,7 @@ class CategoryIndex extends Category implements
 
     public function getNameTableAttribute(): string
     {
-        return TextAttribute::preGenerate($this, "name");
+        return TextAttribute::generation($this, "name");
     }
 
     // call function which will have set of actions for this table
@@ -66,21 +66,21 @@ class CategoryIndex extends Category implements
         return CategoryTable::class;
     }
 
-    public function getTitle():string
+    public function getTitle(): string
     {
         return "Категории";
     }
 
-    public function livewireComponents(): LivewireAdditionalFunctions
+    public function livewireComponents(): LivewireComponents
     {
-        return new LivewireFunctions([
+        return new AllLivewireComponents([
             PaginatorDropDown::getDropDown()
         ]);
     }
 
-    public function livewireOptionalDropDown(): LivewireDropOptional
+    public function livewireOptionalDropDown(): AllLivewireOptionalDropDown
     {
-        return new LivewireDropOptional([
+        return new AllLivewireOptionalDropDown([
             ActivateChooseItem::create('status'),
             DeactivateChooseItem::create('status')
         ]);
@@ -90,6 +90,13 @@ class CategoryIndex extends Category implements
     {
         return BladeGenerator::generation([
             new FileLivewireCreator("Category", $this)
+        ]);
+    }
+
+    public function livewireFunctions(): LivewireAdditionalFunctions
+    {
+        return AllLivewireFunctions::generation([
+
         ]);
     }
 }

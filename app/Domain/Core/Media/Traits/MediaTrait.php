@@ -73,8 +73,8 @@ trait MediaTrait
             $value->extension();
             $this->mediaObject[$key] = MediaServices::createMedia($this->generateBasePath($type), $value, $key, $id);
             $this->attributes[$key] = $this->mediaObject[$key]->path;
+        } else if (is_string($value)) {
         }
-
     }
 
     public function generateBasePath($type)

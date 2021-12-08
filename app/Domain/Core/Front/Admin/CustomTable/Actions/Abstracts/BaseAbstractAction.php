@@ -8,6 +8,7 @@ use App\Domain\Core\Front\Admin\CustomTable\Actions\Interfaces\ActionInterface;
 use App\Domain\Core\Front\Admin\CustomTable\Actions\Interfaces\MainActionInterface;
 use App\Domain\Core\Front\Admin\Routes\Abstracts\RouteHandler;
 use App\Domain\Core\Front\Interfaces\HtmlInterface;
+use Illuminate\Support\Facades\Request;
 
 abstract class BaseAbstractAction implements ActionInterface, HtmlInterface
 {
@@ -30,6 +31,9 @@ abstract class BaseAbstractAction implements ActionInterface, HtmlInterface
 
     public static function new($params = [])
     {
+        if (gettype($params) != 'array')
+            $params = [$params];
+        $params = array_merge($params, Request::all());
         $new = get_called_class();
         return new $new($params);
     }

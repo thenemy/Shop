@@ -41,7 +41,6 @@ function table_init() {
         )
     });
 
-
     return {}
 }
 
