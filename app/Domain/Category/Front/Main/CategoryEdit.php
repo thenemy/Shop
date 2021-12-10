@@ -4,6 +4,7 @@ namespace App\Domain\Category\Front\Main;
 
 use App\Domain\Category\Builders\CategoryBuilder;
 use App\Domain\Category\Entities\Category;
+use App\Domain\Category\Front\Dynamic\FiltrationCategoryDynamic;
 use App\Domain\Category\Front\Nested\CategoryNested;
 use App\Domain\Core\File\Models\Livewire\FileLivewireNested;
 use App\Domain\Core\Front\Admin\File\Attributes\FileAttribute;
@@ -18,14 +19,16 @@ class CategoryEdit extends Category implements CreateAttributesInterface
     public function generateAttributes(): BladeGenerator
     {
         return BladeGenerator::generation(array(
-            new FileLivewireNested("Category", $this->child_category),
+//            new FileLivewireNested("Category", $this->child_category),
+            InputAttribute::updateAttribute("name", "text", "Введите  имя категории"),
+            FiltrationCategoryDynamic::getDynamic('CategoryEdit'),
             new InputFileAttribute("icon_file", "Иконка", self::class)
         ));
     }
 
     public function getIconFileAttribute(): FileAttribute
     {
-        return new FileAttribute($this, "icon_media", 'category_id_1');
+        return new FileAttribute($this[self::CATEGORY_ICON], "icon", 'category_id_1');
     }
 
     public function getChildCategoryAttribute(): CategoryNested
@@ -37,7 +40,11 @@ class CategoryEdit extends Category implements CreateAttributesInterface
         );
     }
 
-
+    /**
+     * example how to use nested creator
+     * the best think to do create some trait
+     * and then call everytime it is needed
+     */
     public function attachCategory($id, int $status)
     {
         if ($status) {

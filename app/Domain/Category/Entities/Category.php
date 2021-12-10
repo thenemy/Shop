@@ -5,6 +5,7 @@ namespace App\Domain\Category\Entities;
 
 
 use App\Domain\Category\Builders\CategoryBuilder;
+use App\Domain\Category\Interfaces\CategoryRelationInterface;
 use App\Domain\Core\Language\Traits\Translatable;
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Core\Media\Models\Media;
@@ -12,7 +13,7 @@ use App\Domain\Core\Slug\Traits\Sluggable;
 use App\Domain\Product\Product\Entities\Product;
 
 
-class Category extends Entity
+class Category extends Entity implements CategoryRelationInterface
 {
     use Translatable, Sluggable;
 

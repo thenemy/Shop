@@ -60,7 +60,7 @@ abstract class BaseLivewireDynamic extends BaseLivewire
     {
         $new_rules = [];
         foreach ($this->getEntity()::getRules() as $key => $value) {
-            $new_rules[$rules . $key] = $value;
+            $new_rules[$rules . $key] =$value;
         }
         $this->validate($new_rules);
     }

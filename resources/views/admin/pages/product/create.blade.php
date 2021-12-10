@@ -18,7 +18,7 @@
             </div>
             
 <x-helper.input.input name='price' type='number'  label='Введите цену' value='{{old("price") ?? ""}}'/>
-<x-helper.drop_down.drop_down :drop='\App\Domain\Product\Product\Front\Admin\DropDown\CurrencyDropDown::getDropDown()'/>
+<x-helper.drop_down.drop_down :drop='\App\Domain\Product\Product\Front\Admin\DropDown\CurrencyDropDown::getDropDown()' />
 <x-helper.input.input name='number' type='number'  label='Введите колиство данного товара' value='{{old("number") ?? ""}}'/>
 <livewire:components.drop-down.drop-down-search
             searchByKey='name'

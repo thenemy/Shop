@@ -20,7 +20,10 @@
         @click.away="isOpen = false"
         class="drop-down-block ">
         <div class="py-1" role="none">
-            <input class="selected_input hidden" type="{{$drop->type}}" name="{{$drop->key}}"
+            <input class="selected_input hidden"
+                   wire:model="{{$attributes['wire:model'] ?? ''}}"
+                   wire:key="{{$attributes['wire:key'] ?? ''}}"
+                   type="{{$drop->type}}" name="{{$drop->key}}"
                    @if($chosen) value="{{$chosen->id}}" @endif/>
             {{$slot}}
         </div>

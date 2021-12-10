@@ -63,9 +63,8 @@ abstract class AbstractDynamicTable extends BaseTable
     public function getInputsByKey($name): string
     {
         $real_attribute = explode('-', $name);
-//        dd($this->inputs);
         return trim(preg_replace('/\s\s+/', ' ', $this->inputs[$real_attribute[0]]));
     }
 
-    abstract public function getInputs();
+    abstract public function getInputs(): array;
 }

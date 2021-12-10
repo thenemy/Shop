@@ -14,14 +14,18 @@ use App\Domain\CreditProduct\Services\CreditService;
 
 trait TableDynamic
 {
-    public $inputs = [];
-    public $front_attribute = [];
+    public array $inputs = [];
+    public array $front_attribute = [];
+
+    /**
+     * for editing already created entities
+     */
 
     public function getInputs($name)
     {
         $real_attribute = explode('-', $name);
         if (empty($this->inputs)) {
-            $this->inputs['id'] = TextAttribute::generation($this, 'id');
+            $this->inputs['id'] = TextAttribute::generation($this, $this->getPrimary());
             $this->generateInput();
             $this->inputs['actions'] = AllActions::generation([
                 ButtonGreenLivewire::new(__("Обновить"), "update('" . $this->id . "')"),
@@ -31,6 +35,9 @@ trait TableDynamic
         return $this->inputs[$real_attribute[0]];
     }
 
+    /**
+     * for displaying already created entities
+     **/
     public function getFrontAttributes($name)
     {
         $real_attribute = explode('-', $name);
@@ -51,7 +58,7 @@ trait TableDynamic
         }
     }
 
-    private function generateInput()
+    protected function generateInput()
     {
         foreach ($this->getRules() as $key => $value) {
             $is_number = false;
@@ -64,11 +71,16 @@ trait TableDynamic
             $this->inputs[$key] = InputTableAttribute::generate(
                 $key,
                 $is_number ? "number" : "text",
-                "collection." . $this->id . '.' . $key);
+                $this->fillCollectionModel($key));
         }
     }
 
-    private function generateAttributes()
+    protected function fillCollectionModel($key): string
+    {
+        return 'collection.' . $this->id . '.' . $key;
+    }
+
+    protected function generateAttributes()
     {
         foreach ($this->getRules() as $key => $value) {
             $this->front_attribute[$key] = TextAttribute::generation(
@@ -81,13 +93,13 @@ trait TableDynamic
     public function getActionsAttribute(): string
     {
         return AllActions::generation([
-            ...$this->getAddingCustom(),
+            ...$this->getAddingCustomActions(),
             ButtonGreenLivewire::new(__("Изменить"), "addToUpdate('" . $this->id . "')"),
             ButtonRedLivewire::new(__("Удалить"), sprintf("delete('%s')", $this->id)),
         ]);
     }
 
-    public function getAddingCustom(): array
+    public function getAddingCustomActions(): array
     {
         return [];
     }
