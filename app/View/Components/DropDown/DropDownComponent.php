@@ -16,6 +16,6 @@ class DropDownComponent extends Component
 
     public function render()
     {
-        return view("components.helper.drop_down.drop_down");
+        return view("components.helper.drop_down.drop_down_component");
     }
 }

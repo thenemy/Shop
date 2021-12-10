@@ -24,12 +24,12 @@ class FiltrationCategoryDropDown extends AbstractDropDownAttributeTable
         return "Выберите компонент";
     }
 
-    static public function generate($model, $name = null): AbstractDropDown
+    static public function generate($model, $name = null): string
     {
-        return new self([
+        return (new self([
             new DropItem(FiltrationInterface::TEXT, FiltrationInterface::TEXT_FRONT),
             new DropItem(FiltrationInterface::IMAGE, FiltrationInterface::IMAGE_FRONT),
             new DropItem(FiltrationInterface::DESCRIPTION, FiltrationInterface::DESCRIPTION_FRONT),
-        ], $model, FiltrationInterface::DB_TO_FRONT[$name] ?? null);
+        ], $model, FiltrationInterface::DB_TO_FRONT[$name] ?? null))->generateHtml();
     }
 }

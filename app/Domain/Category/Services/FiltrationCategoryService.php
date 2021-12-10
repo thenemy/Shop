@@ -8,7 +8,6 @@ use App\Domain\Core\Main\Services\BaseService;
 
 class FiltrationCategoryService extends BaseService
 {
-
     public function getEntity(): Entity
     {
         return new FiltrationCategory();

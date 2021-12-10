@@ -14,7 +14,7 @@ class FiltrationCategoryTable extends AbstractDynamicTable
     public function getInputs(): array
     {
         return [
-            'name' => InputTableAttribute::generate('Название', 'text', 'entity.name'),
+            'key' => InputTableAttribute::generate('Название', 'text', 'entity.key'),
             'attribute' => FiltrationCategoryDropDown::generate('entity.')
         ];
     }
@@ -22,8 +22,8 @@ class FiltrationCategoryTable extends AbstractDynamicTable
     public function getColumns(): array
     {
         return [
-            new Column(__("Название"), "name_filter"),
-            new Column(__("Компонент"), "component_filter")
+            new Column(__("Название"), "key-index"),
+            new Column(__("Компонент"), "attribute-index")
         ];
     }
 }

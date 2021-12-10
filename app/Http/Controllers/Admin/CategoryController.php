@@ -16,6 +16,8 @@ use App\Domain\Core\Front\Admin\Form\Abstracts\AbstractForm;
 
 use App\Domain\Core\Front\Admin\Form\Models\FormForModel;
 use App\Domain\Core\Main\Services\BaseService;
+use App\Domain\CreditProduct\Entity\MainCredit;
+use App\Domain\Installment\Entities\TakenCredit;
 use App\Http\Controllers\Base\Abstracts\BaseController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -46,14 +48,29 @@ class CategoryController extends BaseController
         return $this->getIndex($request);
     }
 
-    public function edit(Request $request, CategoryEdit $category)
+    public function create(Request $request)
     {
+        return $this->getCreate($request);
+    }
 
+    public function store(Request $request)
+    {
+        return $this->getStoreValidation($request);
+    }
+
+    public function edit(Request $request, Category $category)
+    {
         return $this->getEdit($request, $category, [$category]);
+    }
+
+    public function update(Request $request, Category $category): \Illuminate\Http\RedirectResponse
+    {
+        return $this->getUpdateValidation($request, $category);
     }
 
     public function destroy(Category $category): \Illuminate\Http\RedirectResponse
     {
         return $this->getDestroy($category);
     }
+
 }

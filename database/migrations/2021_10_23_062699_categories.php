@@ -16,7 +16,7 @@ class Categories extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->json('name');
-            $table->boolean("status");
+            $table->boolean("status")->default(true);
             $table->integer("depth");
             $table->string("slug")->unique();
             $table->index('depth');

@@ -21,26 +21,27 @@ class FiltrationCategoryDynamic extends FiltrationCategory implements TableInFro
 {
     use TableDynamic;
 
+
     protected function generateInput()
     {
-        $this->inputs['name'] = InputTableAttribute::generate(
-            'name',
+        $this->inputs['key'] = InputTableAttribute::generate(
+            'key',
             'text',
-            $this->fillCollectionModel('name')
+            $this->fillCollectionModel('key')
         );
         $this->inputs['attribute'] = FiltrationCategoryDropDown::generate(
-            $this->fillCollectionModel('attribute'),
+            $this->fillCollectionModel(''),
             'attribute',
         );
     }
 
     protected function generateAttributes()
     {
-        $this->inputs['name'] = TextAttribute::generation(
+        $this->front_attribute['key'] = TextAttribute::generation(
             $this,
-            'name'
+            'key'
         );
-        $this->inputs['attribute'] = TextAttribute::generation(
+        $this->front_attribute['attribute'] = TextAttribute::generation(
             $this,
             self::DB_TO_FRONT[$this->attribute],
             true
@@ -86,5 +87,10 @@ class FiltrationCategoryDynamic extends FiltrationCategory implements TableInFro
         return AllLivewireFunctions::generation([
 
         ]);
+    }
+
+    public function getPrimaryKey(): string
+    {
+        return $this->primaryKey;
     }
 }

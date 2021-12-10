@@ -2,7 +2,9 @@
 
 namespace App\Domain\Category\Front\Opened;
 
-class CategoryOpenCreate
+use App\Domain\Category\Entities\Category;
+
+class CategoryOpenCreate extends Category
 {
 
 }

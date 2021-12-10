@@ -15,21 +15,6 @@ use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 class CategoryCreate extends Category implements CreateAttributesInterface
 {
 
-//
-//    // move somewhere else
-//    public function setIconImageAttribute($value)
-//    {
-//        if ($this->icon) {
-//            $this->icon->icon = $value;
-//            $this->icon->save();
-//        } else {
-//            $icon = new IconCat();
-//            $icon->category()->associate($this->id);
-//            $icon->icon = $value;
-//            $icon->save();
-//        }
-//    }
-
     public function generateAttributes(): BladeGenerator
     {
         return BladeGenerator::generation([
@@ -38,7 +23,12 @@ class CategoryCreate extends Category implements CreateAttributesInterface
                 self::CATEGORY_ICON_DATA,
                 "Загрузите иконку",
             ),
-
+            ...$this->additionalGeneration()
         ]);
+    }
+
+    public function additionalGeneration():array
+    {
+        return [];
     }
 }

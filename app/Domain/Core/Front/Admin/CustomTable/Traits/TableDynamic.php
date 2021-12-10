@@ -20,12 +20,13 @@ trait TableDynamic
     /**
      * for editing already created entities
      */
-
+    abstract  public function getPrimaryKey(): string;
     public function getInputs($name)
     {
+
         $real_attribute = explode('-', $name);
         if (empty($this->inputs)) {
-            $this->inputs['id'] = TextAttribute::generation($this, $this->getPrimary());
+            $this->inputs['id'] = TextAttribute::generation($this, $this->getPrimaryKey());
             $this->generateInput();
             $this->inputs['actions'] = AllActions::generation([
                 ButtonGreenLivewire::new(__("Обновить"), "update('" . $this->id . "')"),
