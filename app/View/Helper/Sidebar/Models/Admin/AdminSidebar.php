@@ -53,6 +53,10 @@ class AdminSidebar implements SideBarFactoryInterface
                 ],
                     "Доставка"
                 ),
+                new SideBarList([
+
+                ],
+                    "Шаблоны")
             ],
         );
     }
