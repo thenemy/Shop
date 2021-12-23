@@ -8,6 +8,8 @@ use App\Domain\CreditProduct\Entity\MainCredit;
 
 class MainCreditDropDownSearch extends BaseDropDownSearchAttribute
 {
+    use ConnectMainCredit;
+
     public static function newCredit(
         bool $create = true, array $filterBy = [])
     {
@@ -15,23 +17,4 @@ class MainCreditDropDownSearch extends BaseDropDownSearchAttribute
             $create, $filterBy);
     }
 
-    function setType(): string
-    {
-        return "number";
-    }
-
-    function setKey(): string
-    {
-        return "main_credit_id";
-    }
-
-    function setName(): string
-    {
-        return "Выберите вид рассрочки";
-    }
-
-    static public function getDropDownSearch($initial, array $filterBy)
-    {
-        return parent::getDropDown($initial, $filterBy, MainCredit::class, "name");
-    }
 }

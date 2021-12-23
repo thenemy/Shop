@@ -32,18 +32,28 @@ class InputLangAttribute extends BaseAttributeFromText
 
     private function langGenerate(string $lang, string $labelContinue)
     {
+        $create = sprintf(
+            '{{old("%s") ? old("%s")["%s"] ?? "" : ""}}',
+            $this->key,
+            $this->key,
+            $lang,
+        );
+        $current = $this->getWithoutScopeAtrVariable($this->key . '["' . $lang . '"]');
+        $update = sprintf(
+            '{{old("%s") ? old("%s")["%s"] ?? %s : %s}}',
+            $this->key,
+            $this->key,
+            $lang,
+            $current,
+            $current
+        );
         return sprintf("
            <x-helper.input.input name='%s[%s]'  label='%s' value='%s'/>
         ",
             $this->key,
             $lang,
             $labelContinue,
-            $this->create ? sprintf(
-                '{{old("%s") ? old("%s")["%s"] ?? "" : ""}}',
-                $this->key,
-                $this->key,
-                $lang,
-            ) : $this->getVariable() . '[\'' . $lang . '\']'
+            $this->create ? $create : $update
         );
     }
 }

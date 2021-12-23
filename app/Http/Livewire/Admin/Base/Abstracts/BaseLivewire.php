@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Base\Abstracts;
 use App\Domain\Core\Front\Admin\DropDown\Items\DropLivewireItem;
 use App\Domain\Core\Front\Admin\DropDown\Models\DropDownOptional;
 use App\Domain\Core\Front\Admin\DropDown\Models\PaginatorDefault;
+use App\Domain\Core\Front\Admin\Livewire\Dispatch\Base\Dispatch;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -20,6 +21,7 @@ abstract class BaseLivewire extends Component
     public $paginate = 10; // drop_down
     public array $checkBox = []; // model
     public string $keySearch = "search"; // set search
+    public string $dispatchClass = Dispatch::class;
 
     public function checkAll()
     {
@@ -90,6 +92,7 @@ abstract class BaseLivewire extends Component
         $to_blade = $this->getVariable();
         $to_blade['optional'] = $this->getOptionalDropDown();
         $to_blade["paginator"] = PaginatorDefault::getDropDown();
+        $this->dispatchClass::run($this);
         return view($this->getPath(), $to_blade);
     }
 

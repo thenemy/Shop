@@ -4,6 +4,7 @@ namespace App\Domain\Core\File\Models\Livewire;
 
 use App\Domain\Core\File\Abstracts\AbstractFileManager;
 use App\Domain\Core\File\Interfaces\LivewireCreatorInterface;
+use App\Domain\Core\Front\Admin\Livewire\Dispatch\Base\Dispatch;
 use App\Domain\Core\Front\Interfaces\HtmlInterface;
 use App\Domain\Core\Main\Traits\FastInstantiation;
 use Illuminate\Support\Facades\Log;
@@ -40,6 +41,11 @@ class FileLivewireCreator extends AbstractFileManager
         $this->entity = $entity;
         $this->classNameBlade = $this->toLivewireCase($className);
         $this->openFile();
+    }
+
+    public function getDispatchClass(): string
+    {
+        return $this->entity->dispatch_class ?? Dispatch::class;
     }
 
     public function generateHtml(): string

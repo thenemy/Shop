@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Base\Abstracts;
 
 use App\Domain\Core\Front\Admin\DropDown\Items\DropLivewireItem;
 use App\Domain\Core\Front\Admin\DropDown\Models\DropDownOptional;
+use App\Domain\Core\Front\Admin\Livewire\AdditionalActions\Base\AdditionalActions;
 use Symfony\Component\Console\Helper\Table;
 
 /**
@@ -12,6 +13,9 @@ use Symfony\Component\Console\Helper\Table;
  *  $keyToAttach    -- the key which must be called attach to main entity
  *  $attachEntity   -- attach entity class
  *  both passed in blade
+ *
+ *  $additionalAction -- additional class for adding additional actions each time when
+ *                       user adds or removes entities from the list
  */
 abstract class BaseLivewireNested extends BaseLivewire
 {
@@ -21,6 +25,7 @@ abstract class BaseLivewireNested extends BaseLivewire
     public $attachEntityId;
     public string $attachEntity;
     public string $keyToAttach;
+    public string $additionalAction = AdditionalActions::class;
 
     public function checkAll()
     {
@@ -81,7 +86,7 @@ abstract class BaseLivewireNested extends BaseLivewire
     private function getDeclineTableBlade()
     {
         $table = $this->getTableDecline();
-        return new $table(parent::getLists());
+        return new $table($this->getLists());
 
     }
 
@@ -114,18 +119,20 @@ abstract class BaseLivewireNested extends BaseLivewire
         $this->removeFromEntity($this->checkBox);
     }
 
-    protected  function addToEntity($adding)
+    protected function addToEntity($adding)
     {
+        $this->additionalAction::add($this, $adding);
         $entity = $this->getAttachEntity();
         $keyToAttach = $this->keyToAttach;
         $entity->$keyToAttach($adding, self::ATTACH);
     }
 
-    protected function removeFromEntity($adding)
+    protected function removeFromEntity($removing)
     {
+        $this->additionalAction::delete($this, $removing);
         $entity = $this->getAttachEntity();
         $keyToAttach = $this->keyToAttach;
-        $entity->$keyToAttach($adding, self::DETACH);
+        $entity->$keyToAttach($removing, self::DETACH);
     }
 
     public function removeSpecific($id)

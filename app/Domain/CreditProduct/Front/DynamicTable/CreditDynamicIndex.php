@@ -62,4 +62,9 @@ class CreditDynamicIndex extends Credit implements TableInFront
 
         ]);
     }
+
+    public function getPrimaryKey(): string
+    {
+        return  "id";
+    }
 }

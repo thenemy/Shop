@@ -3,10 +3,12 @@
 namespace App\Domain\Product\Product\Entities;
 
 use App\Domain\Category\Entities\Category;
+use App\Domain\Core\Front\Admin\File\Attributes\FilesAttributes;
 use App\Domain\Core\Language\Traits\Translatable;
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Core\Media\Traits\MediaManyTrait;
 use App\Domain\Core\Slug\Traits\Sluggable;
+use App\Domain\Currency\Traits\ConvertToSum;
 use App\Domain\Product\HeaderComponent\Header\Entities\HeaderComponent;
 use App\Domain\Product\HeaderTable\Entities\HeaderTable;
 use App\Domain\Product\HeaderText\Entities\HeaderText;
@@ -17,11 +19,12 @@ use App\Domain\Shop\Entities\Shop;
 use App\Domain\User\Entities\User;
 use CardImages;
 use Discounts;
+use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 use ProductStats;
 
 class Product extends Entity implements ProductInterface
 {
-    use Translatable, Sluggable, MediaManyTrait;
+    use Translatable, Sluggable, MediaManyTrait, ConvertToSum;
 
     public $guarded = [];
     protected $table = "products";
@@ -66,6 +69,13 @@ class Product extends Entity implements ProductInterface
         return $this->hasOne(CardImages::class, 'product_id');
     }
 
+    public function getRealPriceAttribute()
+    {
+        if ($this->currency == self::CURRENCY_USD_DB)
+            return $this->convertToSum($this->price);
+        return $this->price;
+    }
+
     public function productProductInfo(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(ProductInfo::class, 'product_id');
@@ -101,9 +111,24 @@ class Product extends Entity implements ProductInterface
         $this->setTranslate('title', $value);
     }
 
-    public function getTitleAttribute($value): ?string
+    public function getTitleAttribute(): ?\Illuminate\Support\Collection
+    {
+        return $this->getTranslations('title');
+    }
+
+    public function getTitleCurrentAttribute(): ?string
     {
         return $this->getTranslatable('title');
+    }
+
+    public function getImageProductAttribute(): FilesAttributes
+    {
+        return new FilesAttributes($this,
+            "images",
+            "product_1",
+            Image::class,
+            "image",
+            "product_id");
     }
 
     public function slugSources(): array

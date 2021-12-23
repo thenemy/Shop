@@ -1,7 +1,8 @@
 @extends("admin.open_layout.edit")
 @section("action")
     
-<x-helper.input.input name='name' type='text'  label='Введите  имя категории' value='{{$entity->name}}'/>
+<x-helper.input.input name='name' type='text'
+            label='Введите  имя категории' value='{{$entity->name}}' id='' onkeyup="" />
 <livewire:admin.pages.category-edit.filtration-category-dynamic
                 parentKey='category_id'
                 :parentId='$entity->id'

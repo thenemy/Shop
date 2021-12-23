@@ -43,7 +43,7 @@ class TakenCredits extends Migration
                 ->constrained("credits")
                 ->restrictOnDelete();
             $table->foreignId("purchase_id")
-                ->unique()->constrained("purchases")
+                ->unique()->constrained("user_purchases")
                 ->restrictOnDelete();
         });
     }

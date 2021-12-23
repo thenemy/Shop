@@ -20,7 +20,10 @@ trait TableDynamic
     /**
      * for editing already created entities
      */
-    abstract  public function getPrimaryKey(): string;
+    public function getPrimaryKey(): string
+    {
+        return $this->primaryKey;
+    }
     public function getInputs($name)
     {
 

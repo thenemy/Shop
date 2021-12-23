@@ -41,11 +41,12 @@ class MainCreditIndex extends MainCredit implements TableInFront, CreateAttribut
     {
         $text = __("Нету");
         if ($this->credits()->exists()) {
+            $credit = $this->credits()->orderBy('month')->get();
             if ($this->credits()->count() == 1) {
-                $text = $this->credits->first()->month;
+                $text = $credit->first()->month;
             } else {
-                $text = __('от') . " " . $this->credits->first()->month . " "
-                    . __("до") . " " . $this->credits->last()->month;
+                $text = __('от') . " " . $credit->first()->month . " "
+                    . __("до") . " " . $credit->last()->month;
             }
         }
 

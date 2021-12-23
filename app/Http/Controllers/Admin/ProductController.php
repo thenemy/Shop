@@ -43,9 +43,9 @@ class ProductController extends BaseController
         return $this->getCreate($request);
     }
 
-    public function store(ProductCreateRequest $request)
+    public function store(Request $request)
     {
-        return $this->getStore($request->validated());
+        return $this->getStoreValidation($request);
     }
 
     public function edit(Request $request, Product $product)
@@ -53,8 +53,8 @@ class ProductController extends BaseController
         return $this->getEdit($request, $product, [$product]);
     }
 
-    public function update(ProductEditRequest $request, Product $product)
+    public function update(Request $request, Product $product)
     {
-        return $this->getUpdate($request->validated(), $product);
+        return $this->getUpdateValidation($request, $product);
     }
 }

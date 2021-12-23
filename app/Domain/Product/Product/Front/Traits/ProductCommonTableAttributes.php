@@ -28,7 +28,7 @@ trait ProductCommonTableAttributes
 
     public function getNameIndexAttribute(): string
     {
-        return TextAttribute::generation($this, 'title');
+        return TextAttribute::generation($this, 'title_current');
     }
 
     public function getPriceIndexAttribute(): string

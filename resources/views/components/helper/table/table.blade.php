@@ -14,7 +14,7 @@
             </div>
         </div>
         <table class="table-auto border-collapse border w-full my-2.5" wire:loading.class="opacity-80">
-            <tr class="w-8/12">
+            <tr class="w-8/12 longpress">
                 <th class="py-3 px-6 font-semibold bg-gray-100 hidden checkbox-show">{{__("Выбрать")}}</th>
                 @foreach($table->columns as $column)
                     <th class="py-3 items-center bg-gray-100 font-semibold justify-center px-6">{{$column->column_name}}</th>
@@ -22,7 +22,7 @@
             </tr>
             @foreach($table->list as $items)
                 <tr wire:key="clean_table_{{$loop->index}}"
-                    class="w-8/12 text-center border-b border-gray-200 hover:bg-gray-200 longpress">
+                    class="w-8/12 text-center border-b border-gray-200 hover:bg-gray-200 ">
                     <td class="p-2 hidden checker checkbox-show">
                         <label for="check{{$loop->index}}">
                             <input type="checkbox" wire:model="checkBox" value="{{$items->id}}"

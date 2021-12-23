@@ -36,15 +36,4 @@ class ProductEdit extends Product implements CreateAttributesInterface
         ]);
     }
 
-    public function getImageProductAttribute(): FilesAttributes
-    {
-        return new FilesAttributes($this,
-            "images",
-            "product_1",
-            Image::class,
-            "image",
-            "product_id");
-    }
-
-
 }

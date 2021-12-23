@@ -15,7 +15,10 @@
         x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0 transform scale-90"
         x-transition:leave="transition ease-in duration-100">
-        {{$slot}}
+        <div {{$attributes}}>
+            {{$slot}}
+        </div>
+
     </div>
     <hr class="h-1">
 </div>

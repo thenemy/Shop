@@ -16,16 +16,17 @@ use function Symfony\Component\Translation\t;
 abstract class BaseAttributeForm implements HtmlInterface
 {
     use AttributeGetVariable;
-
+    public string  $id ="";
     public string $label;
     public string $key;
     protected string $create;
 
-    public function __construct(string $key, string $label, bool $create = true)
+    public function __construct(string $key, string $label, bool $create = true, string  $id = "")
     {
         $this->key = $key;
         $this->label = $label;
         $this->create = $create;
+        $this->id = $id;
     }
 
     protected function getVariable(): string

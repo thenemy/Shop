@@ -20,7 +20,6 @@ class PlasticUserCards extends Migration
             $table->foreignId("user_id")->constrained("users")
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-
             $table->primary(['plastic_id', 'user_id']);
         });
     }

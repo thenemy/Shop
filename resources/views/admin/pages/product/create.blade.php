@@ -17,19 +17,31 @@
              </div>
             </div>
             
-<x-helper.input.input name='price' type='number'  label='Введите цену' value='{{old("price") ?? ""}}'/>
+<x-helper.input.input name='price' type='number'
+            label='Введите цену' value='{{old("price") ?? ""}}' id='' onkeyup="" />
 <x-helper.drop_down.drop_down :drop='\App\Domain\Product\Product\Front\Admin\DropDown\CurrencyDropDown::getDropDown()' />
-<x-helper.input.input name='number' type='number'  label='Введите колиство данного товара' value='{{old("number") ?? ""}}'/>
+<x-helper.input.input name='number' type='number'
+            label='Введите колиство данного товара' value='{{old("number") ?? ""}}' id='' onkeyup="" />
 <livewire:components.drop-down.drop-down-search
             searchByKey='name'
             dropDownClass='App\Domain\Category\Front\Admin\DropDown\CategoryDropDownSearch'
             
             searchLabel='названию Категорий'
+            
              />
+<livewire:components.file.file-uploading-without-entity
+                    keyToAttach='productImage->image'
+                    mediaKey='file_create'
+                    entityClass='App\Domain\File\Entities\FileManyTemp'
+                    :multiple='true'
+                    label='Картинки'
+                    :entityId='old("file->id_file->productImage->image") ?? ""'
+                     />
 <livewire:components.drop-down.drop-down-search
             searchByKey='name'
             dropDownClass='App\Domain\Shop\Front\Admin\DropDown\ShopDropDownSearch'
             
             searchLabel='названию магазина'
+            
              />
 @endsection

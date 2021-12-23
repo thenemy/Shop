@@ -5,6 +5,8 @@ namespace App\Domain\Core\Front\Admin\CustomTable\Traits;
 use App\Domain\Core\Front\Admin\Button\ModelInRunTime\ButtonGreenLivewire;
 use App\Domain\Core\Front\Admin\Button\ModelInRunTime\ButtonRedLivewire;
 use App\Domain\Core\Front\Admin\DropDown\OptionalItems\ActivateChooseItem;
+use App\Domain\Core\Front\Admin\Livewire\AdditionalActions\Base\AdditionalActions;
+use App\Domain\Core\Front\Admin\Livewire\Dispatch\Base\Dispatch;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireFunctions;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireOptionalDropDown;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireComponents;
@@ -24,6 +26,20 @@ trait TableNested
 //   filterBy = [ $key_to_filter => parent_id ]
     public string $key_to_filter;
 
+    /**
+     * dispatch actions needed for dispatching events
+     * called differently for different classes
+     * for drop down its called when child entity was choosen
+     * for others its called after each time when access to server was made
+     */
+    public string $dispatch_class;
+
+    /**
+     * specifically needed for nested class only
+     * actions after entity was removed or added
+     * */
+    public string $additional_actions;
+
     static public function generate($key_to_attach, $title_for_table, $key_to_filter)
     {
         $new = new self();
@@ -33,11 +49,13 @@ trait TableNested
         return $new;
     }
 
-    static public function generateWithoutEntity($key_to_attach, $title_for_table)
+    static public function generateWithoutEntity($key_to_attach, $title_for_table, $dispatch = Dispatch::class, $additional = AdditionalActions::class)
     {
         $new = new self();
         $new->key_to_attach = $key_to_attach;
         $new->title_for_table = $title_for_table;
+        $new->dispatch_class = $dispatch;
+        $new->additional_actions = $additional;
         return $new;
     }
 
@@ -74,6 +92,7 @@ trait TableNested
 
         ]);
     }
+
     public function getDeclineButtonAttribute(): string
     {
         return (new ButtonRedLivewire(__("Удалить"),

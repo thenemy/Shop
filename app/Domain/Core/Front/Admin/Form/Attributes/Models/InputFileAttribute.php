@@ -41,7 +41,7 @@ class InputFileAttribute extends BaseAttributeForm
                     :multiple='%s'
                     label='%s'
                      />",
-            $this->getWithoutScopeAtrVariable($this->id),
+            $this->getWithoutScopeAtrVariable('id'),
             $this->key,
             $this->class,
             $this->multiple ? "true" : 'false',

@@ -15,6 +15,8 @@ trait FileUploadService
         $file_class = $this->popCondition($objectData, "file");
         $file_id = $this->popCondition($file_class, "id_file");
         foreach ($file_id as $key => $value) {
+
+            // decides to use FileTemp or FileManyTemp
             $tempClass = $file_class['class_name' . \CR::CR . $key];
             $objectData[$key] = $tempClass::find($value)->getFileUpload();
         }

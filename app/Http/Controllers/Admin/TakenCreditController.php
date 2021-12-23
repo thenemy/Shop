@@ -11,7 +11,13 @@ use App\Domain\Installment\Front\Admin\Path\TakenCreditRouteHandler;
 use App\Domain\Installment\Services\TakenCreditService;
 use App\Http\Controllers\Base\Abstracts\BaseController;
 use Illuminate\Http\Request;
-
+/*
+ * PROBLEMS
+ * interdependent dropdowns
+ * after choosing sum has to be calculated
+ * after choosing products sum has to be calculated
+ *
+ * */
 class TakenCreditController extends BaseController
 {
 
@@ -43,6 +49,7 @@ class TakenCreditController extends BaseController
 
     public function store(Request $request)
     {
+        dd($request->all());
         return $this->getStoreValidation($request);
     }
 

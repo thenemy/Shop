@@ -57,4 +57,9 @@ class PlasticCardDynamic extends PlasticCard implements TableInFront
             new SendSmsLivewire()
         ]);
     }
+
+    public function getPrimaryKey(): string
+    {
+        return "id";
+    }
 }

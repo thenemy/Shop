@@ -4,6 +4,7 @@ namespace App\Domain\Core\File\Models\Livewire;
 
 use App\Domain\Core\File\Interfaces\LivewireCreatorNestedInterface;
 use App\Domain\Core\Front\Admin\Form\Traits\AttributeGetVariable;
+use App\Domain\Core\Front\Admin\Livewire\AdditionalActions\Base\AdditionalActions;
 
 class FileLivewireNested extends FileLivewireCreator implements LivewireCreatorNestedInterface
 {
@@ -16,7 +17,9 @@ class FileLivewireNested extends FileLivewireCreator implements LivewireCreatorN
                 :attachEntityId='%s'
                 :attachEntity='get_class(%s)'
                 keyToAttach='%s'
-                :filterBy='[\"%s\" => \"%s\"]'
+                :filterBy='[\"%s\" => \"%s\"]',
+                dispatchClass='%s'
+                additionalAction='%s'
                 />",
             $this->classNameBlade,
             $this->getBladeName(),
@@ -25,6 +28,8 @@ class FileLivewireNested extends FileLivewireCreator implements LivewireCreatorN
             $this->entity->key_to_attach,
             $this->entity->key_to_filter,
             $this->getWithoutScopeAtrVariable("id"),
+            $this->getDispatchClass(),
+            $this->getAdditionalActionsClass()
         );
     }
 
@@ -36,6 +41,11 @@ class FileLivewireNested extends FileLivewireCreator implements LivewireCreatorN
     protected function getPathFromBlade(): string
     {
         return self::TEMPLATE_BLADE_PATH . self::BLADE_TEMPLATE_NESTED;
+    }
+
+    protected function getAdditionalActionsClass(): string
+    {
+        return $this->entity->additional_actions ?? AdditionalActions::class;
     }
 
     protected function formatClass($file_from): string

@@ -13,10 +13,11 @@ class Currency extends Migration
      */
     public function up()
     {
-        Schema::create('currency', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger("price");
-        });
+            Schema::create('currency', function (Blueprint $table) {
+                $table->id();
+                $table->bigInteger("price");
+                $table->date("date")->unique();
+            });
     }
 
     /**

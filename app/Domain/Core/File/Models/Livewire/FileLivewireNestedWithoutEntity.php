@@ -9,10 +9,14 @@ class FileLivewireNestedWithoutEntity extends FileLivewireNested
 
         return sprintf("<livewire:admin.pages.%s.%s
                 keyToAttach='%s'
+                dispatchClass='%s'
+                additionalAction='%s'
                 />",
             $this->classNameBlade,
             $this->getBladeName(),
             $this->entity->key_to_attach,
+            $this->getDispatchClass(),
+            $this->getAdditionalActionsClass()
         );
     }
 

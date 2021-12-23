@@ -1,15 +1,24 @@
 @extends("admin.layout.create")
 @section("action")
     
-<x-helper.input.input name='phone' type='text'  label='Телефон пользователя' value='{{old("phone") ?? ""}}'/>
-<x-helper.input.input name='password' type='password'  label='Пароль' value='{{old("password") ?? ""}}'/>
-<x-helper.input.input name='userCreditData->additional_phone' type='text'  label='Дополнительный телефон' value='{{old("userCreditData->additional_phone") ?? ""}}'/>
-<x-helper.input.input name='userCreditData->crucialData->firstname' type='text'  label='Имя пользователя' value='{{old("userCreditData->crucialData->firstname") ?? ""}}'/>
-<x-helper.input.input name='userCreditData->crucialData->lastname' type='text'  label='Фамилия пользователя' value='{{old("userCreditData->crucialData->lastname") ?? ""}}'/>
-<x-helper.input.input name='userCreditData->crucialData->father_name' type='text'  label='Отчество пользователя' value='{{old("userCreditData->crucialData->father_name") ?? ""}}'/>
-<x-helper.input.input name='userCreditData->crucialData->series' type='text'  label='Паспорт серия' value='{{old("userCreditData->crucialData->series") ?? ""}}'/>
-<x-helper.input.input name='userCreditData->crucialData->date_of_birth' type='date'  label='Дата рождения' value='{{old("userCreditData->crucialData->date_of_birth") ?? ""}}'/>
-<x-helper.input.input name='userCreditData->crucialData->pnfl' type='text'  label='ПНФЛ' value='{{old("userCreditData->crucialData->pnfl") ?? ""}}'/>
+<x-helper.input.input name='phone' type='text'
+            label='Телефон пользователя' value='{{old("phone") ?? ""}}' id='' onkeyup="" />
+<x-helper.input.input name='password' type='password'
+            label='Пароль' value='{{old("password") ?? ""}}' id='' onkeyup="" />
+<x-helper.input.input name='userCreditData->additional_phone' type='text'
+            label='Дополнительный телефон' value='{{old("userCreditData->additional_phone") ?? ""}}' id='' onkeyup="" />
+<x-helper.input.input name='userCreditData->crucialData->firstname' type='text'
+            label='Имя пользователя' value='{{old("userCreditData->crucialData->firstname") ?? ""}}' id='' onkeyup="" />
+<x-helper.input.input name='userCreditData->crucialData->lastname' type='text'
+            label='Фамилия пользователя' value='{{old("userCreditData->crucialData->lastname") ?? ""}}' id='' onkeyup="" />
+<x-helper.input.input name='userCreditData->crucialData->father_name' type='text'
+            label='Отчество пользователя' value='{{old("userCreditData->crucialData->father_name") ?? ""}}' id='' onkeyup="" />
+<x-helper.input.input name='userCreditData->crucialData->series' type='text'
+            label='Паспорт серия' value='{{old("userCreditData->crucialData->series") ?? ""}}' id='' onkeyup="" />
+<x-helper.input.input name='userCreditData->crucialData->date_of_birth' type='date'
+            label='Дата рождения' value='{{old("userCreditData->crucialData->date_of_birth") ?? ""}}' id='' onkeyup="" />
+<x-helper.input.input name='userCreditData->crucialData->pnfl' type='text'
+            label='ПНФЛ' value='{{old("userCreditData->crucialData->pnfl") ?? ""}}' id='' onkeyup="" />
 <livewire:components.file.file-uploading-without-entity
                     keyToAttach='avatar->avatar'
                     mediaKey='file_create'

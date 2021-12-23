@@ -15,15 +15,18 @@ class SuretyData extends Migration
     {
         Schema::create('surety_data', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')
+            $table->foreignId('user_id')
+                ->nullable()
+                ->constrained('users')
                 ->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
             $table->foreignId("crucial_data_id")
+                ->nullable()
                 ->constrained("crucial_data")
                 ->restrictOnUpdate()
                 ->restrictOnDelete();
-            $table->string("phone");
-            $table->string("additional_phone");
+            $table->string("phone")->default("");
+            $table->string("additional_phone")->default("");
         });
     }
 

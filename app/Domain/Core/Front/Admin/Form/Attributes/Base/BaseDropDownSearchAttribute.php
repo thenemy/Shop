@@ -9,21 +9,28 @@ use App\Domain\Core\Front\Admin\DropDown\Abstracts\AbstractDropDownSearch;
 use App\Domain\Core\Front\Admin\DropDown\Abstracts\BaseDropDown;
 use App\Domain\Core\Front\Admin\DropDown\Items\DropItem;
 use App\Domain\Core\Front\Admin\Form\Traits\AttributeGetVariable;
+use App\Domain\Core\Front\Admin\Form\Traits\GetDropDown;
 use App\Domain\Core\Front\Interfaces\HtmlInterface;
 
 abstract class BaseDropDownSearchAttribute extends AbstractDropDownSearch implements HtmlInterface
 {
-    use AttributeGetVariable;
+    use AttributeGetVariable, GetDropDown;
 
+    const  DROP_ITEM = DropItem::class;
     protected string $searchLabel;
     protected string $searchByKey;
     protected bool $create;
     protected array $filterBy;
+    public static function getDropItem(): string
+    {
+        return self::DROP_ITEM;
+    }
 
     public static function new(string $searchByKey,
                                string $searchLabel,
                                bool   $create = true,
-                               array  $filterBy = [])
+                               array  $filterBy = [],
+                                      ...$additonal)
     {
         $self = get_called_class();
         $class = new $self([]);
@@ -38,30 +45,36 @@ abstract class BaseDropDownSearchAttribute extends AbstractDropDownSearch implem
     {
         $dropDownClass = get_called_class();
         return sprintf(
-            "<livewire:components.drop-down.drop-down-search
+            "<%s
             searchByKey='%s'
             dropDownClass='%s'
             %s
             searchLabel='%s'
+            %s
              />",
+            $this->componentBladeName(),
             $this->searchByKey,
             $dropDownClass,
-            !$this->create ? ":initial=\"" . $this->getWithoutScopeAtrVariable($this->key) . "\"" : '',
-            $this->searchLabel
+            !$this->create ? ":initial='" . $this->getWithoutScopeAtrVariable($this->key) . "'" : '',
+            $this->searchLabel,
+            $this->additionalParamsHtml()
         );
+    }
+
+    public function componentBladeName(): string
+    {
+        return 'livewire:components.drop-down.drop-down-search';
+    }
+
+    public function additionalParamsHtml(): string
+    {
+        return "";
     }
 
     /**
      * attribute -- what will be displayed to user
      * key --- is what will be assigned to entity
      */
-    static public function getDropDown($initial, array $filterBy, string $class, string $attribute)
-    {
-        $items = $class::filterBy($filterBy)->get()->map(function ($item) use ($attribute) {
-            return new DropItem($item->id, $item->$attribute);
-        })->toArray();
-        $init = $class::find($initial) ?? new $class();
-        $self = get_called_class();
-        return new $self($items, $init->$attribute);
-    }
+
+
 }

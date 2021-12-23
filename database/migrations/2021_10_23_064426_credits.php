@@ -20,6 +20,7 @@ class Credits extends Migration
             $table->foreignId("main_credit_id")
                 ->constrained("main_credits")
                 ->restrictOnDelete();
+            $table->index(['month', 'main_credit_id']);
         });
     }
 

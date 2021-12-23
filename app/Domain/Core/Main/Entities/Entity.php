@@ -21,6 +21,12 @@ class Entity extends Model implements RuleInterface
         return end($array);
     }
 
+    static public function new()
+    {
+        $self = get_called_class();
+        return new $self();
+    }
+
     static public function getRules(): array
     {
         return [];

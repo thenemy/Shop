@@ -11,29 +11,32 @@ class InputTableAttribute implements HtmlInterface
     public string $type;
     public string $model;
     public string $key;
+    public bool $defer;
 
     public function __construct(string $name,
                                 string $type,
                                 string $model,
-                                string $key = ""
+                                string $key = "",
+                                bool   $defer = true
     )
     {
         $this->name = $name;
         $this->type = $type;
         $this->model = $model;
         $this->key = $key;
+        $this->defer = $defer;
     }
 
     public static function generate(string $name, string $type,
-                                    string $model, string $key = ""): string
+                                    string $model, string $key = "", bool $defer = true): string
     {
-        $self = new self($name, $type, $model, $key);
+        $self = new self($name, $type, $model, $key, $defer);
         return $self->generateHtml();
     }
 
     public function generateHtml(): string
     {
-        $component = new InputComponent($this->name, $this->type, $this->model, $this->key);
+        $component = new InputComponent($this->name, $this->type, $this->model, $this->key, $this->defer);
         return $component->render()->with($component->data())->render();
     }
 }

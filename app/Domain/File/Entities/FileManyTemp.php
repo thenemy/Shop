@@ -34,7 +34,7 @@ class FileManyTemp extends Entity implements FileTempInterface
     {
         return new FilesAttributes(
             $this,
-            "files",
+            "files_media",
             $this->id,
             FileTemp::class,
             "file",
