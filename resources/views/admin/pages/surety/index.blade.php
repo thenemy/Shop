@@ -8,7 +8,5 @@
         <x-helper.text.title>{{__('Поручители')}}</x-helper.text.title>
         {{--    insert name of the breadcrumbs and the arguments--}}
         
-<livewire:admin.pages.surety-open-index.surety-open-index
-            :filterBy="['user_id' => $params,]" />
     </div>
 @endsection

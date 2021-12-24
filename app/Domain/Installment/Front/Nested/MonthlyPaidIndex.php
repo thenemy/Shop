@@ -57,7 +57,7 @@ class MonthlyPaidIndex extends MonthPaid implements TableInFront, OpenEntity, Ta
         return AllActions::generation([]);
     }
 
-    public function getKeyForFilter()
+    public function getKeyForFilter(): string
     {
         return "taken_credit_id";
     }

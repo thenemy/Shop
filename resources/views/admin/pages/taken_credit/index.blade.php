@@ -6,8 +6,11 @@
         {{--    insert there new created livewire--}}
         {{--    give the title--}}
         <x-helper.text.title>{{__('Рассрочка')}}</x-helper.text.title>
+        <div class="flex flex-row">
+            <livewire:components.schema-sms.schema-sms-livewire selected_class='App\Domain\SchemaSms\Entities\SchemaSmsInstallment'/>
+        </div>
         {{--    insert name of the breadcrumbs and the arguments--}}
-        
+
 <livewire:admin.pages.taken-credit.taken-credit-index/>
     </div>
 @endsection

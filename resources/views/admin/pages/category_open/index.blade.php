@@ -8,7 +8,5 @@
         <x-helper.text.title>{{__('Под категория')}}</x-helper.text.title>
         {{--    insert name of the breadcrumbs and the arguments--}}
         
-<livewire:admin.pages.category-open.category-open
-            :filterBy="['parent_id' => $params,]" />
     </div>
 @endsection

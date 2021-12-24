@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class SchemaSms extends Migration
+class SchemaSmsRegistration extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class SchemaSms extends Migration
      */
     public function up()
     {
-        Schema::create('schema_sms', function (Blueprint $table) {
+        Schema::create('schema_sms_registration', function (Blueprint $table) {
             $table->id();
             $table->text("schema");
-            $table->smallInteger("type");
+            $table->smallInteger("type")->unique()->index();
         });
     }
 
@@ -27,6 +27,6 @@ class SchemaSms extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('schema_sms');
+        Schema::dropIfExists('schema_sms_registration');
     }
 }

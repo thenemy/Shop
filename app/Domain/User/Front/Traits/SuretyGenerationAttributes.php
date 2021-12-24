@@ -117,13 +117,13 @@ trait SuretyGenerationAttributes
     {
 
         return new FileAttribute(
-            $this->getRelation($relation),
+            $this->suretyRelationGet($relation),
             'passport_reverse',
             'passport_reverse_1'
         );
     }
 
-    private function getRelation($relation = "")
+    private function suretyRelationGet($relation = "")
     {
         if ($relation) {
             return $this[$relation][SuretyRelationInterface::CRUCIAL_DATA_SERVICE];
@@ -134,7 +134,7 @@ trait SuretyGenerationAttributes
     public function getPassportUserEdit($relation = ""): FileAttribute
     {
         return new FileAttribute(
-            $this->getRelation($relation),
+            $this->suretyRelationGet($relation),
             "user_passport",
             "passport_1",
         );

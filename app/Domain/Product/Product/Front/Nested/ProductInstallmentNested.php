@@ -8,6 +8,7 @@ use App\Domain\Core\Front\Admin\CustomTable\Traits\TableNested;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireFunctions;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireAdditionalFunctions;
 use App\Domain\Core\Front\Interfaces\FrontEntityInterface;
+use App\Domain\Core\Front\Js\Interfaces\FilterJsInterface;
 use App\Domain\Product\Product\Entities\Product;
 use App\Domain\Product\Product\Front\Admin\CustomTable\Tables\ProductAcceptTable;
 use App\Domain\Product\Product\Front\Admin\CustomTable\Tables\ProductNestedDeclineTable;
@@ -34,7 +35,8 @@ class ProductInstallmentNested extends Product implements FrontEntityInterface
             "number",
             'entitiesStore.' . $this->id,
             "number_nested_" . $this->id,
-            false
+            false,
+            FilterJsInterface::ONLY_NUMBER
         );
     }
 

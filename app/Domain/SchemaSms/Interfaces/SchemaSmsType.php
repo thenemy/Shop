@@ -2,7 +2,7 @@
 
 namespace App\Domain\SchemaSms\Interfaces;
 
-interface SchemaSmsType
+interface   SchemaSmsType
 {
     const REMAINDER_PAYMENT = 1;
     const DAY_OF_PAYMENT = 2;

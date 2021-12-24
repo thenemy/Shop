@@ -106,5 +106,4 @@
     function dragOverHandler(e) {
         e.preventDefault();
     }
-
 </script>

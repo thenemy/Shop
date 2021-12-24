@@ -2,7 +2,9 @@
 
 namespace App\Domain\Installment\Front\Main;
 
+use App\Domain\Core\File\Interfaces\BladeActionsInterface;
 use App\Domain\Core\File\Models\Livewire\FileLivewireCreator;
+use App\Domain\Core\Front\Admin\Blade\Base\AllBladeActions;
 use App\Domain\Core\Front\Admin\CustomTable\Actions\Base\AllActions;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\StatusAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
@@ -17,8 +19,10 @@ use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\Installment\Entities\TakenCredit;
 use App\Domain\Installment\Front\Admin\CustomTables\Actions\TakenCreditEditAction;
 use App\Domain\Installment\Front\Admin\CustomTables\Tables\TakenCreditTable;
+use App\Domain\SchemaSms\Entities\SchemaSmsInstallment;
+use App\Domain\SchemaSms\Front\Attribute\SchemaSmsAttribute;
 
-class TakenCreditIndex extends TakenCredit implements TableInFront, CreateAttributesInterface
+class TakenCreditIndex extends TakenCredit implements TableInFront, CreateAttributesInterface, BladeActionsInterface
 {
     public function getIdUserPurchaseIndexAttribute()
     {
@@ -114,6 +118,13 @@ class TakenCreditIndex extends TakenCredit implements TableInFront, CreateAttrib
     {
         return AllLivewireFunctions::generation([
 
+        ]);
+    }
+
+    public function getBladeActions(): string
+    {
+        return AllBladeActions::generation([
+            SchemaSmsAttribute::new(SchemaSmsInstallment::class)
         ]);
     }
 }

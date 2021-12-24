@@ -25,7 +25,7 @@ class CommentInstallmentDynamic extends CommentInstallment implements TableInFro
 
     public static function getBaseService(): string
     {
-        return CommentInstallmentService::new();
+        return CommentInstallmentService::class;
     }
 
     public static function getDynamicParentKey(): string

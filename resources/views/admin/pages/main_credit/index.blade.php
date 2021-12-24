@@ -6,6 +6,9 @@
         {{--    insert there new created livewire--}}
         {{--    give the title--}}
         <x-helper.text.title>{{__('Рассрочки')}}</x-helper.text.title>
+        <div class="flex flex-row">
+            
+        </div>
         {{--    insert name of the breadcrumbs and the arguments--}}
         
 <livewire:admin.pages.main-credit.main-credit-index/>

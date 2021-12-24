@@ -12,5 +12,5 @@
     </div>
     {{--   table -> drop down action --}}
     <x-helper.table.table_form :table="$table" :optional="$optional"/>
-{{--    <x-helper.table.table :table="$table" :optional="$optional"/>--}}
+    {{--    <x-helper.table.table :table="$table" :optional="$optional"/>--}}
 </div>

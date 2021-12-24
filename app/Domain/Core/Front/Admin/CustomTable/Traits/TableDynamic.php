@@ -9,21 +9,26 @@ use App\Domain\Core\Front\Admin\Button\ModelInRunTime\ButtonRedLivewire;
 use App\Domain\Core\Front\Admin\CustomTable\Actions\Base\AllActions;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\InputTableAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
+use App\Domain\Core\Front\Admin\CustomTable\Attributes\Traits\SetInputAttribute;
 use App\Domain\CreditProduct\Front\DynamicTable\CreditDynamicIndex;
 use App\Domain\CreditProduct\Services\CreditService;
 
 trait TableDynamic
 {
+    use SetInputAttribute;
+
     public array $inputs = [];
     public array $front_attribute = [];
 
     /**
      * for editing already created entities
      */
+
     public function getPrimaryKey(): string
     {
         return $this->primaryKey;
     }
+
     public function getInputs($name)
     {
 
@@ -75,9 +80,13 @@ trait TableDynamic
             $this->inputs[$key] = InputTableAttribute::generate(
                 $key,
                 $is_number ? "number" : "text",
-                $this->fillCollectionModel($key));
+                $this->fillCollectionModel($key),
+                $this->setInputAttr($key, self::defer()),
+                $this->setInputAttr($key, self::filter())
+            );
         }
     }
+
 
     protected function fillCollectionModel($key): string
     {

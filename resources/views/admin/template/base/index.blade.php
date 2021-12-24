@@ -6,6 +6,9 @@
         {{--    insert there new created livewire--}}
         {{--    give the title--}}
         <x-helper.text.title>{{__('%s')}}</x-helper.text.title>
+        <div class="flex flex-row">
+            %s
+        </div>
         {{--    insert name of the breadcrumbs and the arguments--}}
         %s
     </div>

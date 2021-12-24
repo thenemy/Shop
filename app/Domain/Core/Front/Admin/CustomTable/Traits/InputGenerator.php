@@ -3,9 +3,12 @@
 namespace App\Domain\Core\Front\Admin\CustomTable\Traits;
 
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\InputTableAttribute;
+use App\Domain\Core\Front\Admin\CustomTable\Attributes\Traits\SetInputAttribute;
 
 trait InputGenerator
 {
+    use SetInputAttribute;
+
     protected function generateInput(array $rules, string $model = 'entity.')
     {
         $inputs = [];
@@ -23,7 +26,9 @@ trait InputGenerator
                 $key,
                 !$is_numeric ? "text" : "number",
                 $model . $key,
-                "input_table_" . $key
+                "input_table_" . $key,
+                $this->setInputAttr($key, self::defer()),
+                $this->setInputAttr($key, self::filter())
             );
         }
         return $inputs;

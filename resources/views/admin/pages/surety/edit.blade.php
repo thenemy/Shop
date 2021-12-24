@@ -1,6 +1,7 @@
 @extends("admin.open_layout.edit")
 @section("action")
     
+
 <x-helper.input.input name='phone' type='text'
             label='Телефон пользователя' value='{{$entity->phone}}' id='' onkeyup="" />
 <x-helper.input.input name='additional_phone' type='text'

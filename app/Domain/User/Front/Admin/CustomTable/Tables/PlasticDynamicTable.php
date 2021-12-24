@@ -7,6 +7,7 @@ use App\Domain\Core\Front\Admin\Button\ModelInRunTime\ButtonBlueLivewire;
 use App\Domain\Core\Front\Admin\CustomTable\Abstracts\AbstractDynamicTable;
 use App\Domain\User\Entities\PlasticCard;
 use App\Domain\User\Front\Admin\Functions\SendSmsLivewire;
+use App\Domain\User\Front\Dynamic\PlasticCardDynamic;
 
 class PlasticDynamicTable extends AbstractDynamicTable
 {
@@ -20,6 +21,11 @@ class PlasticDynamicTable extends AbstractDynamicTable
         return [
             ButtonBlueLivewire::new('Отправить сообщение', SendSmsLivewire::FUNCTION_NAME),
         ];
+    }
+
+    public static function setInputAttr($key, $type)
+    {
+        return PlasticCardDynamic::setInputAttr($key, $type);
     }
 
     public function getColumns(): array

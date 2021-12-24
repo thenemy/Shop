@@ -6,6 +6,9 @@
         {{--    insert there new created livewire--}}
         {{--    give the title--}}
         <x-helper.text.title>{{__('Товары')}}</x-helper.text.title>
+        <div class="flex flex-row">
+            
+        </div>
         {{--    insert name of the breadcrumbs and the arguments--}}
         
 <livewire:admin.pages.product.product-index/>

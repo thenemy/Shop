@@ -120,7 +120,11 @@ class FileLivewireCreator extends AbstractFileManager
 
     protected function getLivewireClassName(): string
     {
-        return $this->entity->class_name;
+        try {
+            return $this->entity->class_name;
+        } catch (\Exception $exception) {
+            throw  new \Exception($this->entity);
+        }
     }
 
     protected function openFileBlade()

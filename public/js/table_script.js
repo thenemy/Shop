@@ -66,3 +66,37 @@ function selectAll(current) {
 }
 
 
+function initSchemaSMS(comment) {
+    let object = {
+        show: false,
+        type: 1,
+        loading: false,
+        comment: comment,
+        setComponent(type, comment) {
+            this.type = type;
+            if (this.comment !== comment) {
+                this.loading = true;
+            }
+            this.comment = comment;
+
+        },
+        setComment(comment) {
+            this.comment = comment
+        },
+        setToComment(add) {
+            this.comment = this.comment + add;
+        },
+        close(wire) {
+            wire.save(this.type)
+        }
+    }
+
+    Livewire.hook("element.updated", function (e) {
+        if (object.loading === true) {
+            console.log("UPDATED");
+            object.loading = false;
+        }
+    });
+
+    return object;
+}

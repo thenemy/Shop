@@ -31,7 +31,7 @@
 
 <script src="{{asset("js/table_action.js")}}"></script>
 <script src="{{asset("js/table_script.js")}}"></script>
-
+<script src="{{asset("js/filter.js")}}"></script>
 @include("js/file_input")
 <script>
     $('.hide_during_loading').removeClass("hidden");
