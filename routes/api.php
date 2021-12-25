@@ -20,3 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/sms/send_code', [UserController::class, 'send_code']);
+
+
+
+//for tests
+Route::post('/getToken', [\App\Domain\Core\Api\CardService\TestRoute::class, 'get_access_token']);
