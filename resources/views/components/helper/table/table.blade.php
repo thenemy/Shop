@@ -1,4 +1,5 @@
 <div class="pb-10 ">
+
     <div x-data="table_init()" class="table_checker my-2.5">
         <div class="flex flex-row justify-between">
             <x-helper.drop_down.drop_down_livewire_modal :drop="$optional" class="hidden checkbox-show"/>
@@ -14,7 +15,7 @@
             </div>
         </div>
         <table class="table-auto border-collapse border w-full my-2.5" wire:loading.class="opacity-80">
-            <tr class="w-8/12 longpress">
+            <tr class="w-8/12 @if(!isset($attributes['turn_off'])) longpress @endif">
                 <th class="py-3 px-6 font-semibold bg-gray-100 hidden checkbox-show">{{__("Выбрать")}}</th>
                 @foreach($table->columns as $column)
                     <th class="py-3 items-center bg-gray-100 font-semibold justify-center px-6">{{$column->column_name}}</th>
@@ -40,6 +41,8 @@
             @endforeach
             {{--some style will be here above to react on action--}}
         </table>
+
+        {{$slot}}
     </div>
     {{$table->paginate->links()}}
 </div>

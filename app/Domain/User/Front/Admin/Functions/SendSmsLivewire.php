@@ -3,26 +3,18 @@
 namespace App\Domain\User\Front\Admin\Functions;
 
 use App\Domain\Core\Front\Admin\Livewire\Functions\Abstracts\AbstractFunction;
+use App\Domain\Core\Front\Admin\Livewire\Functions\Abstracts\AbstractFunctionComponent;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\FunctionStandardTemplate;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireAdditionalFunctions;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Traits\FunctionGenerate;
 use App\Http\Livewire\Admin\Base\Abstracts\BaseLivewireDynamic;
 use phpDocumentor\Reflection\Types\Self_;
 
-class SendSmsLivewire implements LivewireAdditionalFunctions, FunctionStandardTemplate
+class SendSmsLivewire extends AbstractFunction
 {
     const FUNCTION_NAME = "sendSms";
 
-    public function generateFunctions(): string
-    {
-        return sprintf(self::FUNCTION_BODY,
-            self::FUNCTION_NAME,
-            "",
-            '\\' . self::class . '::' . 'getSms($this);'
-        );
-    }
-
-    public static function getSms(BaseLivewireDynamic $component)
+    public static function sendSms(BaseLivewireDynamic $component): string
     {
         $component->validate(
             [
@@ -30,6 +22,9 @@ class SendSmsLivewire implements LivewireAdditionalFunctions, FunctionStandardTe
                 'entity.date_number' => "required"
             ]
         );
-        dd($component->entity);
+        dd($component);
+        return BaseLivewireDynamic::class;
     }
+
+
 }

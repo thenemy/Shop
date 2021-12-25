@@ -8,5 +8,5 @@
             {{__("Создать")}}
         </x-helper.button.main_button>
     </div>
-    <x-helper.table.table :table="$table" :optional="$optional"/>
+    <x-helper.table.table :table="$table" :optional="$optional" />
 </div>

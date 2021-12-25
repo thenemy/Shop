@@ -14,48 +14,12 @@ use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireAdditional
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireComponents;
 use App\Domain\Core\Front\Admin\OpenButton\Interfaces\OpenEntity;
 use App\Domain\Core\Main\Traits\ArrayHandle;
-use App\Domain\Installment\Entities\MonthPaid;
-use App\Domain\Installment\Front\Admin\CustomTables\Tables\MonthlyPaidTable;
+use App\Domain\Installment\Entities\TimeScheduleTransactions;
+use App\Domain\Installment\Front\Admin\CustomTables\Tables\TimeScheduleTransactionTable;
 
-    class MonthlyPaidIndex extends MonthPaid implements TableInFront, OpenEntity, TableFilterByInterface
+class TimeScheduleTransactionIndex extends TimeScheduleTransactions implements TableInFront, OpenEntity, TableFilterByInterface
 {
     use TableFilterBy, ArrayHandle, AttributeGetVariable;
-
-    public function getTableClass(): string
-    {
-        return MonthlyPaidTable::class;
-    }
-
-    public function livewireComponents(): LivewireComponents
-    {
-        return AllLivewireComponents::generation([
-
-        ]);
-    }
-
-    public function livewireOptionalDropDown(): AllLivewireOptionalDropDown
-    {
-        return AllLivewireOptionalDropDown::generation([
-
-        ]);
-    }
-
-    public function livewireFunctions(): LivewireAdditionalFunctions
-    {
-        return AllLivewireFunctions::generation([
-
-        ]);
-    }
-
-    public function getTitle(): string
-    {
-        return "";
-    }
-
-    public function getActionsAttribute(): string
-    {
-        return AllActions::generation([]);
-    }
 
     public function getKeyForFilter(): string
     {
@@ -67,5 +31,47 @@ use App\Domain\Installment\Front\Admin\CustomTables\Tables\MonthlyPaidTable;
         return [
             "taken_credit_id" => $this->getAttributeVariable("id")
         ];
+    }
+
+    public function getTableClass(): string
+    {
+        return TimeScheduleTransactionTable::class;
+    }
+
+    public function livewireComponents(): LivewireComponents
+    {
+        return AllLivewireComponents::generation([
+
+        ]);
+    }
+
+    public function livewireOptionalDropDown(): AllLivewireOptionalDropDown
+    {
+        return AllLivewireOptionalDropDown::generation(
+            [
+
+            ]
+        );
+    }
+
+    public function livewireFunctions(): LivewireAdditionalFunctions
+    {
+        return AllLivewireFunctions::generation(
+            [
+
+            ]
+        );
+    }
+
+    public function getTitle(): string
+    {
+        return "";
+    }
+
+    public function getActionsAttribute(): string
+    {
+        return AllActions::generation([
+
+        ]);
     }
 }

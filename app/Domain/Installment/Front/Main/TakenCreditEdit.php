@@ -13,6 +13,7 @@ use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\Installment\Entities\TakenCredit;
 use App\Domain\Installment\Front\Dynamic\CommentInstallmentDynamic;
 use App\Domain\Installment\Front\Nested\MonthlyPaidIndex;
+use App\Domain\Installment\Front\Nested\TimeScheduleTransactionIndex;
 use App\Domain\User\Front\Traits\SuretyGenerationAttributes;
 
 class TakenCreditEdit extends TakenCredit implements CreateAttributesInterface
@@ -39,12 +40,14 @@ class TakenCreditEdit extends TakenCredit implements CreateAttributesInterface
                             KeyTextAttribute::new(__("Количество месяцев"), 'number_month')
                         ])
                 ]),
-                ContainerColumn::new("", [
-                    new FileLivewireCreatorWithFilterBy("TakenCreditEdit", MonthlyPaidIndex::new())
+                ContainerColumn::new("space-y-2", [
+                    new FileLivewireCreatorWithFilterBy("TakenCreditEdit", MonthlyPaidIndex::new()),
+                    new FileLivewireCreatorWithFilterBy("TakenCreditEdit", TimeScheduleTransactionIndex::new())
                 ])
             ]),
             self::generationSuretyEdit(self::SURETY_TO),
             CommentInstallmentDynamic::getDynamic("TakenCreditEdit"),
+
         ]);
     }
 

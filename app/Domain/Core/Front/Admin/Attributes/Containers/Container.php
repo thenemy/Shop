@@ -21,6 +21,11 @@ class Container implements HtmlInterface
         return new $self($item, $class);
     }
 
+    static public function generate(string $class = "", array $item = [])
+    {
+        return self::new($class, $item)->generateHtml();
+    }
+
     protected function generateItems(): string
     {
         $str = "";

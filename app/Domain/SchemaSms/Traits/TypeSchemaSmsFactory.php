@@ -22,6 +22,11 @@ trait TypeSchemaSmsFactory
         return $this->getSmsSchema(self::class, $this->type)->values;
     }
 
+    public function getConcreteType($type)
+    {
+        return $this->getSmsSchema(self::class, $this->type)->values[$type];
+    }
+
     public function getSmsSchema(string $selected, $type)
     {
         try {
@@ -30,7 +35,13 @@ trait TypeSchemaSmsFactory
         } catch (\Exception $exception) {
             throw new \Exception(self::class . "\n wrong getSmsSchema type which" . $type);
         }
+    }
 
+    public function getTypeSchemaValuesAttribute(): array
+    {
+        return collect($this->getSmsSchema(self::class, $this->type)->values)->map(function ($e) {
+            return $e->value;
+        })->toArray();
     }
 
     public function allSchema($selected): array
@@ -42,20 +53,20 @@ trait TypeSchemaSmsFactory
             SchemaSmsInstallment::class => [
                 SchemaSmsType::REMAINDER_PAYMENT => new HeaderSchemaSms(__("Напоминание об оплате"),
                     SchemaSmsType::REMAINDER_PAYMENT, [
-                        new ValueHeader("Ф.И.О", '${name}'),
-                        new ValueHeader("Номер заказа", '${order}'),
+                        SchemaSmsType::TYPE_NAME => new ValueHeader("Ф.И.О", '${name}'),
+                        SchemaSmsType::TYPE_NUMBER_ORDER => new ValueHeader("Номер заказа", '${order}'),
                     ]),
                 SchemaSmsType::DAY_OF_PAYMENT => new HeaderSchemaSms(__("Наступил день оплаты"),
                     SchemaSmsType::DAY_OF_PAYMENT, [
-                        new ValueHeader("Ф.И.О", '${name}'),
+                        SchemaSmsType::TYPE_NAME => new ValueHeader("Ф.И.О", '${name}'),
                     ]),
                 SchemaSmsType::EXPIRED_PAYMENT => new  HeaderSchemaSms(__("Просроченный платеж"),
                     SchemaSmsType::EXPIRED_PAYMENT, [
-                        new ValueHeader("Ф.И.О", '${name}'),
+                        SchemaSmsType::TYPE_NAME => new ValueHeader("Ф.И.О", '${name}'),
                     ]),
                 SchemaSmsType::AFTER_PAYMENT => new HeaderSchemaSms(__("Оплаченный платеж"),
                     SchemaSmsType::AFTER_PAYMENT, [
-                        new ValueHeader("Ф.И.О", '${name}'),
+                        SchemaSmsType::TYPE_NAME => new ValueHeader("Ф.И.О", '${name}'),
                     ])
             ]
         ][$selected];
