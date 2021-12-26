@@ -2,14 +2,20 @@
 
 namespace App\Domain\Core\Api\CardService\BindCard\Model;
 
+use App\Domain\Core\Api\CardService\Model\CardService;
 use Illuminate\Support\Facades\Http;
 
 class BindCardService
 {
     const SERVER = "api.paymo.uz/partner/bind-card/";
+    public CardService $ser;
+
+    public function __construct($ser){
+        $this->ser = $ser;
+    }
 
     public function create($card_number, $expiry, $language){
-        $secret = env("CARD_ACCESS_TOKEN");
+        $secret = $this->ser->getAttribute();
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $secret,
         ])->post(self::SERVER . 'create', [
@@ -22,7 +28,7 @@ class BindCardService
     }
 
     public function apply($transaction_id, $otp, $language){
-        $secret = env("CARD_ACCESS_TOKEN");
+        $secret = $this->ser->getAttribute();
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $secret,
         ])->post(self::SERVER . 'apply', [
@@ -35,7 +41,7 @@ class BindCardService
     }
 
     public function dial($transaction_id){
-        $secret = env("CARD_ACCESS_TOKEN");
+        $secret = $this->ser->getAttribute();
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $secret,
         ])->post(self::SERVER . 'dial', [
@@ -46,7 +52,7 @@ class BindCardService
     }
 
     public function list_cards($page, $page_size){
-        $secret = env("CARD_ACCESS_TOKEN");
+        $secret = $this->ser->getAttribute();
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $secret,
         ])->post(self::SERVER . 'list-cards', [
