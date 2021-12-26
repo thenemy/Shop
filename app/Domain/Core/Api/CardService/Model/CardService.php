@@ -22,6 +22,11 @@ class CardService
         $response = json_decode($res->body());
         $this->access_token = $response->access_token;
         put_env(["CARD_ACCESS_TOKEN" => $this->access_token]);
+        return $this->access_token ?? env("CARD_ACCESS_TOKEN");
+    }
+
+    public function getAttribute(){
+        return $this->access_token ?? env("CARD_ACCESS_TOKEN");
     }
 
     public function getToken(){
@@ -36,7 +41,7 @@ class CardService
         if ($response->getStatusCode() == 401 || $response->getStatusCode() == 400) {
             throw new CardServiceError($resp_encoded->error_description, 401);
         }
-        $this->storeToken($response);
+        return $this->storeToken($response);
     }
 
     public function refreshToken(){
@@ -53,7 +58,7 @@ class CardService
         if ($response->getStatusCode() == 401) {
             throw new CardServiceError($resp_encoded->error_description, 401);
         }
-        $this->storeToken($response);
+        return $this->storeToken($response);
     }
 
     public function revokeToken(){
