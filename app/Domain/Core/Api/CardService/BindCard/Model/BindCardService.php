@@ -7,11 +7,18 @@ use Illuminate\Support\Facades\Http;
 class BindCardService
 {
     const SERVER = "api.paymo.uz/partner/bind-card/";
+    public string $secret;
 
-    public function create($card_number, $expiry, $language){
-        $secret = env("CARD_ACCESS_TOKEN");
+    public function __construct()
+    {
+        $this->secret = env("CARD_ACCESS_TOKEN");
+
+    }
+
+    public function create($card_number, $expiry, $language = 'ru')
+    {
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $secret,
+            'Authorization' => 'Bearer ' . $this->secret,
         ])->post(self::SERVER . 'create', [
             'card_number' => $card_number,
             'expiry' => $expiry,
@@ -21,10 +28,10 @@ class BindCardService
         return $response_decoded->transaction_id;
     }
 
-    public function apply($transaction_id, $otp, $language){
-        $secret = env("CARD_ACCESS_TOKEN");
+    public function apply($transaction_id, $otp, $language = "ru")
+    {
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $secret,
+            'Authorization' => 'Bearer ' . $this->secret,
         ])->post(self::SERVER . 'apply', [
             'transaction_id' => $transaction_id,
             'otp' => $otp,
@@ -34,10 +41,10 @@ class BindCardService
         return $response_decoded;
     }
 
-    public function dial($transaction_id){
-        $secret = env("CARD_ACCESS_TOKEN");
+    public function dial($transaction_id)
+    {
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $secret,
+            'Authorization' => 'Bearer ' . $this->secret,
         ])->post(self::SERVER . 'dial', [
             'transaction_id' => $transaction_id,
         ]);
@@ -45,10 +52,10 @@ class BindCardService
         return $response_decoded;
     }
 
-    public function list_cards($page, $page_size){
-        $secret = env("CARD_ACCESS_TOKEN");
+    public function list_cards($page, $page_size)
+    {
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $secret,
+            'Authorization' => 'Bearer ' . $this->secret,
         ])->post(self::SERVER . 'list-cards', [
             'page' => $page,
             'page_size' => $page_size

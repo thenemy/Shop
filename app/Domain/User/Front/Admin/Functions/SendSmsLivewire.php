@@ -2,6 +2,7 @@
 
 namespace App\Domain\User\Front\Admin\Functions;
 
+use App\Domain\Core\Api\CardService\BindCard\Model\BindCardService;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Abstracts\AbstractFunction;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Abstracts\AbstractFunctionComponent;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\FunctionStandardTemplate;
@@ -22,8 +23,13 @@ class SendSmsLivewire extends AbstractFunction
                 'entity.date_number' => "required"
             ]
         );
-        dd($component);
-        return BaseLivewireDynamic::class;
+        $service = new BindCardService();
+
+        $component->entity['transaction_id'] = $service->create(
+            $component->entity->card_number,
+            $component->entity->date_number,
+        );
+        return "";
     }
 
 
