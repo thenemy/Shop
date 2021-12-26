@@ -27,6 +27,7 @@ class Entity extends Model implements RuleInterface
         return new $self();
     }
 
+
     static public function getRules(): array
     {
         return [];

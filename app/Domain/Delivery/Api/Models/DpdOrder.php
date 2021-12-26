@@ -11,11 +11,18 @@ class DpdOrder extends DpdClient
     /**
      * @return  Delivery
      */
+    const ORDER = "order2?wsdl";
+
+    public function __construct()
+    {
+        parent::__construct(self::ORDER);
+    }
+
     public function createOrder(ShopAddress $fromAddress)
     {
         $request = [
             'header' => [
-
+                'datePickup' => $fromAddress->workTime()->where("day", ">=", date('w'))->orderByDesc("day")
             ]
         ];
     }

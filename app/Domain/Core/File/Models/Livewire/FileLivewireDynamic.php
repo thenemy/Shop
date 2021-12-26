@@ -12,15 +12,18 @@ class FileLivewireDynamic extends FileLivewireCreator implements LivewireCreator
 
     public string $service;
     public string $parentKey;
+    public string $parentId;
 
     public function __construct($className,
         $entity,
                                 string $serviceClass,
-                                string $parentKey
+                                string $parentKey,
+                                string $parentId = "id"
     )
     {
         $this->parentKey = $parentKey;
         $this->service = $serviceClass;
+        $this->parentId = $parentId;
         parent::__construct($className, $entity);
     }
 
@@ -34,7 +37,7 @@ class FileLivewireDynamic extends FileLivewireCreator implements LivewireCreator
             $this->classNameBlade,
             $this->getBladeName(),
             $this->parentKey,
-            $this->getWithoutScopeAtrVariable("id")
+            $this->getWithoutScopeAtrVariable($this->parentId)
         );
     }
 

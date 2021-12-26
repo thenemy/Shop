@@ -19,6 +19,7 @@ class Products extends Migration
             $table->bigInteger('price');
             $table->smallInteger("currency");
             $table->integer("number");
+            $table->integer("weight");// weight in kg
             $table->boolean("is_important")->default(false);
             $table->string("slug")->unique();
             $table->foreignId('category_id')->constrained('categories');

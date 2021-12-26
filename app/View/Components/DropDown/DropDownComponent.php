@@ -12,7 +12,7 @@ class DropDownComponent extends Component
     {
         $this->drop = $drop;
         $this->attributes = $attributes;
-    }
+        }
 
     public function render()
     {

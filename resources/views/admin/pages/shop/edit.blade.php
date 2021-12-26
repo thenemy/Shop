@@ -7,6 +7,10 @@
             label='Телефон пользователя' value='{{$entity->user->phone}}' id='' onkeyup="" />
 <x-helper.input.input name='user->password' type='password'
             label='Пароль' value='{{old("user->password") ?? ""}}' id='' onkeyup="" />
+<livewire:admin.pages.shop-edit.work-times-dynamic
+                parentKey='id'
+                :parentId='$entity->id'
+            />
 <livewire:components.file.file-uploading
                     :entityId='$entity->id'
                     mediaKey='image_file'

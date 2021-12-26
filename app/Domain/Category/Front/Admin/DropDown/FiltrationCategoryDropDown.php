@@ -26,10 +26,6 @@ class FiltrationCategoryDropDown extends AbstractDropDownAttributeTable
 
     static public function generate($model, $name = null): string
     {
-        return (new self([
-            new DropItem(FiltrationInterface::TEXT, FiltrationInterface::TEXT_FRONT),
-            new DropItem(FiltrationInterface::IMAGE, FiltrationInterface::IMAGE_FRONT),
-            new DropItem(FiltrationInterface::DESCRIPTION, FiltrationInterface::DESCRIPTION_FRONT),
-        ], $model, FiltrationInterface::DB_TO_FRONT[$name] ?? null))->generateHtml();
+        return (new self(self::generateItems(FiltrationInterface::DB_TO_FRONT), $model, FiltrationInterface::DB_TO_FRONT[$name] ?? null))->generateHtml();
     }
 }

@@ -3,7 +3,9 @@
 namespace App\Domain\Category\Entities;
 
 use App\Domain\Category\Builders\FiltrationCategoryBuilder;
+use App\Domain\Category\Front\Admin\DropDown\FiltrationCategoryDropDown;
 use App\Domain\Category\Interfaces\FiltrationInterface;
+use App\Domain\Core\Front\Admin\CustomTable\Attributes\Abstracts\DynamicAttributes;
 use App\Domain\Core\Main\Entities\Entity;
 
 class FiltrationCategory extends Entity implements FiltrationInterface
@@ -27,4 +29,5 @@ class FiltrationCategory extends Entity implements FiltrationInterface
             'attribute' => 'required',
         ];
     }
+
 }

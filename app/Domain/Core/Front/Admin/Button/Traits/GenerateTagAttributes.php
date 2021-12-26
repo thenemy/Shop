@@ -4,7 +4,7 @@ namespace App\Domain\Core\Front\Admin\Button\Traits;
 
 trait GenerateTagAttributes
 {
-    private array $attributes = [];
+    protected array $attributes = [];
 
     /**
      * @return string

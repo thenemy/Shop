@@ -8,6 +8,7 @@ use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputFileAttribute;
 use App\Domain\Core\Front\Admin\Form\Interfaces\CreateAttributesInterface;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\Shop\Entities\Shop;
+use App\Domain\Shop\Front\Dynamic\WorkTimesDynamic;
 
 class ShopEdit extends Shop implements CreateAttributesInterface
 {
@@ -21,6 +22,7 @@ class ShopEdit extends Shop implements CreateAttributesInterface
                 "Телефон пользователя", false),
             new InputAttribute(self::USER_TO . "password", "password",
                 "Пароль"),
+            WorkTimesDynamic::getDynamic("ShopEdit", self::SHOP_ADDRESS_TO . "id"),
             new InputFileAttribute("image_file", "Фото магазина", self::class),
             new InputFileAttribute("logo_file", "Лого Магазина", self::class),
             new InputFileAttribute("document_file", "Документы", self::class),

@@ -29,3 +29,10 @@ if (!function_exists('put_env')) {
         return true;
     }
 }
+if (!function_exists('test')) {
+    function test(array $values = [])
+    {
+        $s = new \App\Domain\Delivery\Api\Models\DpdGeography();
+        return $s->getSerializedCities("UZ");
+    }
+}

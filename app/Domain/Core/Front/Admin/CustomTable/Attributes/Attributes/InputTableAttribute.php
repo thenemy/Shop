@@ -31,7 +31,7 @@ class InputTableAttribute implements HtmlInterface
     }
 
     public static function generate(string $name, string $type,
-                                    string $model, string $key = "", ?bool $defer = true, ?string $filter = ""): string
+                                    string $model, ?bool $defer = true, ?string $filter = "", string $key = ""): string
     {
         $self = new self($name, $type, $model, $key, $defer, $filter);
         return $self->generateHtml();

@@ -6,6 +6,7 @@ use App\Domain\Category\Entities\FiltrationCategory;
 use App\Domain\Category\Front\Admin\CustomTable\Tables\FiltrationCategoryTable;
 use App\Domain\Category\Front\Admin\DropDown\FiltrationCategoryDropDown;
 use App\Domain\Category\Services\FiltrationCategoryService;
+use App\Domain\Core\Front\Admin\CustomTable\Attributes\Abstracts\DynamicAttributes;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\InputTableAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Interfaces\TableInFront;
@@ -21,19 +22,36 @@ class FiltrationCategoryDynamic extends FiltrationCategory implements TableInFro
 {
     use TableDynamic;
 
-
-    protected function generateInput()
+    /**
+     * @throws \App\Domain\Core\Front\Admin\CustomTable\Errors\DynamicTableException
+     */
+    public static function getCustomRules(): array
     {
-        $this->inputs['key'] = InputTableAttribute::generate(
-            'key',
-            'text',
-            $this->fillCollectionModel('key')
-        );
-        $this->inputs['attribute'] = FiltrationCategoryDropDown::generate(
-            $this->fillCollectionModel(''),
-            'attribute',
-        );
+        return [
+            'key' => DynamicAttributes::INPUT,
+            'attribute' => DynamicAttributes::DROP_DOWN(FiltrationCategoryDropDown::class),
+        ];
     }
+
+    public function getCustomFrontRules(): array
+    {
+        return [
+            'key' => null,
+            'attribute' => fn($value) => self::DB_TO_FRONT[$this->attribute],
+        ];
+    }
+//    protected function generateInput()
+//    {
+//        $this->inputs['key'] = InputTableAttribute::generate(
+//            'key',
+//            'text',
+//            $this->fillCollectionModel('key')
+//        );
+//        $this->inputs['attribute'] = FiltrationCategoryDropDown::generate(
+//            $this->fillCollectionModel(''),
+//            $this->attribute,
+//        );
+//    }
 
     protected function generateAttributes()
     {

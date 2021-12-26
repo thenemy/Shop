@@ -16,11 +16,13 @@ class ShopService extends BaseService implements ShopRelationInterface
 {
     use FileUploadService;
 
-    public UserShopService $userService;
+    private UserShopService $userService;
+    private WorkTimesService $workTimesService;
 
     public function __construct()
     {
         $this->userService = new UserShopService();
+        $this->workTimesService = new WorkTimesService();
         parent::__construct();
     }
 
@@ -38,9 +40,12 @@ class ShopService extends BaseService implements ShopRelationInterface
         try {
             DB::beginTransaction();
             $user_array = $this->popCondition($object_data, self::USER);
-            $store = ["id" => $this->userService->create($user_array)->id];
-            $shop_array = array_merge($store, $object_data);
-            $object = parent::create($shop_array);
+            $work_array = $this->popCondition($object_data, self::WORK_TIME);
+            $user_array['id'] = $this->userService->create($user_array)->id;
+            $object = parent::create($user_array);
+            //will be added when work could be made without entity
+//            $work_array['id'] = $object->id;
+//            $this->workTimesService->create($work_array);
             DB::commit();
             return $object;
         } catch (\Throwable $exception) {
