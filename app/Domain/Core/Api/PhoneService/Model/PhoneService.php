@@ -40,8 +40,8 @@ class PhoneService
             return $this->send_code($phone_to_send, $message);
         }
         $response_decoded = json_decode($response->body());
-        if ($response->getStatusCode() == 400) {
-            throw new PhoneError($response['message'], 400);
+        if ($response_decoded->getStatusCode() == 400) {
+            throw new PhoneError($response_decoded['message'], 400);
         }
         return $response_decoded;
     }

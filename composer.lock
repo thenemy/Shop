@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "12fb599f367e7810f9ebc54d0b0f319f",
+    "content-hash": "fbccc19985a47dde864513462e4defe9",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3054,29 +3054,30 @@
         },
         {
             "name": "rawilk/laravel-breadcrumbs",
-            "version": "2.0.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rawilk/laravel-breadcrumbs.git",
-                "reference": "c0fd5b8efb0183fffd867e23d5ed3d173a738b4c"
+                "reference": "70f5300476fb8677ba1d009a2f2e2212f5e60a5a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rawilk/laravel-breadcrumbs/zipball/c0fd5b8efb0183fffd867e23d5ed3d173a738b4c",
-                "reference": "c0fd5b8efb0183fffd867e23d5ed3d173a738b4c",
+                "url": "https://api.github.com/repos/rawilk/laravel-breadcrumbs/zipball/70f5300476fb8677ba1d009a2f2e2212f5e60a5a",
+                "reference": "70f5300476fb8677ba1d009a2f2e2212f5e60a5a",
                 "shasum": ""
             },
             "require": {
                 "facade/ignition-contracts": "^1.0",
-                "illuminate/contracts": "^7.0|^8.0",
-                "illuminate/routing": "^7.0|^8.0",
-                "illuminate/support": "^7.0|^8.0",
-                "php": "^7.4"
+                "illuminate/contracts": "^8.0",
+                "illuminate/routing": "^8.0",
+                "illuminate/support": "^8.0",
+                "php": "^8.0"
             },
             "require-dev": {
+                "doctrine/dbal": "^2.12",
                 "friendsofphp/php-cs-fixer": "^2.16",
-                "orchestra/testbench": "^5.0|^6.0",
-                "phpunit/phpunit": "^9.4",
+                "orchestra/testbench": "^6.5",
+                "phpunit/phpunit": "^9.4.4",
                 "psalm/plugin-laravel": "^1.4",
                 "spatie/phpunit-snapshot-assertions": "^4.2",
                 "vimeo/psalm": "^4.0"
@@ -3121,7 +3122,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rawilk/laravel-breadcrumbs/issues",
-                "source": "https://github.com/rawilk/laravel-breadcrumbs/tree/2.0.0"
+                "source": "https://github.com/rawilk/laravel-breadcrumbs/tree/3.0.0"
             },
             "funding": [
                 {
@@ -3129,7 +3130,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-26T16:56:49+00:00"
+            "time": "2020-12-01T15:53:42+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -8181,8 +8182,9 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3|^8.0",
-        "ext-json": "*"
+        "php": "^7.4|^8.0",
+        "ext-json": "*",
+        "ext-soap": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.1.0"
