@@ -49,7 +49,6 @@ class TakenCreditController extends BaseController
 
     public function store(Request $request)
     {
-        dd($request->all());
         return $this->getStoreValidation($request);
     }
 

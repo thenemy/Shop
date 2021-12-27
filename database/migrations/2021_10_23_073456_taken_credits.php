@@ -17,7 +17,8 @@ class TakenCredits extends Migration
         Schema::create('taken_credits', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->boolean('is_paid');
+            $table->boolean('is_paid')->default(false);
+            $table->bigInteger("transaction_id");
             $table->bigInteger('initial_price');
             $table->boolean("status")->default(false); /// accepted the credit or not is the important
             $table->dateTime('date_taken')->nullable();

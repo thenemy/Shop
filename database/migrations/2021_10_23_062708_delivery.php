@@ -18,11 +18,16 @@ class Delivery extends Migration
     public function up()
     {
         Schema::create('delivery', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId("user_purchase_id")
-                ->constrained("user_purchases")
+            $table->id();//orderNumberInteral   this must be putted
+            $table->foreignId("user_purchase_id") // from here we will get all relevant products
+            ->constrained("user_purchases")
                 ->restrictOnDelete()
                 ->restrictOnDelete();
+            $table->foreignId("shop_id") // this is needed for getting relevant products, and pick Up
+            ->constrained("shops")
+                ->restrictOnUpdate()
+                ->restrictOnDelete();
+            // Namely, some products have the same pick up address , so we have to put them together
             $table->string("orderNum");
             $table->integer("status"); //// all status that possible for delivery
             ///

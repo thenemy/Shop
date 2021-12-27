@@ -23,7 +23,11 @@ class TakenCredit extends Entity implements TakenCreditRelationInterface
     public $timestamps = true;
 
     protected $table = "taken_credits";
-
+    public function paid()
+    {
+        $this->is_paid = true;
+        $this->save();
+    }
     public function newEloquentBuilder($query)
     {
         return TakenCreditBuilder::new($query);

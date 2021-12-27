@@ -13,9 +13,11 @@ class Merchant
     public function __construct($ser)
     {
         $this->ser = $ser;
+        $this->storeID = env("STORE_ID");
     }
 
-    public function create($amount, $account, $store_id, $terminal_id, $details){
+    public function create($amount, $account, $store_id, $terminal_id = null, $details = null)
+    {
         $secret = $this->ser->getAttribute();
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $secret,
@@ -30,7 +32,8 @@ class Merchant
         return $response_decoded;
     }
 
-    public function pre_confirm($card_token, $card_number, $expiry, $store_id, $transaction_id){
+    public function pre_confirm($card_token, $card_number, $expiry, $store_id, $transaction_id)
+    {
         $secret = $this->ser->getAttribute();
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $secret,
@@ -43,7 +46,8 @@ class Merchant
         ]);
     }
 
-    public function confirm($transaction_id, $otp, $store_id){
+    public function confirm($transaction_id, $otp, $store_id)
+    {
         $secret = $this->ser->getAttribute();
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $secret,
@@ -54,7 +58,8 @@ class Merchant
         ]);
     }
 
-    public function otp_resend($transaction_id){
+    public function otp_resend($transaction_id)
+    {
         $secret = $this->ser->getAttribute();
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $secret,
@@ -63,7 +68,8 @@ class Merchant
         ]);
     }
 
-    public function reverse($transaction_id, $reason, $hold_amount){
+    public function reverse($transaction_id, $reason, $hold_amount)
+    {
         $secret = $this->ser->getAttribute();
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $secret,
@@ -74,7 +80,8 @@ class Merchant
         ]);
     }
 
-    public function get($store_id, $transaction_id){
+    public function get($store_id, $transaction_id)
+    {
         $secret = $this->ser->getAttribute();
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $secret,

@@ -9,7 +9,7 @@ use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Location\Entities\Location;
 use App\Domain\Order\Pivot\UserOrders;
 use App\Domain\Product\Product\Entities\Product;
-use App\Models\User;
+use App\Domain\User\Entities\User;
 
 class Order extends Entity
 {

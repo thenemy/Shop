@@ -4,13 +4,62 @@ namespace App\Domain\Installment\Services;
 
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Core\Main\Services\BaseService;
+use App\Domain\CreditProduct\Entity\Credit;
+use App\Domain\File\Traits\FileUploadService;
 use App\Domain\Installment\Entities\TakenCredit;
+use App\Domain\Installment\Interfaces\TakenCreditRelationInterface;
+use App\Domain\Order\Interfaces\UserPurchaseRelation;
+use App\Domain\Product\Product\Entities\Product;
+use App\Domain\User\Entities\PlasticCard;
+use App\Domain\User\Entities\User;
+use App\Domain\User\Services\SuretyService;
+use Illuminate\Support\Facades\DB;
 
-class TakenCreditService extends BaseService
+class TakenCreditService extends BaseService implements TakenCreditRelationInterface
 {
+    use FileUploadService;
+
+    private SuretyService $surety;
+
+    public function __construct()
+    {
+        $this->surety = new SuretyService();
+        parent::__construct();
+    }
 
     public function getEntity(): Entity
     {
-        return  new TakenCredit();
+        return new TakenCredit();
+    }
+
+
+    private function setKeys(array &$object_data)
+    {
+
+    }
+
+    public function create(array $object_data)
+    {
+        dd($object_data);
+
+        $this->serializeTempFile($object_data);
+        try {
+            DB::beginTransaction();
+            $user_data = User::findByPlastic($object_data['plastic_id'])
+                ->selectUserDataId()->first()->id;
+            $object_data['user_credit_data_id'] = $user_data->id;
+            $object_data['user_id'] = $user_data->user_id;
+            $surety_data = $this->popCondition($object_data, self::SURETY_SERVICE);
+            $object_data['surety_id'] = $this->surety->create($surety_data)->id;
+            $object = parent::create($object_data);
+            $object_data['taken_credit_id'] = $object->id;
+            $payService = new InstallmentPayService($object_data, $object);
+            $payService->pay();
+            DB::commit();
+            return $object;
+        } catch (\Throwable $exception) {
+            DB::rollBack();
+            throw  $exception;
+        }
     }
 }

@@ -17,6 +17,22 @@ class UserBuilder extends BuilderEntity
         return $this->join('user_roles', 'user_id', 'id');
     }
 
+    public function findByPlastic($id): UserBuilder
+    {
+        return $this->join("plastic_user_cards", "plastic_user_cards.user_id",
+            "=", 'users.id')->where("plastic_id", '=', $id);
+    }
+
+    public function joinUserData()
+    {
+        return $this->join("user_credit_datas", "user_id", '=', 'users.id');
+    }
+
+    public function selectUserDataId()
+    {
+        return $this->joinUserData()->select("user_credit_datas.id");
+    }
+
     public function filterBy($filter)
     {
         $this->joinRole()->where('role', Roles::USER);

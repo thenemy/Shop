@@ -13,7 +13,7 @@ class PlasticUserCards extends Migration
     public function up()
     {
         Schema::create("plastic_user_cards", function (Blueprint $table) {
-            $table->foreignUuid('plastic_id')
+                $table->foreignUuid('plastic_id')
                 ->constrained("plastic_card")
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();

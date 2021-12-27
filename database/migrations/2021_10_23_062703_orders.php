@@ -24,7 +24,7 @@ class Orders extends Migration
     public function up()
     {
         /**
-            order will contain all required infromation about the product
+         * order will contain all required infromation about the product
          *  not about how this product wiil be served by our service
          *  so it will give what the color of the product
          *  how many the similiar product wanted to buy
@@ -35,7 +35,7 @@ class Orders extends Migration
             $table->timestamps();
             $table->integer('quantity');
             $table->json('order');
-            $table->integer('price');
+            $table->integer('price'); /// calculated price
             $table->foreignId("product_id")->constrained("products");
         });
     }

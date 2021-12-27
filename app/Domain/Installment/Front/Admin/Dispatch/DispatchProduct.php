@@ -18,11 +18,14 @@ class DispatchProduct extends Dispatch
             $current = $value;
             $uzs_price = Product::find($key)->real_price;
             if (!($object->entitiesStore[$key] > 0)) {
+                // if 0 was entered for number  of items choosen
+                // it will set to 1
                 $current = 1;
                 $object->entitiesStore[$key] = $current;
             }
             $overall_sum = $uzs_price * $current + $overall_sum;
         }
         $object->dispatchBrowserEvent('product-update', ['sum' => $overall_sum]);
+        $object->dispatchBrowserEvent('product-number', ['product' => json_encode($object->entitiesStore)]);
     }
 }

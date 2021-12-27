@@ -2,6 +2,7 @@
 
 namespace App\Domain\Installment\Interfaces;
 
+use App\Domain\Order\Interfaces\UserPurchaseRelation;
 use App\Domain\User\Interfaces\UserRelationInterface;
 
 interface TakenCreditRelationInterface
@@ -17,4 +18,5 @@ interface TakenCreditRelationInterface
     const USER_TO = self::USER_SERVICE . \CR::CR;
     const SURETY_TO = self::SURETY_SERVICE . \CR::CR;
     const PURCHASE_TO = self::PURCHASE_SERVICE . \CR::CR;
+    const PURCHASES_TO = self::PURCHASE_TO . UserPurchaseRelation::PURCHASE_TO;
 }
