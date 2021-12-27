@@ -4,37 +4,46 @@ namespace App\Domain\Installment\Jobs;
 
 use App\Domain\Core\Api\CardService\Interfaces\Payable;
 use App\Domain\Core\Api\CardService\Merchant\Model\Merchant;
+use App\Domain\Core\Api\CardService\Model\WithdrawMoney;
 use App\Domain\Core\Job\Base\AbstractJob;
 use App\Domain\Installment\Entities\MonthPaid;
+use App\Domain\Installment\Payable\MonthPaidPayable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use PHPUnit\Exception;
 
 class MonthPaidJobs extends AbstractJob
 {
-    private MonthPaid $monthPaid;
-    private Merchant $merchant;
+    private MonthPaidPayable $monthPaid;
+    private WithdrawMoney $withdrawMoney;
 
-    public function __construct(MonthPaid $monthPaid)
+    public function __construct(MonthPaidPayable $monthPaid)
     {
         $this->monthPaid = $monthPaid;
-        $this->merchant = new Merchant();
+        $this->withdrawMoney = new WithdrawMoney($monthPaid);
 
     }
-
-    public function withdraw(array $tokens, Payable $payable)
+    /// handle logic when it goes to FailedToWithdraw dispatch
+    ///  what has to be the condition for this case
+    public function withdraw()
     {
-        $transaction_id = $this->merchant->create($payable->amount(), $payable->account_id());
-        $this->merchant->pre_confirm($this->monthPaid->plastic_token(), $transaction_id);
-        $this->merchant->confirm();
+        foreach ($this->monthPaid->getTokens() as $token) {
+            try {
+                $this->withdrawMoney->withdraw($token);
+                break;
+            } catch (\Exception $exception) {
+
+            }
+        }
     }
 
     public function handle()
     {
         try {
-
+            $this->withdraw();
         } catch (\Exception $exception) {
 
         }

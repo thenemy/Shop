@@ -26,6 +26,11 @@ class Surety extends Entity implements SuretyRelationInterface
             "surety_id");
     }
 
+    public function getPlasticTokens(): \Illuminate\Support\Collection
+    {
+        return $this->plastic()->pluck('card_token');
+    }
+
     public function crucialData(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(CrucialData::class, "crucial_data_id");

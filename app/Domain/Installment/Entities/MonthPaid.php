@@ -19,7 +19,7 @@ class MonthPaid extends Entity
         return $this->belongsTo(TakenCredit::class, "taken_credit_id");
     }
 
-    public function plastic_token()
+    public function getPlasticToken()
     {
         return $this->takenCredit->plastic->card_token;
     }

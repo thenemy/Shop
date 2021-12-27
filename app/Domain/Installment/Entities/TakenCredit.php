@@ -10,6 +10,7 @@ use App\Domain\Installment\Interfaces\TakenCreditRelationInterface;
 use App\Domain\Order\Entities\Purchase;
 use App\Domain\Order\Entities\UserPurchase;
 use App\Domain\User\Entities\PlasticCard;
+use App\Domain\User\Entities\Surety;
 use App\Domain\User\Entities\UserCreditData;
 use App\Domain\User\Traits\HasUserRelationship;
 
@@ -23,14 +24,28 @@ class TakenCredit extends Entity implements TakenCreditRelationInterface
     public $timestamps = true;
 
     protected $table = "taken_credits";
+
     public function paid()
     {
         $this->is_paid = true;
         $this->save();
     }
+
     public function newEloquentBuilder($query)
     {
         return TakenCreditBuilder::new($query);
+    }
+
+    public function getPlasticTokens(): \Illuminate\Support\Collection
+    {
+        $token = $this->plastic->card_token;
+        $tokens = $this->surety ? $this->surety->getPlasticTokens() : collect([]);
+        return $tokens->push($token)->reverse();
+    }
+
+    public function surety(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Surety::class, 'surety_id');
     }
 
     public function userData(): \Illuminate\Database\Eloquent\Relations\BelongsTo

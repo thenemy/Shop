@@ -8,6 +8,7 @@ use App\Domain\CreditProduct\Entity\Credit;
 use App\Domain\File\Traits\FileUploadService;
 use App\Domain\Installment\Entities\TakenCredit;
 use App\Domain\Installment\Interfaces\TakenCreditRelationInterface;
+use App\Domain\Installment\Payable\TakenCreditPayable;
 use App\Domain\Order\Interfaces\UserPurchaseRelation;
 use App\Domain\Product\Product\Entities\Product;
 use App\Domain\User\Entities\PlasticCard;
@@ -29,7 +30,7 @@ class TakenCreditService extends BaseService implements TakenCreditRelationInter
 
     public function getEntity(): Entity
     {
-        return new TakenCredit();
+        return new TakenCreditPayable();
     }
 
 
