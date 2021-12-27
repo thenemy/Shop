@@ -10,5 +10,7 @@ interface Payable
 
     public function tokens_array();
 
-    public function saveTransaction(int $transaction_id);
+    public function setTransaction(int $transaction_id);
+
+    public function getTransaction();
 }

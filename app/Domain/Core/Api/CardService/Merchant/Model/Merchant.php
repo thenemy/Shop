@@ -13,7 +13,6 @@ class Merchant
     public function __construct($ser)
     {
         $this->ser = $ser;
-        $this->storeID = env("STORE_ID");
     }
 
     public function create($amount, $account, $store_id, $terminal_id = null, $details = null)
