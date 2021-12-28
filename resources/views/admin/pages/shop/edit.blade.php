@@ -2,14 +2,14 @@
 @section("action")
     
 <x-helper.input.input name='name' type='text'
-            label='Имя Магазина' value='{{$entity->name}}' id='' onkeyup="" />
+            label='Имя Магазина' value='{{ $entity->name ?? " " }}' id='name'  onkeyup=""/>
 <x-helper.input.input name='user->phone' type='text'
-            label='Телефон пользователя' value='{{$entity->user->phone}}' id='' onkeyup="" />
+            label='Телефон пользователя' value='{{ $entity->user->phone ?? " " }}' id='user->phone'  onkeyup=""/>
 <x-helper.input.input name='user->password' type='password'
-            label='Пароль' value='{{old("user->password") ?? ""}}' id='' onkeyup="" />
+            label='Пароль' value='{{old("user->password") ?? ""}}' id='user->password'  onkeyup=""/>
 <livewire:admin.pages.shop-edit.work-times-dynamic
                 parentKey='id'
-                :parentId='$entity->id'
+                :parentId='$entity->shopAddress->id'
             />
 <livewire:components.file.file-uploading
                     :entityId='$entity->id'

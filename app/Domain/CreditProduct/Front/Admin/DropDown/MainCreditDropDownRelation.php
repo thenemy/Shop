@@ -12,7 +12,7 @@ class MainCreditDropDownRelation extends BaseDropDownRelationAttribute
     public static function newCredit(string $dropDownAssociateClass, string $dispatch = Dispatch::class,
                                      bool   $create = true, array $filterBy = [])
     {
-        return self::newRelation("name", "названию Рассрочки",
+        return self::dynamicSearchRelation("\"name->\" . app()->getLocale()", "названию Рассрочки",
             $dropDownAssociateClass, $dispatch, $create, $filterBy);
     }
 

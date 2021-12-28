@@ -41,8 +41,8 @@ class ShopService extends BaseService implements ShopRelationInterface
             DB::beginTransaction();
             $user_array = $this->popCondition($object_data, self::USER);
             $work_array = $this->popCondition($object_data, self::WORK_TIME);
-            $user_array['id'] = $this->userService->create($user_array)->id;
-            $object = parent::create($user_array);
+            $object_data['id'] = $this->userService->create($user_array)->id;
+            $object = parent::create($object_data);
             //will be added when work could be made without entity
 //            $work_array['id'] = $object->id;
 //            $this->workTimesService->create($work_array);

@@ -41,6 +41,11 @@ class FileTemp extends Entity implements FileTempInterface
         return new UploadedFile(public_path($this->file->storage()), $this->file->filename);
     }
 
+    public function getEmptyFile(): UploadedFile
+    {
+        return new UploadedFile(public_path(".empty"), "");
+    }
+
     public function getFileCreateAttribute(): FileAttribute
     {
         return new FileAttribute(

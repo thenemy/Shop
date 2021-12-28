@@ -33,7 +33,9 @@ abstract class BaseInputFileTemp implements HtmlInterface
         $this->multiple = $multiple;
         $this->label = $label;
     }
-
+    /// create here the field for initial value
+    /// attach it in mount state
+    ///
     public function generateHtml(): string
     {
         return sprintf("<livewire:components.file.file-uploading-without-entity

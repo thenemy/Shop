@@ -30,6 +30,19 @@ abstract class BaseDropDownRelationAttribute extends BaseDropDownSearchAttribute
      *  hence, entity will call necessary method to set initial value for
      *  dropdowns
      * */
+    public static function dynamicSearchRelation(string $searchByKey,
+                                                 string $searchLabel,
+                                                 string $dropDownAssociatedClass,
+                                                 string $dispatch = Dispatch::class,
+                                                 bool   $create = true,
+                                                 array  $filterBy = [])
+    {
+        $object = parent::dynamicSearch($searchByKey, $searchLabel, $create, $filterBy);
+        $object->dropDownAssociatedClass = $dropDownAssociatedClass;
+        $object->dispatch = $dispatch;
+        return $object;
+    }
+
     public static function newRelation(string $searchByKey,
                                        string $searchLabel,
                                        string $dropDownAssociatedClass,

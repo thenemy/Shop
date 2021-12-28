@@ -25,7 +25,7 @@ class MonthlyPaidTable extends BaseTable
 
     public function slot(): string
     {
-        return ContainerRow::generate("justify-end items-end", [
+        return ContainerRow::generateClass("justify-end items-end", [
             MainButtonCompile::new("Выставить счет", [
                 'wire:click' => SmsNotPayment::FUNCTION_NAME
             ])

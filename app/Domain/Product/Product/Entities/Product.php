@@ -39,11 +39,6 @@ class Product extends Entity implements ProductInterface
         return $this->belongsTo(Shop::class, "shop_id");
     }
 
-    public function getImagesAttribute()
-    {
-        return $this->getManyMedia("productImage", "image");
-    }
-
     public function category()
     {
         return $this->belongsTo(Category::class, "category_id");
@@ -137,6 +132,12 @@ class Product extends Entity implements ProductInterface
             'slug' => 'title'
         ];
     }
+
+    public function getImagesAttribute()
+    {
+        return $this->getManyMedia("productImage", "image");
+    }
+
 
 }
 

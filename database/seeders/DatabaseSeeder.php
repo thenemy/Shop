@@ -13,8 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        (new CategorySeeder)->run();
         (new RoleSeeder())->run();
+        (new CurrencySeeder())->run();
+        (new SchemaSmsSeeder())->run();
         // \App\Models\User::factory(10)->create();
     }
 }

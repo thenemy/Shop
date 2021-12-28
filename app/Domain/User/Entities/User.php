@@ -64,4 +64,11 @@ class User extends Entity implements UserRelationInterface
     {
         return $this->hasOne(UserAvatar::class, "user_id");
     }
+
+    public static function getCreateRules(): array
+    {
+        return [
+            'phone' => "required",
+        ];
+    }
 }

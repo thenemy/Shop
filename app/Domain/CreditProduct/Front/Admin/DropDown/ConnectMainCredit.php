@@ -24,6 +24,6 @@ trait ConnectMainCredit
 
     static public function getDropDownSearch($initial, array $filterBy)
     {
-        return parent::getDropDown($initial, $filterBy, MainCredit::class, "name");
+        return parent::getDropDown($initial, $filterBy, MainCredit::class, "name_current");
     }
 }

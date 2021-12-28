@@ -29,7 +29,7 @@ class MainCreditIndex extends MainCredit implements TableInFront, CreateAttribut
 
     public function getNameIndexAttribute()
     {
-        return TextAttribute::generation($this, "name");
+        return TextAttribute::generation($this, $this['name_current'], true);
     }
 
     public function getInitialPriceIndexAttribute()

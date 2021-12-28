@@ -2,11 +2,11 @@
 @section("action")
     
 <x-helper.input.input name='name' type='text'
-            label='Имя Магазина' value='{{old("name") ?? ""}}' id='' onkeyup="" />
+            label='Имя Магазина' value='{{old("name") ?? ""}}' id='name'  onkeyup=""/>
 <x-helper.input.input name='user->phone' type='text'
-            label='Телефон пользователя' value='{{old("user->phone") ?? ""}}' id='' onkeyup="" />
+            label='Телефон пользователя' value='{{old("user->phone") ?? ""}}' id='user->phone'  onkeyup=""/>
 <x-helper.input.input name='user->password' type='password'
-            label='Пароль' value='{{old("user->password") ?? ""}}' id='' onkeyup="" />
+            label='Пароль' value='{{old("user->password") ?? ""}}' id='user->password'  onkeyup=""/>
 <livewire:components.file.file-uploading-without-entity
                     keyToAttach='image'
                     mediaKey='file_create'

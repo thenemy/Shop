@@ -11,6 +11,7 @@ use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Core\Media\Models\Media;
 use App\Domain\Core\Slug\Traits\Sluggable;
 use App\Domain\Product\Product\Entities\Product;
+use Illuminate\Support\Collection;
 
 
 class Category extends Entity implements CategoryRelationInterface
@@ -30,9 +31,14 @@ class Category extends Entity implements CategoryRelationInterface
         return $this->hasMany(Product::class);
     }
 
-    public function getNameAttribute($value): ?string
+    public function getNameAttribute($value): ?Collection
     {
-        return $this->getTranslatable("name");
+        return $this->getTranslations("name");
+    }
+
+    public function getNameCurrentAttribute(): ?string
+    {
+        return $this->getTranslatable('name');
     }
 
     public function setNameAttribute($value)

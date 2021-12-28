@@ -7,12 +7,14 @@ namespace App\Domain\Core\Main\Services;
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Core\Main\Interfaces\ServiceInterface;
 use App\Domain\Core\Main\Traits\FastInstantiation;
+use Illuminate\Support\Facades\Validator;
+use Nette\Schema\ValidationException;
 
 abstract class BaseService implements ServiceInterface
 {
     use FastInstantiation;
 
-    protected $entity;
+    protected Entity $entity;
 
     public function __construct()
     {
@@ -27,15 +29,47 @@ abstract class BaseService implements ServiceInterface
 
     abstract public function getEntity(): Entity;
 
+    private function validate(array $object_data, array $rules)
+    {
+        $validator = Validator::make(
+            $object_data,
+            $rules,
+            $this->validationMessage()
+        );
+        if ($validator->fails()) {
+            $errors = $validator->errors()->toArray();
+            $collapsed = collect($errors)->collapse();
+            throw  new ValidationException($collapsed->join('<br>'));
+        }
+
+    }
+
+    protected function validationMessage(): array
+    {
+        return [];
+    }
+
+    protected function validateCreateRules(): array
+    {
+        return $this->entity->getCreateRules();
+    }
+
+    protected function validateUpdateRules(): array
+    {
+        return $this->entity->getUpdateRules();
+    }
+
     public function create(array $object_data)
     {
         $filtered = $this->filterRecursive($object_data);
+        $this->validate($object_data, $this->validateCreateRules());
         return $this->entity->create($filtered);
     }
 
     public function update($object, array $object_data)
     {
         $filtered = $this->filterRecursive($object_data);
+        $this->validate($object_data, $this->validateUpdateRules());
         $object->update($filtered);
         return $object;
     }
@@ -64,7 +98,7 @@ abstract class BaseService implements ServiceInterface
      * then $d = popCondition($s , 'd')
      * output $d [ 'asd' => "somedata"]
      */
-    public function popCondition(array &$array, string $check_key): array
+    public function popCondition(array &$array, string $check_key, bool $clean = false): array
     {
         $new_array = [];
         foreach ($array as $key => $value) {
@@ -78,7 +112,8 @@ abstract class BaseService implements ServiceInterface
                  * we are connecting remainder keys
                  */
                 $connect_rest = implode(\CR::CR, array_splice($key_value, 1));
-                $new_array[$connect_rest] = $value;
+                if (!$clean || $value)
+                    $new_array[$connect_rest] = $value;
                 unset($array[$key]);
             }
         }

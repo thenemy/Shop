@@ -40,7 +40,7 @@ class CategoryIndex extends Category implements
 
     public function getNameTableAttribute(): string
     {
-        return TextAttribute::generation($this, "name");
+        return TextAttribute::generation($this, $this['name_current'], true);
     }
 
     // call function which will have set of actions for this table

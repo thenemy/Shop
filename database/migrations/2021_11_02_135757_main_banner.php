@@ -15,7 +15,9 @@ class MainBanner extends Migration
     {
         Schema::create('main_banner', function (Blueprint $table) {
             $table->id();
-            $table->string("image");
+            $table->json("image");
+            $table->boolean("status")->default(true);
+            $table->string("link");
         });
     }
 

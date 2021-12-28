@@ -5,7 +5,8 @@ namespace App\Domain\Installment\Jobs;
 use App\Domain\Core\Api\CardService\Interfaces\Payable;
 use App\Domain\Core\Api\CardService\Model\WithdrawMoney;
 use App\Domain\Core\Job\Base\AbstractJob;
- // do we need to add token to the construct ?
+
+// do we need to add token to the construct ?
 
 class FailedToWithdraw extends AbstractJob
 {
@@ -19,6 +20,7 @@ class FailedToWithdraw extends AbstractJob
     public function handle()
     {
         try {
+            sleep(60 * 60 * 2);
             $this->withdrawMoney->withdraw();
         } catch (\Exception $exception) {
 

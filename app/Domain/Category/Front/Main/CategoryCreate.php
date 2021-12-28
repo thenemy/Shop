@@ -18,7 +18,7 @@ class CategoryCreate extends Category implements CreateAttributesInterface
     public function generateAttributes(): BladeGenerator
     {
         return BladeGenerator::generation([
-            InputAttribute::createAttribute("name", "text", "Введите  имя категории"),
+            new InputLangAttribute("name", __("Введите  имя категории")),
             new InputFileTempAttribute(
                 self::CATEGORY_ICON_DATA,
                 "Загрузите иконку",
@@ -27,7 +27,7 @@ class CategoryCreate extends Category implements CreateAttributesInterface
         ]);
     }
 
-    public function additionalGeneration():array
+    public function additionalGeneration(): array
     {
         return [];
     }

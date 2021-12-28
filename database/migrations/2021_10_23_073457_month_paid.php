@@ -19,7 +19,7 @@ class MonthPaid extends Migration
             $table->float("must_pay");
             $table->float("paid")->default(0);
             $table->integer("month");
-            $table->string("transaction_id");
+            $table->bigInteger("transaction_id");
             $table->foreignId("taken_credit_id")
                 ->constrained("taken_credits")
                 ->cascadeOnUpdate()

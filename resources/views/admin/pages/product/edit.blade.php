@@ -18,19 +18,19 @@
             </div>
             
 <x-helper.input.input name='price' type='number'
-            label='Введите цену' value='{{$entity->price}}' id='' onkeyup="" />
+            label='Введите цену' value='{{ $entity->price ?? " " }}' id='price'  onkeyup=""/>
 <x-helper.drop_down.drop_down :drop='\App\Domain\Product\Product\Front\Admin\DropDown\CurrencyDropDown::getDropDown($entity->currency)' />
 <x-helper.input.input name='number' type='number'
-            label='Введите колиство данного товара' value='{{$entity->number}}' id='' onkeyup="" />
+            label='Введите колиство данного товара' value='{{ $entity->number ?? " " }}' id='number'  onkeyup=""/>
 <livewire:components.drop-down.drop-down-search
-            searchByKey='name'
+            :searchByKey='"name"'
             dropDownClass='App\Domain\Category\Front\Admin\DropDown\CategoryDropDownSearch'
             :initial='$entity->category_id'
             searchLabel='названию Категорий'
             
              />
 <livewire:components.drop-down.drop-down-search
-            searchByKey='name'
+            :searchByKey='"name"'
             dropDownClass='App\Domain\Shop\Front\Admin\DropDown\ShopDropDownSearch'
             :initial='$entity->shop_id'
             searchLabel='названию магазина'

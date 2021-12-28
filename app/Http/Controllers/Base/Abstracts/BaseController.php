@@ -53,35 +53,11 @@ abstract class BaseController extends Controller implements ControllerInterface
 
     public function __construct()
     {
-//        $this->entity = $this->getNewEntity();
         $this->form = $this->getForm();
         $this->service = $this->getService();
 
     }
 
-
-//    private function getEntity($id)
-//    {
-//        return $this->getEntityClass()::find($id);
-//    }
-//
-//    private function getNewEntity()
-//    {
-//        $base = $this->getEntityClass();
-//        return new $base();
-//    }
-//
-//    private function getNewEntityIndex()
-//    {
-//        $base = $this->getIndexEntity();
-//        return new $base();
-//    }
-//
-
-    //// MAIN FUNCTIONS
-    ///
-    ///
-    ///
 
     public function getIndex($request, $variables = [])
     {

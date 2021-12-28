@@ -13,7 +13,7 @@ class MainCreditDropDownSearch extends BaseDropDownSearchAttribute
     public static function newCredit(
         bool $create = true, array $filterBy = [])
     {
-        return self::new("name", "названию Рассрочки",
+        return self::new("name->" . app()->getLocale(), "названию Рассрочки",
             $create, $filterBy);
     }
 

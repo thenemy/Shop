@@ -18,12 +18,14 @@
             </div>
             
 <x-helper.input.input name='price' type='number'
-            label='Введите цену' value='{{old("price") ?? ""}}' id='' onkeyup="" />
+            label='Введите цену' value='{{old("price") ?? ""}}' id='price'  onkeyup=""/>
+<x-helper.input.input name='weight' type='number'
+            label='Введите вес' value='{{old("weight") ?? ""}}' id='weight'  onkeyup=""/>
 <x-helper.drop_down.drop_down :drop='\App\Domain\Product\Product\Front\Admin\DropDown\CurrencyDropDown::getDropDown()' />
 <x-helper.input.input name='number' type='number'
-            label='Введите колиство данного товара' value='{{old("number") ?? ""}}' id='' onkeyup="" />
+            label='Введите колиство данного товара' value='{{old("number") ?? ""}}' id='number'  onkeyup=""/>
 <livewire:components.drop-down.drop-down-search
-            searchByKey='name'
+            :searchByKey='"name"'
             dropDownClass='App\Domain\Category\Front\Admin\DropDown\CategoryDropDownSearch'
             
             searchLabel='названию Категорий'
@@ -38,7 +40,7 @@
                     :entityId='old("file->id_file->productImage->image") ?? ""'
                      />
 <livewire:components.drop-down.drop-down-search
-            searchByKey='name'
+            :searchByKey='"name"'
             dropDownClass='App\Domain\Shop\Front\Admin\DropDown\ShopDropDownSearch'
             
             searchLabel='названию магазина'

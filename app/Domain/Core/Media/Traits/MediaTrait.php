@@ -55,7 +55,7 @@ trait MediaTrait
         }
     }
 
-    private function getOriginalValue($key)
+    protected function getOriginalValue($key)
     {
         return $this->attributes[$key] ?? null;
     }

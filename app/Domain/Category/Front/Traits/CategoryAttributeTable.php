@@ -10,7 +10,7 @@ use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
 use App\Domain\Core\Front\Admin\Routes\Abstracts\RouteHandler;
 use App\Domain\Core\Front\Admin\Routes\Interfaces\RoutesInterface;
 
-trait   CategoryAttributeTable
+trait  CategoryAttributeTable
 {
     public function getIconTableAttribute(): string
     {

@@ -35,7 +35,7 @@ trait Translatable
 
     public function setTranslate(string $key, $value): void
     {
-        if ($this->checkIfStringExists($value)) {
+        if ($this->checkIfStringAndEmptyArray($value)) {
             $lang = app()->getLocale();
             $value = [$lang => $value];
         }
@@ -54,7 +54,7 @@ trait Translatable
         return json_encode((object)array_merge($existing, $value), JSON_UNESCAPED_UNICODE);
     }
 
-    private function checkIfStringExists($value): bool
+    private function checkIfStringAndEmptyArray($value): bool
     {
         return is_string($value) && !empty($value);
     }

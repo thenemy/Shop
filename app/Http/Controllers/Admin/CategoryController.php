@@ -65,7 +65,6 @@ class CategoryController extends BaseController
 
     public function update(Request $request, Category $category): \Illuminate\Http\RedirectResponse
     {
-        dd($request->all());
         return $this->getUpdateValidation($request, $category);
     }
 

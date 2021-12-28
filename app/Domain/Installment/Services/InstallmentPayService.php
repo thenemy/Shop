@@ -90,6 +90,7 @@ class InstallmentPayService
         $status = UserOrderInterface::INSTALMENT;
         if (isset($object_data['delivery'])) {
             $status += UserOrderInterface::DELIVERY;
+            throw new \Exception("Delivery method is not implemented now");
         } else {
             $status += UserOrderInterface::SELF_DELIVERY;
         }

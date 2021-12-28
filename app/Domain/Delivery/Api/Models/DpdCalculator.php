@@ -29,7 +29,7 @@ class DpdCalculator extends DpdClient
         return $response;
     }
 
-    private function setWeightAndServiceCode(Collection $product, int &$weight)
+    private function setWeightAndServiceCode(Collection $product, int &$weight): string
     {
         $partial = true;
         $weight = $product->reduce(function ($cary, $item) {

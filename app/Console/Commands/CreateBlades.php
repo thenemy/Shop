@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 
 use App\Domain\Category\Front\Admin\File\CategoryCreator;
 use App\Domain\Category\Front\Admin\File\CategoryOpenCreator;
+use App\Domain\Common\Banners\Front\Admin\File\BannerCreator;
+use App\Domain\Common\Brands\Front\Admin\File\BrandCreator;
 use App\Domain\CreditProduct\Front\Admin\File\MainCreditCreator;
 use App\Domain\Installment\Front\Admin\Files\TakenCreditCreator;
 use App\Domain\Product\Product\Front\Admin\File\ProductCreator;
@@ -54,6 +56,8 @@ class CreateBlades extends Command
         MainCreditCreator::createFiles();
         TakenCreditCreator::createFiles();
         SuretyFileCreator::createFiles();
+        BannerCreator::createFiles();
+        BrandCreator::createFiles();
         return 0;
     }
 }

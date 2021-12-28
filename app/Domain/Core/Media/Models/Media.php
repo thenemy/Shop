@@ -27,6 +27,9 @@ class Media implements MediaInterface
 
     private function getFileName(): ?string
     {
+        if (pathinfo($this->path, PATHINFO_EXTENSION) == "empty") {
+            return null;
+        }
         return pathinfo($this->path, PATHINFO_BASENAME);
     }
 

@@ -8,7 +8,7 @@ class ContainerTitle extends Container
 
     static public function newTitle(string $title, string $class = '', array $items = [])
     {
-        $object = self::new($class, $items);
+        $object = self::newClass($class, $items);
         $object->title = $title;
         return $object;
     }
@@ -17,9 +17,9 @@ class ContainerTitle extends Container
     {
         return sprintf(
             "
-            <div class='%s'>
+            <div %s>
             <span class='font-bold text-lg'>%s</span>
                 %s
-            </div>", $this->class, $this->title, $this->generateItems());
+            </div>", $this->generateAttributes(), $this->title, $this->generateItems());
     }
 }

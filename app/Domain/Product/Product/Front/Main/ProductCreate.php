@@ -20,6 +20,9 @@ class ProductCreate extends Product implements CreateAttributesInterface
         return BladeGenerator::generation([
             new InputLangAttribute("title", __("Введите название")),
             new InputAttribute("price", "number", __("Введите цену")),
+
+            new InputAttribute("weight", "number", __("Введите вес")),
+
             CurrencyDropDown::new(),
             new InputAttribute("number", "number", __("Введите колиство данного товара")),
             CategoryDropDownSearch::newCat(),

@@ -55,6 +55,7 @@ class Merchant
             'otp' => $otp,
             'store_id' => $store_id
         ]);
+
     }
 
     public function otp_resend($transaction_id)

@@ -12,6 +12,8 @@ use App\Domain\User\Interfaces\UserRelationInterface;
 use App\Domain\User\Traits\PasswordHandle;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 /**
  * finish this method
@@ -45,6 +47,12 @@ class UserService extends BaseService implements UserRelationInterface
     public function create(array $object_data)
     {
         try {
+            // [
+            // "userCreditData->name" => name
+            // "userCreditData->asd" => name
+            // "userCreditData->saf" => name
+            // "userCreditData->gsag" => name
+            // ]
             DB::beginTransaction();
             $this->updatePassword($object_data);
             $this->serializeTempFile($object_data);
@@ -83,10 +91,16 @@ class UserService extends BaseService implements UserRelationInterface
             $credit_data = $this->popCondition($object_data, self::USER_DATA_SERVICE);
             $avatar_data = $this->popCondition($object_data, self::AVATAR_SERVICE);
             $crucial_data = $this->popCondition($credit_data, self::CRUCIAL_DATA_SERVICE);
-            if (!empty($crucial_data)) {
-                $this->crucialService
-                    ->update($object[self::USER_DATA_SERVICE][self::CRUCIAL_DATA_SERVICE], $crucial_data);
-            } else if (!empty($avatar_data)) {
+            if (!empty($credit_data) && !empty($crucial_data)) {
+                if (isset($object[self::USER_DATA_SERVICE][self::CRUCIAL_DATA_SERVICE])) {
+                    $object_crucial = $object[self::USER_DATA_SERVICE][self::CRUCIAL_DATA_SERVICE];
+                    $this->crucialService
+                        ->update($object_crucial, $crucial_data);
+                } else {
+                    $this->crucialService->create($crucial_data);
+                }
+            }
+            if (!empty($avatar_data)) {
                 $this->avatarService
                     ->update($object[self::AVATAR_SERVICE], $avatar_data);
             }

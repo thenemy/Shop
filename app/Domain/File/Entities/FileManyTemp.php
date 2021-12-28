@@ -6,6 +6,7 @@ use App\Domain\Core\Front\Admin\File\Attributes\FilesAttributes;
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Core\Media\Traits\MediaManyTrait;
 use App\Domain\File\Interfaces\FileTempInterface;
+use Illuminate\Http\UploadedFile;
 
 class FileManyTemp extends Entity implements FileTempInterface
 {
@@ -30,7 +31,12 @@ class FileManyTemp extends Entity implements FileTempInterface
         });
     }
 
-        public function getFileCreateAttribute()
+    public function getEmptyFile(): array
+    {
+        return [new UploadedFile(public_path(".empty"), "")];
+    }
+
+    public function getFileCreateAttribute()
     {
         return new FilesAttributes(
             $this,

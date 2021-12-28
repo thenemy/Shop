@@ -21,9 +21,21 @@ abstract class BaseDropDownSearchAttribute extends AbstractDropDownSearch implem
     protected string $searchByKey;
     protected bool $create;
     protected array $filterBy;
+
     public static function getDropItem(): string
     {
         return self::DROP_ITEM;
+    }
+
+    public static function dynamicSearch(string $searchByKey,
+                                         string $searchLabel,
+                                         bool   $create = true,
+                                         array  $filterBy = [],
+                                                ...$additonal)
+    {
+        $object = self::new($searchByKey, $searchLabel  , $create, $filterBy, ...$additonal);
+        $object->searchByKey = $searchByKey;
+        return $object;
     }
 
     public static function new(string $searchByKey,
@@ -34,7 +46,7 @@ abstract class BaseDropDownSearchAttribute extends AbstractDropDownSearch implem
     {
         $self = get_called_class();
         $class = new $self([]);
-        $class->searchByKey = $searchByKey;
+        $class->searchByKey = sprintf("\"%s\"", $searchByKey);
         $class->searchLabel = $searchLabel;
         $class->create = $create;
         $class->filterBy = $filterBy;
@@ -46,7 +58,7 @@ abstract class BaseDropDownSearchAttribute extends AbstractDropDownSearch implem
         $dropDownClass = get_called_class();
         return sprintf(
             "<%s
-            searchByKey='%s'
+            :searchByKey='%s'
             dropDownClass='%s'
             %s
             searchLabel='%s'

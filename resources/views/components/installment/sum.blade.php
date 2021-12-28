@@ -1,10 +1,12 @@
 <div x-data="initSum()"
+
      @credit-update.window="setPercent($event.detail.percent, $event.detail.month)"
      @product-update.window="setProducts($event.detail.sum)"
      @pay-update.window="setInitialPayment($event.data.value)"
      @product-number.window="setProductsWithNumber($event.detail.product)"
      class="flex flex-row border w-full justify-around">
     <div>
+
         <span class="font-bold">{{__("Процент за месяц:")}}</span> <span x-text="percent_month"></span>
     </div>
     <div>

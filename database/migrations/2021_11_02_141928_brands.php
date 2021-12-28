@@ -15,7 +15,7 @@ class Brands extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
-            $table->string("brand");
+            $table->string("brand")->index()->unique();
             $table->string("image");
         });
     }

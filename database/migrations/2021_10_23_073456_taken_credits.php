@@ -33,6 +33,7 @@ class TakenCredits extends Migration
                 ->constrained("plastic_card")
                 ->restrictOnDelete();
             $table->foreignId('surety_id')
+                ->nullable()
                 ->constrained("surety_data")
                 ->restrictOnDelete()
                 ->restrictOnUpdate();

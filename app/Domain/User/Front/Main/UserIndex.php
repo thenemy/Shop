@@ -28,7 +28,11 @@ class UserIndex extends User implements
 
     public function getAvatarIndexAttribute(): string
     {
-        return ImageAttribute::generation($this, $this[self::AVATAR_SERVICE]->avatar->storage(), true);
+        $storage = "";
+        if (isset($this[self::AVATAR_SERVICE]['avatar'])) {
+            $storage = $this[self::AVATAR_SERVICE]->avatar->storage();
+        }
+        return ImageAttribute::generation($this, $storage, true);
     }
 
     public function getSuretyIndexAttribute(): string
@@ -43,7 +47,11 @@ class UserIndex extends User implements
 
     public function getNameIndexAttribute(): string
     {
-        return TextAttribute::generation($this, $this->userCreditData->name, true);
+        $name = "";
+        if(isset($this[self::USER_DATA_SERVICE]['name'])){
+            $name = $this[self::USER_DATA_SERVICE]['name'];
+        }
+        return TextAttribute::generation($this, $name, true);
     }
 
     public function getPhoneIndexAttribute(): string

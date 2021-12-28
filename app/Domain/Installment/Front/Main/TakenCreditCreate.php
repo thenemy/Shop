@@ -4,8 +4,10 @@ namespace App\Domain\Installment\Front\Main;
 
 use App\Domain\Core\File\Models\Livewire\FileLivewireNestedWithoutEntity;
 use App\Domain\Core\Front\Admin\Attributes\Containers\Container;
+use App\Domain\Core\Front\Admin\Attributes\Containers\ContainerColumn;
 use App\Domain\Core\Front\Admin\Attributes\Containers\ContainerRow;
 use App\Domain\Core\Front\Admin\Attributes\Containers\NestedContainer;
+use App\Domain\Core\Front\Admin\Attributes\Containers\Visibility;
 use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputAttribute;
 use App\Domain\Core\Front\Admin\Form\Interfaces\CreateAttributesInterface;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
@@ -32,22 +34,22 @@ class TakenCreditCreate extends TakenCredit implements CreateAttributesInterface
     {
         return BladeGenerator::generation([
             SumComponent::new(),
-            ContainerRow::new("w-full items-end", [
+            ContainerRow::newClass("w-full items-end", [
                 UserDropDownRelation::newUser(PlasticCardDropDownAssociated::class),
                 InputAttribute::createAttribute("initial_price",
                     "number", "Первоначальная плата",
-                    "initial_payment", "pay-update"),
+                    "initial_payment"),
                 InputAttribute::createAttribute(
                     "payment_type",
                     'checkbox',
                     "Уплачен на кассе",
-                    "payment_type",
+                    "initial_pay",
                 ),
             ]),
             MainCreditDropDownRelation::newCredit(
                 CreditDropDownAssociated::class,
                 DispatchCredit::class),
-            ContainerRow::new("border-2 rounded p-2 w-full justify-start", [
+            ContainerRow::newClass("border-2 rounded p-2 w-full justify-start", [
                 InputAttribute::createAttribute(
                     "delivery",
                     'checkbox',
@@ -56,10 +58,21 @@ class TakenCreditCreate extends TakenCredit implements CreateAttributesInterface
                     "delivery-update"
                 ),
             ]),
-            new FileLivewireNestedWithoutEntity("TakenCredit", $this->getProductsView()),
-            NestedContainer::new("Поручитель", [
-                self::generationSuretyCreate(self::SURETY_TO)
+            ContainerColumn::newClass("border-2 rounded p-2 w-full items-start", [
+                InputAttribute::createAttribute(
+                    "surety",
+                    'checkbox',
+                    "Поручитель",
+                    "surety_check",
+                    "surety-update"
+                ),
+                Visibility::newVisibility("surety-update", [
+                    NestedContainer::new("Добавить", [
+                        self::generationSuretyCreate(self::SURETY_TO)
+                    ]),
+                ])
             ]),
+            new FileLivewireNestedWithoutEntity("TakenCredit", $this->getProductsView()),
             // add choice for the address to the user
         ]);
     }

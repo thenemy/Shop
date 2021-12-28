@@ -10,6 +10,7 @@ use App\Domain\Core\File\Models\Livewire\FileLivewireNested;
 use App\Domain\Core\Front\Admin\File\Attributes\FileAttribute;
 use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputAttribute;
 use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputFileAttribute;
+use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputLangAttribute;
 use App\Domain\Core\Front\Admin\Form\Interfaces\CreateAttributesInterface;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 
@@ -20,7 +21,7 @@ class CategoryEdit extends Category implements CreateAttributesInterface
     {
         return BladeGenerator::generation(array(
 //            new FileLivewireNested("Category", $this->child_category),
-            InputAttribute::updateAttribute("name", "text", "Введите  имя категории"),
+            new InputLangAttribute("name", __("Введите  имя категории"), false),
             FiltrationCategoryDynamic::getDynamic('CategoryEdit'),
             new InputFileAttribute("icon_file", "Иконка", self::class)
         ));

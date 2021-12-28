@@ -23,8 +23,8 @@ class TakenCreditEdit extends TakenCredit implements CreateAttributesInterface
     public function generateAttributes(): BladeGenerator
     {
         return BladeGenerator::generation([
-            ContainerRow::new("", [
-                ContainerColumn::new("", [
+            ContainerRow::newClass("", [
+                ContainerColumn::newClass("", [
                     ContainerTitle::newTitle("Информация о клиенте",
                         "border p-2", [
                             KeyTextAttribute::new(__("Имя клиента"), self::CRUCIAL_DATA_TO . "name"),
@@ -40,7 +40,7 @@ class TakenCreditEdit extends TakenCredit implements CreateAttributesInterface
                             KeyTextAttribute::new(__("Количество месяцев"), 'number_month')
                         ])
                 ]),
-                ContainerColumn::new("space-y-2", [
+                ContainerColumn::newClass("space-y-2", [
                     new FileLivewireCreatorWithFilterBy("TakenCreditEdit", MonthlyPaidIndex::new()),
                     new FileLivewireCreatorWithFilterBy("TakenCreditEdit", TimeScheduleTransactionIndex::new())
                 ])

@@ -18,4 +18,6 @@ interface AdminRoutesInterface
     const MAIN_CREDIT = "main_credit";
     const TAKEN_CREDIT = "taken_credit";
     const SURETY = "surety";
+    const BANNER = "banner";
+    const BRAND = "brand";
 }

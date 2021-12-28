@@ -32,7 +32,7 @@ class CategoryDropDownSearch extends BaseDropDownSearchAttribute
 
     public static function getDropDownSearch($initial, array $filterBy): CategoryDropDownSearch
     {
-        return self::getDropDown($initial, $filterBy, Category::class, 'name');
+        return self::getDropDown($initial, $filterBy, Category::class, 'name_current');
     }
 
 }

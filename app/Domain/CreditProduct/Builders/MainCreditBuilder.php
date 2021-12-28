@@ -8,6 +8,6 @@ class MainCreditBuilder extends BuilderEntity
 {
     protected function getSearch(): string
     {
-        return "name";
+        return "name->" . app()->getLocale();
     }
 }
