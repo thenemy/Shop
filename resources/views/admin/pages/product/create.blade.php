@@ -38,6 +38,7 @@
                     :multiple='true'
                     label='Картинки'
                     :entityId='old("file->id_file->productImage->image") ?? ""'
+                    :mediaInitial='$entity->productImage->image'
                      />
 <livewire:components.drop-down.drop-down-search
             :searchByKey='"name"'

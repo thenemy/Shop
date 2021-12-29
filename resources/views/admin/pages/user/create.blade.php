@@ -26,6 +26,7 @@
                     :multiple='false'
                     label='Аватар'
                     :entityId='old("file->id_file->avatar->avatar") ?? ""'
+                    :mediaInitial='""'
                      />
 <livewire:components.file.file-uploading-without-entity
                     keyToAttach='userCreditData->crucialData->passport_reverse'
@@ -34,6 +35,7 @@
                     :multiple='false'
                     label='Прописка'
                     :entityId='old("file->id_file->userCreditData->crucialData->passport_reverse") ?? ""'
+                    :mediaInitial='""'
                      />
 <livewire:components.file.file-uploading-without-entity
                     keyToAttach='userCreditData->crucialData->user_passport'
@@ -42,6 +44,7 @@
                     :multiple='false'
                     label='Паспорт c пользователем'
                     :entityId='old("file->id_file->userCreditData->crucialData->user_passport") ?? ""'
+                    :mediaInitial='""'
                      />
 <livewire:components.file.file-uploading-without-entity
                     keyToAttach='userCreditData->crucialData->passport'
@@ -50,5 +53,6 @@
                     :multiple='false'
                     label='Паспорт пользователя'
                     :entityId='old("file->id_file->userCreditData->crucialData->passport") ?? ""'
+                    :mediaInitial='""'
                      />
 @endsection

@@ -10,6 +10,7 @@
                     :multiple='false'
                     label='Русский Баннер'
                     :entityId='old("file->id_file->image->ru") ?? ""'
+                    :mediaInitial='""'
                      />
 <livewire:components.file.file-uploading-without-entity
                     keyToAttach='image->uz'
@@ -18,6 +19,7 @@
                     :multiple='false'
                     label='Узбекский Баннер'
                     :entityId='old("file->id_file->image->uz") ?? ""'
+                    :mediaInitial='""'
                      />
 <livewire:components.file.file-uploading-without-entity
                     keyToAttach='image->en'
@@ -26,5 +28,6 @@
                     :multiple='false'
                     label='Английский Баннер'
                     :entityId='old("file->id_file->image->en") ?? ""'
+                    :mediaInitial='""'
                      />
 @endsection

@@ -24,6 +24,11 @@ class FileTemp extends Entity implements FileTempInterface
         $this->setMedia('file', $value, $this->id);
     }
 
+    public function setFileNewAttribute($value)
+    {
+        $this->file = $value;
+    }
+
     public function getMediaPathStorages(): string
     {
         return "temp/files";

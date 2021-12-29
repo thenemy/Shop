@@ -19,6 +19,11 @@ class FileManyTemp extends Entity implements FileTempInterface
         return $this->hasMany(FileTemp::class, "file_id");
     }
 
+    public function setFileNewAttribute(array $value)
+    {
+        $this->setManyMedia($value, FileTemp::class, "file", "file_id");
+    }
+
     public function getFilesMediaAttribute()
     {
         return $this->getManyMedia("files", "file");
@@ -36,7 +41,7 @@ class FileManyTemp extends Entity implements FileTempInterface
         return [new UploadedFile(public_path(".empty"), "")];
     }
 
-    public function getFileCreateAttribute()
+    public function getFileCreateAttribute(): FilesAttributes
     {
         return new FilesAttributes(
             $this,

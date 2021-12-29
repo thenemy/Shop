@@ -15,7 +15,6 @@ class FileMany extends Migration
     {
         Schema::create('file_many', function (Blueprint $table) {
             $table->id();
-
         });
     }
 

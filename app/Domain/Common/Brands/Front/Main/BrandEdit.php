@@ -15,7 +15,7 @@ class BrandEdit extends Brand implements CreateAttributesInterface
     {
         return BladeGenerator::generation([
             InputAttribute::updateAttribute("brand", "text", __("Название брэнда")),
-            new InputFileTempAttribute("image", __("Лого"))
+            InputFileTempAttribute::edit("image", __("Лого"))
         ]);
     }
 }

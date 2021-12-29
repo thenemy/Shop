@@ -10,5 +10,6 @@
                     :multiple='false'
                     label='Лого'
                     :entityId='old("file->id_file->image") ?? ""'
+                    :mediaInitial='""'
                      />
 @endsection

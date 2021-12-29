@@ -24,5 +24,6 @@
                     :multiple='false'
                     label='Загрузите иконку'
                     :entityId='old("file->id_file->icon->icon") ?? ""'
+                    :mediaInitial='""'
                      />
 @endsection

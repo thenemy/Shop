@@ -14,6 +14,7 @@
                     :multiple='false'
                     label='Фото магазина'
                     :entityId='old("file->id_file->image") ?? ""'
+                    :mediaInitial='""'
                      />
 <livewire:components.file.file-uploading-without-entity
                     keyToAttach='logo'
@@ -22,6 +23,7 @@
                     :multiple='false'
                     label='Лого Магазина'
                     :entityId='old("file->id_file->logo") ?? ""'
+                    :mediaInitial='""'
                      />
 <livewire:components.file.file-uploading-without-entity
                     keyToAttach='document'
@@ -30,6 +32,7 @@
                     :multiple='false'
                     label='Документы'
                     :entityId='old("file->id_file->document") ?? ""'
+                    :mediaInitial='""'
                      />
 <livewire:components.file.file-uploading-without-entity
                     keyToAttach='licence'
@@ -38,6 +41,7 @@
                     :multiple='false'
                     label='Лицензия'
                     :entityId='old("file->id_file->licence") ?? ""'
+                    :mediaInitial='""'
                      />
 <livewire:components.file.file-uploading-without-entity
                     keyToAttach='director_passport'
@@ -46,5 +50,6 @@
                     :multiple='false'
                     label='Паспорт директора'
                     :entityId='old("file->id_file->director_passport") ?? ""'
+                    :mediaInitial='""'
                      />
 @endsection

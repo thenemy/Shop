@@ -10,6 +10,7 @@ use App\Domain\Core\Media\Models\Media;
 use App\Domain\Core\Media\Services\MediaService;
 use App\Domain\Core\Media\Services\MediaServices;
 use Illuminate\Http\UploadedFile;
+use function Symfony\Component\Translation\t;
 
 trait MediaTrait
 {
@@ -39,10 +40,20 @@ trait MediaTrait
     public function setMedia($key, $value, $id)
     {
 
-        if ($value) {
+        if (!isset($this->attributes[$key]) || $value && $this->checkOnTemp($key, $value, $this->attributes[$key])) {
             $this->deleteMedia($key, $this->getOriginalValue($key));
             $this->storeMedia($key, $value, MediaInterface::PUBLIC_PATH, $id);
         }
+    }
+
+    final  protected function checkOnTemp($key, $inserted, $previous)
+    {
+        if ($previous) {
+            $old = preg_replace("/\//i", "\/", $previous);
+            $new = preg_replace("/\\\/i", "/", $inserted->path());
+            return !preg_match("/" . $old . "/i", $new);
+        }
+        return true;
     }
 
     public function deleteMedia(string $key, $value)
@@ -67,6 +78,12 @@ trait MediaTrait
         }
     }
 
+    private function checkPath($key, UploadedFile $value)
+    {
+        $path = $value->getPath();
+        return preg_match("/storage\/temp\//i", $path) || !preg_match("/public/i", $path);
+    }
+
     public function storeMedia($key, $value, $type, $id)
     {
         if ($value instanceof UploadedFile) {
@@ -74,6 +91,9 @@ trait MediaTrait
             $this->mediaObject[$key] = MediaServices::createMedia($this->generateBasePath($type), $value, $key, $id);
             $this->attributes[$key] = $this->mediaObject[$key]->path;
         } else if (is_string($value)) {
+        } else if ($value instanceof Media) {
+            $this->mediaObject[$key] = $value;
+            $this->attributes[$key] = $this->mediaObject[$key]->path;
         }
     }
 

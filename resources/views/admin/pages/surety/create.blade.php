@@ -24,6 +24,7 @@
                     :multiple='false'
                     label='Прописка'
                     :entityId='old("file->id_file->crucialData->passport_reverse") ?? ""'
+                    :mediaInitial='""'
                      />
 <livewire:components.file.file-uploading-without-entity
                     keyToAttach='crucialData->user_passport'
@@ -32,6 +33,7 @@
                     :multiple='false'
                     label='Паспорт c пользователем'
                     :entityId='old("file->id_file->crucialData->user_passport") ?? ""'
+                    :mediaInitial='""'
                      />
 <livewire:components.file.file-uploading-without-entity
                     keyToAttach='crucialData->passport'
@@ -40,5 +42,6 @@
                     :multiple='false'
                     label='Паспорт пользователя'
                     :entityId='old("file->id_file->crucialData->passport") ?? ""'
+                    :mediaInitial='""'
                      />
 @endsection

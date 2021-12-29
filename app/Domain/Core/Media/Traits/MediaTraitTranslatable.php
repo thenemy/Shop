@@ -3,6 +3,7 @@
 namespace App\Domain\Core\Media\Traits;
 
 use App\Domain\Core\Language\Traits\Translatable;
+use App\Domain\Core\Media\Interfaces\MediaInterface;
 use App\Domain\Core\Media\Models\Media;
 use App\Domain\Core\Media\Services\MediaServices;
 use Illuminate\Http\UploadedFile;
@@ -21,6 +22,28 @@ trait MediaTraitTranslatable
         return $this->getTranslations($key);
     }
 
+
+    public function setMedia($key, $value, $id)
+    {
+        if (is_array($value) && !empty($value)) {
+            foreach ($this->getOriginalValue($key) as $sub_key => $item) {
+                if ($this->checkOnTemp($key, $value[$sub_key], $item)) {
+                    $this->deleteMediaMany($key, $item, $sub_key);
+                    $this->storeMediaMany($key, $value[$sub_key], $sub_key, MediaInterface::PUBLIC_PATH, $id);
+                }
+            }
+        }
+    }
+
+    public function deleteMediaMany(string $key, $item, $sub_key)
+    {
+        $media = $this->getMedia($key, $item);
+        if ($media->filename) {
+            $media->delete();
+            $this->setTranslate($key, [$sub_key => ""]);
+        }
+    }
+
     public function deleteMedia(string $key, $value)
     {
         foreach ($value as $lang => $item) {
@@ -30,6 +53,17 @@ trait MediaTraitTranslatable
                 $this->setTranslate($key, [$lang => ""]);
             }
         }
+    }
+
+    public function storeMediaMany($key, $item, $sub_key, $type, $id)
+    {
+        if ($item instanceof UploadedFile) {
+            $item->extension();
+            $this->mediaObject[$key] = MediaServices::createMedia($this->generateBasePath($type), $item, $key, $id);
+            $this->setTranslate($key, [$sub_key => $this->mediaObject[$key]->path]);
+        } else if (is_string($item)) {
+        }
+
     }
 
     public function storeMedia($key, $value, $type, $id)
