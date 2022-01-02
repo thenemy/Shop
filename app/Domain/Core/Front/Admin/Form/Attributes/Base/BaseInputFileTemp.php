@@ -29,7 +29,8 @@ abstract class BaseInputFileTemp implements HtmlInterface
     public function __construct($class,
                                 $keyToAttach,
                                 $label,
-                                $multiple, bool $create = true,
+                                $multiple,
+                                bool $create = true,
                                 $mediaInitialKey = ""
     )
     {

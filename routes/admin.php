@@ -12,7 +12,8 @@ Route::name("admin.")->group(function () {
         [
             AdminRoutesInterface::USER => \App\Http\Controllers\Admin\UserController::class,
             AdminRoutesInterface::CATEGORY => \App\Http\Controllers\Admin\CategoryController::class,
-            AdminRoutesInterface::CATEGORY_OPEN => \App\Http\Controllers\Admin\CategoryChildController::class,
+            AdminRoutesInterface::SUB_CATEGORY => \App\Http\Controllers\Admin\SubCategoryController::class,
+            AdminRoutesInterface::CATEGORY_ALL => \App\Http\Controllers\Admin\AllCategoryController::class,
             AdminRoutesInterface::PRODUCT => \App\Http\Controllers\Admin\ProductController::class,
             AdminRoutesInterface::SHOP => \App\Http\Controllers\Admin\ShopController::class,
             AdminRoutesInterface::MAIN_CREDIT => \App\Http\Controllers\Admin\MainCreditController::class,

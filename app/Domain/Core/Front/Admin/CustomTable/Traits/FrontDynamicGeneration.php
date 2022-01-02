@@ -5,10 +5,12 @@ namespace App\Domain\Core\Front\Admin\CustomTable\Traits;
 use App\Domain\Core\Front\Admin\Button\ModelInRunTime\ButtonGreenLivewire;
 use App\Domain\Core\Front\Admin\Button\ModelInRunTime\ButtonRedLivewire;
 use App\Domain\Core\Front\Admin\CustomTable\Actions\Base\AllActions;
+use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\InputTableAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Errors\DynamicTableException;
+use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputAttribute;
 
-trait FrontDynamicGeneration
+trait   FrontDynamicGeneration
 {
     public array $front_attribute = [];
 
@@ -62,29 +64,59 @@ trait FrontDynamicGeneration
         }
         $input = [];
         foreach ($rules as $key => $value) {
+            $text_html = "";
             if (!$value)
-                $input[$key] = TextAttribute::generation(
+                $text_html = TextAttribute::generation(
                     $this,
                     $key
                 );
             else
-                $input[$key] = TextAttribute::generation(
+                $text_html = TextAttribute::generation(
                     $this,
                     $value($this->$key),
                     true
                 );
+            $input[$key] = $text_html;
+//            if ($this->getPrefixInputHidden())
+//                $input[$key] = $text_html . ' ' . $this->hiddenInputAdd($key);
+//            else
+//                $input[$key] = $text_html;
+
         }
         return $input;
+    }
+
+    abstract static public function getPrefixInputHidden(): string;
+
+    private function hiddenInputAdd($key): string
+    {
+        return InputTableAttribute::generate(
+            $this->getPrefixInputHidden() . \CR::CR . $this->id . \CR::CR . $key,
+            "text",
+            "",
+            false,
+            "",
+            "",
+            [
+                'class' => 'hidden',
+                "value" => $this->$key
+            ]
+        );
     }
 
     protected function generateAttributesFromRules($rules): array
     {
         $input = [];
         foreach ($rules as $key => $value) {
-            $input[$key] = TextAttribute::generation(
+            $text_html = TextAttribute::generation(
                 $this,
                 $key
             );
+//            if ($this->getPrefixInputHidden())
+//                $input[$key] = $text_html . ' ' . $this->hiddenInputAdd($key);
+//            else
+//                $input[$key] = $text_html;
+            $input[$key] = $text_html;
         }
         return $input;
     }

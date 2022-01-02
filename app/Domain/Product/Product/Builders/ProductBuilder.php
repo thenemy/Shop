@@ -12,14 +12,6 @@ class ProductBuilder extends BuilderEntity
         return "title";
     }
 
-    public function filterByIn($filter)
-    {
-        if (isset($filter['id'])) {
-            $this->whereIn('id', $filter['id']);
-        }
-        return $this;
-    }
-
     public function currencyUSD()
     {
         return $this->where('currency', ProductInterface::CURRENCY_USD_DB);
@@ -30,11 +22,5 @@ class ProductBuilder extends BuilderEntity
         return $this->where('currency', ProductInterface::CURRENCY_UZS_DB);
     }
 
-    public function filterByNotIn($filter)
-    {
-        if (isset($filter['id'])) {
-            $this->whereNotIn('id', $filter['id']);
-        }
-        return $this;
-    }
+
 }

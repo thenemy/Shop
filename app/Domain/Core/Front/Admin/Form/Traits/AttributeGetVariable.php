@@ -6,7 +6,12 @@ trait AttributeGetVariable
 {
     protected function getAttributeVariable($value): string
     {
-        return sprintf('{{%s}}', $this->getWithoutScopeAtrVariable($value));
+        return $this->getScope($this->getWithoutScopeAtrVariable($value));
+    }
+
+    protected function getScope($value)
+    {
+        return sprintf('{{%s ?? ""}}', $value);
     }
 
     protected function getWithoutScopeAtrVariable($value): string

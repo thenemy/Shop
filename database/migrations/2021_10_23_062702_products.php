@@ -21,9 +21,14 @@ class Products extends Migration
             $table->integer("number");
             $table->integer("weight");// weight in kg
             $table->boolean("is_important")->default(false);
+            $table->integer('percentage')->default(0);
             $table->string("slug")->unique();
-            $table->foreignId('category_id')->constrained('categories');
-            $table->foreignId('shop_id')->constrained('users')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreignId('category_id')->constrained('categories')
+                ->restrictOnDelete();
+            $table->foreignId('shop_id')->constrained('users')->onUpdate('CASCADE')
+                ->restrictOnDelete();
+            $table->foreignId('brand_id')->constrained('brands')->onUpdate('CASCADE')
+                ->restrictOnDelete();
         });
     }
 

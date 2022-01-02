@@ -14,8 +14,8 @@ abstract class BaseLivewireDynamic extends BaseLivewire
 {
     use FastInstantiation;
 
-    public $parentId;
-    public string $parentKey;
+    public $parentId = 0;
+    public string $parentKey = "";
     public Collection $entity;
     public Collection $collection;
     public array $rules = [];
@@ -23,6 +23,7 @@ abstract class BaseLivewireDynamic extends BaseLivewire
 
     public function mount()
     {
+        parent::mount();
         $this->entity = collect([]);
         $this->generateRules('entity.');
         $this->collection = collect([]);
@@ -45,18 +46,18 @@ abstract class BaseLivewireDynamic extends BaseLivewire
     {
         $this->validateRules('collection.' . $id . ".");
         $object = $this->collection->pull($id);
-        $entity = $this->getEntity()::find($id);
+        $entity = $this->findEntity($id);
         $this->getService()->update($entity, $object);
         $this->dispatchBrowserEvent('show-inputs', ['id' => $id, 'show' => false]);
     }
 
     public function delete($id)
     {
-        $entity = $this->getEntity()::find($id);
+        $entity = $this->findEntity($id);
         $this->getService()->destroy($entity);
     }
 
-    private function validateRules(string $rules)
+    protected function validateRules(string $rules)
     {
         $new_rules = [];
         foreach ($this->getEntity()::getRules() as $key => $value) {
@@ -67,16 +68,25 @@ abstract class BaseLivewireDynamic extends BaseLivewire
 
     public function cancel($id)
     {
-
         $this->collection->pull($id);
         $this->dispatchBrowserEvent('show-inputs', ['id' => $id, 'show' => false]);
+    }
+
+    protected function findEntity($id)
+    {
+        return $this->getEntity()::find($id);
+    }
+
+    protected function setCollection($entity, $id)
+    {
+        $this->collection[$id] = $entity->attributesToArray();
     }
 
     public function addToUpdate($id)
     {
 
-        $entity = $this->getEntity()::find($id);
-        $this->collection[$id] = $entity->attributesToArray();
+        $entity = $this->findEntity($id);
+        $this->setCollection($entity, $id);
         $this->generateRules("collection." . $id . ".");
         $this->dispatchBrowserEvent('show-inputs', ['id' => $id, 'show' => true]);
     }
@@ -85,7 +95,6 @@ abstract class BaseLivewireDynamic extends BaseLivewire
     {
         $this->validateRules('entity.');
         $this->entity[$this->parentKey] = $this->parentId;
-
         $this->getService()->create($this->entity->toArray());
         $this->entity = collect([]);
     }

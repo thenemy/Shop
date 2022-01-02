@@ -32,6 +32,7 @@ class CategoryDropDownSearch extends BaseDropDownSearchAttribute
 
     public static function getDropDownSearch($initial, array $filterBy): CategoryDropDownSearch
     {
+        $filterBy['depth'] = Category::orderBy("depth", "DESC")->first()->depth ?? 0;
         return self::getDropDown($initial, $filterBy, Category::class, 'name_current');
     }
 

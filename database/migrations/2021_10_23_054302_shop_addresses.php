@@ -19,8 +19,8 @@ class ShopAddresses extends Migration
                 ->constrained('users')
                 ->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
-            $table->foreignId("delivery_address_id")
-                ->unique()
+            $table->foreignId("delivery_address_id") // for create order
+            ->unique()
                 ->constrained("delivery_address");
             $table->float("longitude");
             $table->float("latitude");

@@ -27,7 +27,7 @@ class UserCreditDatas extends Migration
                 ->restrictOnUpdate()
                 ->restrictOnDelete();
             $table->string("additional_phone");
-
+            $table->integer("sex")->default(0);
         });
     }
 

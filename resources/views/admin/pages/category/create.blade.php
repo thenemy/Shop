@@ -26,4 +26,5 @@
                     :entityId='old("file->id_file->icon->icon") ?? ""'
                     :mediaInitial='""'
                      />
+<livewire:admin.pages.category-create.filtration-category-dynamic-without-entity />
 @endsection

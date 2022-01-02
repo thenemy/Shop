@@ -57,4 +57,9 @@ class ProductController extends BaseController
     {
         return $this->getUpdateValidation($request, $product);
     }
+
+    public function destroy(Request $request, Product $product)
+    {
+        return $this->getDestroy($product);
+    }
 }

@@ -3,10 +3,14 @@
 namespace App\Domain\Core\File\Abstracts;
 
 use App\Domain\Core\File\Interfaces\BladeCreatorInterface;
+use App\Domain\Core\Front\Admin\Form\Traits\AttributeGetVariable;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 
+/// addTitle can be done
 abstract class  AbstractFileManagerBlade extends AbstractFileManager implements BladeCreatorInterface
 {
+    use AttributeGetVariable;
+
     protected BladeGenerator $bladeGenerator;
     protected $entity;
 
@@ -36,7 +40,16 @@ abstract class  AbstractFileManagerBlade extends AbstractFileManager implements 
 
     protected function getTitle(): string
     {
-        return $this->entity->getTitle();
+        try {
+            return $this->translate($this->entity->getTitle()) . " " . $this->getScope($this->entity->addTitle());
+        } catch (\Exception $exception) {
+            return $this->translate($this->entity->getTitle());
+        }
+    }
+
+    private function translate($value)
+    {
+        return $this->getScope(sprintf('__("%s")', $value));
     }
 
     protected function formatFile($file_from): string

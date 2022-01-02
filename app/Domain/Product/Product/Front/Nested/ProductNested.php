@@ -21,11 +21,9 @@ class ProductNested extends Product implements FrontEntityInterface
         return ProductAcceptTable::class;
     }
 
-
     public function tableDeclineClass(): string
     {
         return ProductDeclineTable::class;
     }
-
 
 }

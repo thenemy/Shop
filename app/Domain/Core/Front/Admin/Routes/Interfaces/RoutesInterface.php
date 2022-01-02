@@ -12,9 +12,11 @@ interface RoutesInterface
     public const DESTROY_ROUTE = "admin.change.destroy";
     public const STORE_ROUTE = "admin.change.store";
     public const UPDATE_ROUTE = "admin.change.update";
+    public const SHOW_ROUTE = "admin.change.show";
 
     public const  INDEX = 'index';
     public const  CREATE = 'create';
     public const  EDIT = 'edit';
+    public const SHOW = 'show';
 }
 

@@ -7,7 +7,7 @@ use App\Http\Livewire\Admin\Base\Abstracts\BaseLivewire;
 class CategoryIndex extends BaseLivewire
 {
 
-    public $selected_value;  public function newClass($test){$this->selected_value=$test;}
+    
 
  public function activateChosen(){$this->getEntity()::whereIn('id', $this->checkBox)
             ->update(
@@ -32,8 +32,7 @@ class CategoryIndex extends BaseLivewire
         $table = $this->getTable();
         return [
             "table" => new $table($this->getLists()),
-             
-'name_blade' => \App\Domain\Core\Front\Admin\DropDown\Models\Paginator\PaginatorDropDown::getDropDown($this->selected_value) //5   --- variable to blade
+              //5   --- variable to blade
         ];
     }
     public function getItemsToOptionalDropDown():array{

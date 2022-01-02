@@ -14,7 +14,11 @@ class ProductOfDays extends Migration
     public function up()
     {
         Schema::create('product_of_days', function (Blueprint $table) {
-            $table->id();
+            $table->foreignId("product_id")
+                ->primary()
+                ->constrained("products")
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
             $table->dateTime('start_time');
             $table->dateTime('end_time');
         });
@@ -22,9 +26,9 @@ class ProductOfDays extends Migration
     /**
      * use trigger to remove product offer after 24 hours
      * BEGIN
-         DO SLEEP(<seconds>);
-         UPDATE ...;
-       END
+     * DO SLEEP(<seconds>);
+     * UPDATE ...;
+     * END
      *
      */
 

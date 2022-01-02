@@ -15,11 +15,13 @@ class CategoryService extends BaseService implements CategoryRelationInterface
     use FileUploadService;
 
     public IconCatService $service;
+    public FiltrationCategoryService $filtrationCategoryService;
 
     public function __construct()
     {
         parent::__construct();
         $this->service = new IconCatService();
+        $this->filtrationCategoryService = new FiltrationCategoryService();
     }
 
     public function getEntity(): Category
@@ -43,8 +45,10 @@ class CategoryService extends BaseService implements CategoryRelationInterface
             DB::beginTransaction();
             $this->serializeTempFile($object_data);
             $icon = $this->popCondition($object_data, self::CATEGORY_ICON);
+            $filter = $this->popCondition($object_data, "filtration");
             $this->getDepth($object_data);
             $object = parent::create($object_data);
+            $this->filtrationCategoryService->createMany($filter, ['category_id' => $object->id]);
             $icon['id'] = $object->id;
             $this->service->create($icon);
             DB::commit();

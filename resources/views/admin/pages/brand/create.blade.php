@@ -2,7 +2,7 @@
 @section("action")
     
 <x-helper.input.input name='brand' type='text'
-            label='Название брэнда' value='{{old("brand") ?? ""}}' id='brand'  onkeyup=""/>
+            label='Название брэнда' value='{{old("brand") ?? $entity->brand ?? " "}}' id='brand'  onkeyup=""/>
 <livewire:components.file.file-uploading-without-entity
                     keyToAttach='image'
                     mediaKey='file_create'

@@ -4,7 +4,6 @@ namespace App\Domain\CreditProduct\Entity;
 
 use App\Domain\Core\Language\Traits\Translatable;
 use App\Domain\Core\Main\Entities\Entity;
-use App\Domain\Core\Main\Interfaces\RuleInterface;
 use App\Domain\CreditProduct\Builders\MainCreditBuilder;
 use Illuminate\Support\Collection;
 

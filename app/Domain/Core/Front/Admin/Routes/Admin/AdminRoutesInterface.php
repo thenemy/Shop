@@ -13,7 +13,7 @@ interface AdminRoutesInterface
     const PRODUCT = "product";
     const ORDER = "order";
     const COURIER = 'courier';
-    const CATEGORY_OPEN = "category_open";
+    const SUB_CATEGORY = "sub_category";
     const CATEGORY_ALL = 'category_all';
     const MAIN_CREDIT = "main_credit";
     const TAKEN_CREDIT = "taken_credit";

@@ -22,8 +22,8 @@ class CategoryEdit extends Category implements CreateAttributesInterface
         return BladeGenerator::generation(array(
 //            new FileLivewireNested("Category", $this->child_category),
             new InputLangAttribute("name", __("Введите  имя категории"), false),
+            new InputFileAttribute("icon_file", "Иконка", self::class),
             FiltrationCategoryDynamic::getDynamic('CategoryEdit'),
-            new InputFileAttribute("icon_file", "Иконка", self::class)
         ));
     }
 

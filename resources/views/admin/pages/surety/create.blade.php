@@ -2,21 +2,21 @@
 @section("action")
     
 <x-helper.input.input name='phone' type='text'
-            label='Телефон пользователя' value='{{old("phone") ?? ""}}' id='phone'  onkeyup=""/>
+            label='Телефон пользователя' value='{{old("phone") ?? $entity->phone ?? " "}}' id='phone'  onkeyup=""/>
 <x-helper.input.input name='additional_phone' type='text'
-            label='Дополнительный телефон' value='{{old("additional_phone") ?? ""}}' id='additional_phone'  onkeyup=""/>
+            label='Дополнительный телефон' value='{{old("additional_phone") ?? $entity->additional_phone ?? " "}}' id='additional_phone'  onkeyup=""/>
 <x-helper.input.input name='crucialData->firstname' type='text'
-            label='Имя пользователя' value='{{old("crucialData->firstname") ?? ""}}' id='crucialData->firstname'  onkeyup=""/>
+            label='Имя пользователя' value='{{old("crucialData->firstname") ?? $entity->crucialData->firstname ?? " "}}' id='crucialData->firstname'  onkeyup=""/>
 <x-helper.input.input name='crucialData->lastname' type='text'
-            label='Фамилия пользователя' value='{{old("crucialData->lastname") ?? ""}}' id='crucialData->lastname'  onkeyup=""/>
+            label='Фамилия пользователя' value='{{old("crucialData->lastname") ?? $entity->crucialData->lastname ?? " "}}' id='crucialData->lastname'  onkeyup=""/>
 <x-helper.input.input name='crucialData->father_name' type='text'
-            label='Отчество пользователя' value='{{old("crucialData->father_name") ?? ""}}' id='crucialData->father_name'  onkeyup=""/>
+            label='Отчество пользователя' value='{{old("crucialData->father_name") ?? $entity->crucialData->father_name ?? " "}}' id='crucialData->father_name'  onkeyup=""/>
 <x-helper.input.input name='crucialData->series' type='text'
-            label='Паспорт серия' value='{{old("crucialData->series") ?? ""}}' id='crucialData->series'  onkeyup=""/>
+            label='Паспорт серия' value='{{old("crucialData->series") ?? $entity->crucialData->series ?? " "}}' id='crucialData->series'  onkeyup=""/>
 <x-helper.input.input name='crucialData->pnfl' type='text'
-            label='ПНФЛ' value='{{old("crucialData->pnfl") ?? ""}}' id='crucialData->pnfl'  onkeyup=""/>
+            label='ПНФЛ' value='{{old("crucialData->pnfl") ?? $entity->crucialData->pnfl ?? " "}}' id='crucialData->pnfl'  onkeyup=""/>
 <x-helper.input.input name='crucialData->date_of_birth' type='date'
-            label='Дата рождения' value='{{old("crucialData->date_of_birth") ?? ""}}' id='crucialData->date_of_birth'  onkeyup=""/>
+            label='Дата рождения' value='{{old("crucialData->date_of_birth") ?? $entity->crucialData->date_of_birth ?? " "}}' id='crucialData->date_of_birth'  onkeyup=""/>
 <livewire:components.file.file-uploading-without-entity
                     keyToAttach='crucialData->passport_reverse'
                     mediaKey='file_create'

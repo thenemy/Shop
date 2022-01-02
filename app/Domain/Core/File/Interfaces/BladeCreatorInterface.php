@@ -14,6 +14,7 @@ interface BladeCreatorInterface
     const CREATE = "create.blade.php";
     const EDIT = "edit.blade.php";
     const CHOOSE = "choose.blade.php";
+    const SHOW = "show.blade.php";
 
     /**
      * @params  first  --- Title
@@ -23,6 +24,7 @@ interface BladeCreatorInterface
     const FROM_EDIT = self::FROM . self::EDIT;
     const FROM_CREATE = self::FROM . self::CREATE;
     const FROM_CHOOSE = self::FROM . self::CHOOSE;
+    const FROM_SHOW = self::FROM . self::SHOW;
 
     const FROM_INDEX_OPEN = self::FROM_OPEN . self::INDEX; // include livewire
     const FROM_EDIT_OPEN = self::FROM_OPEN . self::EDIT;

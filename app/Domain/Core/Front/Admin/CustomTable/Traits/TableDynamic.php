@@ -13,36 +13,12 @@ use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\InputTableAttr
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Traits\SetInputAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Errors\DynamicTableException;
-use App\Domain\CreditProduct\Front\DynamicTable\CreditDynamicIndex;
+use App\Domain\CreditProduct\Front\Dynamic\CreditDynamicIndex;
 use App\Domain\CreditProduct\Services\CreditService;
 
 trait TableDynamic
 {
-    use InputDynamicGeneration, FrontDynamicGeneration;
-
-    /**
-     * decide whether just to show entity or edit it
-     */
-    public function getInputsDecision($name, $decide)
-    {
-        if ($decide) {
-            return $this->getInputs($name);
-        } else {
-            return $this->getFrontAttributes($name);
-        }
-    }
-
-
-    public function getAddingCustomActions(): array
-    {
-        return [];
-    }
-
-    /**
-     * title for opening container
-     **/
-    abstract public function getTitle(): string;
-
+    use TableDynamicWithoutEntity;
 
     public static function getDynamic($className, $parentId = "id"): FileLivewireDynamic
     {
@@ -56,6 +32,14 @@ trait TableDynamic
         );
     }
 
+    public static function getPrefixInputHidden(): string
+    {
+        return "";
+    }
+
+    /**
+     * Service which will be responsible for creation edition and deletion
+     */
     abstract public static function getBaseService(): string;
 
     /**

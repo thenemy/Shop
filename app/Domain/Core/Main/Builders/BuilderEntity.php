@@ -23,6 +23,22 @@ abstract class BuilderEntity extends Builder implements BuilderInterface
         return $this;
     }
 
+
+    public function filterByIn($filter)
+    {
+        if (isset($filter['id'])) {
+            $this->whereIn('id', $filter['id']);
+        }
+        return $this;
+    }
+    public function filterByNotIn($filter)
+    {
+        if (isset($filter['id'])) {
+            $this->whereNotIn('id', $filter['id']);
+        }
+        return $this;
+    }
+
     public function filterBy($filter)
     {
         if (isset($filter[$this->getSearch()])) {

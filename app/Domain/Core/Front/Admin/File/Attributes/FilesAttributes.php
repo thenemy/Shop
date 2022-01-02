@@ -28,6 +28,7 @@ class FilesAttributes extends BaseFileAttribute
 
     /**
      * @params  $entity --- parent entity who will be associated by $childEntity
+     *          $key -- for parent class to have getManyMedia
      *          $childEntityClass --- class for $childEntity
      *          $storeKey --- child entity key to store the file
      *          $id --- unique id for blade --very important

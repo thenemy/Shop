@@ -17,7 +17,7 @@ class FileLivewireNested extends FileLivewireCreator implements LivewireCreatorN
                 :attachEntityId='%s'
                 :attachEntity='get_class(%s)'
                 keyToAttach='%s'
-                :filterBy='[\"%s\" => \"%s\"]',
+                :filterBy='[\"%s\" => \"%s\"]'
                 dispatchClass='%s'
                 additionalAction='%s'
                 />",

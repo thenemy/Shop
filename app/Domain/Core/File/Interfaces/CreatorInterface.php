@@ -12,4 +12,5 @@ interface CreatorInterface
 
     public function getEditEntity(): string;
 
+    public function getShowEntity(): string;
 }

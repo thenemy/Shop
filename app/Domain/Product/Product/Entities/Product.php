@@ -4,10 +4,12 @@ namespace App\Domain\Product\Product\Entities;
 
 use App\Domain\Category\Entities\Category;
 use App\Domain\Core\Front\Admin\File\Attributes\FilesAttributes;
+use App\Domain\Core\Front\Admin\Form\Traits\AttachNested;
 use App\Domain\Core\Language\Traits\Translatable;
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Core\Media\Traits\MediaManyTrait;
 use App\Domain\Core\Slug\Traits\Sluggable;
+use App\Domain\CreditProduct\Entity\MainCredit;
 use App\Domain\Currency\Traits\ConvertToSum;
 use App\Domain\Product\HeaderComponent\Header\Entities\HeaderComponent;
 use App\Domain\Product\HeaderTable\Entities\HeaderTable;
@@ -18,13 +20,12 @@ use App\Domain\Product\Product\Interfaces\ProductInterface;
 use App\Domain\Shop\Entities\Shop;
 use App\Domain\User\Entities\User;
 use CardImages;
-use Discounts;
-use phpDocumentor\Reflection\DocBlock\Tags\Return_;
+
 use ProductStats;
 
 class Product extends Entity implements ProductInterface
 {
-    use Translatable, Sluggable, MediaManyTrait, ConvertToSum;
+    use Translatable, Sluggable, MediaManyTrait, ConvertToSum, AttachNested;
 
     public $guarded = [];
     protected $table = "products";
@@ -49,6 +50,30 @@ class Product extends Entity implements ProductInterface
         return $this->belongsToMany(User::class, "favourites");
     }
 
+    public function acceptMainCredit($id, $status)
+    {
+        $this->attachedManyNested($id, self::MAIN_CREDIT_SERVICE);
+    }
+
+    public function setProductOfDayAttribute($value)
+    {
+        $this->productDay()->attach($value);
+    }
+
+    public function productDay()
+    {
+        return $this->hasOne(ProductOfDay::class, "product_id");
+    }
+
+    public function mainCredit()
+    {
+        return $this->belongsToMany(MainCredit::class,
+            "product_credits",
+            "product_id",
+            "main_credit_id"
+        );
+    }
+
     public function productProductStatus()
     {
         return $this->belongsToMany(ProductStats::class);
@@ -61,7 +86,7 @@ class Product extends Entity implements ProductInterface
 
     public function productImageHeader(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(CardImages::class, 'product_id');
+        return $this->hasOne(CardImage::class, 'product_id');
     }
 
     public function getRealPriceAttribute()
@@ -96,9 +121,10 @@ class Product extends Entity implements ProductInterface
         return $this->hasMany(HeaderComponent::class, 'product_id');
     }
 
-    public function productDiscount(): \Illuminate\Database\Eloquent\Relations\HasMany
+
+    public function productHit()
     {
-        return $this->hasMany(Discounts::class, 'id');
+        return $this->hasOne(ProductHit::class, "product_id");
     }
 
     public function setTitleAttribute($value)
@@ -116,15 +142,6 @@ class Product extends Entity implements ProductInterface
         return $this->getTranslatable('title');
     }
 
-    public function getImageProductAttribute(): FilesAttributes
-    {
-        return new FilesAttributes($this,
-            "images",
-            "product_1",
-            Image::class,
-            "image",
-            "product_id");
-    }
 
     public function slugSources(): array
     {
@@ -138,6 +155,19 @@ class Product extends Entity implements ProductInterface
         return $this->getManyMedia("productImage", "image");
     }
 
+    /*
+     *  it is being here to reduce amount of work to do
+     *  the upload function is used in the service
+     * **/
+    public function getImageProductAttribute(): FilesAttributes
+    {
+        return new FilesAttributes($this,
+            "images",
+            "product_1",
+            Image::class,
+            "image",
+            "product_id");
+    }
 
 }
 

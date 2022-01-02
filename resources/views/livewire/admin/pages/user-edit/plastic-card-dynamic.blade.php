@@ -1,4 +1,4 @@
-<x-helper.container.container :title="__('Пластиковая карта')">
+    <x-helper.container.container :title="__('Пластиковая карта')">
     <div class="flex flex-col space-y-2">
         {{--   table -> drop down action --}}
         <x-helper.error.error :error="$errors"/>

@@ -18,7 +18,7 @@ class ProductCredits extends Migration
             $table->foreignId("product_id")->constrained("products")
                 ->onDelete("CASCADE")
                 ->onUpdate("CASCADE");;
-            $table->foreignId("credit_id")->constrained("credits")
+            $table->foreignId("main_credit_id")->constrained("main_credits")
                 ->onDelete("CASCADE")
                 ->onUpdate("CASCADE");
 

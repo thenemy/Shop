@@ -12,12 +12,12 @@ use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireFunctions;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireOptionalDropDown;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireAdditionalFunctions;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireComponents;
-use App\Domain\Core\Front\Admin\OpenButton\Interfaces\OpenEntity;
+use App\Domain\Core\Front\Admin\OpenButton\Interfaces\FilterInterface;
 use App\Domain\Core\Main\Traits\ArrayHandle;
 use App\Domain\Installment\Entities\MonthPaid;
 use App\Domain\Installment\Front\Admin\CustomTables\Tables\MonthlyPaidTable;
 
-    class MonthlyPaidIndex extends MonthPaid implements TableInFront, OpenEntity, TableFilterByInterface
+    class MonthlyPaidIndex extends MonthPaid implements TableInFront, FilterInterface, TableFilterByInterface
 {
     use TableFilterBy, ArrayHandle, AttributeGetVariable;
 

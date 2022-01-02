@@ -13,6 +13,8 @@ use App\Domain\Core\Front\Interfaces\HtmlInterface;
 abstract class AbstractLivewireDropDown extends AbstractDropDown
     implements HtmlInterface, FunctionInterface, FunctionHelperStaticInterface, FunctionStandardTemplate
 {
+    const  FORMAT_CLICK = "%s(%s)";
+
     use FunctionFormatArg, FunctionGenerate, InitStaticDropFunction;
 
     public function generateFunction(): string
@@ -20,11 +22,11 @@ abstract class AbstractLivewireDropDown extends AbstractDropDown
         return sprintf(self::FUNCTION_BODY,
             $this->getFunctionName(),
             $this->formatArguments(),
-            $this->getAssignment()
+            $this->setBodyFunction()
         );
     }
 
-    private function getAssignment(): string
+    protected function setBodyFunction(): string
     {
         return $this->toThisVariable() . '=' . '$' . $this->getArguments()[0] . ";";
     }
@@ -44,6 +46,16 @@ abstract class AbstractLivewireDropDown extends AbstractDropDown
         return "";
     }
 
-    abstract static public function formatClick($value);
-
+    static public function formatClick($value): string
+    {
+        $class = get_called_class();
+        return sprintf(self::FORMAT_CLICK,
+            $class::getFunctionName(), $value);
+    }
+    public function generateHtml(): string
+    {
+        $class = get_called_class();
+        return sprintf("<x-helper.drop_down.drop_down_livewire :drop='%s' />",
+            self::toRealBlade($class::getVariableBlade()));
+    }
 }

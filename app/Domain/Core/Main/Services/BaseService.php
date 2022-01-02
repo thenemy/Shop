@@ -7,17 +7,19 @@ namespace App\Domain\Core\Main\Services;
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Core\Main\Interfaces\ServiceInterface;
 use App\Domain\Core\Main\Traits\FastInstantiation;
+use App\Domain\Core\Main\Traits\FilterArray;
 use Illuminate\Support\Facades\Validator;
 use Nette\Schema\ValidationException;
 
 abstract class BaseService implements ServiceInterface
 {
-    use FastInstantiation;
+    use FastInstantiation, FilterArray;
 
     protected Entity $entity;
 
     public function __construct()
     {
+
         $this->entity = $this->getEntity();
     }
 
@@ -27,7 +29,6 @@ abstract class BaseService implements ServiceInterface
         return new $self();
     }
 
-    abstract public function getEntity(): Entity;
 
     private function validate(array $object_data, array $rules)
     {
@@ -46,6 +47,7 @@ abstract class BaseService implements ServiceInterface
 
     protected function validationMessage(): array
     {
+
         return [];
     }
 
@@ -58,6 +60,29 @@ abstract class BaseService implements ServiceInterface
     {
         return $this->entity->getUpdateRules();
     }
+
+    public function createMany(array $object_data, array $parent)
+    {
+        for ($i = 1; !empty($object_data); $i++) {
+            $data = $this->popCondition($object_data, $i);
+            $data = array_merge($parent, $data);
+            $this->create($data);
+        }
+    }
+
+    protected function changeKey(&$object_array, $new, $old = 'params')
+    {
+        $object_array[$new] = $object_array[$old];
+        unset($object_array[$old]);
+    }
+
+    public function updateOrCreate(array $condition, array $object_data)
+    {
+        $filtered = $this->filterRecursive($object_data);
+        $this->validate($object_data, $this->validateCreateRules());
+        return $this->entity->updateOrCreate($filtered);
+    }
+
 
     public function create(array $object_data)
     {
@@ -74,18 +99,9 @@ abstract class BaseService implements ServiceInterface
         return $object;
     }
 
-    protected function changeKey(&$object_array, $new, $old = 'params')
+    public function destroy($object): bool
     {
-        $object_array[$new] = $object_array[$old];
-        unset($object_array[$old]);
-    }
-
-    public function filterRecursive(array $data, callable $filter = null): array
-    {
-        return array_filter($data, function ($item) use ($filter) {
-            $item = is_array($item) ? $this->filterRecursive($item, $filter) : $item;
-            return isset($filter) ? $filter($item) : isset($item) && !empty($item);
-        });
+        return $object->delete();
     }
 
     /**
@@ -107,7 +123,7 @@ abstract class BaseService implements ServiceInterface
              * we are taking first element
              * because we are putting key element at the last
              */
-            if ($key_value[0] == $check_key) {
+            if (preg_match(sprintf("/^%s$/i", $check_key), $key_value[0])) {
                 /**
                  * we are connecting remainder keys
                  */
@@ -120,8 +136,7 @@ abstract class BaseService implements ServiceInterface
         return $new_array;
     }
 
-    public function destroy($object): bool
-    {
-        return $object->delete();
-    }
+
+    abstract public function getEntity(): Entity;
+
 }

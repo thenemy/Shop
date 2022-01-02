@@ -30,8 +30,8 @@ abstract class BaseAttributeForm implements HtmlInterface
         $this->id = $id == "" ? $this->key : $id;
     }
 
-    protected function getVariable(): string
+    protected function  getVariable(): string
     {
-        return "{{ " . $this->getWithoutScopeAtrVariable($this->key) . ' ?? " "' . " }}";
+        return  $this->getWithoutScopeAtrVariable($this->key) . ' ?? " "';
     }
 }

@@ -18,6 +18,7 @@ use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\Core\Front\Interfaces\FrontEntityInterface;
 use App\Domain\User\Entities\User;
 use App\Domain\User\Front\Admin\CustomTable\Action\UserEditAction;
+use App\Domain\User\Front\Admin\CustomTable\Action\UserShowAction;
 use App\Domain\User\Front\Admin\CustomTable\Tables\UserTable;
 use App\Domain\User\Front\Admin\Path\SuretyRouteHandler;
 
@@ -48,8 +49,8 @@ class UserIndex extends User implements
     public function getNameIndexAttribute(): string
     {
         $name = "";
-        if(isset($this[self::USER_DATA_SERVICE]['name'])){
-            $name = $this[self::USER_DATA_SERVICE]['name'];
+        if (isset($this[self::USER_DATA_SERVICE][self::CRUCIAL_DATA_SERVICE]['name'])) {
+            $name = $this[self::USER_DATA_SERVICE][self::CRUCIAL_DATA_SERVICE]['name'];
         }
         return TextAttribute::generation($this, $name, true);
     }
@@ -89,7 +90,9 @@ class UserIndex extends User implements
     public function getActionsAttribute(): string
     {
         return AllActions::generation([
-            UserEditAction::new([$this->id])
+            UserShowAction::new([$this->id]),
+            UserEditAction::new([$this->id]),
+
         ]);
     }
 

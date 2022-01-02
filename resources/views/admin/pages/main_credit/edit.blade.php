@@ -17,12 +17,10 @@
              </div>
             </div>
             
-<x-helper.input.input name='helper_text' type='text'
-            label='Введите условия' value='{{ $entity->helper_text ?? " " }}' id='helper_text'  onkeyup=""/>
+<x-helper.text_area.text_area name='helper_text' label='Введите условия'>{{old("helper_text") ?? $entity->helper_text ?? " "}}</x-helper.text_area.text_area>
 <x-helper.input.input name='initial_percent' type='number'
-            label='Введите первоначальный процент оплаты' value='{{ $entity->initial_percent ?? " " }}' id='initial_percent'  onkeyup=""/>
-<livewire:admin.pages.main-credit.credit-dynamic-index
-                parentKey='main_credit_id'
-                :parentId='$entity->id'
-            />
+            label='Введите первоначальный процент оплаты' value='{{old("initial_percent") ?? $entity->initial_percent ?? " "}}' id='initial_percent'  onkeyup=""/>
+<livewire:admin.pages.main-credit.credit-dynamic-index 
+                 parentKey='main_credit_id'
+                :parentId='$entity->id'/>
 @endsection

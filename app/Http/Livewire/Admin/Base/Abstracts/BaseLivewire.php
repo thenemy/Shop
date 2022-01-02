@@ -6,6 +6,7 @@ use App\Domain\Core\Front\Admin\DropDown\Items\DropLivewireItem;
 use App\Domain\Core\Front\Admin\DropDown\Models\DropDownOptional;
 use App\Domain\Core\Front\Admin\DropDown\Models\PaginatorDefault;
 use App\Domain\Core\Front\Admin\Livewire\Dispatch\Base\Dispatch;
+use Illuminate\Support\Facades\Request;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -22,6 +23,11 @@ abstract class BaseLivewire extends Component
     public array $checkBox = []; // model
     public string $keySearch = "search"; // set search
     public string $dispatchClass = Dispatch::class;
+
+    public function mount()
+    {
+        $this->filterBy = array_merge($this->filterBy, Request::all());
+    }
 
     public function checkAll()
     {
@@ -98,7 +104,7 @@ abstract class BaseLivewire extends Component
 
     public function cleanFiler()
     {
-        $this->filterBy = [];
+        unset($this->filterBy['search']);
     }
 
     public function includeOnlySearch()

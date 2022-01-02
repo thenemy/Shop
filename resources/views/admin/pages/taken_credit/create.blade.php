@@ -16,9 +16,9 @@
         
              />			
 <x-helper.input.input name='initial_price' type='number'
-            label='Первоначальная плата' value='{{old("initial_price") ?? ""}}' id='initial_payment'  onkeyup=""/>			
-<x-helper.input.input name='payment_type' type='checkbox'
-            label='Уплачен на кассе' value='{{old("payment_type") ?? ""}}' id='initial_pay'  onchange=""/>
+            label='Первоначальная плата' value='{{old("initial_price") ?? $entity->initial_price ?? " "}}' id='initial_payment'  onkeyup=""/>			
+<x-helper.input.input_checked name='payment_type' type='checkbox'
+            label='Уплачен на кассе' value='{{old("payment_type") ?? $entity->payment_type ?? " "}}' id='initial_pay'  onchange=""/>
             </div>
 <livewire:components.drop-down.drop-down-search-with-relation
             :searchByKey='"name->" . app()->getLocale()'
@@ -33,8 +33,8 @@
 
             <div 	class='flex flex-row  space-x-2 border-2 rounded p-2 w-full justify-start'>
                 			
-<x-helper.input.input name='delivery' type='checkbox'
-            label='Самовызов' value='{{old("delivery") ?? ""}}' id='payment_type'  onchange="$dispatch('delivery-update', {
+<x-helper.input.input_checked name='delivery' type='checkbox'
+            label='Самовызов' value='{{old("delivery") ?? $entity->delivery ?? " "}}' id='payment_type'  onchange="$dispatch('delivery-update', {
                data:{
                     value: event.target.value
                }
@@ -43,8 +43,8 @@
 
             <div 	class='flex flex-col  space-y-2 border-2 rounded p-2 w-full items-start'>
                 			
-<x-helper.input.input name='surety' type='checkbox'
-            label='Поручитель' value='{{old("surety") ?? ""}}' id='surety_check'  onchange="$dispatch('surety-update', {
+<x-helper.input.input_checked name='surety' type='checkbox'
+            label='Поручитель' value='{{old("surety") ?? $entity->surety ?? " "}}' id='surety_check'  onchange="$dispatch('surety-update', {
                data:{
                     value: event.target.value
                }
@@ -59,21 +59,21 @@
                 			
 
 <x-helper.input.input name='surety->phone' type='text'
-            label='Телефон пользователя' value='{{old("surety->phone") ?? ""}}' id='surety->phone'  onkeyup=""/>
+            label='Телефон пользователя' value='{{old("surety->phone") ?? $entity->surety->phone ?? " "}}' id='surety->phone'  onkeyup=""/>
 <x-helper.input.input name='surety->additional_phone' type='text'
-            label='Дополнительный телефон' value='{{old("surety->additional_phone") ?? ""}}' id='surety->additional_phone'  onkeyup=""/>
+            label='Дополнительный телефон' value='{{old("surety->additional_phone") ?? $entity->surety->additional_phone ?? " "}}' id='surety->additional_phone'  onkeyup=""/>
 <x-helper.input.input name='surety->crucialData->firstname' type='text'
-            label='Имя пользователя' value='{{old("surety->crucialData->firstname") ?? ""}}' id='surety->crucialData->firstname'  onkeyup=""/>
+            label='Имя пользователя' value='{{old("surety->crucialData->firstname") ?? $entity->surety->crucialData->firstname ?? " "}}' id='surety->crucialData->firstname'  onkeyup=""/>
 <x-helper.input.input name='surety->crucialData->lastname' type='text'
-            label='Фамилия пользователя' value='{{old("surety->crucialData->lastname") ?? ""}}' id='surety->crucialData->lastname'  onkeyup=""/>
+            label='Фамилия пользователя' value='{{old("surety->crucialData->lastname") ?? $entity->surety->crucialData->lastname ?? " "}}' id='surety->crucialData->lastname'  onkeyup=""/>
 <x-helper.input.input name='surety->crucialData->father_name' type='text'
-            label='Отчество пользователя' value='{{old("surety->crucialData->father_name") ?? ""}}' id='surety->crucialData->father_name'  onkeyup=""/>
+            label='Отчество пользователя' value='{{old("surety->crucialData->father_name") ?? $entity->surety->crucialData->father_name ?? " "}}' id='surety->crucialData->father_name'  onkeyup=""/>
 <x-helper.input.input name='surety->crucialData->series' type='text'
-            label='Паспорт серия' value='{{old("surety->crucialData->series") ?? ""}}' id='surety->crucialData->series'  onkeyup=""/>
+            label='Паспорт серия' value='{{old("surety->crucialData->series") ?? $entity->surety->crucialData->series ?? " "}}' id='surety->crucialData->series'  onkeyup=""/>
 <x-helper.input.input name='surety->crucialData->pnfl' type='text'
-            label='ПНФЛ' value='{{old("surety->crucialData->pnfl") ?? ""}}' id='surety->crucialData->pnfl'  onkeyup=""/>
+            label='ПНФЛ' value='{{old("surety->crucialData->pnfl") ?? $entity->surety->crucialData->pnfl ?? " "}}' id='surety->crucialData->pnfl'  onkeyup=""/>
 <x-helper.input.input name='surety->crucialData->date_of_birth' type='date'
-            label='Дата рождения' value='{{old("surety->crucialData->date_of_birth") ?? ""}}' id='surety->crucialData->date_of_birth'  onkeyup=""/>
+            label='Дата рождения' value='{{old("surety->crucialData->date_of_birth") ?? $entity->surety->crucialData->date_of_birth ?? " "}}' id='surety->crucialData->date_of_birth'  onkeyup=""/>
 <livewire:components.file.file-uploading-without-entity
                     keyToAttach='surety->crucialData->passport_reverse'
                     mediaKey='file_create'

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Domain\Category\Front\Admin\File\CategoryAllCreator;
 use App\Domain\Category\Front\Admin\File\CategoryCreator;
 use App\Domain\Category\Front\Admin\File\CategoryOpenCreator;
 use App\Domain\Common\Banners\Front\Admin\File\BannerCreator;
@@ -50,6 +51,7 @@ class CreateBlades extends Command
     {
         CategoryCreator::createFiles();
         CategoryOpenCreator::createFiles();
+        CategoryAllCreator::createFiles();
         UserFileCreator::createFiles();
         ProductCreator::createFiles();
         ShopFileCreator::createFiles();

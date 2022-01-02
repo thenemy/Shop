@@ -59,4 +59,9 @@ class ShopController extends BaseController
     {
         return $this->getUpdateValidation($request, $shop);
     }
+
+    public function destroy(Request $request, Shop $shop)
+    {
+        return $this->getDestroy($shop);
+    }
 }

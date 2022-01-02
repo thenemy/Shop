@@ -4,6 +4,7 @@ namespace App\Domain\Category\Front\Main;
 
 use App\Domain\Category\Entities\Category;
 use App\Domain\Category\Entities\IconCat;
+use App\Domain\Category\Front\Dynamic\FiltrationCategoryDynamicWithoutEntity;
 use App\Domain\Core\File\Models\Livewire\FileLivewireDynamic;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\ImageAttribute;
 use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputAttribute;
@@ -23,6 +24,7 @@ class CategoryCreate extends Category implements CreateAttributesInterface
                 self::CATEGORY_ICON_DATA,
                 "Загрузите иконку",
             ),
+            FiltrationCategoryDynamicWithoutEntity::getDynamic("CategoryCreate"),
             ...$this->additionalGeneration()
         ]);
     }

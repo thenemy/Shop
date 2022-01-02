@@ -20,7 +20,7 @@
             </div>
 
         </div>
-        <x-helper.table.table :table="$table" :optional="$optional" turn_off="">
+        <x-helper.table.table :table="$table" :optional="$optional" >
          </x-helper.table.table>
         {{--        <x-helper.table.table :table="$table" :optional="$optional"/>--}}
 

@@ -7,6 +7,7 @@ use App\Domain\Core\File\Interfaces\CreatorInterface;
 use App\Domain\Core\File\Models\Main\FileBladeCreatorCreate;
 use App\Domain\Core\File\Models\Main\FileBladeCreatorEdit;
 use App\Domain\Core\File\Models\Main\FileBladeCreatorIndex;
+use App\Domain\Core\File\Models\Main\FileBladeCreatorShow;
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Core\Main\Traits\FastInstantiation;
 
@@ -28,6 +29,7 @@ abstract class  MainFactoryCreator implements CreatorInterface
         $class->createIndex();
         $class->createEdit();
         $class->createCreate();
+        $class->createShow();
     }
 
     protected function createIndex()
@@ -48,6 +50,16 @@ abstract class  MainFactoryCreator implements CreatorInterface
     protected function getCreateBladeCreator(): string
     {
         return FileBladeCreatorCreate::class;
+    }
+
+    protected function getShowBladeCreator(): string
+    {
+        return FileBladeCreatorShow::class;
+    }
+
+    protected function createShow()
+    {
+        $this->create($this->getShowEntity(), $this->getShowBladeCreator());
     }
 
     protected function createEdit()
@@ -72,4 +84,10 @@ abstract class  MainFactoryCreator implements CreatorInterface
             );
         }
     }
+
+    public function getShowEntity(): string
+    {
+        return  "";
+    }
+
 }

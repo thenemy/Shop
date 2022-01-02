@@ -3,16 +3,16 @@
 @tailwind utilities;
 
 .drop-down-button {
-    @apply inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500;
+    @apply inline-flex h-10 justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500;
 }
 
 .transition-custom {
     overflow: hidden;
     width: 0;
-    -webkit-transition: width 500ms ease-in-out;
-    -moz-transition: width 500ms ease-in-out;
-    -o-transition: width 500ms ease-in-out;
-    transition: width 500ms ease-in-out;
+    -webkit-transition: width 80ms ease-in-out;
+    -moz-transition: width 80ms ease-in-out;
+    -o-transition: width 80ms ease-in-out;
+    transition: width 80ms ease-in-out;
 }
 
 .width-sidebar {
@@ -20,7 +20,9 @@
 }
 
 .drop-down-block {
-    @apply z-50 origin-top-right absolute left-0 mt-2 w-max rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none;
+    @apply z-50 origin-top-right absolute left-0 mt-2 w-max rounded-md
+    shadow bg-white ring-1 ring-black
+    ring-opacity-5 focus:outline-none;
 }
 
 .drop-down-item {
@@ -31,8 +33,18 @@
     @apply xs:px-3 sm:px-10 md:px-16 lg:px-20 my-5;
 }
 
+.input-check {
+    @apply border
+    shadow
+    focus:outline-none focus:ring focus:border-gray-500
+    focus:border-green-50 rounded p-0.5
+}
+
 .input-custom {
-    @apply border border-black border-opacity-40 focus:outline-none focus:ring focus:border-gray-500 focus:border-green-50 rounded p-0.5
+    @apply h-10 border
+    shadow
+    focus:outline-none focus:ring focus:border-gray-500
+    focus:border-green-50 rounded p-0.5
 }
 
 @responsive {

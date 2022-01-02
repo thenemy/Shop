@@ -20,13 +20,10 @@ class DeliveryAddress extends Migration
         Schema::create('delivery_address', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string("addressString")->nullable();
-            $table->string("countryName");
+//            $table->string("addressString")->nullable();// can be generated
             $table->string("index")->nullable(); /// required
-            $table->string("region")->nullable();
-            $table->string("city");
             $table->string("street");
-            $table->string("house")->nullable();
+            $table->smallInteger("house")->nullable();
             $table->string('flat')->nullable();
             $table->string("instructions"); //additional instructions for courier to get the product
             $table->foreignId("city_id")->constrained(

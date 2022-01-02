@@ -50,7 +50,9 @@ class UserController extends BaseController
     {
         return $this->getEdit($request, $user, [$user]);
     }
-
+    public function show(Request $request, User $user) {
+        return $this->getShow($request, $user);
+    }
     public function update(Request $request, User $user)
     {
         return $this->getUpdateValidation($request, $user);

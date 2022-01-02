@@ -18,58 +18,9 @@ use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireOptionalDropD
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireAdditionalFunctions;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireComponents;
 
-class FiltrationCategoryDynamic extends FiltrationCategory implements TableInFront
+class FiltrationCategoryDynamic extends FiltrationCategoryDynamicWithoutEntity
 {
     use TableDynamic;
-
-    /**
-     * @throws \App\Domain\Core\Front\Admin\CustomTable\Errors\DynamicTableException
-     */
-    public static function getCustomRules(): array
-    {
-        return [
-            'key' => DynamicAttributes::INPUT,
-            'attribute' => DynamicAttributes::DROP_DOWN(FiltrationCategoryDropDown::class),
-        ];
-    }
-
-    public function getCustomFrontRules(): array
-    {
-        return [
-            'key' => null,
-            'attribute' => fn($value) => self::DB_TO_FRONT[$this->attribute],
-        ];
-    }
-//    protected function generateInput()
-//    {
-//        $this->inputs['key'] = InputTableAttribute::generate(
-//            'key',
-//            'text',
-//            $this->fillCollectionModel('key')
-//        );
-//        $this->inputs['attribute'] = FiltrationCategoryDropDown::generate(
-//            $this->fillCollectionModel(''),
-//            $this->attribute,
-//        );
-//    }
-
-    protected function generateAttributes()
-    {
-        $this->front_attribute['key'] = TextAttribute::generation(
-            $this,
-            'key'
-        );
-        $this->front_attribute['attribute'] = TextAttribute::generation(
-            $this,
-            self::DB_TO_FRONT[$this->attribute],
-            true
-        );
-    }
-
-    public function getTitle(): string
-    {
-        return 'Фильтрация для продуктов';
-    }
 
     public static function getBaseService(): string
     {
@@ -79,36 +30,5 @@ class FiltrationCategoryDynamic extends FiltrationCategory implements TableInFro
     public static function getDynamicParentKey(): string
     {
         return 'category_id';
-    }
-
-    public function getTableClass(): string
-    {
-        return FiltrationCategoryTable::class;
-    }
-
-    public function livewireComponents(): LivewireComponents
-    {
-        return AllLivewireComponents::generation([
-
-        ]);
-    }
-
-    public function livewireOptionalDropDown(): AllLivewireOptionalDropDown
-    {
-        return AllLivewireOptionalDropDown::generation([
-
-        ]);
-    }
-
-    public function livewireFunctions(): LivewireAdditionalFunctions
-    {
-        return AllLivewireFunctions::generation([
-
-        ]);
-    }
-
-    public function getPrimaryKey(): string
-    {
-        return $this->primaryKey;
     }
 }

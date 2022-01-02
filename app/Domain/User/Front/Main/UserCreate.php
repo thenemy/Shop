@@ -10,6 +10,7 @@ use App\Domain\Core\Front\Admin\Form\Interfaces\CreateAttributesInterface;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\File\Traits\FileUploadTemp;
 use App\Domain\User\Entities\User;
+use App\Domain\User\Front\Admin\DropDown\SexDropDown;
 use App\Domain\User\Interfaces\UserRelationInterface;
 use Illuminate\Validation\Rules\In;
 
@@ -20,11 +21,13 @@ class UserCreate extends User implements CreateAttributesInterface
     {
         return BladeGenerator::generation([
             new InputAttribute("phone", "text", "Телефон пользователя"),
-            new InputAttribute("password", "password", "Пароль"),
             new InputAttribute(UserRelationInterface::USER_DATA
                 . 'additional_phone',
                 "text",
                 "Дополнительный телефон"),
+            new InputAttribute("password", "password", "Пароль"),
+
+
             new InputAttribute(
                 UserRelationInterface::CRUCIAL_DATA
                 . "firstname",
@@ -37,6 +40,7 @@ class UserCreate extends User implements CreateAttributesInterface
                 UserRelationInterface::CRUCIAL_DATA
                 . "father_name",
                 "text", "Отчество пользователя"),
+            SexDropDown::new(),
             new InputAttribute(
                 UserRelationInterface::CRUCIAL_DATA
                 . 'series',
@@ -55,6 +59,10 @@ class UserCreate extends User implements CreateAttributesInterface
                 "Аватар"),
             new InputFileTempAttribute(
                 UserRelationInterface::CRUCIAL_DATA
+                . 'passport',
+                "Паспорт"),
+            new InputFileTempAttribute(
+                UserRelationInterface::CRUCIAL_DATA
                 . "passport_reverse",
                 "Прописка"),
             new InputFileTempAttribute(
@@ -62,10 +70,6 @@ class UserCreate extends User implements CreateAttributesInterface
                 . "user_passport",
                 "Паспорт c пользователем"),
 
-            new InputFileTempAttribute(
-                UserRelationInterface::CRUCIAL_DATA
-                . 'passport',
-                "Паспорт пользователя"),
 
         ]);
     }

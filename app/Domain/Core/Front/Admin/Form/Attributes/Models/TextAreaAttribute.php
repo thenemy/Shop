@@ -10,10 +10,10 @@ class TextAreaAttribute extends BaseAttributeForm
 
     public function generateHtml(): string
     {
-        return sprintf("<x-helper.text_area.text_area name='%s' label='%s'>%s</x-helper.text_area.text_area>",
+        return sprintf("<x-helper.text_area.text_area name='%s' label='%s'>{{%s}}</x-helper.text_area.text_area>",
             $this->key,
             $this->label,
-            $this->create ? sprintf('{{old("%s")}}', $this->key) : $this->getVariable()
+            sprintf('old("%s") ?? %s', $this->key, $this->getVariable())
         );
     }
 }

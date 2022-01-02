@@ -16,4 +16,5 @@ class AllCategoryTable extends AbstractTable
             ...$this->getCommonColumns()
         ];
     }
+
 }

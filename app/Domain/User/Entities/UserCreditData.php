@@ -3,9 +3,10 @@
 namespace App\Domain\User\Entities;
 
 use App\Domain\Core\Main\Entities\Entity;
+use App\Domain\User\Interfaces\SexInterface;
 use App\Domain\User\Traits\HasUserRelationship;
 
-class UserCreditData extends Entity
+class UserCreditData extends Entity implements SexInterface
 {
     use HasUserRelationship;
 
@@ -14,6 +15,11 @@ class UserCreditData extends Entity
     public function crucialData()
     {
         return $this->belongsTo(CrucialData::class, "crucial_data_id");
+    }
+
+    public function getSexShowAttribute()
+    {
+        return __(self::DB_TO_FRONT[$this->sex] ?? "");
     }
 
     public function __get($key)

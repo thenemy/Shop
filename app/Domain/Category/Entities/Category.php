@@ -18,7 +18,6 @@ class Category extends Entity implements CategoryRelationInterface
 {
     use Translatable, Sluggable;
 
-    public $guarded = [];
     protected $table = "categories";
 
     public function newEloquentBuilder($query): CategoryBuilder
@@ -34,6 +33,11 @@ class Category extends Entity implements CategoryRelationInterface
     public function getNameAttribute($value): ?Collection
     {
         return $this->getTranslations("name");
+    }
+
+    public function filter(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(FiltrationCategory::class, "category_id");
     }
 
     public function getNameCurrentAttribute(): ?string

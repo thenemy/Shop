@@ -23,7 +23,7 @@ trait ProductCommonTableAttributes
 
     public function getCategoryIndexAttribute(): string
     {
-        return TextAttribute::generation($this, $this->category->name, true);
+        return TextAttribute::generation($this, $this->category->name_current, true);
     }
 
     public function getNameIndexAttribute(): string

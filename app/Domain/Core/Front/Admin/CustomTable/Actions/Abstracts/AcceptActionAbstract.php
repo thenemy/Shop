@@ -12,7 +12,7 @@ abstract class  AcceptActionAbstract extends BaseAbstractAction
 {
     public function subActionRoute(): string
     {
-        return self::ACCEPT;
+        return Routes::ACCEPT;
     }
 
     public function generateHtml(): string

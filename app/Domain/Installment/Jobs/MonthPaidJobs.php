@@ -5,7 +5,7 @@ namespace App\Domain\Installment\Jobs;
 use App\Domain\Core\Api\CardService\Interfaces\Payable;
 use App\Domain\Core\Api\CardService\Merchant\Model\Merchant;
 use App\Domain\Core\Api\CardService\Model\WithdrawMoney;
-use App\Domain\Core\Job\Base\AbstractJob;
+use App\Domain\Core\BackgroundTask\Base\AbstractJob;
 use App\Domain\Installment\Entities\MonthPaid;
 use App\Domain\Installment\Payable\MonthPaidPayable;
 use Illuminate\Bus\Queueable;

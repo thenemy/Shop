@@ -22,7 +22,6 @@ class UserTable extends AbstractCreateTable
             new Column(__("Аватар"), 'avatar_index'),
             new Column(__("Имя"), "name_index"),
             new Column(__("Телефон"), "phone_index"),
-            new Column(__("Поручители"), 'surety_index'),
             new Column(__("Дата Создания"), "data_index"),
         ];
     }

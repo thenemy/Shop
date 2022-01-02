@@ -7,8 +7,8 @@ use App\Domain\File\Entities\FileManyTemp;
 
 class InputFileTempManyAttribute extends BaseInputFileTemp
 {
-    public function __construct($keyToAttach, $label, string $mediaInitialKey = "")
+    public function __construct($keyToAttach, $label, bool $create = true, string $mediaInitialKey = "")
     {
-        parent::__construct(FileManyTemp::class, $keyToAttach, $label, true, $mediaInitialKey);
+        parent::__construct(FileManyTemp::class, $keyToAttach, $label, true, $create, $mediaInitialKey);
     }
 }

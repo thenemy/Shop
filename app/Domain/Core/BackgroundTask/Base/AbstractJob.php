@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Core\Job\Base;
+namespace App\Domain\Core\BackgroundTask\Base;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

@@ -14,7 +14,7 @@
                 </x-helper.button.outline_button>
             </div>
         </div>
-        <table class="table-auto border-collapse border w-full my-2.5" wire:loading.class="opacity-80">
+        <table class="table-fixed border-collapse border w-full my-2.5" wire:loading.class="opacity-80">
             <tr class="w-8/12 @if(!isset($attributes['turn_off'])) longpress @endif">
                 <th class="py-3 px-6 font-semibold bg-gray-100 hidden checkbox-show">{{__("Выбрать")}}</th>
                 @foreach($table->columns as $column)

@@ -10,6 +10,7 @@ use App\Domain\Core\Front\Admin\Form\Interfaces\CreateAttributesInterface;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\User\Entities\CrucialData;
 use App\Domain\User\Entities\User;
+use App\Domain\User\Front\Admin\DropDown\SexDropDown;
 use App\Domain\User\Front\Dynamic\PlasticCardDynamic;
 use App\Domain\User\Interfaces\UserRelationInterface;
 
@@ -20,11 +21,11 @@ class UserEdit extends User implements CreateAttributesInterface
     {
         return BladeGenerator::generation([
             new InputAttribute("phone", "text", "Телефон пользователя", false),
-            new InputAttribute("password", "password", "Пароль"),
             new InputAttribute(
                 self::USER_DATA . 'additional_phone',
                 "text",
                 "Дополнительный телефон", false),
+            new InputAttribute("password", "password", "Пароль"),
             new InputAttribute(
                 self::CRUCIAL_DATA . "firstname",
                 "text", "Имя пользователя", false),
@@ -34,6 +35,7 @@ class UserEdit extends User implements CreateAttributesInterface
             new InputAttribute(
                 self::CRUCIAL_DATA . "father_name",
                 "text", "Отчество пользователя", false),
+            SexDropDown::new(false),
             new InputAttribute(
                 self::CRUCIAL_DATA . 'series',
                 "text", "Паспорт серия", false),
@@ -49,19 +51,19 @@ class UserEdit extends User implements CreateAttributesInterface
                 "Аватар",
                 self::class),
             new InputFileAttribute(
+                'passport_edit',
+                "Паспорт",
+                self::class
+            ),
+            new InputFileAttribute(
                 "passport_reverse_edit",
                 "Прописка",
                 self::class),
+
             new InputFileAttribute(
                 "passport_user_edit",
                 "Паспорт c пользователем",
-                self::class,
-            ),
-            new InputFileAttribute(
-                'passport_edit',
-                "Паспорт пользователя",
-                self::class
-            ),
+                self::class,),
             PlasticCardDynamic::getDynamic("UserEdit")
         ]);
     }

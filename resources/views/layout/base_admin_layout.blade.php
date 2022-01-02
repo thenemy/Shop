@@ -6,13 +6,15 @@
 @endsection
 @section("body")
     <div class="px-5 rounded h-screen">
-        <div x-data="{ sidebarOpen: false }" class="flex">
-            <div class="flex flex-row   space-x-1">
-                <div class="flex-1 flex w-full z-50">
-                    <aside class="w-full flex h-screen flex-col transition-custom"
-                           :class=" sidebarOpen && 'width-sidebar'">
-                        @yield("sidebar")
-                    </aside>
+        <div x-data="{ sidebarOpen: true }" class="flex h-screen">
+            <div class="flex flex-row fixed space-x-1">
+                <div class="flex-1 flex w-full">
+                    <div class="w-full flex flex-col transition-custom"
+                         :class=" sidebarOpen && 'width-sidebar'">
+                        <div class=" h-screen">
+                            @yield("sidebar")
+                        </div>
+                    </div>
                 </div>
                 <div class="">
                     <button class="p-1 mr-4  transition duration-500
@@ -27,7 +29,10 @@
                     </button>
                 </div>
             </div>
-            <div class="flex-1 m-10 transition h-screen w-screen">
+            <div :class="sidebarOpen && 'lg:w-1/3 xl:w-1/4'">
+
+            </div>
+            <div class="m-10 transition h-screen w-screen">
                 @yield("content")
             </div>
         </div>

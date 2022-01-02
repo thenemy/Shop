@@ -17,10 +17,6 @@
              </div>
             </div>
             
-<livewire:admin.pages.category-edit.filtration-category-dynamic
-                parentKey='category_id'
-                :parentId='$entity->id'
-            />
 <livewire:components.file.file-uploading
                     :entityId='$entity->id'
                     mediaKey='icon_file'
@@ -28,4 +24,7 @@
                     :multiple='false'
                     label='Иконка'
                      />
+<livewire:admin.pages.category-edit.filtration-category-dynamic 
+                 parentKey='category_id'
+                :parentId='$entity->id'/>
 @endsection

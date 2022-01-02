@@ -43,4 +43,9 @@ abstract class AbstractForm implements RoutesInterface
         return $this;
     }
 
+    public function show($params = []): AbstractForm
+    {
+        $this->title = __("Посмотреть") . " " . $this->getTitle();
+        return $this;
+    }
 }

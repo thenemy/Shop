@@ -20,16 +20,29 @@ class FileLivewireCreator extends AbstractFileManager
 /// wierds
     protected function formatClass($file_from): string
     {
-        return sprintf($file_from,
-            $this->getNamespace(),
-            $this->getLivewireClassName(),
-            $this->getFunctions(),
-            $this->getBladePath(),
-            $this->initializeVariables(),
-            $this->getOptionalDropItems(),
-            $this->getTableClass(),
-            $this->getEntityClass(),
-        );
+        try {
+            return sprintf($file_from,
+                $this->getNamespace(),
+                $this->getLivewireClassName(),
+                $this->getFunctions(),
+                $this->getBladePath(),
+                $this->initializeVariables(),
+                $this->getOptionalDropItems(),
+                $this->getTableClass(),
+                $this->getEntityClass(),
+                ...$this->generateAdditionalFormatClass()
+            );
+        } catch (\Exception $exception) {
+
+//            $messsage = sprintf("%s %s", get_called_class(), $exception->getMessage());
+            throw  new \Exception(get_called_class());
+        }
+
+    }
+
+    protected function generateAdditionalFormatClass(): array
+    {
+        return [];
     }
 
     protected string $className;
@@ -50,10 +63,16 @@ class FileLivewireCreator extends AbstractFileManager
 
     public function generateHtml(): string
     {
-        return sprintf("<livewire:admin.pages.%s.%s/>",
+        return sprintf("<livewire:admin.pages.%s.%s %s/>",
             $this->classNameBlade,
             $this->getBladeName(),
+            $this->generateAdditionalToHtml()
         );
+    }
+
+    public function generateAdditionalToHtml(): string
+    {
+        return "";
     }
 
     public function initializeVariables(): string

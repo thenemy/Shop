@@ -58,7 +58,6 @@ abstract class BaseController extends Controller implements ControllerInterface
 
     }
 
-
     public function getIndex($request, $variables = [])
     {
         return view($this->getPath() . RoutesInterface::INDEX, $variables);
@@ -115,9 +114,19 @@ abstract class BaseController extends Controller implements ControllerInterface
         );
     }
 
+    public function getShow(Request $formRequest, $entity, $params = [], $variables = [])
+    {
+        return view($this->getPath() . RoutesInterface::SHOW,
+            array_merge([
+                "form" => $this->form->show($params),
+                "entity" => $entity
+            ], $variables)
+        );
+    }
+
     public function getDestroy($entity): \Illuminate\Http\RedirectResponse
     {
-        $entity->delete();
+        $this->service->destroy($entity);
         return back();
     }
 }

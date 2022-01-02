@@ -9,13 +9,16 @@ use App\Domain\Category\Front\Admin\CustomTable\Action\Models\CategoryEditAction
 use App\Domain\Category\Front\Admin\CustomTable\Tables\CategoryTable;
 use App\Domain\Category\Front\Traits\CategoryAttributeTable;
 use App\Domain\Core\File\Models\Livewire\FileLivewireCreator;
+use App\Domain\Core\File\Models\Livewire\FileLivewireCreatorWithFilterBy;
 use App\Domain\Core\Front\Admin\CustomTable\Actions\Base\AllActions;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Interfaces\TableInFront;
+use App\Domain\Core\Front\Admin\CustomTable\Traits\TableFilterBy;
 use App\Domain\Core\Front\Admin\DropDown\Models\Paginator\PaginatorDropDown;
 use App\Domain\Core\Front\Admin\DropDown\OptionalItems\ActivateChooseItem;
 use App\Domain\Core\Front\Admin\DropDown\OptionalItems\DeactivateChooseItem;
 use App\Domain\Core\Front\Admin\Form\Interfaces\CreateAttributesInterface;
+use App\Domain\Core\Front\Admin\Form\Traits\AttributeGetVariable;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireFunctions;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireOptionalDropDown;
 
@@ -23,13 +26,14 @@ use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireOptionalDropD
 use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireComponents;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireAdditionalFunctions;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireComponents;
+use App\Domain\Core\Front\Admin\OpenButton\Interfaces\FilterInterface;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
+use App\Domain\Core\Main\Traits\ArrayHandle;
 
 
-class CategoryIndex extends Category implements
-    TableInFront, CreateAttributesInterface
+class CategoryIndex extends Category implements TableInFront, CreateAttributesInterface
 {
-    use  CategoryAttributeTable;
+    use  CategoryAttributeTable, TableFilterBy, AttributeGetVariable;
 
 //    write all mutators required for table
 //    add title for indexPage
@@ -74,7 +78,6 @@ class CategoryIndex extends Category implements
     public function livewireComponents(): LivewireComponents
     {
         return new AllLivewireComponents([
-            PaginatorDropDown::getDropDown()
         ]);
     }
 
@@ -89,7 +92,7 @@ class CategoryIndex extends Category implements
     public function generateAttributes(): BladeGenerator
     {
         return BladeGenerator::generation([
-            new FileLivewireCreator("Category", $this)
+            new FileLivewireCreatorWithFilterBy("Category", $this)
         ]);
     }
 
@@ -98,5 +101,12 @@ class CategoryIndex extends Category implements
         return AllLivewireFunctions::generation([
 
         ]);
+    }
+
+    function filterByData(): array
+    {
+        return [
+            "depth" => 1
+        ];
     }
 }

@@ -10,7 +10,7 @@ use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputFileTempAttribute;
 use App\Domain\Core\Front\Admin\Form\Interfaces\CreateAttributesInterface;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireOptionalDropDown;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireAdditionalFunctions;
-use App\Domain\Core\Front\Admin\OpenButton\Interfaces\OpenEntity;
+use App\Domain\Core\Front\Admin\OpenButton\Interfaces\FilterInterface;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\Core\Main\Traits\ArrayHandle;
 use App\Domain\User\Entities\Surety;

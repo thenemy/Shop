@@ -58,6 +58,12 @@ class Media implements MediaInterface
         return Storage::url($this->path);
     }
 
+    public function download()
+    {
+        return Storage::download($this->path);
+    }
+
+
     public function __get(string $name)
     {
         switch ($name) {

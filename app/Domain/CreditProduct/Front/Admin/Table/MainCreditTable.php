@@ -6,9 +6,11 @@ use App\Domain\Core\Front\Admin\Attributes\Models\Column;
 use App\Domain\Core\Front\Admin\CustomTable\Abstracts\AbstractCreateTable;
 use App\Domain\Core\Front\Admin\Routes\Abstracts\RouteHandler;
 use App\Domain\CreditProduct\Front\Admin\Path\MainCreditRouteHandler;
+use App\Domain\CreditProduct\Front\Admin\Traits\MainCreditCommonColumn;
 
 class MainCreditTable extends AbstractCreateTable
 {
+    use MainCreditCommonColumn;
 
     public function getRouteHandler(): RouteHandler
     {
@@ -17,10 +19,6 @@ class MainCreditTable extends AbstractCreateTable
 
     public function getColumns(): array
     {
-        return [
-            Column::new(__("Название"), "name_index"),
-            Column::new(__("Изночальная ставка"), "initial_price_index"),
-            Column::new(__("Месяцы"), "initial_month_index"),
-        ];
+        return $this->getCommonColumns();
     }
 }

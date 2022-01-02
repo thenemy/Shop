@@ -4,7 +4,7 @@ namespace App\Domain\Installment\Jobs;
 
 use App\Domain\Core\Api\CardService\Interfaces\Payable;
 use App\Domain\Core\Api\CardService\Model\WithdrawMoney;
-use App\Domain\Core\Job\Base\AbstractJob;
+use App\Domain\Core\BackgroundTask\Base\AbstractJob;
 
 // do we need to add token to the construct ?
 

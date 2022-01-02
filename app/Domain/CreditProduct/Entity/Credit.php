@@ -9,6 +9,7 @@ use App\Domain\CreditProduct\Builders\CreditBuilder;
 class Credit extends Entity
 {
     protected $table = "credits";
+    protected $guarded = ['id'];
 
     public function newEloquentBuilder($query)
     {

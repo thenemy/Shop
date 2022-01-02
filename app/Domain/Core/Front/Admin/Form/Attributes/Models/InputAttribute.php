@@ -7,6 +7,13 @@ use App\Domain\Core\Front\Admin\Form\Attributes\Base\BaseAttributeFromText;
 class InputAttribute extends BaseAttributeFromText
 {
 
+    private function getValue()
+    {
+        if ($this->type == "password"){
+            return  "";
+        }
+        return sprintf('{{old("%s") ?? %s}}', $this->key, $this->getVariable());
+    }
 
     public function generateHtml(): string
     {
@@ -15,12 +22,13 @@ class InputAttribute extends BaseAttributeFromText
         } else {
             $dispatch = sprintf("onkeyup=\"%s\"", $this->createDispatch());
         }
-        return sprintf("<x-helper.input.input name='%s' type='%s'
+        return sprintf("<x-helper.input.input%s name='%s' type='%s'
             label='%s' value='%s' id='%s'  %s/>",
+            $this->type == "checkbox" ? "_checked" : "",
             $this->key,
             $this->type,
             $this->label,
-            $this->create ? sprintf('{{old("%s") ?? ""}}', $this->key) : $this->getVariable(),
+            $this->getValue(),
             $this->id,
             $dispatch
         );

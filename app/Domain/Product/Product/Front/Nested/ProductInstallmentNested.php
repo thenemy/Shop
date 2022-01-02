@@ -31,12 +31,13 @@ class ProductInstallmentNested extends Product implements FrontEntityInterface
 
     public function getTakeNumberAttribute(): string
     {
-        return InputTableAttribute::generate('current_number',
+        return InputTableAttribute::generate(
+            'current_number',
             "text",
             'entitiesStore.' . $this->id,
-            "number_nested_" . $this->id,
             false,
-            FilterJsInterface::ONLY_NUMBER
+            FilterJsInterface::ONLY_NUMBER,
+            "number_nested_" . $this->id,
         );
     }
 

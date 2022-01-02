@@ -38,7 +38,6 @@ trait SetInputAttribute
         $dynamic = $rules;
         $input = [];
         if (empty($dynamic)) {
-
             throw new DynamicTableException("New way is not supported");
         }
         foreach ($dynamic as $key => $value) {

@@ -100,3 +100,15 @@ function initSchemaSMS(comment) {
 
     return object;
 }
+
+function setInitWidth() {
+    return {
+        width: 30,
+        getStyle() {
+            return `width:${this.width}%`;
+        },
+        setWidth(event) {
+            console.log(event.target.offsetWidth);
+        }
+    }
+}

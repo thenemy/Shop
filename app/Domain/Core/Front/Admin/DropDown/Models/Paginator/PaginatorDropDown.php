@@ -11,8 +11,6 @@ use App\Domain\Core\Front\Admin\DropDown\Items\DropLivewireItem;
 // good for sorting
 class PaginatorDropDown extends AbstractLivewireDropDown
 {
-    const  FORMAT_CLICK = "%s(%s)";
-
     static public function getDropDown($name = null): AbstractDropDown
     {
         return new self([
@@ -25,18 +23,13 @@ class PaginatorDropDown extends AbstractLivewireDropDown
                 self::formatClick(2)
             ),
             new DropLivewireItem(
-                2,
-                self::formatClick(2)
+                4,
+                self::formatClick(4)
             )
             ,
         ], $name);
     }
 
-    static public function formatClick($value): string
-    {
-        return sprintf(self::FORMAT_CLICK,
-            self::getFunctionName(), $value);
-    }
 
     function setType(): string
     {
@@ -53,12 +46,6 @@ class PaginatorDropDown extends AbstractLivewireDropDown
         return __("Выберите размер списка");
     }
 
-
-    public function generateHtml(): string
-    {
-        return sprintf("<x-helper.drop_down.drop_down_livewire :drop='%s' />",
-            self::toRealBlade(self::getVariableBlade()));
-    }
 
     static public function getFunctionName(): string
     {

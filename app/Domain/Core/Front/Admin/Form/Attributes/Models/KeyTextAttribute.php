@@ -10,8 +10,8 @@ class KeyTextAttribute implements HtmlInterface
 {
     use AttributeGetVariable;
 
-    private string $key;
-    private string $value;
+    protected string $key;
+    protected string $value;
 
     public function __construct(string $key, string $value)
     {
@@ -19,9 +19,10 @@ class KeyTextAttribute implements HtmlInterface
         $this->value = $value;
     }
 
-    static public function new(string $key, string $value): KeyTextAttribute
+    static public function new(string $key, string $value)
     {
-        return new self($key, $value);
+        $class = get_called_class();
+        return new $class($key, $value);
     }
 
     public function generateHtml(): string

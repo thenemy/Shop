@@ -8,9 +8,10 @@ use App\Domain\Category\Interfaces\FiltrationInterface;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Abstracts\DynamicAttributes;
 use App\Domain\Core\Main\Entities\Entity;
 
-class FiltrationCategory extends Entity implements FiltrationInterface
+class   FiltrationCategory extends Entity implements FiltrationInterface
 {
     protected $table = "filtration_category";
+    protected $guarded = ['id'];
 
     public function newEloquentBuilder($query): FiltrationCategoryBuilder
     {

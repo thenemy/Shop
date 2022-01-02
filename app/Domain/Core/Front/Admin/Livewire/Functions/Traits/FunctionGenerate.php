@@ -8,6 +8,9 @@ use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\FunctionInterface;
 
 trait FunctionGenerate
 {
+    /*
+     *  in livewire
+     * */
     abstract static public function getVariable(): string;
 
     abstract static public function getVariableBlade(): string;

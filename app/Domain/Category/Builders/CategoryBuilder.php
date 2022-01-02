@@ -8,11 +8,13 @@ class CategoryBuilder extends BuilderEntity
 {
     public function filterBy($filter): CategoryBuilder
     {
-
         parent::filterBy($filter);
         if (isset($filter['parent_id'])) {
             $this->where($this->getParent(), '=', $filter['parent_id'])
                 ->where("id", "!=", $filter['parent_id']);
+        }
+        if (isset($filter['depth'])) {
+            $this->where("depth", "=", $filter['depth']);
         }
         return $this;
     }

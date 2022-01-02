@@ -38,7 +38,7 @@ class CreditDynamicIndex extends BaseLivewireDynamic
     }
 
     public function getEntity(){
-        return 'App\Domain\CreditProduct\Front\DynamicTable\CreditDynamicIndex'; //8  --- class name of entity
+        return 'App\Domain\CreditProduct\Front\Dynamic\CreditDynamicIndex'; //8  --- class name of entity
     }
 
 

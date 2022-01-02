@@ -6,6 +6,7 @@
     x-data="{ isOpen: false}" {{$attributes->merge(["class"=>"relative drop_down_init inline-block text-left w-max" ])}}>
     <div>
         <x-helper.button.drop_down_button
+            class="flex items-center"
             type="button"
             @click="isOpen = !isOpen"
             @keydown.escape="isOpen = false"
