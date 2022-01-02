@@ -16,7 +16,7 @@ use App\Domain\User\Front\Admin\File\SuretyFileCreator;
 use App\Domain\User\Front\Admin\File\UserFileCreator;
 use Illuminate\Console\Command;
 
-class CreateBlades extends Command
+class   CreateBlades extends Command
 {
     /**
      * The name and signature of the console command.
