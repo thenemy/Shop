@@ -2,7 +2,7 @@
 
 @section("sidebar")
     <div class="">
-{{--        <x-helper.sidebar.sidebar name="Админ" :list="\App\View\Helper\SideBar\Models\Admin\AdminSideBar::sideBars()"/>--}}
+        <x-helper.sidebar.sidebar name="Админ" :list="\SideBar::sideBars()"/>
     </div>
 @endsection
 
