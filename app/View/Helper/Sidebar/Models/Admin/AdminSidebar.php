@@ -15,10 +15,10 @@ use App\Domain\Shop\Front\Admin\Path\ShopRouteHandler;
 use App\Domain\User\Front\Admin\Path\UserRouteHandler;
 use App\View\Helper\Sidebar\Items\SideBarDrop;
 use App\View\Helper\SideBar\Items\SideBarList;
-use App\View\Helper\SideBar\Interfaces\SideBarFactoryInterface;
+//use App\View\Helper\SideBar\Interfaces\SideBarFactoryInterface;
 
 
-class AdminSidebar implements SideBarFactoryInterface
+class AdminSidebar
 {
     static public function sideBars(): SideBarList
     {
