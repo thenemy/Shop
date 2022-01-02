@@ -12,41 +12,39 @@ use App\Domain\Installment\Front\Admin\Path\TakenCreditRouteHandler;
 use App\Domain\Product\Product\Front\Admin\Path\ProductRouteHandler;
 use App\Domain\Shop\Front\Admin\Path\ShopRouteHandler;
 use App\Domain\User\Front\Admin\Path\UserRouteHandler;
-use App\View\Helper\Sidebar\Items\SideBarDrop;
-use App\View\Helper\SideBar\Items\SideBarList;
-use App\View\Helper\SideBar\Interfaces\SideBarFactoryInterface;
 
 
-class AdminSidebar implements SideBarFactoryInterface
+
+class AdminSidebar implements \SideBarFactoryInterface
 {
-    static public function sideBars(): SideBarList
+    static public function sideBars(): \SideBarList
     {
-        return new SideBarList(
+        return new \SideBarList(
             [
-                new SideBarDrop(__("Пользователи"), UserRouteHandler::new()),
-                new SideBarDrop(__("Магазин"), ShopRouteHandler::new()),
-                new SideBarList([
-                    new SideBarDrop(__("Главные категории"), CategoryRouteHandler::new()),
-                    new SideBarDrop(__("Все категории"), CategoryAllRouteHandler::new()),
+                new \SideBarDrop(__("Пользователи"), UserRouteHandler::new()),
+                new \SideBarDrop(__("Магазин"), ShopRouteHandler::new()),
+                new \SideBarList([
+                    new \SideBarDrop(__("Главные категории"), CategoryRouteHandler::new()),
+                    new \SideBarDrop(__("Все категории"), CategoryAllRouteHandler::new()),
                 ],
                     "Раздел Категорий"
                 ),
-                new SideBarList([
-                new SideBarDrop(__("Банеры"), BannerRouteHandler::new()),
-                new SideBarDrop(__("Брэнды"), BrandRouteHandler::new()),],
+                new \SideBarList([
+                new \SideBarDrop(__("Банеры"), BannerRouteHandler::new()),
+                new \SideBarDrop(__("Брэнды"), BrandRouteHandler::new()),],
                 "Общие"),
-                new SideBarList([
-                    new SideBarDrop(__("Товары"), ProductRouteHandler::new())
+                new \SideBarList([
+                    new \SideBarDrop(__("Товары"), ProductRouteHandler::new())
                 ],
                     __("Действия для товаров")
                 ),
-                new SideBarList([
-                    new SideBarDrop(__("Виды рассрочки"), MainCreditRouteHandler::new()),
-                    new SideBarDrop(__("Рассрочка"), TakenCreditRouteHandler::new()),
+                new \SideBarList([
+                    new \SideBarDrop(__("Виды рассрочки"), MainCreditRouteHandler::new()),
+                    new \SideBarDrop(__("Рассрочка"), TakenCreditRouteHandler::new()),
                 ],
                     "Рассрочка"
                 ),
-                new SideBarList([
+                new \SideBarList([
 //                    new SideBarDrop(__("Виды рассрочки"), MainCreditRouteHandler::new()),
 //                    new SideBarDrop(__("Рассрочка"), TakenCreditRouteHandler::new()),
                 ],
