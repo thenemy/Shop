@@ -19,7 +19,7 @@ class AdminSidebar implements \SideBarFactoryInterface
 {
     static public function sideBars(): \SideBarList
     {
-        return new SideBarList(
+        return new \SideBarList(
             [
                 new \SideBarDrop(__("Пользователи"), UserRouteHandler::new()),
                 new \SideBarDrop(__("Магазин"), ShopRouteHandler::new()),
@@ -34,7 +34,7 @@ class AdminSidebar implements \SideBarFactoryInterface
                 new \SideBarDrop(__("Брэнды"), BrandRouteHandler::new()),],
                 "Общие"),
                 new \SideBarList([
-                    new SideBarDrop(__("Товары"), ProductRouteHandler::new())
+                    new \SideBarDrop(__("Товары"), ProductRouteHandler::new())
                 ],
                     __("Действия для товаров")
                 ),
