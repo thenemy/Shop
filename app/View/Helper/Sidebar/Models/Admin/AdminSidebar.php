@@ -14,10 +14,8 @@ use App\Domain\Product\Product\Front\Admin\Path\ProductRouteHandler;
 use App\Domain\Shop\Front\Admin\Path\ShopRouteHandler;
 use App\Domain\User\Front\Admin\Path\UserRouteHandler;
 use App\View\Helper\SideBar\Interfaces\SideBarFactoryInterface;
-use App\View\Helper\SideBar\Items\SideBar;
 use App\View\Helper\Sidebar\Items\SideBarDrop;
 use App\View\Helper\SideBar\Items\SideBarList;
-use App\View\Helper\Sidebar\Path\AdminRouteHandler;
 
 class AdminSidebar implements SideBarFactoryInterface
 {
