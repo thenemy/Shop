@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\View\Helper\Sidebar\Interfaces;
+namespace app\View\Helper\Sidebar\Interfaces;
 
 
 interface SideBarFactoryInterface
