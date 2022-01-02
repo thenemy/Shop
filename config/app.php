@@ -1,5 +1,8 @@
 <?php
 
+use App\View\Helper\Sidebar\Interfaces\SideBarFactoryInterface;
+use App\View\Helper\Sidebar\Items\SideBarList;
+
 return [
 
     /*
@@ -189,6 +192,9 @@ return [
     */
 
     'aliases' => [
+        "SideBarFactoryInterface" => SideBarFactoryInterface::class,
+        "SideBarList" => SideBarList::class,
+        "SideBarDrop" => \App\View\Helper\Sidebar\Items\SideBarDrop::class,
         "SideBar" => \App\View\Helper\Sidebar\Models\Admin\AdminSidebar::class,
         'CR' => \App\Domain\Core\Main\Interfaces\Connector::class,
         'AdminRoute' => \App\Domain\Core\Front\Admin\Routes\Admin\AdminRoutesInterface::class,
