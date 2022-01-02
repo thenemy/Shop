@@ -8,9 +8,6 @@ use App\Domain\Category\Front\Admin\Path\CategoryAllRouteHandler;
 use App\Domain\Category\Front\Admin\Path\CategoryRouteHandler;
 use App\Domain\Common\Banners\Front\Admin\Path\BannerRouteHandler;
 use App\Domain\Common\Brands\Front\Admin\Path\BrandRouteHandler;
-use App\Domain\Core\Front\Admin\Routes\Abstracts\RouteHandler;
-use App\Domain\Core\Front\Admin\Routes\Interfaces\RoutesInterface;
-
 use App\Domain\CreditProduct\Front\Admin\Path\MainCreditRouteHandler;
 use App\Domain\Installment\Front\Admin\Path\TakenCreditRouteHandler;
 use App\Domain\Product\Product\Front\Admin\Path\ProductRouteHandler;
