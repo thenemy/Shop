@@ -18,6 +18,7 @@ module.exports = {
             },
             colors: {
                 black_custom: "#525252",
+                filter_color: "#43c7d7",
                 gray: colors.neutral,
                 green: colors.emerald,
                 sidebar: '#191919',

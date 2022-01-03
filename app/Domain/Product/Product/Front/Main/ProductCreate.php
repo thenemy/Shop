@@ -4,7 +4,9 @@ namespace App\Domain\Product\Product\Front\Main;
 
 use App\Domain\Category\Front\Admin\DropDown\CategoryDropDownSearch;
 use App\Domain\Common\Brands\Front\Admin\DropDown\BrandDropDownSearch;
+use App\Domain\Core\File\Models\Livewire\FileLivewireFactoring;
 use App\Domain\Core\File\Models\Livewire\FileLivewireNestedWithoutEntity;
+use App\Domain\Core\Front\Admin\Form\Attributes\Models\ComplexAttribute;
 use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputAttribute;
 use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputFileTempAttribute;
 use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputFileTempManyAttribute;
@@ -41,7 +43,8 @@ class ProductCreate extends Product implements CreateAttributesInterface
                 __("Хит продаж")),
             InputFileTempAttribute::create(self::CARD_IMAGE_TO . "image", "Главная картинка"),
             InputFileTempManyAttribute::create(self::IMAGE_TO . "image", "Картинки"),
-            new  FileLivewireNestedWithoutEntity("ProductCreate", $this->getMainCredit())
+            new  FileLivewireNestedWithoutEntity("ProductCreate", $this->getMainCredit()),
+            FileLivewireFactoring::generation("Product", $this, "")
         ]);
     }
 

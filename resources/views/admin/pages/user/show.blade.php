@@ -8,6 +8,7 @@
         {{--    insert there new created livewire--}}
         {{--    give the title--}}
         <x-helper.text.title>{{$form->title}}</x-helper.text.title>
+        <hr class="border-dashed border-title_color"/>
         {{--    insert name of the breadcrumbs and the arguments--}}
         <div class="w-full ">
             
@@ -15,10 +16,10 @@
             <div 	class='flex flex-col  space-y-2 space-y-10'>
                 			
 
-            <div 	class='flex flex-row  space-x-2 space-x-10'>
+            <div 	class='flex flex-row  space-x-2 space-x-10 '>
                 			
 
-            <div 	class='flex flex-row  space-x-2 space-x-10 items-center shadow-lg rounded p-10'>
+            <div 	class='flex flex-row  space-x-2 space-x-10 flex-1 bg-white items-center shadow-lg rounded p-10'>
                 			
 
             <div >
@@ -36,7 +37,7 @@
             </div>
             </div>			
 
-            <div 	class='items-center shadow-lg rounded p-10'>
+            <div 	class='items-center bg-white shadow-lg rounded p-10'>
                 			
 <x-helper.text.text_key key='Серия паспорта' value='{{$entity->userCreditData->crucialData->series ?? ""}}'></x-helper.text.text_key>			
 <x-helper.text.text_key key='ПНФЛ' value='{{$entity->userCreditData->crucialData->pnfl ?? ""}}'></x-helper.text.text_key>			

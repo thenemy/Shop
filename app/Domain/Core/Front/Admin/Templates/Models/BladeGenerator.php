@@ -6,9 +6,9 @@ use App\Domain\Core\Front\Interfaces\HtmlInterface;
 
 class BladeGenerator implements HtmlInterface
 {
-    private array $items;
+    protected array $items;
 
-    private function __construct(array $items)
+    protected function __construct(array $items)
     {
         $this->items = $items;
     }

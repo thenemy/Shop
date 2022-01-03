@@ -21,7 +21,7 @@
             <div class="bg-white w-full h-16 shadow">
                 @yield("new_header")
             </div>
-            <div class="m-4">
+            <div class="ml-4 mt-4">
                 @yield("content")
             </div>
         </div>

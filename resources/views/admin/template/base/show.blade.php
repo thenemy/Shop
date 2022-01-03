@@ -8,6 +8,7 @@
         {{--    insert there new created livewire--}}
         {{--    give the title--}}
         <x-helper.text.title>{{$form->title}}</x-helper.text.title>
+        <hr class="border-dashed border-title_color"/>
         {{--    insert name of the breadcrumbs and the arguments--}}
         <div class="w-full ">
             %s

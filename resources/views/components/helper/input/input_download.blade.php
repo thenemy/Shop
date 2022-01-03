@@ -19,11 +19,10 @@
     >
         <!-- file upload modal -->
         <article x-show="!isUploading" aria-label="File Upload Modal"
-                 class="relative h-full flex flex-col bg-white shadow-xl rounded-md"
+                 class="relative h-full flex flex-col bg-white shadow rounded-md"
                  wire:drop="$emit('file-dropped', $event)"
                  ondrop="dropHandler(event);" ondragover="dragOverHandler(event);"
                  ondragleave="dragLeaveHandler(event);" ondragenter="dragEnterHandler(event);">
-
 
             <section class="h-full overflow- p-8 w-full h-full flex flex-col">
                 <header class="border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center">

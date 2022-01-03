@@ -9,14 +9,16 @@ abstract class BaseLivewireFactoring extends Component
     public $counter = 0;
     public $entityId;
     public $className;
+    public string $prefix = '';
 
     /**
      * @param null $entity
-     * @param null $key -- used for initial counter
+     * @param string $key -- used for initial counter and for prefixing
      */
-    public function mount($entity = null, $key = null)
+    public function mount($entity = null)
     {
-        if ($entity) {
+        if ($this->prefix && $entity) {
+            $key = $this->prefix;
             $this->entityId = $entity->id;
             $this->className = get_class($entity);
             $this->counter = $entity->$key;

@@ -25,9 +25,9 @@ class UserShow extends User implements CreateAttributesInterface
             ContainerColumn::new([
                 'class' => "space-y-10"
             ], [
-                ContainerRow::new(['class' => "space-x-10"], [
+                ContainerRow::new(['class' => "space-x-10 "], [
                     ContainerRow::new([
-                        "class" => "space-x-10 items-center shadow-lg rounded p-10"
+                        "class" => "space-x-10 flex-1 bg-white items-center shadow-lg rounded p-10"
                     ], [
                         Container::new([], [
                             ImageCompileAttribute::new(
@@ -47,7 +47,7 @@ class UserShow extends User implements CreateAttributesInterface
                             ]),
                     ]),
                     Container::new([
-                        'class' => "items-center shadow-lg rounded p-10"
+                        'class' => "items-center bg-white shadow-lg rounded p-10"
                     ], [
                         KeyTextAttribute::new(__("Серия паспорта"), self::CRUCIAL_DATA . 'series'),
                         KeyTextAttribute::new('ПНФЛ', self::CRUCIAL_DATA . 'pnfl'),

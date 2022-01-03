@@ -5,9 +5,11 @@ namespace App\Domain\Core\File\Models\Livewire;
 /// available variables in blade is
 /// $entity $index
 use App\Domain\Core\File\Interfaces\LivewireFactoringInterface;
+use App\Domain\Core\Front\Admin\Form\Attributes\Models\ComplexAttribute;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\Core\Front\Interfaces\HtmlInterface;
 
+//
 class FileLivewireFactoring extends FileLivewireCreator implements LivewireFactoringInterface
 {
     public string $key;
@@ -15,14 +17,19 @@ class FileLivewireFactoring extends FileLivewireCreator implements LivewireFacto
 
     /**
      * @param $className
-     * @param $entity
+     * @param $entity -- required for generating name for the livewire
      * @param $key -- required for setting initial value for counter
      */
-    public function __construct($className, $entity, BladeGenerator $attributes, $key = null)
+    public function __construct($className, $entity, $key, BladeGenerator $attributes)
     {
         $this->key = $key;
         $this->attributes = $attributes;
         parent::__construct($className, $entity);
+    }
+
+    static public function generation($className, $entity, $key, array $attributes, $title)
+    {
+        return new self($className, $entity, $key, ComplexAttribute::generation($attributes, $title));
     }
 
     public function formatClass($file_from): string
@@ -37,7 +44,7 @@ class FileLivewireFactoring extends FileLivewireCreator implements LivewireFacto
     public function generateAdditionalToHtml(): string
     {
         if ($this->key)
-            return sprintf(':entity="$entity" key="%s"', $this->key);
+            return sprintf(':entity="$entity" prefix="%s"', $this->key);
         return "";
     }
 

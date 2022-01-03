@@ -5,20 +5,23 @@
     <div x-data="{ open: '{{$item->isCurrentRoute()}}' }" class="cursor-pointer">
         <div class="drop_element" x-data="{add_style : false}"
              @click="open = ! open"
-
              @mouseover="add_style = true"
              @mouseleave="add_style = false">
             <div
-
                 class="hover_side_item">
                 <div>
                     <button class="w-full">
                         <div class="flex items-center justify-between w-full text-lg">
                             <div class="drop_helper_text">
-                                <span :class="add_style && 'text-side_hovering'"
-                                      class="text-xl fas {{$item->icon}}"></span>
-                                <span :class="add_style && 'text-side_hovering'" x-show="!isSideBarOpen"
-                                      class="text-sm font-medium">{{$item->name}}</span>
+                                <div>
+                                     <span :class="add_style && 'text-side_hovering'"
+                                           class="text-xl fas {{$item->icon}}"></span>
+                                </div>
+                                <div>
+                                    <span x-show="!isSideBarOpen"
+                                          :class="add_style && 'text-side_hovering'"
+                                          class="text-sm font-medium">{{$item->name}}</span>
+                                </div>
                             </div>
                             <div x-show="!isSideBarOpen"
                                  :class="open && 'rotate-180'  || 'transform transition  rotate-90' "
