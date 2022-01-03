@@ -23,22 +23,11 @@
                  wire:drop="$emit('file-dropped', $event)"
                  ondrop="dropHandler(event);" ondragover="dragOverHandler(event);"
                  ondragleave="dragLeaveHandler(event);" ondragenter="dragEnterHandler(event);">
-            <!-- overlay -->
-            {{--            <div id="overlay"--}}
-            {{--                 class="w-full overlay h-full absolute top-0 left-0 pointer-events-none z-50 flex flex-col items-center justify-center rounded-md">--}}
-            {{--                <i>--}}
-            {{--                    <svg class="fill-current w-12 h-12 mb-3 text-blue-700" xmlns="http://www.w3.org/2000/svg" width="24"--}}
-            {{--                         height="24" viewBox="0 0 24 24">--}}
-            {{--                        <path--}}
-            {{--                            d="M19.479 10.092c-.212-3.951-3.473-7.092-7.479-7.092-4.005 0-7.267 3.141-7.479 7.092-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.521-5.408zm-7.479-1.092l4 4h-3v4h-2v-4h-3l4-4z"/>--}}
-            {{--                    </svg>--}}
-            {{--                </i>--}}
-            {{--                <p class="text-lg text-blue-700">{{__("Отпустите файл чтоб загрузить")}}</p>--}}
-            {{--            </div>--}}
+
 
             <section class="h-full overflow- p-8 w-full h-full flex flex-col">
                 <header class="border-dashed border-2 border-gray-400 py-12 flex flex-col justify-center items-center">
-                    <p class="mb-3 font-semibold text-gray-900 flex flex-wrap justify-center">
+                    <p class="mb-3 font-semibold  flex flex-wrap justify-center">
                         <span> {{__("Загрузите ")}} {{$label}}</span>
                     </p>
                     <input
@@ -54,7 +43,7 @@
                 </header>
 
                 @if(!empty($file) && $file[0] && $file[0]->exists())
-                    <h1 class="pt-8 pb-3 font-semibold sm:text-lg text-gray-900">
+                    <h1 class="pt-8 pb-3 font-semibold sm:text-lg">
                         {{__("Файлы")}}
                     </h1>
                     <ul class="gallery flex flex-1 flex-wrap -m-1">

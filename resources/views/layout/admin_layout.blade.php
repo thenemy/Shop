@@ -1,8 +1,8 @@
-@extends("layout.base_admin_layout")
+@extends("layout.new_base_admin_layout")
 
 @section("sidebar")
     <div class="">
-        <x-helper.sidebar.sidebar name="Админ" :list="\SideBar::sideBars()"/>
+        <x-helper.sidebar.new_sidebar name="Админ" :list="\SideBar::sideBars()"/>
     </div>
 @endsection
 

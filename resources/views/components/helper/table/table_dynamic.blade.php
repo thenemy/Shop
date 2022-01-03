@@ -13,18 +13,18 @@
             </x-helper.button.outline_button>
         </div>
     </div>
-    <table class="table-auto border-collapse border w-full my-2.5" wire:loading.class="opacity-80">
-        <tr class="w-8/12 longpress">
-            <th class="py-3 px-6 font-semibold bg-gray-100 hidden checkbox-show">{{__("Выбрать")}}</th>
+    <table class="table_main" wire:loading.class="opacity-80">
+        <tr class="longpress">
+            <th class="table_main_th hidden checkbox-show">{{__("Выбрать")}}</th>
             @foreach($table->columns as $column)
-                <th class="py-3 items-center bg-gray-100 font-semibold justify-center px-6">{{$column->column_name}}</th>
+                <th class="table_main_th">{{$column->column_name}}</th>
             @endforeach
         </tr>
 
         @foreach($table->list as $items)
             <tr wire:key="dynamic_table_{{$loop->index}}"
-                class="w-8/12 text-center border-b border-gray-200 hover:bg-gray-200 ">
-                <td class="p-2 hidden checker checkbox-show">
+                class="table_main_tr">
+                <td class="table_main_td hidden checker checkbox-show">
                     <label for="check{{$loop->index}}">
                         <input type="checkbox" wire:model="checkBox" value="{{$items->id}}"
                                class="form-checkbox mt-2 w-5 h-5"/>
@@ -33,7 +33,7 @@
 
                 @foreach($table->columns as $row)
                     <td
-                        class="p-2 cursor-default items-center justify-center">
+                        class="table_main_td">
                         <div x-data="initDynamic('{{$items->id}}')"
                              class="flex flex-row justify-center"
                              x-on:show-inputs.window="showInput($event)">
@@ -49,13 +49,13 @@
             </tr>
         @endforeach
 
-        <tr>
-            <td class="p-2 hidden checker checkbox-show">
+        <tr class="table_main_tr">
+            <td class="table_main_td hidden checker checkbox-show">
 
             </td>
             @foreach($table->columns as $row)
                 <td
-                    class="p-2 cursor-default items-center justify-center ">
+                    class="table_main_td">
                     <div class="flex flex-row justify-center">
                         {!!  $storedValues[explode('-', $row->key_to_row)[0]]!!}
                     </div>
