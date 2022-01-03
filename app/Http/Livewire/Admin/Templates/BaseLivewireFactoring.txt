@@ -1,0 +1,13 @@
+<?php
+
+namespace %s  // 1  --- namespace
+use App\Http\Livewire\Admin\Base\Abstracts\BaseLivewireFactoring;
+
+class %s extends BaseLivewireFactoring
+{
+
+    function getPath()
+    {
+        return '%s';
+    }
+}

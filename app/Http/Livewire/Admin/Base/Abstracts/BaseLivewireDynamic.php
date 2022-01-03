@@ -19,19 +19,34 @@ abstract class BaseLivewireDynamic extends BaseLivewire
     public Collection $entity;
     public Collection $collection;
     public array $rules = [];
-    public array $storedValues = [];
+    public array $storedValues = []; //
 
     public function mount()
     {
         parent::mount();
-        $this->entity = collect([]);
+        $this->setCollections();
         $this->generateRules('entity.');
-        $this->collection = collect([]);
-        $table = self::newClass($this->getTable(), []);
-        $this->storedValues = $table->inputs;
+        $this->setTemplateInput();
+        $this->setInitialValues();
+    }
+
+    private function setInitialValues()
+    {
         $this->filterBy[$this->parentKey] = $this->parentId;
     }
 
+    private function setCollections()
+    {
+        $this->collection = collect([]);
+        $this->entity = collect([]);
+
+    }
+
+    private function setTemplateInput()
+    {
+        $table = self::newClass($this->getTable(), []);
+        $this->storedValues = $table->inputs;
+    }
 
     private function generateRules($parent)
     {

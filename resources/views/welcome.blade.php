@@ -1,10 +1,17 @@
-<<<<<<< HEAD
-@extends('layout.admin_layout')
-=======
-{{--@extends("layout.layout")--}}
-
-{{--@section("body")--}}
-{{--    <livewire:new-livewire/>--}}
-{{--    {!!(new \App\Domain\Category\Front\Models\CategoryIndex())->name_table !!}--}}
-{{--@endsection--}}
->>>>>>> 895a7332d79d8f86a18b1db6b167b2afa375cf9a
+@extends("layout.layout")
+@section("body")
+    <div class="flex flex-row w-full">
+        <div x-data="{close: false}"
+             :class="close && 'basis-bar' || 'basis-1/5'">
+            <div>
+                <div @click="close = !close" class="bg-black p-5">
+                    <span class="leading-3 text-white fa fa-bars"></span>
+                </div>
+            </div>
+            <div class="bg-sidebar h-screen">
+            </div>
+        </div>
+        <div class="bg-blue-500 flex-1">02</div>
+        <div class="bg-red-600 basis-1/4">03</div>
+    </div>
+@endsection

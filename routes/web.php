@@ -23,6 +23,9 @@ Route::group([
         Route::get('/', [\App\Http\Controllers\Admin\CategoryController::class, "index"])->name('admin.category.index');
     }
 );
+Route::get("test", function (){
+    return view("welcome");
+});
 Route::get("file_download", \App\Http\Controllers\Common\FileDownloadController::class)
     ->name("download.file");
 include 'admin.php';
