@@ -9,12 +9,13 @@ class InputAttribute extends BaseAttributeFromText
 
     private function getValue()
     {
-        if ($this->type == "password"){
-            return  "";
+        if ($this->type == "password") {
+            return "";
         }
         return sprintf('{{old("%s") ?? %s}}', $this->key, $this->getVariable());
     }
 
+    // change dispatches depending on type
     public function generateHtml(): string
     {
         if ($this->type == "checkbox") {
@@ -23,7 +24,7 @@ class InputAttribute extends BaseAttributeFromText
             $dispatch = sprintf("onkeyup=\"%s\"", $this->createDispatch());
         }
         return sprintf("<x-helper.input.input%s name='%s' type='%s'
-            label='%s' value='%s' id='%s'  %s/>",
+            label='{{__(\"%s\")}}' value='%s' id='%s'  %s/>",
             $this->type == "checkbox" ? "_checked" : "",
             $this->key,
             $this->type,

@@ -3,6 +3,7 @@
 namespace App\View\Components\DropDown;
 
 use Illuminate\View\Component;
+use Illuminate\View\ComponentAttributeBag;
 
 class DropDownComponent extends Component
 {
@@ -11,7 +12,7 @@ class DropDownComponent extends Component
     public function __construct($drop, array $attributes = [])
     {
         $this->drop = $drop;
-        $this->attributes = $attributes;
+        $this->attributes = new ComponentAttributeBag($attributes) ;
         }
 
     public function render()

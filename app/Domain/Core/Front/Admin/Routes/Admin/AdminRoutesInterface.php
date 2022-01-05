@@ -20,4 +20,5 @@ interface AdminRoutesInterface
     const SURETY = "surety";
     const BANNER = "banner";
     const BRAND = "brand";
+    const COLOR = "color";
 }

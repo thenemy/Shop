@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Base\Abstracts;
 
 use App\Domain\Core\Main\Services\BaseService;
 use App\Domain\Core\Main\Traits\FastInstantiation;
+use App\Http\Livewire\Admin\Base\Rules\GenerateRules;
 use Illuminate\Support\Collection;
 
 /*
@@ -12,13 +13,12 @@ use Illuminate\Support\Collection;
 
 abstract class BaseLivewireDynamic extends BaseLivewire
 {
-    use FastInstantiation;
+    use FastInstantiation, GenerateRules;
 
     public $parentId = 0;
     public string $parentKey = "";
     public Collection $entity;
     public Collection $collection;
-    public array $rules = [];
     public array $storedValues = []; //
 
     public function mount()
@@ -48,14 +48,6 @@ abstract class BaseLivewireDynamic extends BaseLivewire
         $this->storedValues = $table->inputs;
     }
 
-    private function generateRules($parent)
-    {
-        $new_rules = [];
-        foreach ($this->getEntity()::getRules() as $key => $value) {
-            $new_rules[$parent . $key] = $value;
-        }
-        $this->rules = array_merge($this->rules, $new_rules);
-    }
 
     public function update($id)
     {

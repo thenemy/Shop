@@ -129,4 +129,19 @@ abstract class BaseController extends Controller implements ControllerInterface
         $this->service->destroy($entity);
         return back();
     }
+    public function index(Request $request)
+    {
+
+        return $this->getIndex($request);
+    }
+
+    public function create(Request $request)
+    {
+        return $this->getCreate($request);
+    }
+
+    public function store(Request $request)
+    {
+        return $this->getStoreValidation($request);
+    }
 }

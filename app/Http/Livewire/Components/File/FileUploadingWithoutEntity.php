@@ -6,6 +6,15 @@ class FileUploadingWithoutEntity extends FileUploading
 {
     public string $keyToAttach;
 
+//    public function updatedFileCustom()
+//    {
+//        parent::updatedFileCustom();
+//        $upload = collect($this->fileCustom)->map(function ($item){
+//            return $item->getRealPath();
+//        })->toArray();
+//        $this->emitUp("fileUploadDynamic", $this->keyToAttach, $upload);
+//    }
+
     public function mount($mediaInitial = null)
     {
         if (!$this->entityId) {

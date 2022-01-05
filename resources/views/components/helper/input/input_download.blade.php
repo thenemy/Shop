@@ -6,7 +6,7 @@
 "uniqueId"
 ]
 )
-    <div x-data="init('{{$uniqueId}}', @this)"
+<div x-data="init('{{$uniqueId}}', @this)"
      id="{{$uniqueId}}"
      uniqueId="{{$uniqueId}}"
      class="w-full file_upload">
@@ -19,7 +19,7 @@
     >
         <!-- file upload modal -->
         <article x-show="!isUploading" aria-label="File Upload Modal"
-                 class="relative h-full flex flex-col bg-white shadow rounded-md"
+                 class="h-full shadow rounded-md"
                  wire:drop="$emit('file-dropped', $event)"
                  ondrop="dropHandler(event);" ondragover="dragOverHandler(event);"
                  ondragleave="dragLeaveHandler(event);" ondragenter="dragEnterHandler(event);">

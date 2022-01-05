@@ -52,13 +52,14 @@
 }
 
 .drop-down-block {
-    @apply  origin-top-right absolute left-0 mt-2 w-max rounded-md
+    @apply origin-top-right absolute left-0 mt-2 w-max rounded-md
     shadow bg-white ring-1 ring-black
+    z-50
     ring-opacity-5 focus:outline-none;
 }
 
 .drop-down-item {
-    @apply text-gray-700 block px-4 py-2 text-sm;
+    @apply text-gray-700 block px-4 py-2 text-xs  bg-white;
 }
 
 .main-back {

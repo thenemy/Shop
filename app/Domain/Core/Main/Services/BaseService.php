@@ -15,6 +15,7 @@ abstract class BaseService implements ServiceInterface
 {
     use FastInstantiation, FilterArray;
 
+    const VALIDATE_SEPARATOR = "<br>";
     protected Entity $entity;
 
     public function __construct()
@@ -40,7 +41,7 @@ abstract class BaseService implements ServiceInterface
         if ($validator->fails()) {
             $errors = $validator->errors()->toArray();
             $collapsed = collect($errors)->collapse();
-            throw  new ValidationException($collapsed->join('<br>'));
+            throw  new ValidationException($collapsed->join(self::VALIDATE_SEPARATOR));
         }
 
     }
@@ -61,9 +62,9 @@ abstract class BaseService implements ServiceInterface
         return $this->entity->getUpdateRules();
     }
 
-    public function createMany(array $object_data, array $parent)
+    public function createMany(array $object_data, array $parent, int $start = 1)
     {
-        for ($i = 1; !empty($object_data); $i++) {
+        for ($i = $start; !empty($object_data); $i++) {
             $data = $this->popCondition($object_data, $i);
             $data = array_merge($parent, $data);
             $this->create($data);
@@ -76,11 +77,23 @@ abstract class BaseService implements ServiceInterface
         unset($object_array[$old]);
     }
 
-    public function updateOrCreate(array $condition, array $object_data)
+
+    public function createIfExists(array $object_data, array $addition = [])
     {
-        $filtered = $this->filterRecursive($object_data);
-        $this->validate($object_data, $this->validateCreateRules());
-        return $this->entity->updateOrCreate($filtered);
+        if (!empty($object_data)) {
+            $this->create(array_merge($object_data, $addition));
+        }
+    }
+
+    public function createOrUpdate($object, $key, array $object_data, array $addition = [])
+    {
+        if (!empty($object_data)) {
+            if ($update_object = $object[$key]) {
+                return $this->update($update_object, $object_data);
+            } else {
+                return $this->create(array_merge($object_data, $addition));
+            }
+        }
     }
 
 

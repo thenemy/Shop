@@ -46,7 +46,7 @@
 <x-helper.text.text_key_link key='Паспорт c пользователем' value='Скачать' :link='route("download.file", ["path"=> $entity->userCreditData->crucialData->user_passport->path])'></x-helper.text.text_key_link>
             </div>
             </div>			
-<x-helper.container.container title='Рассрочки' class='flex flex-wrap justify-between'>
+<x-helper.container.container :title='Рассрочки' 	class='flex flex-wrap justify-between'>
                 			
 <livewire:admin.pages.user-show.taken-credit-filtered
             :filterBy="['user_id' => $entity->user_id,]" />

@@ -13,6 +13,7 @@ trait GetDropDown
             $drop = $class::getDropItem();
             return new $drop($item->id, $item->$attribute);
         })->toArray();
+
         $init = $class::find($initial) ?? new $class();
         $self = get_called_class();
         return new $self($items, $init->$attribute);

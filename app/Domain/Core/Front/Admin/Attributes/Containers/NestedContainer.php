@@ -2,23 +2,29 @@
 
 namespace App\Domain\Core\Front\Admin\Attributes\Containers;
 
+use App\Domain\Core\Front\Admin\Button\Traits\GenerateTagAttributes;
 use App\Domain\Core\Front\Interfaces\HtmlInterface;
 
 class NestedContainer implements HtmlInterface
 {
+    use GenerateTagAttributes;
+
     public string $title;
     public array $items;
 
-    public function __construct(string $title, array $items = [])
+    public function __construct(string $title, array $items = [], array $attributes = [])
     {
         $this->items = $items;
         $this->title = $title;
+        $this->attributes = self::append($attributes, [
+            'class' => "flex flex-wrap justify-between"
+        ]);
     }
 
-    static public function new(string $title, array $items = [])
+    static public function new(string $title, array $items = [], array $attributes = [])
     {
         $self = get_called_class();
-        return new $self($title, $items);
+        return new $self($title, $items, $attributes);
     }
 
     public function generateHtml(): string
@@ -28,10 +34,11 @@ class NestedContainer implements HtmlInterface
             $str = $str . "\t\t\t\n" . $item->generateHtml();
         }
         return sprintf(
-            "<x-helper.container.container title='%s' class='flex flex-wrap justify-between'>
+            "<x-helper.container.container :title='%s' %s>
                 %s
                 </x-helper.container.container>",
             $this->title,
+            $this->generateAttributes(),
             $str
         );
     }

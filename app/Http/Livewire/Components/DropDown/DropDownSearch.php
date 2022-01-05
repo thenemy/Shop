@@ -13,13 +13,15 @@ class DropDownSearch extends Component
     public string $initial = "";
     public string $searchLabel = "";
     public array $filterBy = [];
+    public string $prefix = "";
+    public $chosen;
 
     public function render()
     {
         $this->dispatchBrowserEvent('search_event');
         $this->filterBy[$this->searchByKey] = $this->search;
         return view('livewire.components.drop-down.drop-down-search', [
-            "drop" => $this->dropDownClass::getDropDownSearch($this->initial, $this->filterBy),
+            "drop" => $this->dropDownClass::getDropDownSearch($this->initial, $this->filterBy, $this->prefix),
         ]);
     }
 }
