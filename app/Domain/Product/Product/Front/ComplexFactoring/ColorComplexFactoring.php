@@ -16,8 +16,8 @@ class ColorComplexFactoring implements ComplexFactoring, ProductInterface
     static public function initialize(BaseLivewireFactoring $factoring)
     {
         foreach ($factoring->entity->colors as $color) {
-            $factoring->counter++;
             $factoring->entities[$factoring->counter] = $color;
+            $factoring->counter++;
         }
     }
 
@@ -30,19 +30,19 @@ class ColorComplexFactoring implements ComplexFactoring, ProductInterface
     {
         return [
             ColorDropDownSearch::newColor(true, [], [
-                'wire:key' => 'drop_objects.{{$index}}.color_id',
+                'wire:key' => 'new_drop_objects.{{$index}}.color_id',
                 'prefix' => sprintf('%s{{$index}}%s', ProductInterface::COLORS_TO, \CR::CR),
             ]),
             InputFileTempAttribute::create(self::COLORS_TO .
                 sprintf('%%s%simage', \CR::CR),
                 "Главный цвет",
-                'product_file_objects.{{$index}}.file_one',
+                'new_product_file_objects.{{$index}}.file_one',
                 self::INDEX
             ),
             InputFileTempManyAttribute::create(self::COLORS_TO .
                 sprintf('%%s%simages', \CR::CR),
                 "Под цвета",
-                'product_file_objects.{{$index}}.file_two',
+                'new_product_file_objects.{{$index}}.file_two',
                 self::INDEX),
         ];
     }
@@ -50,23 +50,23 @@ class ColorComplexFactoring implements ComplexFactoring, ProductInterface
     static public function edit()
     {
         return [
-            ColorDropDownSearch::newColor(true, [], [
-                'wire:key' => 'drop_objects.{{$index}}.color_id',
+            ColorDropDownSearch::newColor(false, [], [
+                'wire:key' => 'edit_drop_objects.{{$index}}.color_id',
                 'prefix' => sprintf('%s{{$index}}%s', ProductInterface::COLORS_TO, \CR::CR),
             ]),
             InputFileTempAttribute::edit(self::COLORS_TO .
                 sprintf('%%s%simage', \CR::CR),
                 "Главный цвет",
-                '$entity->image',
-                'product_file_objects.{{$index}}.file_one',
+                'image',
+                'edit_product_file_objects.{{$index}}.file_one',
                 self::INDEX,
                 ""
             ),
             InputFileTempManyAttribute::edit(self::COLORS_TO .
                 sprintf('%%s%simages', \CR::CR),
                 "Под цвета",
-                '$entity->images',
-                'product_file_objects.{{$index}}.file_two',
+                'images',
+                'edit_product_file_objects.{{$index}}.file_two',
                 self::INDEX),
         ];
     }

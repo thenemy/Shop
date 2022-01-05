@@ -21,7 +21,7 @@ class FileManyTemp extends Entity implements FileTempInterface
 
     public function setFileNewAttribute(array $value)
     {
-        $this->setManyMedia($value, FileTemp::class, "file", "file_id");
+        $this->setSaveManyMedia("files", $value, "file");
     }
 
     public function getFilesMediaAttribute()

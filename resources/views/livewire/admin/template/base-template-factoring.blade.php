@@ -14,7 +14,9 @@
                         {{__("Удалить")}}
                     </button>
                 </div>
-                <input class="hidden" name="{{$prefixKey}}[]" value="{{$index}}">
+                <div class="hidden" x-data="{id: {{$entity->id ?? " "}} }">
+                    <input  name="{{$prefixKey}}->{{$index}}->id" :value="id">
+                </div>
             </div>
         @endforeach
         @foreach($objects as $index => $value)
@@ -27,7 +29,7 @@
                         {{__("Удалить")}}
                     </button>
                 </div>
-                <input class="hidden" name="{{$prefixKey}}[]" value="{{$index}}">
+                <input class="hidden" name="{{$prefixKey}}_new_created[]" value="{{$index}}">
             </div>
         @endforeach
     </div>

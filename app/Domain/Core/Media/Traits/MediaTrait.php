@@ -14,6 +14,7 @@ use function Symfony\Component\Translation\t;
 
 trait MediaTrait
 {
+    use CheckOnTemp;
     private $mediaObject = [];
 
     protected static function bootMediaTrait()
@@ -39,22 +40,14 @@ trait MediaTrait
 
     public function setMedia($key, $value, $id)
     {
-
-        if (!isset($this->attributes[$key]) || $value && $this->checkOnTemp($key, $value, $this->attributes[$key])) {
+//        dd(sprintf('%s %s' , $value, $this->attributes[$key]));
+        if (!isset($this->attributes[$key]) || $value && $this->isFileNotExists($value, $this->attributes[$key])) {
             $this->deleteMedia($key, $this->getOriginalValue($key));
             $this->storeMedia($key, $value, MediaInterface::PUBLIC_PATH, $id);
         }
     }
 
-    final  protected function checkOnTemp($key, $inserted, $previous)
-    {
-        if ($previous) {
-            $old = preg_replace("/\//i", "\/", $previous);
-            $new = preg_replace("/\\\/i", "/", $inserted->path());
-            return !preg_match("/" . $old . "/i", $new);
-        }
-        return true;
-    }
+
 
     public function deleteMedia(string $key, $value)
     {

@@ -77,7 +77,7 @@ abstract class BaseInputFileTemp implements HtmlInterface
         $attached = 'file->id_file->' . $this->keyToAttach;
         $old = sprintf('old("%s") ?? ""', $attached);
         if ($this->customOldValue) {
-            $old = sprintf("old(sprintf(\"%s\", %s)) ?? \" \"", $attached, $this->customOldValue);
+            $old = sprintf("old(sprintf(\"%s\", %s)) ?? null", $attached, $this->customOldValue);
             $this->keyToAttach = sprintf($this->keyToAttach, $this->getScope($this->customOldValue));
         }
         return sprintf("<livewire:components.file.file-uploading-without-entity

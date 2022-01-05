@@ -68,7 +68,7 @@ class FileLivewireFactoring extends FileLivewireCreator implements LivewireFacto
     {
         $must = sprintf("  :entity='%s'
             prefixKey='%s' initialSettingClass='%s'", '$entity ?? null',
-            $this->prefixKey . "trashed", $this->initialSettingClass);
+            $this->prefixKey, $this->initialSettingClass);
         if ($this->rules)
             return sprintf(":rules=(array)json_decode('%s') %s",
                 json_encode($this->rules),

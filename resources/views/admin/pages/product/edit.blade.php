@@ -71,5 +71,5 @@
                 additionalAction='App\Domain\Core\Front\Admin\Livewire\AdditionalActions\Base\AdditionalActions'
                 />
 <livewire:admin.pages.product-edit.product-edit   :entity='$entity ?? null'
-            prefixKey='colorstrashed' initialSettingClass='App\Domain\Product\Product\Front\ComplexFactoring\ColorComplexFactoring'/>
+            prefixKey='colors' initialSettingClass='App\Domain\Product\Product\Front\ComplexFactoring\ColorComplexFactoring'/>
 @endsection

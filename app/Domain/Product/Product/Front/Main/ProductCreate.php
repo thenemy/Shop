@@ -19,6 +19,7 @@ use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\CreditProduct\Front\Nested\MainCreditNested;
 use App\Domain\Product\Product\Entities\Product;
 use App\Domain\Product\Product\Front\Admin\DropDown\CurrencyDropDown;
+use App\Domain\Product\Product\Front\ComplexFactoring\ColorComplexFactoring;
 use App\Domain\Product\Product\Interfaces\ProductInterface;
 use App\Domain\Shop\Front\Admin\DropDown\ShopDropDownSearch;
 
@@ -54,24 +55,10 @@ class ProductCreate extends Product implements CreateAttributesInterface
             ], [
                 "class" => "space-y-4"
             ]),
-            FileLivewireFactoring::generation("Product", $this, [], "Цвета", [
-                ColorDropDownSearch::newColor(true, [], [
-                    'wire:model' => 'objects.{{$index}}.color_id',
-                    'wire:key' => 'drop_objects.{{$index}}.color_id',
-                    'prefix' => sprintf('%s{{$index}}%s', ProductInterface::COLORS_TO, \CR::CR),
-                ]),
-                InputFileTempAttribute::create(self::COLORS_TO .
-                    sprintf('%%s%simage', \CR::CR),
-                    "Главный цвет",
-                    'product_file_objects.{{$index}}.file_one',
-                    '$index'
-                ),
-                InputFileTempManyAttribute::create(self::COLORS_TO .
-                    sprintf('%%s%simages', \CR::CR),
-                    "Под цвета",
-                    'product_file_objects.{{$index}}.file_two',
-                    '$index'),
-            ], [], self::COLORS_SERVICE)
+            FileLivewireFactoring::generation("Product",
+                $this, [], "Цвета",
+                ColorComplexFactoring::create(), [],
+                self::COLORS_SERVICE)
         ]);
     }
 

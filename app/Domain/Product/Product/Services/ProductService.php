@@ -20,7 +20,7 @@ class ProductService extends BaseService implements ProductInterface
     use FileUploadService;
 
     private CardImageService $cardImage;
-    private HeaderService   $headerService;
+    private HeaderService $headerService;
     private ProductMainService $colorService;
 
     public function __construct()
@@ -63,6 +63,7 @@ class ProductService extends BaseService implements ProductInterface
             $main_credits = collect($this->popCondition($object_data, self::MAIN_CREDIT_SERVICE))->collapse()->toArray();
             $headers = $this->popCondition($object_data, self::BODIES_SERVICE);
             $colors = $this->popCondition($object_data, self::COLORS_SERVICE);
+            $this->popCondition($object_data, self::COLORS_TEMP);
             $product = parent::create($object_data);
             $product_id = ['product_id' => $product->id];
             $this->colorService->createMany($colors, $product_id, 0);
@@ -86,14 +87,16 @@ class ProductService extends BaseService implements ProductInterface
     public function update($object, array $object_data): \App\Domain\Core\Main\Entities\Entity
     {
         try {
-
             DB::beginTransaction();
+            $this->serializeTempFile($object_data);
             $product_of_day = $this->popCondition($object_data, self::PRODUCT_DAY_SERVICE);
             $product_hit = $this->popCondition($object_data, self::PRODUCT_HIT_SERVICE);
             $headers = $this->popCondition($object_data, self::BODIES_SERVICE);
-            $this->headerService->createOrUpdate($object, self::BODIES_SERVICE, $headers, [
-                'product_id' => $object->id
-            ]);
+            $colors = $this->popCondition($object_data, self::COLORS_SERVICE);
+            $parent = ['product_id' => $object->id];
+            $this->headerService->createOrUpdate($object, self::BODIES_SERVICE, $headers, $parent);
+
+            $this->colorService->createOrUpdateMany($colors, $parent, 0);
             if ($object instanceof Product) {
                 $this->createCheck($product_of_day, $object, ProductOfDay::class);
                 $this->createCheck($product_hit, $object, ProductHit::class);

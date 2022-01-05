@@ -23,7 +23,7 @@ abstract class BaseLivewireFactoring extends Component
     public string $prefixKey;
     public string $initialSettingClass;
     public Collection $entities;
-    public   $entity;
+    public $entity;
 
     /**
      * @param null $entity
@@ -36,8 +36,8 @@ abstract class BaseLivewireFactoring extends Component
         if ($this->initialSettingClass) {
             $this->initialSettingClass::initialize($this);
         }
-        if (old($this->prefixKey)) {
-            foreach (old($this->prefixKey) as $value) {
+        if (old($this->prefixKey . '_new_created')) {
+            foreach (old($this->prefixKey . '_new_created') as $value) {
                 $this->objects[$value] = [];
             }
         }
@@ -45,9 +45,10 @@ abstract class BaseLivewireFactoring extends Component
     }
 
     public function addCounter()
-    {
+    {//        dd($this->counter);
+        $this->objects[$this->counter] = [];
         $this->counter++;
-        $this->objects->push([$this->counter => []]);
+
     }
 
     public function remove($id)

@@ -95,5 +95,5 @@
             
                 </x-helper.container.container>
 <livewire:admin.pages.product.product-create   :entity='$entity ?? null'
-            prefixKey='colorstrashed' initialSettingClass=''/>
+            prefixKey='colors' initialSettingClass=''/>
 @endsection

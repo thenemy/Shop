@@ -8,7 +8,7 @@ use App\Domain\Core\Media\Traits\MediaTrait;
 class ProductManyColor extends Entity
 {
     use MediaTrait;
-
+    protected $table = "color_products_many";
     public function getMediaPathStorages()
     {
         return "product/many/color";

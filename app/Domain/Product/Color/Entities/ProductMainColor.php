@@ -11,6 +11,7 @@ class ProductMainColor extends Entity
 {
     use MediaTrait, MediaManyTrait;
 
+
     protected $table = "color_products";
 
     public function manyColor(): \Illuminate\Database\Eloquent\Relations\HasMany
@@ -40,7 +41,7 @@ class ProductMainColor extends Entity
 
     public function setImagesAttribute($value)
     {
-        $this->setManyMedia($value, ProductManyColor::class, "image", "color_product_id");
+        $this->setSaveManyMedia("manyColor", $value, "image");
     }
 
     public function getMediaPathStorages()

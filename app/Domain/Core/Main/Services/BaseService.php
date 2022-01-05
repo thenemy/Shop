@@ -70,6 +70,21 @@ abstract class BaseService implements ServiceInterface
             $this->create($data);
         }
     }
+// there is many , when I will use key in entity it will give many items
+    public function createOrUpdateMany(array $object_data, array $parent, int $start = 1)
+    {
+        for ($i = $start; !empty($object_data); $i++) {
+            $data = $this->popCondition($object_data, $i);
+            if (isset($data["id"])) {
+                $id = $data['id'];
+                unset($data['id']);
+                $this->update($this->entity->find($id), $data);
+            } else {
+                $data = array_merge($parent, $data);
+                $this->create($data);
+            }
+        }
+    }
 
     protected function changeKey(&$object_array, $new, $old = 'params')
     {

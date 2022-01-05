@@ -68,12 +68,6 @@ class ProductEdit extends Product implements CreateAttributesInterface
                 $this, [], "Цвета",
                 ColorComplexFactoring::create(), ColorComplexFactoring::edit(),
                 self::COLORS_SERVICE, ColorComplexFactoring::class)
-//            NestedContainer::new("__(\"Большое описание\")", [
-//                new InputLangAttribute(self::BODIES_TO . "text", "Введите заголовок"),
-//                new TextAreaLangAttribute(self::BODIES_INSIDE_TO . 'text', "Введите описание")
-//            ], [
-//                "class" => "space-y-4"
-//            ]),
         ]);
     }
 

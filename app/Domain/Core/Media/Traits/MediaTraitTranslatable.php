@@ -17,7 +17,7 @@ trait MediaTraitTranslatable
         return new Media($value ?? "", $key, $id);
     }
 
-    final protected function getOriginalValue($key)
+    final protected function getOriginalValue($key): ?\Illuminate\Support\Collection
     {
         return $this->getTranslations($key);
     }
@@ -27,7 +27,7 @@ trait MediaTraitTranslatable
     {
         if (is_array($value) && !empty($value)) {
             foreach ($this->getOriginalValue($key) as $sub_key => $item) {
-                if ($this->checkOnTemp($key, $value[$sub_key], $item)) {
+                if ($this->isFileNotExists($value[$sub_key], $item)) {
                     $this->deleteMediaMany($key, $item, $sub_key);
                     $this->storeMediaMany($key, $value[$sub_key], $sub_key, MediaInterface::PUBLIC_PATH, $id);
                 }

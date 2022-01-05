@@ -2,8 +2,11 @@
 
 namespace App\Domain\Core\Media\Traits;
 
+use App\Domain\Core\Main\Traits\FilterArray;
+
 trait MediaManyTrait
 {
+    use FilterArray, CheckOnTemp;
 
     /**
      * @param $parentKey -- method to call child class in the parent class
@@ -13,22 +16,34 @@ trait MediaManyTrait
     public function getManyMedia($parentKey, $mediaKey)
     {
         $images = $this->$parentKey->map(function ($item) use ($mediaKey) {
-            return $item->$mediaKey;
+            if ($item->$mediaKey->exists())
+                return $item->$mediaKey;
+            return null;
         })->toArray();
-        return $images;
+        return self::filterRecursive($images);
+    }
+
+    public function setSaveManyMedia(
+        $parentKey,
+        $inputs,
+        $mediaKey
+    )
+    {
+        $previous = $this->$parentKey; // storing previous results
+        $this->setManyMedia($inputs, $parentKey, $mediaKey); // creating absolutely new objects
+        foreach ($previous as $item) { // deleting previous objects
+            $item->delete();
+        }
     }
 
     public function setManyMedia($inputs,
-                                 $childClass,
-                                 $key,
-                                 $associate
+                                 $parentKey,
+                                 $mediaKey
     )
     {
         foreach ($inputs as $input) {
-            $childEntity = new $childClass();
-            $childEntity->$key = $input;
-            $childEntity->$associate = $this->id;
-            $childEntity->save();
+            $this->$parentKey()->create([$mediaKey => $input]);
         }
     }
+
 }

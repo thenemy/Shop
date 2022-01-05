@@ -17,7 +17,9 @@
                         {{__("Удалить")}}
                     </button>
                 </div>
-                <input class="hidden" name="{{$prefixKey}}[]" value="{{$index}}">
+                <div class="hidden" x-data="{id: {{$entity->id ?? " "}} }">
+                    <input  name="{{$prefixKey}}->{{$index}}->id" :value="id">
+                </div>
             </div>
         @endforeach
         @foreach($objects as $index => $value)
@@ -31,7 +33,7 @@
             dropDownClass='App\Domain\Common\Colors\Front\Admin\DropDown\ColorDropDownSearch'
             
             searchLabel='названию цвета'
-            	wire:model='objects.{{$index}}.color_id'	wire:key='drop_objects.{{$index}}.color_id'	prefix='colors->{{$index}}->'
+            	wire:key='new_drop_objects.{{$index}}.color_id'	prefix='colors->{{$index}}->'
             
              />			
 <livewire:components.file.file-uploading-without-entity
@@ -40,9 +42,9 @@
                     entityClass='App\Domain\File\Entities\FileTemp'
                     :multiple='false'
                     :label='__("Главный цвет")'
-                    :entityId='old(sprintf("file->id_file->colors->%s->image", $index)) ?? " "'
+                    :entityId='old(sprintf("file->id_file->colors->%s->image", $index)) ?? null'
                     :mediaInitial='""'
-                    wire:key='product_file_objects.{{$index}}.file_one'
+                    wire:key='new_product_file_objects.{{$index}}.file_one'
                      />			
 <livewire:components.file.file-uploading-without-entity
                     keyToAttach='colors->{{$index ?? ""}}->images'
@@ -50,9 +52,9 @@
                     entityClass='App\Domain\File\Entities\FileManyTemp'
                     :multiple='true'
                     :label='__("Под цвета")'
-                    :entityId='old(sprintf("file->id_file->colors->%s->images", $index)) ?? " "'
+                    :entityId='old(sprintf("file->id_file->colors->%s->images", $index)) ?? null'
                     :mediaInitial='""'
-                    wire:key='product_file_objects.{{$index}}.file_two'
+                    wire:key='new_product_file_objects.{{$index}}.file_two'
                      />
                 </x-helper.container.container> </div>
                 </div>
@@ -61,7 +63,7 @@
                         {{__("Удалить")}}
                     </button>
                 </div>
-                <input class="hidden" name="{{$prefixKey}}[]" value="{{$index}}">
+                <input class="hidden" name="{{$prefixKey}}_new_created[]" value="{{$index}}">
             </div>
         @endforeach
     </div>
