@@ -15,6 +15,7 @@ use function Symfony\Component\Translation\t;
 trait MediaTrait
 {
     use CheckOnTemp;
+
     private $mediaObject = [];
 
     protected static function bootMediaTrait()
@@ -47,6 +48,12 @@ trait MediaTrait
         }
     }
 
+    public function cleanMedia()
+    {
+        foreach ($this->mediaKeys() as $key) {
+            $this->attributes[$key] = "";
+        }
+    }
 
 
     public function deleteMedia(string $key, $value)

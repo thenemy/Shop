@@ -93,9 +93,9 @@ class ProductService extends BaseService implements ProductInterface
             $product_hit = $this->popCondition($object_data, self::PRODUCT_HIT_SERVICE);
             $headers = $this->popCondition($object_data, self::BODIES_SERVICE);
             $colors = $this->popCondition($object_data, self::COLORS_SERVICE);
+            $this->popCondition($object_data, self::COLORS_TEMP);
             $parent = ['product_id' => $object->id];
             $this->headerService->createOrUpdate($object, self::BODIES_SERVICE, $headers, $parent);
-
             $this->colorService->createOrUpdateMany($colors, $parent, 0);
             if ($object instanceof Product) {
                 $this->createCheck($product_of_day, $object, ProductOfDay::class);

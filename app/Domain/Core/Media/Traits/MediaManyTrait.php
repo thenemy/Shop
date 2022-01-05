@@ -32,6 +32,8 @@ trait MediaManyTrait
         $previous = $this->$parentKey; // storing previous results
         $this->setManyMedia($inputs, $parentKey, $mediaKey); // creating absolutely new objects
         foreach ($previous as $item) { // deleting previous objects
+            $item->cleanMedia(); //  not deleting the real file , because the existing file will be used again
+            // and also in the case of mistake
             $item->delete();
         }
     }
