@@ -38,14 +38,12 @@ class AuthPaymoService
 
     public function getToken()
     {
-        dd($this->base64);
         $response = Http::withHeaders([
             'Authorization' => 'Basic ' . $this->base64,
             'Content-Type' => 'application/x-www-form-urlencoded'
         ])->post(self::SERVER . 'token', [
             'grant_type' => 'client_credentials'
         ]);
-        dd($response->body());
         $resp_encoded = json_decode($response->body());
         file_put_contents("test.txt", $response->body());
         if ($response->getStatusCode() == 401 || $response->getStatusCode() == 400) {
