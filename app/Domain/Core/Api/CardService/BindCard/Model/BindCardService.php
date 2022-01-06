@@ -63,7 +63,7 @@ class BindCardService extends AuthPaymoService
             'otp' => $otp,
             'lang' => $language
         ]);
-        $object = $response->object();
+        $object = $response->json();
         $this->checkOnError($object, $response);
         return $object;
     }
