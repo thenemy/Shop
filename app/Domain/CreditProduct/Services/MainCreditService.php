@@ -27,6 +27,7 @@ class MainCreditService extends BaseService
     {
         try {
             DB::beginTransaction();
+
             $credits = $this->popCondition($object_data, "credits");
             $object = parent::create($object_data);
             $this->creditService->createMany($credits, ['main_credit_id' => $object->id]);

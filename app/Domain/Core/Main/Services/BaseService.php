@@ -66,10 +66,13 @@ abstract class BaseService implements ServiceInterface
     {
         for ($i = $start; !empty($object_data); $i++) {
             $data = $this->popCondition($object_data, $i);
-            $data = array_merge($parent, $data);
-            $this->create($data);
+            if (!empty($data)) {
+                $data = array_merge($parent, $data);
+                $this->create($data);
+            }
         }
     }
+
 // there is many , when I will use key in entity it will give many items
     public function createOrUpdateMany(array $object_data, array $parent, int $start = 1)
     {
@@ -111,9 +114,11 @@ abstract class BaseService implements ServiceInterface
         }
     }
 
-    public function createWith(array $object_data, array $additional){
+    public function createWith(array $object_data, array $additional)
+    {
         return $this->create(array_merge($object_data, $additional));
     }
+
     public function create(array $object_data)
     {
         $filtered = $this->filterRecursive($object_data);
