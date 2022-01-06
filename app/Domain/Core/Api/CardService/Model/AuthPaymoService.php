@@ -18,11 +18,7 @@ class AuthPaymoService
 
     public function __construct()
     {
-        if (!($this->base64 = env(self::EXECUTE . "BASE64_PAYMO"))) {
-            $this->base64 = base64_encode(env(self::EXECUTE . "CONSUMER_KEY") . ":" . env(self::EXECUTE . "CONSUMER_SECRET"));
-            dd($this->base64);
-            put_env([self::EXECUTE . "BASE64" => $this->base64]);
-        }
+        $this->base64 = base64_encode(env(self::EXECUTE . "CONSUMER_KEY") . ":" . env(self::EXECUTE . "CONSUMER_SECRET"));
     }
 
     public function storeToken($res)
