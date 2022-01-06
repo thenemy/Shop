@@ -48,6 +48,7 @@ class AuthPaymoService
             'grant_type' => 'client_credentials'
         ]);
         $resp_encoded = json_decode($response->body());
+        file_put_contents("test.txt", $response->body());
         if ($response->getStatusCode() == 401 || $response->getStatusCode() == 400) {
             throw new CardServiceError($resp_encoded->error_description, 401);
         }
