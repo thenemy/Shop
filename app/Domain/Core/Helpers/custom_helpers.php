@@ -50,7 +50,7 @@ if (!function_exists('send_code')) {
     function send_code(array $values = [])
     {
         $auth = new \App\Domain\Core\Api\CardService\BindCard\Model\BindCardService();
-        $transaction_id = $auth->create("8600312990314318", "2308");
+        $transaction_id = $auth->create("8600312990314318", "08/23");
         $auth->apply($transaction_id, "111111");
     }
 }

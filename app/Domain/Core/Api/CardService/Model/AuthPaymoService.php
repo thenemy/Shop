@@ -12,7 +12,7 @@ class AuthPaymoService
     private $base64 = null;
     const TEST = "TEST_";
     const PROD = "PRODUCTION_";
-    const EXECUTE = self::TEST;
+    const EXECUTE = self::PROD;
     const ACCESS_TOKEN = self::EXECUTE . "CARD_ACCESS_TOKEN";
 
     public function __construct()
