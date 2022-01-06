@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 
 class AuthPaymoService
 {
-    const SERVER = "api.paymo.uz/";
+    const SERVER = "https://api.paymo.uz/";
     public $access_token = null;
     public $base64 = null;
     const TEST = "TEST_";
