@@ -83,8 +83,10 @@ abstract class BaseService implements ServiceInterface
                 unset($data['id']);
                 $this->update($this->entity->find($id), $data);
             } else {
-                $data = array_merge($parent, $data);
-                $this->create($data);
+                if (!empty($data)) {
+                    $data = array_merge($parent, $data);
+                    $this->create($data);
+                }
             }
         }
     }
