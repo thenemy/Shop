@@ -2,13 +2,13 @@
 
 namespace App\Domain\Core\Api\CardService\Merchant\Model;
 
-use App\Domain\Core\Api\CardService\Model\CardService;
+use App\Domain\Core\Api\CardService\Model\AuthPaymoService;
 use Illuminate\Support\Facades\Http;
 
 class Merchant
 {
     const SERVER = "api.paymo.uz/merchant/pay/";
-    public CardService $ser;
+    public AuthPaymoService $ser;
 
     public function __construct($ser)
     {
@@ -17,7 +17,7 @@ class Merchant
 
     public function create($amount, $account, $store_id, $terminal_id = null, $details = null)
     {
-        $secret = $this->ser->getAttribute();
+        $secret = $this->ser->getAccessToken();
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $secret,
         ])->post(self::SERVER . 'create', [
@@ -33,7 +33,7 @@ class Merchant
 
     public function pre_confirm($card_token, $card_number, $expiry, $store_id, $transaction_id)
     {
-        $secret = $this->ser->getAttribute();
+        $secret = $this->ser->getAccessToken();
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $secret,
         ])->post(self::SERVER . 'pre-confirm', [
@@ -47,7 +47,7 @@ class Merchant
 
     public function confirm($transaction_id, $otp, $store_id)
     {
-        $secret = $this->ser->getAttribute();
+        $secret = $this->ser->getAccessToken();
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $secret,
         ])->post(self::SERVER . 'confirm', [
@@ -60,7 +60,7 @@ class Merchant
 
     public function otp_resend($transaction_id)
     {
-        $secret = $this->ser->getAttribute();
+        $secret = $this->ser->getAccessToken();
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $secret,
         ])->post(self::SERVER . 'otp-resend', [
@@ -70,7 +70,7 @@ class Merchant
 
     public function reverse($transaction_id, $reason, $hold_amount)
     {
-        $secret = $this->ser->getAttribute();
+        $secret = $this->ser->getAccessToken();
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $secret,
         ])->post(self::SERVER . 'reverse', [
@@ -82,7 +82,7 @@ class Merchant
 
     public function get($store_id, $transaction_id)
     {
-        $secret = $this->ser->getAttribute();
+        $secret = $this->ser->getAccessToken();
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $secret,
         ])->post(self::SERVER . 'get', [
