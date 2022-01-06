@@ -38,7 +38,7 @@ class AuthPaymoService
 
     public function getToken()
     {
-        $response = Http::withHeaders([
+        $response = Http::dd()->withHeaders([
             'Authorization' => 'Basic ' . $this->base64,
             'Content-Type' => 'application/x-www-form-urlencoded'
         ])->post(self::SERVER . 'token', [
