@@ -41,6 +41,7 @@ class AuthPaymoService
 
     public function getToken()
     {
+        dd($this->base64);
         $response = Http::withHeaders([
             'Authorization' => 'Basic ' . $this->base64,
             'Content-Type' => 'application/x-www-form-urlencoded'
