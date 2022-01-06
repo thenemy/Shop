@@ -19,7 +19,7 @@
 }
 
 .table_main {
-    @apply text-sm text-table_color table-fixed border-collapse border w-full my-2.5
+    @apply text-sm text-table_color table-auto border-collapse border w-full my-2.5
 }
 
 .table_main_th {

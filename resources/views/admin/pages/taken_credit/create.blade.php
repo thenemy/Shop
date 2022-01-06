@@ -57,7 +57,7 @@
 
             <div 	x-show='show'	@surety-update.window='show = !show'>
                 			
-<x-helper.container.container :title='Добавить' 	class='flex flex-wrap justify-between'>
+<x-helper.container.container :title='__("Добавить")' 	class='flex flex-wrap justify-between'>
                 			
 
 <x-helper.input.input name='surety->phone' type='text'

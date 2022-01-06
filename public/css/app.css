@@ -3581,7 +3581,7 @@ html {
   margin-top: 0.625rem;
   margin-bottom: 0.625rem;
   width: 100%;
-  table-layout: fixed;
+  table-layout: auto;
   border-collapse: collapse;
   border-width: 1px;
   font-size: 0.875rem;
