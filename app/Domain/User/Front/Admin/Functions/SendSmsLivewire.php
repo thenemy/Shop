@@ -31,6 +31,7 @@ class SendSmsLivewire extends AbstractFunction
                 $component->entity['card_number'],
                 $component->entity['date_number'],
             );
+            session()->flash("success", __("Вам отправлен SMS код"));
         } catch (BindCardError $exception) {
             if ($exception->getCode() == BindCardError::ERROR_OCCURED) {
                 $component->addError("bind", $exception->getMessage());
