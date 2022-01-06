@@ -47,7 +47,7 @@ if (!function_exists('check_auto')) {
 
 
 if (!function_exists('send_code')) {
-    function check_auto(array $values = [])
+    function send_code(array $values = [])
     {
         $auth = new \App\Domain\Core\Api\CardService\BindCard\Model\BindCardService();
         $transaction_id = $auth->create("8600312990314318", "2308");
@@ -56,7 +56,7 @@ if (!function_exists('send_code')) {
 }
 
 if (!function_exists('merchant')) {
-    function check_auto(array $values = [])
+    function merchant(array $values = [])
     {
 //        $merchant = new \App\Domain\Core\Api\CardService\Merchant\Model\Merchant();
 //        $create = $merchant->create("10", "0000000");
