@@ -20,8 +20,13 @@ class PlasticCardService extends BaseService
     {
         try {
             DB::beginTransaction();
-            $service = new BindCardService();
-            $result = $service->apply($object_data["transaction_id"], $object_data['code']);
+            if (!isset($object_data['plastic_data'])) {
+                $service = new BindCardService();
+                $result = $service->apply($object_data["transaction_id"], $object_data['code']);
+            } else {
+                $result = $object_data['plastic_data'];
+                unset($object_data['plastic_data']);
+            }
             $object_data = array_merge($object_data, $result['data']);
             parent::create($object_data);
             DB::commit();
