@@ -30,11 +30,11 @@ class BindCardService extends AuthPaymoService
 
     public function create($card_number, $expiry, $language = 'ru')
     {
-        
+
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->token,
         ])->post(self::SERVER . 'create', [
-            'card_number' => $card_number,
+            'card_number' => str_replace(" ", '', $card_number),
             'expiry' => $this->transformDate($expiry),
             'lang' => $language
         ]);
