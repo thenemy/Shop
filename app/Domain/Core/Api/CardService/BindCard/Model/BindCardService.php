@@ -22,7 +22,7 @@ class BindCardService extends AuthPaymoService
     {
 
         $divide = explode("/", $date);
-        if (count($divide) != 2) {
+        if (count($divide) == 2) {
             return $divide[1] . $divide[0];
         }
         throw new BindCardError(__("Не правильный формат даты"), BindCardError::ERROR_OCCURED);
