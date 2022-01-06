@@ -8,19 +8,19 @@ use Illuminate\Support\Facades\Http;
 class BindCardService extends AuthPaymoService
 {
     const SERVER = parent::SERVER . "partner/bind-card/";
-    public string $secret;
+    public string $token;
 
     public function __construct()
     {
         parent::__construct();
-        $this->secret = $this->getToken();
+        $this->token = $this->getToken();
     }
 
     public function create($card_number, $expiry, $language = 'ru')
     {
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $this->secret,
-        ])->post(self::SERVER . 'create', [
+            'Authorization' => 'Bearer ' . $this->token,
+        ])->asForm()->post(self::SERVER . 'create', [
             'card_number' => $card_number,
             'expiry' => $expiry,
             'lang' => $language
@@ -33,8 +33,8 @@ class BindCardService extends AuthPaymoService
     public function apply($transaction_id, $otp, $language = "ru")
     {
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $this->secret,
-        ])->post(self::SERVER . 'apply', [
+            'Authorization' => 'Bearer ' . $this->token,
+        ])->asForm()->post(self::SERVER . 'apply', [
             'transaction_id' => $transaction_id,
             'otp' => $otp,
             'lang' => $language
@@ -47,8 +47,8 @@ class BindCardService extends AuthPaymoService
     public function dial($transaction_id)
     {
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $this->secret,
-        ])->post(self::SERVER . 'dial', [
+            'Authorization' => 'Bearer ' . $this->token,
+        ])->asForm()->post(self::SERVER . 'dial', [
             'transaction_id' => $transaction_id,
         ]);
         $response_decoded = $response->object();
@@ -58,8 +58,8 @@ class BindCardService extends AuthPaymoService
     public function list_cards($page, $page_size)
     {
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $this->secret,
-        ])->post(self::SERVER . 'list-cards', [
+            'Authorization' => 'Bearer ' . $this->token,
+        ])->asForm()->post(self::SERVER . 'list-cards', [
             'page' => $page,
             'page_size' => $page_size
         ]);
