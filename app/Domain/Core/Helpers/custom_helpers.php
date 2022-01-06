@@ -36,9 +36,18 @@ if (!function_exists('test')) {
         return $s->getSerializedCities("UZ");
     }
 }
+
+if (!function_exists('check_auto')) {
+    function check_auto(array $values = [])
+    {
+        $auth = new \App\Domain\Core\Api\CardService\Model\AuthPaymoService();
+        $auth->getToken();
+    }
+}
+
 if (!function_exists('month_num')) {
     function month_num(): int
     {
-       return intval(date('m'));
+        return intval(date('m'));
     }
 }

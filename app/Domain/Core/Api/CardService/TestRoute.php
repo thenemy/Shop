@@ -5,14 +5,14 @@ namespace App\Domain\Core\Api\CardService;
 use App\Domain\Core\Api\CardService\BindCard\Model\BindCardService;
 use App\Http\Controllers\Controller;
 use http\Env\Request;
-use App\Domain\Core\Api\CardService\Model\CardService;
+use App\Domain\Core\Api\CardService\Model\AuthPaymoService;
 
 class TestRoute extends Controller
 {
     public $ser;
     public $res;
 
-    public function __construct(CardService $ser, BindCardService $res){
+    public function __construct(AuthPaymoService $ser, BindCardService $res){
         $this->ser=$ser;
         $this->res=$res;
     }

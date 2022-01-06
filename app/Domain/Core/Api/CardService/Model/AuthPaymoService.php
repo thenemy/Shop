@@ -5,34 +5,44 @@ namespace App\Domain\Core\Api\CardService\Model;
 use App\Domain\Core\Api\CardService\BindCard\Error\BindCardError;
 use App\Domain\Core\Api\CardService\Error\CardServiceError;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
-class CardService
+class AuthPaymoService
 {
     const SERVER = "api.paymo.uz/";
     public $access_token = null;
-    public $base64= null;
+    public $base64 = null;
+    const TEST = "TEST_";
+    const PROD = "PRODUCTION_";
+    const EXECUTE = self::TEST;
 
-    public function init(){
-        $this->base64 = base64_encode(env("CONSUMER_KEY") . ":" . env("CONSUMER_SECRET"));
-        put_env(["BASE64" => $this->base64]);
-        return $this->base64 ?? env("BASE64");
+    public function __construct()
+    {
+        if (!($this->base64 = env(self::EXECUTE . "BASE64_PAYMO"))) {
+            $this->base64 = base64_encode(env(self::EXECUTE . "CONSUMER_KEY") . ":" . env(self::EXECUTE . "CONSUMER_SECRET"));
+            put_env([self::EXECUTE . "BASE64" => $this->base64]);
+        }
     }
 
-    public function storeToken($res){
+    public function storeToken($res)
+    {
+        Log::info("RESPONSE " . $res);
         $response = json_decode($res->body());
+
         $this->access_token = $response->access_token;
-        put_env(["CARD_ACCESS_TOKEN" => $this->access_token]);
-        return $this->access_token ?? env("CARD_ACCESS_TOKEN");
+        put_env([self::EXECUTE . "CARD_ACCESS_TOKEN" => $this->access_token]);
+        return $this->access_token;
     }
 
-    public function getAttribute(){
-        return $this->access_token ?? env("CARD_ACCESS_TOKEN");
+    public function getAccessToken()
+    {
+        return $this->access_token ?? env(self::EXECUTE . "CARD_ACCESS_TOKEN");
     }
 
-    public function getToken(){
-        $secret = $this->init();
+    public function getToken()
+    {
         $response = Http::withHeaders([
-            'Authorization' => 'Basic ' . $secret,
+            'Authorization' => 'Basic ' . $this->base64,
             'Content-Type' => 'application/x-www-form-urlencoded'
         ])->post(self::SERVER . 'token', [
             'grant_type' => 'client_credentials'
@@ -44,11 +54,11 @@ class CardService
         return $this->storeToken($response);
     }
 
-    public function refreshToken(){
-        $secret = $this->init();
-        $token = $this->access_token ?? env("CARD_ACCESS_TOKEN");
+    public function refreshToken()
+    {
+        $token = $this->getAccessToken();
         $response = Http::withHeaders([
-            'Authorization' => 'Basic ' . $secret,
+            'Authorization' => 'Basic ' . $this->base64,
             'Content-Type' => 'application/x-www-form-urlencoded'
         ])->post(self::SERVER . 'token', [
             'grant_type' => 'client_credentials',
@@ -61,11 +71,11 @@ class CardService
         return $this->storeToken($response);
     }
 
-    public function revokeToken(){
-        $secret = $this->init();
-        $token = $this->access_token ?? env("CARD_ACCESS_TOKEN");
+    public function revokeToken()
+    {
+        $token = $this->getAccessToken();
         $response = Http::withHeaders([
-            'Authorization' => 'Basic ' . $secret,
+            'Authorization' => 'Basic ' . $this->base64,
             'Content-Type' => 'application/x-www-form-urlencoded'
         ])->post(self::SERVER . 'revoke', [
             'token' => $token
