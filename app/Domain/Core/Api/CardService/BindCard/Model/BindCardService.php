@@ -2,17 +2,18 @@
 
 namespace App\Domain\Core\Api\CardService\BindCard\Model;
 
+use App\Domain\Core\Api\CardService\Model\AuthPaymoService;
 use Illuminate\Support\Facades\Http;
 
-class BindCardService
+class BindCardService extends AuthPaymoService
 {
-    const SERVER = "api.paymo.uz/partner/bind-card/";
+    const SERVER = parent::SERVER . "partner/bind-card/";
     public string $secret;
 
     public function __construct()
     {
-        $this->secret = env("CARD_ACCESS_TOKEN");
-
+        parent::__construct();
+        $this->secret = $this->getToken();
     }
 
     public function create($card_number, $expiry, $language = 'ru')
@@ -24,7 +25,8 @@ class BindCardService
             'expiry' => $expiry,
             'lang' => $language
         ]);
-        $response_decoded = json_decode($response->body());
+        file_put_contents("test_bind.txt", $response->body());
+        $response_decoded = $response->object();
         return $response_decoded->transaction_id;
     }
 
@@ -37,7 +39,8 @@ class BindCardService
             'otp' => $otp,
             'lang' => $language
         ]);
-        $response_decoded = json_decode($response->body());
+        file_put_contents("test_bind.txt", $response->body());
+        $response_decoded = $response->object();
         return $response_decoded;
     }
 
@@ -48,7 +51,7 @@ class BindCardService
         ])->post(self::SERVER . 'dial', [
             'transaction_id' => $transaction_id,
         ]);
-        $response_decoded = json_decode($response->body());
+        $response_decoded = $response->object();
         return $response_decoded;
     }
 
@@ -60,7 +63,7 @@ class BindCardService
             'page' => $page,
             'page_size' => $page_size
         ]);
-        $response_decoded = json_decode($response->body());
+        $response_decoded = $response->object();
         return $response_decoded;
     }
 }

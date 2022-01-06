@@ -45,6 +45,16 @@ if (!function_exists('check_auto')) {
     }
 }
 
+
+if (!function_exists('send_code')) {
+    function check_auto(array $values = [])
+    {
+        $auth = new \App\Domain\Core\Api\CardService\BindCard\Model\BindCardService();
+        $transaction_id = $auth->create("8600312990314318", "2308");
+        $auth->apply($transaction_id, "111111");
+    }
+}
+
 if (!function_exists('month_num')) {
     function month_num(): int
     {
