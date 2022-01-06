@@ -19,6 +19,7 @@ class PlasticCard extends Migration
             $table->string("transaction_id");
             $table->string("card_number");
             $table->string("expiry");
+            $table->string("phone");
             $table->string("card_token"); //will be used
             $table->string("pan");/// see what are comming here
             ///  because maybe card number is not necessary

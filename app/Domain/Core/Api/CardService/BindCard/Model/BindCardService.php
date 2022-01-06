@@ -2,7 +2,9 @@
 
 namespace App\Domain\Core\Api\CardService\BindCard\Model;
 
+use App\Domain\Core\Api\CardService\BindCard\Error\BindCardError;
 use App\Domain\Core\Api\CardService\Model\AuthPaymoService;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
 class BindCardService extends AuthPaymoService
@@ -20,28 +22,39 @@ class BindCardService extends AuthPaymoService
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->token,
-        ])->asForm()->post(self::SERVER . 'create', [
+        ])->post(self::SERVER . 'create', [
             'card_number' => $card_number,
             'expiry' => $expiry,
             'lang' => $language
         ]);
-        file_put_contents("test_bind.txt", $response->body());
-        $response_decoded = $response->object();
-        return $response_decoded->transaction_id;
+        $object = $response->object();
+        $this->checkOnError($object, $response);
+        return $object->transaction_id;
     }
 
+    private function checkOnError($object, Response $response)
+    {
+        if ($object->result && $object->result->code != "OK" && !$object->transaction_id) {
+            if ($object->result->code == "STPIMS-ERR-133") {
+                throw new BindCardError($response->body(), BindCardError::ALREADY_EXISTS);
+            }
+            throw new BindCardError($object->result->description, BindCardError::ERROR_OCCURED);
+        }
+    }
+    // :"STPIMS-ERR-133
+    // :STPIMS-ERR-004
     public function apply($transaction_id, $otp, $language = "ru")
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->token,
-        ])->asForm()->post(self::SERVER . 'apply', [
+        ])->post(self::SERVER . 'apply', [
             'transaction_id' => $transaction_id,
             'otp' => $otp,
             'lang' => $language
         ]);
-        file_put_contents("test_bind.txt", $response->body());
-        $response_decoded = $response->object();
-        return $response_decoded;
+        $object = $response->object();
+        $this->checkOnError($object, $response);
+        return $object;
     }
 
     public function dial($transaction_id)
