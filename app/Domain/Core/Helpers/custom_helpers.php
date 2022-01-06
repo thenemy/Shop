@@ -45,6 +45,25 @@ if (!function_exists('check_auto')) {
     }
 }
 
+
+if (!function_exists('send_code')) {
+    function check_auto(array $values = [])
+    {
+        $auth = new \App\Domain\Core\Api\CardService\BindCard\Model\BindCardService();
+        $transaction_id = $auth->create("8600312990314318", "2308");
+        $auth->apply($transaction_id, "111111");
+    }
+}
+
+if (!function_exists('merchant')) {
+    function check_auto(array $values = [])
+    {
+//        $merchant = new \App\Domain\Core\Api\CardService\Merchant\Model\Merchant();
+//        $create = $merchant->create("10", "0000000");
+//        $merchant->
+    }
+}
+
 if (!function_exists('month_num')) {
     function month_num(): int
     {

@@ -8,12 +8,13 @@ use Illuminate\Support\Facades\Http;
 class AuthPaymoService
 {
     const SERVER = "https://api.paymo.uz/";
-    public $access_token = null;
-    public $base64 = null;
+    private $access_token = null;
+    private $base64 = null;
     const TEST = "TEST_";
     const PROD = "PRODUCTION_";
     const EXECUTE = self::TEST;
-    const ACCESS_TOKEN =  self::EXECUTE . "CARD_ACCESS_TOKEN";
+    const ACCESS_TOKEN = self::EXECUTE . "CARD_ACCESS_TOKEN";
+
     public function __construct()
     {
         $this->base64 = base64_encode(env(self::EXECUTE . "CONSUMER_KEY") . ":" . env(self::EXECUTE . "CONSUMER_SECRET"));
@@ -32,11 +33,12 @@ class AuthPaymoService
         return $this->access_token ?? env(self::ACCESS_TOKEN);
     }
 
-    private function buildTokenBody(){
+    private function buildTokenBody(): array
+    {
         $body = [
             'grant_type' => 'client_credentials'
         ];
-        if($token = $this->getAccessToken()){
+        if ($token = $this->getAccessToken()) {
             $body['refresh_token'] = $token;
         }
         return $body;
@@ -58,7 +60,7 @@ class AuthPaymoService
     public function revokeToken()
     {
         $token = $this->getAccessToken();
-        $response =  Http::withHeaders([
+        $response = Http::withHeaders([
             'Authorization' => 'Basic ' . $this->base64,
         ])->asForm()->post(self::SERVER . 'revoke', [
             'token' => $token
