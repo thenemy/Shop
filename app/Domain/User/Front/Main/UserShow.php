@@ -61,7 +61,7 @@ class UserShow extends User implements CreateAttributesInterface
                             . "user_passport"),
                     ]),
                 ]),
-                NestedContainer::new("__('Рассрочки')", [
+                NestedContainer::new("__(\"Рассрочки\")", [
                     new FileLivewireCreatorWithFilterBy("UserShow", TakenCreditFiltered::new()),
                 ])
             ])
