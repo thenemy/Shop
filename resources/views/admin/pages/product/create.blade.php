@@ -81,7 +81,7 @@
             Введите заголовок
             </x-helper.text.pre_title>
                  <div class=' flex flex-row space-x-2'>
-                 <x-helper.input.input name='bodies->text[ru]'  label='{{__("на русском языке")}}' value='{{old("bodies->text") ? old("bodies->text")["ru"] ?? $entity->bodies->text["ru"] ?? " " : $entity->bodies->text["ru"] ?? " "}}'/><x-helper.input.input name='bodies->text[uz]'  label='{{__("o`zbek tilda")}}' value='{{old("bodies->text") ? old("bodies->text")["uz"] ?? $entity->bodies->text["uz"] ?? " " : $entity->bodies->text["uz"] ?? " "}}'/><x-helper.input.input name='bodies->text[en]'  label='{{__("in english")}}' value='{{old("bodies->text") ? old("bodies->text")["en"] ?? $entity->bodies->text["en"] ?? " " : $entity->bodies->text["en"] ?? " "}}'/>
+                 <x-helper.input.input name='description->header[ru]'  label='{{__("на русском языке")}}' value='{{old("description->header") ? old("description->header")["ru"] ?? $entity->description->header["ru"] ?? " " : $entity->description->header["ru"] ?? " "}}'/><x-helper.input.input name='description->header[uz]'  label='{{__("o`zbek tilda")}}' value='{{old("description->header") ? old("description->header")["uz"] ?? $entity->description->header["uz"] ?? " " : $entity->description->header["uz"] ?? " "}}'/><x-helper.input.input name='description->header[en]'  label='{{__("in english")}}' value='{{old("description->header") ? old("description->header")["en"] ?? $entity->description->header["en"] ?? " " : $entity->description->header["en"] ?? " "}}'/>
              </div>
             </div>
             			
@@ -90,7 +90,7 @@
             <x-helper.text.pre_title class='self-start'>
             Введите описание
             </x-helper.text.pre_title>
-                <div class='space-y-2'><x-helper.text_area.text_area  name='bodies->body->text[ru]'  label='{{__("на русском языке")}}'>{{old("bodies->body->text") ? old("bodies->body->text")["ru"] ?? $entity->bodies->body->text["ru"] ?? " " : $entity->bodies->body->text["ru"] ?? " "}}</x-helper.text_area.text_area><x-helper.text_area.text_area  name='bodies->body->text[uz]'  label='{{__("o`zbek tilda")}}'>{{old("bodies->body->text") ? old("bodies->body->text")["uz"] ?? $entity->bodies->body->text["uz"] ?? " " : $entity->bodies->body->text["uz"] ?? " "}}</x-helper.text_area.text_area><x-helper.text_area.text_area  name='bodies->body->text[en]'  label='{{__("in english")}}'>{{old("bodies->body->text") ? old("bodies->body->text")["en"] ?? $entity->bodies->body->text["en"] ?? " " : $entity->bodies->body->text["en"] ?? " "}}</x-helper.text_area.text_area></div>
+                <div class='space-y-2'><x-helper.text_area.text_area  name='description->body[ru]'  label='{{__("на русском языке")}}'>{{old("description->body") ? old("description->body")["ru"] ?? $entity->description->body["ru"] ?? " " : $entity->description->body["ru"] ?? " "}}</x-helper.text_area.text_area><x-helper.text_area.text_area  name='description->body[uz]'  label='{{__("o`zbek tilda")}}'>{{old("description->body") ? old("description->body")["uz"] ?? $entity->description->body["uz"] ?? " " : $entity->description->body["uz"] ?? " "}}</x-helper.text_area.text_area><x-helper.text_area.text_area  name='description->body[en]'  label='{{__("in english")}}'>{{old("description->body") ? old("description->body")["en"] ?? $entity->description->body["en"] ?? " " : $entity->description->body["en"] ?? " "}}</x-helper.text_area.text_area></div>
             </div>
             
                 </x-helper.container.container>

@@ -6,6 +6,8 @@ use App\Domain\Common\Colors\Entities\Color;
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Core\Media\Traits\MediaManyTrait;
 use App\Domain\Core\Media\Traits\MediaTrait;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Log;
 
 class ProductMainColor extends Entity
 {

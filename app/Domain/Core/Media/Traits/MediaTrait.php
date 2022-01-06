@@ -41,7 +41,7 @@ trait MediaTrait
 
     public function setMedia($key, $value, $id)
     {
-//        dd(sprintf('%s %s' , $value, $this->attributes[$key]));
+
         if (!isset($this->attributes[$key]) || $value && $this->isFileNotExists($value, $this->attributes[$key])) {
             $this->deleteMedia($key, $this->getOriginalValue($key));
             $this->storeMedia($key, $value, MediaInterface::PUBLIC_PATH, $id);

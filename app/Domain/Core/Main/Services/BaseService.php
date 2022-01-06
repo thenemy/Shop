@@ -111,7 +111,9 @@ abstract class BaseService implements ServiceInterface
         }
     }
 
-
+    public function createWith(array $object_data, array $additional){
+        return $this->create(array_merge($object_data, $additional));
+    }
     public function create(array $object_data)
     {
         $filtered = $this->filterRecursive($object_data);

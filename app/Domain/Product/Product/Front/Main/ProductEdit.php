@@ -64,6 +64,12 @@ class ProductEdit extends Product implements CreateAttributesInterface
                 true
             ),
             new FileLivewireNested("ProductEdit", $this->getMainCredit()),
+            NestedContainer::new("__(\"Большое описание\")", [
+                new InputLangAttribute(self::DESCRIPTION_TO . "header", "Введите заголовок", false),
+                new TextAreaLangAttribute(self::DESCRIPTION_TO . 'body', "Введите описание", false)
+            ], [
+                "class" => "space-y-4"
+            ]),
             FileLivewireFactoring::generation("ProductEdit",
                 $this, [], "Цвета",
                 ColorComplexFactoring::create(), ColorComplexFactoring::edit(),

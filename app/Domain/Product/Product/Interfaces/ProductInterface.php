@@ -26,7 +26,9 @@ interface ProductInterface
     const MAIN_CREDIT_SERVICE = "mainCredit";
     const BODIES_SERVICE = "bodies";
     const COLORS_SERVICE = "colors";
+    const DESCRIPTION_SERVICE = "description";
     const COLORS_TEMP = self::COLORS_SERVICE . "_new_created";
+    const DESCRIPTION_TO = self::DESCRIPTION_SERVICE . \CR::CR;
     const COLORS_TO = self::COLORS_SERVICE . \CR::CR;
     const BODIES_TO = self::BODIES_SERVICE . \CR::CR;
     const BODIES_INSIDE_TO = self::BODIES_TO . HeaderRelation::BODY_TO; // for front mention

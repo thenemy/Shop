@@ -50,8 +50,8 @@ class ProductCreate extends Product implements CreateAttributesInterface
             InputFileTempManyAttribute::create(self::IMAGE_TO . "image", "Картинки"),
             new  FileLivewireNestedWithoutEntity("ProductCreate", $this->getMainCredit()),
             NestedContainer::new("__(\"Большое описание\")", [
-                new InputLangAttribute(self::BODIES_TO . "text", "Введите заголовок"),
-                new TextAreaLangAttribute(self::BODIES_INSIDE_TO . 'text', "Введите описание")
+                new InputLangAttribute(self::DESCRIPTION_TO . "header", "Введите заголовок"),
+                new TextAreaLangAttribute(self::DESCRIPTION_TO . 'body', "Введите описание")
             ], [
                 "class" => "space-y-4"
             ]),

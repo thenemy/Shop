@@ -42,6 +42,11 @@ class Product extends Entity implements ProductInterface
         return $this->hasMany(ProductMainColor::class, "product_id");
     }
 
+    public function description(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(ProductDescription::class, "product_id");
+    }
+
     public function bodies(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(HeaderBody::class, "product_id");
@@ -170,6 +175,11 @@ class Product extends Entity implements ProductInterface
     public function getImagesAttribute()
     {
         return $this->getManyMedia("productImage", "image");
+    }
+
+    public function setImagesAttribute($value)
+    {
+        $this->setSaveManyMedia("productImage", $value, "image");
     }
 
     /*

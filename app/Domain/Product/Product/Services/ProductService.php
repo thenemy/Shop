@@ -10,6 +10,7 @@ use App\Domain\Product\Header\Services\HeaderService;
 use App\Domain\Product\Images\Services\ImageService;
 use App\Domain\Product\Product\Entities\CardImage;
 use App\Domain\Product\Product\Entities\Product;
+use App\Domain\Product\Product\Entities\ProductDescription;
 use App\Domain\Product\Product\Entities\ProductHit;
 use App\Domain\Product\Product\Entities\ProductOfDay;
 use App\Domain\Product\Product\Interfaces\ProductInterface;
@@ -19,16 +20,18 @@ class ProductService extends BaseService implements ProductInterface
 {
     use FileUploadService;
 
-    private CardImageService $cardImage;
+    private CardImageService $imageService;
     private HeaderService $headerService;
     private ProductMainService $colorService;
+    private ProductDescriptionService $descriptionService;
 
     public function __construct()
     {
         parent::__construct();
-        $this->cardImage = CardImageService::new();
+        $this->imageService = CardImageService::new();
         $this->headerService = HeaderService::new();
         $this->colorService = ProductMainService::new();
+        $this->descriptionService = ProductDescriptionService::new();
     }
 
     public function getEntity(): Product
@@ -63,18 +66,22 @@ class ProductService extends BaseService implements ProductInterface
             $main_credits = collect($this->popCondition($object_data, self::MAIN_CREDIT_SERVICE))->collapse()->toArray();
             $headers = $this->popCondition($object_data, self::BODIES_SERVICE);
             $colors = $this->popCondition($object_data, self::COLORS_SERVICE);
+            $descriptions = $this->popCondition($object_data, self::DESCRIPTION_SERVICE);
             $this->popCondition($object_data, self::COLORS_TEMP);
             $product = parent::create($object_data);
+            $product->images = $image_data['image'];
+
             $product_id = ['product_id' => $product->id];
             $this->colorService->createMany($colors, $product_id, 0);
             $this->headerService->createIfExists($headers, $product_id);
-            $product->image_product->upload($image_data['image']);
+            $this->descriptionService->createWith($descriptions, $product_id);
+
             $card_image['product_id'] = $product->id;
             $this->createCheck($product_of_day, $product, ProductOfDay::class);
             $this->createCheck($product_hit, $product, ProductHit::class);
             $main_credit = self::MAIN_CREDIT_SERVICE;
             $product->$main_credit()->attach($main_credits);
-            $this->cardImage->create($card_image);
+            $this->imageService->create($card_image);
             DB::commit();
             return $product;
         } catch (\Throwable $exception) {
@@ -93,9 +100,11 @@ class ProductService extends BaseService implements ProductInterface
             $product_hit = $this->popCondition($object_data, self::PRODUCT_HIT_SERVICE);
             $headers = $this->popCondition($object_data, self::BODIES_SERVICE);
             $colors = $this->popCondition($object_data, self::COLORS_SERVICE);
+            $descriptions = $this->popCondition($object_data, self::DESCRIPTION_SERVICE);
             $this->popCondition($object_data, self::COLORS_TEMP);
             $parent = ['product_id' => $object->id];
             $this->headerService->createOrUpdate($object, self::BODIES_SERVICE, $headers, $parent);
+            $this->descriptionService->update($object[self::DESCRIPTION_SERVICE], $descriptions);
             $this->colorService->createOrUpdateMany($colors, $parent, 0);
             if ($object instanceof Product) {
                 $this->createCheck($product_of_day, $object, ProductOfDay::class);
