@@ -21,15 +21,15 @@ class SendSmsLivewire extends AbstractFunction
     {
         $component->validate(
             [
-                'entity.card_number' => "required",
-                'entity.date_number' => "required"
+                'entity.card_number' => "required|min:19",
+                'entity.date_number' => "required|min:5|max:5"
             ]
         );
         $service = new BindCardService();
         try {
             $component->entity['transaction_id'] = $service->create(
-                $component->entity->card_number,
-                $component->entity->date_number,
+                $component->entity['card_number'],
+                $component->entity['date_number'],
             );
         } catch (BindCardError $exception) {
             if ($exception->getCode() == BindCardError::ERROR_OCCURED) {

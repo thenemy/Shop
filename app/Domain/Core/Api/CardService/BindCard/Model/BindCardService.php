@@ -18,13 +18,23 @@ class BindCardService extends AuthPaymoService
         $this->token = $this->getToken();
     }
 
+    private function transformDate($date): string
+    {
+
+        $divide = explode("/", $date);
+        if (count($divide) != 2) {
+            return $divide[1] . $divide[0];
+        }
+        throw new BindCardError(__("Не правильный формат даты"), BindCardError::ERROR_OCCURED);
+    }
+
     public function create($card_number, $expiry, $language = 'ru')
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->token,
         ])->post(self::SERVER . 'create', [
             'card_number' => $card_number,
-            'expiry' => $expiry,
+            'expiry' => $this->transformDate($expiry),
             'lang' => $language
         ]);
         $object = $response->object();
