@@ -4,7 +4,7 @@
             %s
         </x-helper.filter.filtration>
     </div>
-    <div x-data="{filterOpen: false}" class="flex flex-col space-y-2">
+    <div x-data="{filterOpen: false}" class="flex flex-col w-full space-y-2">
             <div class="flex flex-row justify-between">
                 <div>
                     <x-helper.input.input wire:model="search" label='{{__("Поиск по списку")}}'/>

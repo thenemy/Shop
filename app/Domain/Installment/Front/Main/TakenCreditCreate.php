@@ -67,7 +67,7 @@ class TakenCreditCreate extends TakenCredit implements CreateAttributesInterface
                     "surety-update"
                 ),
                 Visibility::newVisibility("surety-update", [
-                    NestedContainer::new("Добавить", [
+                    NestedContainer::new("__(\"Добавить\")", [
                         self::generationSuretyCreate(self::SURETY_TO)
                     ]),
                 ])
