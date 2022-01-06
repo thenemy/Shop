@@ -25,56 +25,79 @@ abstract class BaseInputFileTemp implements HtmlInterface
     public string $key;
     public bool $create;
     public string $mediaInitialKey;
+    public string $wireKey;
+    public ?string $customOldValue;
 
     public function __construct($class,
-                                $keyToAttach,
-                                $label,
-                                $multiple,
+        $keyToAttach,
+        $label,
+        $multiple,
                                 bool $create = true,
-                                $mediaInitialKey = ""
+                                string $mediaInitialKey = "",
+                                string $wireKey = "",
+                                ?string $customOldValue = null
     )
     {
         $this->class = $class;
         $this->key = FileTempInterface::MEDIA_KEY;
         $this->keyToAttach = $keyToAttach;
         $this->multiple = $multiple;
+        $this->wireKey = $wireKey;
         $this->label = $label;
         $this->create = $create;
+        $this->customOldValue = $customOldValue;
         $this->mediaInitialKey = $mediaInitialKey == "" ? $this->keyToAttach : $mediaInitialKey;
     }
 
-    public static function create($keyToAttach, $label)
+    public static function create($keyToAttach, $label, $wireKey = "", $customOldValue = null)
     {
         $self = get_called_class();
-        return new $self($keyToAttach, $label);
+        $object = new $self($keyToAttach, $label);
+        $object->wireKey = $wireKey;
+        $object->customOldValue = $customOldValue;
+        return $object;
     }
 
-    public static function edit($keyToAttach, $label, string $mediaInitialKey = "")
+    public static function edit($keyToAttach, $label,
+                                string $mediaInitialKey = "",
+                                string $wireKey = "",
+        $customOldValue = null)
     {
         $self = get_called_class();
-        return new $self($keyToAttach, $label, false, $mediaInitialKey);
+        $object = new $self($keyToAttach, $label, false, $mediaInitialKey);
+        $object->wireKey = $wireKey;
+        $object->customOldValue = $customOldValue;
+        return $object;
     }
     /// create here the field for initial value
     /// attach it in mount state
     ///
     public function generateHtml(): string
     {
+        $attached = 'file->id_file->' . $this->keyToAttach;
+        $old = sprintf('old("%s") ?? ""', $attached);
+        if ($this->customOldValue) {
+            $old = sprintf("old(sprintf(\"%s\", %s)) ?? null", $attached, $this->customOldValue);
+            $this->keyToAttach = sprintf($this->keyToAttach, $this->getScope($this->customOldValue));
+        }
         return sprintf("<livewire:components.file.file-uploading-without-entity
                     keyToAttach='%s'
                     mediaKey='%s'
                     entityClass='%s'
                     :multiple='%s'
-                    label='%s'
+                    :label='__(\"%s\")'
                     :entityId='%s'
                     :mediaInitial='%s'
+                    wire:key='%s'
                      />",
             $this->keyToAttach,
             $this->key,
             $this->class,
             $this->multiple ? 'true' : 'false',
             $this->label,
-            sprintf('old("%s") ?? ""', 'file->id_file->' . $this->keyToAttach),
-            !$this->create ? $this->getWithoutScopeAtrVariable($this->mediaInitialKey) : "\"\""
+            $old,
+            !$this->create ? $this->getWithoutScopeAtrVariable($this->mediaInitialKey) : "\"\"",
+            $this->wireKey
         );
     }
 }

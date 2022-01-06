@@ -20,7 +20,8 @@ Route::name("admin.")->group(function () {
             AdminRoutesInterface::TAKEN_CREDIT => \App\Http\Controllers\Admin\TakenCreditController::class,
             AdminRoutesInterface::SURETY => \App\Http\Controllers\Admin\SuretyController::class,
             AdminRoutesInterface::BANNER => \App\Http\Controllers\Admin\BannerController::class,
-            AdminRoutesInterface::BRAND => \App\Http\Controllers\Admin\BrandController::class
+            AdminRoutesInterface::BRAND => \App\Http\Controllers\Admin\BrandController::class,
+            AdminRoutesInterface::COLOR => \App\Http\Controllers\Admin\ColorController::class
         ]
     );
 });

@@ -96,12 +96,12 @@ abstract class BaseController extends Controller implements ControllerInterface
 
     public function getUpdate($object, $entity): \Illuminate\Http\RedirectResponse
     {
-        try {
+//        try {
             $this->service->update($entity, $object);
-            return back()->with("success", __("Обнавлено успешно"));
-        } catch (\Exception $e) {
-            return back()->withErrors($e->getMessage())->withInput();
-        }
+            return back()->with("success", __("Обновлено успешно"));
+//        } catch (\Exception $e) {
+//            return back()->withErrors($e->getMessage())->withInput();
+//        }
     }
 
     public function getEdit(Request $formRequest, $entity, $params = [], $variables = [])
@@ -128,5 +128,20 @@ abstract class BaseController extends Controller implements ControllerInterface
     {
         $this->service->destroy($entity);
         return back();
+    }
+    public function index(Request $request)
+    {
+
+        return $this->getIndex($request);
+    }
+
+    public function create(Request $request)
+    {
+        return $this->getCreate($request);
+    }
+
+    public function store(Request $request)
+    {
+        return $this->getStoreValidation($request);
     }
 }

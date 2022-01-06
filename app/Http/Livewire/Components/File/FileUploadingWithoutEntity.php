@@ -6,18 +6,26 @@ class FileUploadingWithoutEntity extends FileUploading
 {
     public string $keyToAttach;
 
+
     public function mount($mediaInitial = null)
     {
-        if (!$this->entityId) {
-            $input = [];
-            if ($mediaInitial) {
-                $input['file_new'] = $mediaInitial;
-            }
-            $entity = $this->entityClass::create($input);
-            $this->entityId = $entity->id;
-        }
+        $this->createObject($mediaInitial);
         parent::mount();
     }
+
+    private function createObject($mediaInitial = null)
+    {
+        if (!$this->entityId) {
+            $entity = $this->entityClass::create([]);
+            if ($mediaInitial) {
+                $entity->file_new = $mediaInitial;
+                $entity->save();
+            }
+            $this->entityId = $entity->id;
+        }
+
+    }
+
 
     public function getPath(): string
     {

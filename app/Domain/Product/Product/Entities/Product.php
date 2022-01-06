@@ -11,6 +11,8 @@ use App\Domain\Core\Media\Traits\MediaManyTrait;
 use App\Domain\Core\Slug\Traits\Sluggable;
 use App\Domain\CreditProduct\Entity\MainCredit;
 use App\Domain\Currency\Traits\ConvertToSum;
+use App\Domain\Product\Color\Entities\ProductMainColor;
+use App\Domain\Product\Header\Entities\HeaderBody;
 use App\Domain\Product\HeaderComponent\Header\Entities\HeaderComponent;
 use App\Domain\Product\HeaderTable\Entities\HeaderTable;
 use App\Domain\Product\HeaderText\Entities\HeaderText;
@@ -33,6 +35,26 @@ class Product extends Entity implements ProductInterface
     public function newEloquentBuilder($query): ProductBuilder
     {
         return new ProductBuilder($query);
+    }
+
+    public function colors()
+    {
+        return $this->hasMany(ProductMainColor::class, "product_id");
+    }
+
+    public function description(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(ProductDescription::class, "product_id");
+    }
+
+    public function bodies(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(HeaderBody::class, "product_id");
+    }
+
+    public function getBodyFirstAttribute()
+    {
+        return $this->bodies()->first()->header;
     }
 
     public function shop()
@@ -153,6 +175,11 @@ class Product extends Entity implements ProductInterface
     public function getImagesAttribute()
     {
         return $this->getManyMedia("productImage", "image");
+    }
+
+    public function setImagesAttribute($value)
+    {
+        $this->setSaveManyMedia("productImage", $value, "image");
     }
 
     /*

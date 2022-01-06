@@ -100,10 +100,10 @@ class UserService extends BaseService implements UserRelationInterface
                     $this->crucialService->create($crucial_data);
                 }
             }
-            if (!empty($avatar_data)) {
-                $this->avatarService
-                    ->update($object[self::AVATAR_SERVICE], $avatar_data);
-            }
+            $this->avatarService
+                ->createOrUpdate($object, self::AVATAR_SERVICE, $avatar_data, [
+                    'user_id' => $object->id
+                ]);
             $user = parent::update($object, $object_data);
             DB::commit();
             return $user;

@@ -1,8 +1,13 @@
 <x-helper.container.container :title="__('%s')">
     <div class="flex flex-col space-y-3">
-        <div class="flex flex-row space-x-3">
-            <x-helper.input.input wire:model="paginate" label='{{__("Элементов на страничке")}}'/>
-            <x-helper.input.input wire:model="search" label='{{__("Поиск по списку")}}'/>
+        <div class="flex flex-row justify-between">
+            <div>
+                <x-helper.input.input wire:model="search" label='{{__("Поиск по списку")}}'/>
+            </div>
+
+            <div>
+                <x-helper.input.input class="w-14" wire:model="paginate" label='{{__("Показать")}}'/>
+            </div>
             %s
         </div>
         <div class="flex flex-row  space-x-3">

@@ -4,6 +4,7 @@ namespace App\Domain\Core\Front\Admin\Form\Attributes\Base;
 
 use App\Domain\Category\Entities\Category;
 use App\Domain\Category\Front\Admin\DropDown\CategoryDropDownSearch;
+use App\Domain\Core\Front\Admin\Button\Traits\GenerateTagAttributes;
 use App\Domain\Core\Front\Admin\DropDown\Abstracts\AbstractDropDown;
 use App\Domain\Core\Front\Admin\DropDown\Abstracts\AbstractDropDownSearch;
 use App\Domain\Core\Front\Admin\DropDown\Abstracts\BaseDropDown;
@@ -14,7 +15,7 @@ use App\Domain\Core\Front\Interfaces\HtmlInterface;
 
 abstract class BaseDropDownSearchAttribute extends AbstractDropDownSearch implements HtmlInterface
 {
-    use AttributeGetVariable, GetDropDown;
+    use AttributeGetVariable, GetDropDown, GenerateTagAttributes;
 
     const  DROP_ITEM = DropItem::class;
     protected string $searchLabel;
@@ -33,7 +34,7 @@ abstract class BaseDropDownSearchAttribute extends AbstractDropDownSearch implem
                                          array  $filterBy = [],
                                                 ...$additonal)
     {
-        $object = self::new($searchByKey, $searchLabel  , $create, $filterBy, ...$additonal);
+        $object = self::new($searchByKey, $searchLabel, $create, $filterBy, $additonal);
         $object->searchByKey = $searchByKey;
         return $object;
     }
@@ -42,10 +43,11 @@ abstract class BaseDropDownSearchAttribute extends AbstractDropDownSearch implem
                                string $searchLabel,
                                bool   $create = true,
                                array  $filterBy = [],
-                                      ...$additonal)
+                               array  $attributes = [])
     {
         $self = get_called_class();
         $class = new $self([]);
+        $class->attributes = $attributes;
         $class->searchByKey = sprintf("\"%s\"", $searchByKey);
         $class->searchLabel = $searchLabel;
         $class->create = $create;
@@ -63,12 +65,14 @@ abstract class BaseDropDownSearchAttribute extends AbstractDropDownSearch implem
             %s
             searchLabel='%s'
             %s
+            %s
              />",
             $this->componentBladeName(),
             $this->searchByKey,
             $dropDownClass,
             !$this->create ? ":initial='" . $this->getWithoutScopeAtrVariable($this->key) . "'" : '',
             $this->searchLabel,
+            $this->generateAttributes(),
             $this->additionalParamsHtml()
         );
     }

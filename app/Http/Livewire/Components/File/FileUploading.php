@@ -27,9 +27,11 @@ class FileUploading extends Component
 
     public function updatedFileCustom()
     {
-        $media = $this->getMedia();
-        $media->validate($this);
-        $media->upload($this->fileCustom);
+        if ($this->fileCustom && $this->fileCustom[0]) {
+            $media = $this->getMedia();
+            $media->validate($this);
+            $media->upload($this->fileCustom);
+        }
     }
 
     public function download($path)

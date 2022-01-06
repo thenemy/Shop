@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\Route;
 class SideBarDrop extends SideBarBase
 {
     public string $route_also;
-
-    public function __construct($name, RouteHandler $route_name)
+    public string $icon;
+    public function __construct($name, RouteHandler $route_name, string $icon = "")
     {
         parent::__construct($name, $route_name);
+        $this->icon = $icon;
         $this->route_also = $this->getOtherRoutes($this->current_name);
 
     }

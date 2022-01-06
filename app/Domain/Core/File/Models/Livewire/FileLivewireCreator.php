@@ -173,10 +173,7 @@ class FileLivewireCreator extends AbstractFileManager
     private function createFileBlade()
     {
         $file_to = $this->pathMain . $this->getBladeName() . ".blade.php";
-        Log::info(get_called_class());
-        Log::info($this->getPathFromBlade());
         $file_from = $this->getContents($this->getPathFromBlade());
-        Log::info($file_from);
         $formatted_data = $this->formatBlade($file_from);
         $this->putContents($file_to, $formatted_data);
     }

@@ -1,10 +1,27 @@
-<<<<<<< HEAD
-@extends('layout.admin_layout')
-=======
-{{--@extends("layout.layout")--}}
+@extends("layout.layout")
+@section("body")
+    <div class="flex flex-row w-full">
+        <div x-data="{isSideBarOpen: false}"
+             :class="isSideBarOpen && 'w-16' || 'basis-1/5'">
+            <div class="flex flex-row items-center bg-black h-16">
+                <div class="self-center">
+                    <div @click="isSideBarOpen = !isSideBarOpen" class="p-5 text-center">
+                        <span class="leading-3 text-white fa fa-bars"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-sidebar h-screen">
+                <x-helper.sidebar.new_sidebar name="Админ" :list="\SideBar::sideBars()"/>
+            </div>
+        </div>
 
-{{--@section("body")--}}
-{{--    <livewire:new-livewire/>--}}
-{{--    {!!(new \App\Domain\Category\Front\Models\CategoryIndex())->name_table !!}--}}
-{{--@endsection--}}
->>>>>>> 895a7332d79d8f86a18b1db6b167b2afa375cf9a
+        <div class="bg-background flex-1">
+            <div class="bg-white w-full h-16 shadow">
+                @yield("new_header")
+            </div>
+            <div class="">
+                @yield("new_body")
+            </div>
+        </div>
+    </div>
+@endsection

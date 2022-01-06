@@ -8,11 +8,13 @@ class SideBarList implements SideBarInterface
 {
     public string $name;
     public array $sublist;
+    public string $icon;
 
-    public function __construct(array $sublist, $name = "")
+    public function __construct(array $sublist, $name = "", $icon = "")
     {
         $this->sublist = $sublist;
         $this->name = $name;
+        $this->icon = $icon;
     }
 
 

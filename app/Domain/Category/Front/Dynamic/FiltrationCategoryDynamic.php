@@ -22,6 +22,22 @@ class FiltrationCategoryDynamic extends FiltrationCategoryDynamicWithoutEntity
 {
     use TableDynamic;
 
+    public static function getCustomRules(): array
+    {
+        return [
+            'key' => DynamicAttributes::INPUT,
+            'attribute' => DynamicAttributes::DROP_DOWN(FiltrationCategoryDropDown::class),
+        ];
+    }
+
+    public function getCustomFrontRules(): array
+    {
+        return [
+            'key' => null,
+            'attribute' => fn($value) => self::DB_TO_FRONT[$this->attribute],
+        ];
+    }
+
     public static function getBaseService(): string
     {
         return FiltrationCategoryService::class;

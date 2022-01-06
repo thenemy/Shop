@@ -4,12 +4,18 @@ namespace App\Domain\Product\Product\Front\Main;
 
 use App\Domain\Category\Front\Admin\DropDown\CategoryDropDownSearch;
 use App\Domain\Common\Brands\Front\Admin\DropDown\BrandDropDownSearch;
+use App\Domain\Common\Colors\Front\Admin\DropDown\ColorDropDownSearch;
+use App\Domain\Core\File\Models\Livewire\FileLivewireFactoring;
 use App\Domain\Core\File\Models\Livewire\FileLivewireNested;
+use App\Domain\Core\Front\Admin\Attributes\Containers\NestedContainer;
 use App\Domain\Core\Front\Admin\File\Attributes\FileAttribute;
 use App\Domain\Core\Front\Admin\File\Attributes\FilesAttributes;
 use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputAttribute;
 use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputFileAttribute;
+use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputFileTempAttribute;
+use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputFileTempManyAttribute;
 use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputLangAttribute;
+use App\Domain\Core\Front\Admin\Form\Attributes\Models\TextAreaLangAttribute;
 use App\Domain\Core\Front\Admin\Form\Interfaces\CreateAttributesInterface;
 use App\Domain\Core\Front\Admin\Form\Traits\AttachNested;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
@@ -17,6 +23,8 @@ use App\Domain\CreditProduct\Front\Nested\MainCreditNested;
 use App\Domain\Product\Images\Entities\Image;
 use App\Domain\Product\Product\Entities\Product;
 use App\Domain\Product\Product\Front\Admin\DropDown\CurrencyDropDown;
+use App\Domain\Product\Product\Front\ComplexFactoring\ColorComplexFactoring;
+use App\Domain\Product\Product\Interfaces\ProductInterface;
 use App\Domain\Shop\Front\Admin\DropDown\ShopDropDownSearch;
 
 class ProductEdit extends Product implements CreateAttributesInterface
@@ -55,7 +63,17 @@ class ProductEdit extends Product implements CreateAttributesInterface
                 true,
                 true
             ),
-            new FileLivewireNested("ProductEdit", $this->getMainCredit())
+            new FileLivewireNested("ProductEdit", $this->getMainCredit()),
+            NestedContainer::new("__(\"Большое описание\")", [
+                new InputLangAttribute(self::DESCRIPTION_TO . "header", "Введите заголовок", false),
+                new TextAreaLangAttribute(self::DESCRIPTION_TO . 'body', "Введите описание", false)
+            ], [
+                "class" => "space-y-4"
+            ]),
+            FileLivewireFactoring::generation("ProductEdit",
+                $this, [], "Цвета",
+                ColorComplexFactoring::create(), ColorComplexFactoring::edit(),
+                self::COLORS_SERVICE, ColorComplexFactoring::class)
         ]);
     }
 
@@ -67,7 +85,6 @@ class ProductEdit extends Product implements CreateAttributesInterface
             "product_id"
         );
     }
-
 
 
     public function getImageMainAttribute(): FileAttribute

@@ -9,9 +9,24 @@ class FileLivewireDynamicWithoutEntity extends FileLivewireCreator implements Li
 {
     use AttributeGetVariable;
 
-    public string $service;
-    public string $parentKey;
-    public string $parentId;
+    private string $initial;
+
+    public function __construct(
+        $className,
+        $entity,
+        string $initial = ""
+    )
+    {
+        $this->initial = $initial;
+        parent::__construct($className, $entity);
+    }
+
+    public function generateAdditionalToHtml(): string
+    {
+        if ($this->initial)
+            return sprintf(":initial='%s'", $this->getWithoutScopeAtrVariable($this->initial));
+        return "";
+    }
 
 
     protected function getPathFromClass(): string

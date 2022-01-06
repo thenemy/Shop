@@ -1,9 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@tailwind variants;
 .drop-down-button {
-    @apply inline-flex h-10 justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500;
+    @apply inline-flex h-8  justify-center w-full items-center rounded-md border shadow-sm px-4  bg-white text-base font-medium  hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500;
+}
+
+.drop_element {
+    @apply hover:bg-white p-4 hover:border-r-4 border-blue-500 cursor-pointer
+}
+
+.drop_helper_text {
+    @apply flex flex-row items-center space-x-4 text-side_elem  hover:text-side_hovering
+}
+
+.hover_side_item {
+    @apply transform hover:translate-x-2 cursor-pointer transition-transform ease-in duration-200
+}
+
+.table_main {
+    @apply text-sm text-table_color table-fixed border-collapse border w-full my-2.5
+}
+
+.table_main_th {
+    @apply p-1 border font-semibold bg-gray-100 cursor-pointer
+}
+
+.table_main_tr {
+    @apply text-center border-b border-gray-200
+}
+
+.table_main_td {
+    @apply border text-table_color bg-white p-1.5
+}
+
+.icon_action {
+    @apply text-center px-1 py-0.5 hover:text-blue-300 hover:border-blue-300 border-2  rounded
 }
 
 .transition-custom {
@@ -20,13 +52,14 @@
 }
 
 .drop-down-block {
-    @apply z-50 origin-top-right absolute left-0 mt-2 w-max rounded-md
+    @apply origin-top-right absolute left-0 mt-2 w-max rounded-md
     shadow bg-white ring-1 ring-black
+    z-50
     ring-opacity-5 focus:outline-none;
 }
 
 .drop-down-item {
-    @apply text-gray-700 block px-4 py-2 text-sm;
+    @apply text-gray-700 block px-4 py-2 text-xs  bg-white;
 }
 
 .main-back {
@@ -41,13 +74,13 @@
 }
 
 .input-custom {
-    @apply h-10 border
+    @apply h-8 border
     shadow
     focus:outline-none focus:ring focus:border-gray-500
-    focus:border-green-50 rounded p-0.5
+    focus:border-green-50 rounded
 }
 
-@responsive {
+@layer utilities {
     .custom-slider .slick-list {
         padding: 0 20% 0 0 !important;
     }
