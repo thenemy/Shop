@@ -20,7 +20,6 @@ class BindCardService extends AuthPaymoService
 
     private function transformDate($date): string
     {
-
         $divide = explode("/", $date);
         if (count($divide) == 2) {
             return $divide[1] . $divide[0];
@@ -30,7 +29,6 @@ class BindCardService extends AuthPaymoService
 
     public function create($card_number, $expiry, $language = 'ru')
     {
-
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->token,
         ])->post(self::SERVER . 'create', [
@@ -38,18 +36,18 @@ class BindCardService extends AuthPaymoService
             'expiry' => $this->transformDate($expiry),
             'lang' => $language
         ]);
-        $object = $response->object();
+        $object = $response->json();
         $this->checkOnError($object, $response);
-        return $object->transaction_id;
+        return $object['transaction_id'];
     }
 
     private function checkOnError($object, Response $response)
     {
-        if ($object->result && $object->result->code != "OK" && !$object->transaction_id) {
-            if ($object->result->code == "STPIMS-ERR-133") {
+        if ($object['result'] && $object['result']['code'] != "OK") {
+            if ($object['result']['code'] == "STPIMS-ERR-133") {
                 throw new BindCardError($response->body(), BindCardError::ALREADY_EXISTS);
             }
-            throw new BindCardError($object->result->description, BindCardError::ERROR_OCCURED);
+            throw new BindCardError($object['result']['description'], BindCardError::ERROR_OCCURED);
         }
     }
     // :"STPIMS-ERR-133
@@ -75,7 +73,7 @@ class BindCardService extends AuthPaymoService
         ])->asForm()->post(self::SERVER . 'dial', [
             'transaction_id' => $transaction_id,
         ]);
-        $response_decoded = $response->object();
+        $response_decoded = $response->json();
         return $response_decoded;
     }
 
@@ -87,7 +85,7 @@ class BindCardService extends AuthPaymoService
             'page' => $page,
             'page_size' => $page_size
         ]);
-        $response_decoded = $response->object();
+        $response_decoded = $response->json();
         return $response_decoded;
     }
 }

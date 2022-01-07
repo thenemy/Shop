@@ -22,6 +22,10 @@ class PlasticCardService extends BaseService
             DB::beginTransaction();
             if (!isset($object_data['plastic_data'])) {
                 $service = new BindCardService();
+                $this->validate($object_data, [
+                    'transaction_id' => "required",
+                    'code' => "required"
+                ]);
                 $result = $service->apply($object_data["transaction_id"], $object_data['code']);
             } else {
                 $result = $object_data['plastic_data'];

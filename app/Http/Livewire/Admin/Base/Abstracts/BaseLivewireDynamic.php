@@ -100,6 +100,7 @@ abstract class BaseLivewireDynamic extends BaseLivewire
 
     public function save()
     {
+
         $this->validateRules('entity.');
         $this->entity[$this->parentKey] = $this->parentId;
         $this->getService()->create($this->entity->toArray());

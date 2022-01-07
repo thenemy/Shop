@@ -24,7 +24,7 @@ class PlasticCard extends Entity
         return [
             'card_number' => "required",
             "date_number" => "required",
-            "code" => "required"
+            "code" => "integer"
         ];
     }
 }

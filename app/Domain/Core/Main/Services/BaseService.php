@@ -31,7 +31,7 @@ abstract class BaseService implements ServiceInterface
     }
 
 
-    private function validate(array $object_data, array $rules)
+    protected function validate(array $object_data, array $rules)
     {
         $validator = Validator::make(
             $object_data,
