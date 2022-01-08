@@ -22,7 +22,7 @@ class PlasticCardDynamic extends PlasticCard implements TableInFront
 
     public function getActionsAttribute(): string
     {
-        return $this->getRemoveButton();
+        return $this->getRemoveButton()->generateHtml();
     }
 
     public function getCustomFrontRules(): array
