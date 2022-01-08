@@ -26,6 +26,6 @@ class PlasticCardDropDownAssociated extends BaseDropDownAssociatedAttribute
 
     public static function getDropDownParent($initial, $filterBy)
     {
-        return self::getDropDown($initial, $filterBy, PlasticCard::class, "card_number");
+        return self::getDropDown($initial, $filterBy, PlasticCard::class, "pan");
     }
 }

@@ -20,12 +20,12 @@ class UserBuilder extends BuilderEntity
     public function findByPlastic($id): UserBuilder
     {
         return $this->join("plastic_user_cards", "plastic_user_cards.user_id",
-            "=", 'users.id')->where("plastic_id", '=', $id);
+            "=", 'users.id')->where("plastic_user_cards.plastic_id", '=', $id);
     }
 
     public function joinUserData()
     {
-        return $this->join("user_credit_datas", "user_id", '=', 'users.id');
+        return $this->join("user_credit_datas", "user_credit_datas.user_id", '=', 'users.id');
     }
 
     public function selectUserDataId()
