@@ -21,7 +21,7 @@ class PlasticCard extends Entity
 
     public function getExpiryAttribute()
     {
-        $pan = $this->attributes['pan'];
+        $pan = $this->attributes['expiry'];
         return substr($pan, 0, 2) . "/" . substr($pan, 2);
     }
 
