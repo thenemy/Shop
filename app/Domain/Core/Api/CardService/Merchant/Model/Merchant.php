@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Http;
 class Merchant extends AuthPaymoService
 {
     const SERVER = "api.paymo.uz/merchant/pay/";
+    const STORE_ID = self::EXECUTE . "STORE_ID";
     private string $token;
     private string $store_id;
 
@@ -15,7 +16,7 @@ class Merchant extends AuthPaymoService
     {
         parent::__construct();
         $this->token = $this->getToken();
-        $this->store_id = env("STORE_ID");
+        $this->store_id = env(self::STORE_ID);
     }
 
     public function create($amount, $account, $terminal_id = null, $details = null)
@@ -29,7 +30,7 @@ class Merchant extends AuthPaymoService
             'terminal_id' => $terminal_id,
             'details' => $details
         ]);
-        $response_decoded = $response->object();
+        $response_decoded = $response->json();
         return $response_decoded;
     }
 
@@ -44,7 +45,7 @@ class Merchant extends AuthPaymoService
             'store_id' => $this->store_id,
             'transaction_id' => $transaction_id
         ]);
-        return $response->object();
+        return $response->json();
     }
 
     public function confirm($transaction_id, $otp = null)
@@ -56,7 +57,7 @@ class Merchant extends AuthPaymoService
             'otp' => $otp,
             'store_id' => $this->store_id
         ]);
-        return $response->object();
+        return $response->json();
     }
 
     public function otp_resend($transaction_id)
@@ -66,7 +67,7 @@ class Merchant extends AuthPaymoService
         ])->asForm()->post(self::SERVER . 'otp-resend', [
             'transaction_id' => $transaction_id,
         ]);
-        return $response->object();
+        return $response->json();
     }
 
     public function reverse($transaction_id, $reason = "", $hold_amount = 0)
@@ -78,7 +79,7 @@ class Merchant extends AuthPaymoService
             'reason' => $reason,
             'hold_amount' => $hold_amount
         ]);
-        return $response->object();
+        return $response->json();
     }
 
     public function get($transaction_id)
@@ -89,6 +90,6 @@ class Merchant extends AuthPaymoService
             'store_id' => $this->store_id,
             'transaction_id' => $transaction_id
         ]);
-        return $response->object();
+        return $response->json();
     }
 }
