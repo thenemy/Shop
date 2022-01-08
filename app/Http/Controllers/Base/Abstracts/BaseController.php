@@ -74,12 +74,12 @@ abstract class BaseController extends Controller implements ControllerInterface
 
     protected function getStore($object): \Illuminate\Http\RedirectResponse
     {
-        try {
+//        try {
             $this->service->create($object);
             return back()->with("success", __("Добавлено успешно"));
-        } catch (\Exception $e) {
-            return back()->withErrors($e->getMessage())->withInput();
-        }
+//        } catch (\Exception $e) {
+//            return back()->withErrors($e->getMessage())->withInput();
+//        }
     }
 
     public function getStoreValidation(Request $request)
@@ -96,12 +96,12 @@ abstract class BaseController extends Controller implements ControllerInterface
 
     public function getUpdate($object, $entity): \Illuminate\Http\RedirectResponse
     {
-//        try {
+        try {
             $this->service->update($entity, $object);
             return back()->with("success", __("Обновлено успешно"));
-//        } catch (\Exception $e) {
-//            return back()->withErrors($e->getMessage())->withInput();
-//        }
+        } catch (\Exception $e) {
+            return back()->withErrors($e->getMessage())->withInput();
+        }
     }
 
     public function getEdit(Request $formRequest, $entity, $params = [], $variables = [])
