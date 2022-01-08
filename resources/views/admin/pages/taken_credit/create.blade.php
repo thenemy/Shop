@@ -2,9 +2,6 @@
 @section("action")
     
 <x-installment.sum/>
-
-            <div 	class='flex flex-row  space-x-2 w-full items-end'>
-                			
 <livewire:components.drop-down.drop-down-search-with-relation
             :searchByKey='"phone"'
             dropDownClass='App\Domain\User\Front\Admin\DropDown\UserDropDownRelation'
@@ -15,12 +12,7 @@
         dropDownAssociatedClass='App\Domain\User\Front\Admin\DropDown\PlasticCardDropDownAssociated'
         dispatchClass='App\Domain\Core\Front\Admin\Livewire\Dispatch\Base\Dispatch'
         
-             />			
-<x-helper.input.input name='initial_price' type='number'
-            label='{{__("Первоначальная плата")}}' value='{{old("initial_price") ?? $entity->initial_price ?? " "}}' id='initial_payment'  onkeyup=""/>			
-<x-helper.input.input_checked name='payment_type' type='checkbox'
-            label='{{__("Уплачен на кассе")}}' value='{{old("payment_type") ?? $entity->payment_type ?? " "}}' id='initial_pay'  onchange=""/>
-            </div>
+             />
 <livewire:components.drop-down.drop-down-search-with-relation
             :searchByKey='"name->" . app()->getLocale()'
             dropDownClass='App\Domain\CreditProduct\Front\Admin\DropDown\MainCreditDropDownRelation'
@@ -32,6 +24,15 @@
         dispatchClass='App\Domain\Installment\Front\Admin\Dispatch\DispatchCredit'
         
              />
+<x-helper.input.input name='initial_price' type='number'
+            label='{{__("Первоначальная плата")}}' value='{{old("initial_price") ?? $entity->initial_price ?? " "}}' id='initial_payment'  onkeyup=""/>
+<x-helper.input.input_checked name='payment_type' type='checkbox'
+            label='{{__("Уплачен на кассе")}}' value='{{old("payment_type") ?? $entity->payment_type ?? " "}}' id='initial_pay'  onchange=""/>
+<livewire:admin.pages.taken-credit.product-installment-nested
+                keyToAttach='products'
+                dispatchClass='App\Domain\Installment\Front\Admin\Dispatch\DispatchProduct'
+                additionalAction='App\Domain\Product\Product\Front\Admin\AdditionalActions\GenerateRuleProductAdditionalAction'
+                />
 
             <div 	class='flex flex-row  space-x-2 border-2 rounded p-2 w-full justify-start'>
                 			
@@ -52,10 +53,10 @@
                }
             })"/>			
 
-            <div 	x-data='{show: false}'	class='w-full'>
+            <div 	x-data='{show: false}'	class='w-full'	:class='show && " " || "hidden"'>
                 			
 
-            <div 	x-show='show'	@surety-update.window='show = !show'>
+            <div 	@surety-update.window='show = !show'>
                 			
 <x-helper.container.container :title='__("Добавить")' 	class='flex flex-wrap justify-between'>
                 			
@@ -110,9 +111,4 @@
             </div>
             </div>
             </div>
-<livewire:admin.pages.taken-credit.product-installment-nested
-                keyToAttach='products'
-                dispatchClass='App\Domain\Installment\Front\Admin\Dispatch\DispatchProduct'
-                additionalAction='App\Domain\Product\Product\Front\Admin\AdditionalActions\GenerateRuleProductAdditionalAction'
-                />
 @endsection

@@ -34,21 +34,23 @@ class TakenCreditCreate extends TakenCredit implements CreateAttributesInterface
     {
         return BladeGenerator::generation([
             SumComponent::new(),
-            ContainerRow::newClass("w-full items-end", [
-                UserDropDownRelation::newUser(PlasticCardDropDownAssociated::class),
-                InputAttribute::createAttribute("initial_price",
-                    "number", "Первоначальная плата",
-                    "initial_payment"),
-                InputAttribute::createAttribute(
-                    "payment_type",
-                    'checkbox',
-                    "Уплачен на кассе",
-                    "initial_pay",
-                ),
-            ]),
+            UserDropDownRelation::newUser(PlasticCardDropDownAssociated::class),
             MainCreditDropDownRelation::newCredit(
                 CreditDropDownAssociated::class,
                 DispatchCredit::class),
+            InputAttribute::createAttribute("initial_price",
+                "number", "Первоначальная плата",
+                "initial_payment"),
+            InputAttribute::createAttribute(
+                "payment_type",
+                'checkbox',
+                "Уплачен на кассе",
+                "initial_pay",
+            ),
+
+
+            new FileLivewireNestedWithoutEntity("TakenCredit", $this->getProductsView()),
+
             ContainerRow::newClass("border-2 rounded p-2 w-full justify-start", [
                 InputAttribute::createAttribute(
                     "delivery",
@@ -72,7 +74,6 @@ class TakenCreditCreate extends TakenCredit implements CreateAttributesInterface
                     ]),
                 ])
             ]),
-            new FileLivewireNestedWithoutEntity("TakenCredit", $this->getProductsView()),
             // add choice for the address to the user
         ]);
     }

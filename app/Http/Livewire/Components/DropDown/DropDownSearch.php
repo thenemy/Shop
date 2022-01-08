@@ -14,12 +14,31 @@ class DropDownSearch extends Component
     public string $searchLabel = "";
     public array $filterBy = [];
     public string $prefix = "";
-    public $chosen;
+    public string $uniqueId = "";
+    public bool $resetDropDown = true;
+
+    public function mount()
+    {
+        $this->resetDropDown = false;
+        $this->uniqueId = $this->id;
+    }
+
+
+    public function updatedSearch()
+    {
+        $this->filterBy[$this->searchByKey] = $this->search;
+        $this->dispatchEvent();
+    }
+
+    protected function dispatchEvent()
+    {
+        $this->dispatchBrowserEvent('search-event', [
+            "id" => $this->uniqueId
+        ]);
+    }
 
     public function render()
     {
-        $this->dispatchBrowserEvent('search_event');
-        $this->filterBy[$this->searchByKey] = $this->search;
         return view('livewire.components.drop-down.drop-down-search', [
             "drop" => $this->dropDownClass::getDropDownSearch($this->initial, $this->filterBy, $this->prefix),
         ]);

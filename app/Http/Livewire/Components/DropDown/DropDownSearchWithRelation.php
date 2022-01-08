@@ -16,23 +16,45 @@ class DropDownSearchWithRelation extends DropDownSearch
     public array $filterByAssociated = [];
     public string $dispatchClass = Dispatch::class;
     public $parentInitial;
-
+//    public string $uniqueId = "";
+//    public function mount(){
+//        $this->uniqueId = $this->id;
+//    }
     public function setParent($id)
     {
         $this->parentInitial = $id;
         $this->filterByAssociated[$this->dropDownAssociatedClass::parentKey()] = $id;
-    }
 
+    }
+    public function updatingSearch()
+    {
+        $this->reset([
+            'initial',
+            "filterBy"]);
+    }
     public function setChild($id)
     {
         $this->initial = $id;
         $this->dispatchClass::run($this);
     }
 
+
+    public function dehydrate(){
+        $this->resetDropDown = false;
+    }
+    public function updatedSearch()
+    {
+        $this->reset([
+            'filterByAssociated',
+            'initial',
+            'parentInitial',
+            "filterBy"]);
+        $this->filterBy[$this->searchByKey] = $this->search;
+        $this->dispatchEvent();
+    }
+
     public function render()
     {
-        $this->dispatchBrowserEvent('search_event');
-        $this->filterBy[$this->searchByKey] = $this->search;
         return view('livewire.components.drop-down.drop-down-search-with-relation',
             [
                 "drop" => $this->dropDownClass::getDropDownSearch($this->parentInitial,

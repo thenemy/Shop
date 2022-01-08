@@ -4,9 +4,10 @@
 ])
 <div
     x-data="initBaseDropDown('{{ $chosen->name ?? $drop->name}}')"
+    {{$attributes->merge(["class"=>"relative drop_down_init inline-block text-left w-max" ])}}>
+    <div
 
-        {{$attributes->merge(["class"=>"relative drop_down_init inline-block text-left w-max" ])}}>
-    <div>
+    >
         <x-helper.button.drop_down_button
             class="flex items-center"
             type="button"
@@ -17,6 +18,8 @@
         </x-helper.button.drop_down_button>
     </div>
     <div
+
+
         x-show="isOpen"
         @click.away="isOpen = false"
         class="drop-down-block ">

@@ -67,22 +67,7 @@
 //     $(this).parents(".file_upload").find(".hidden-input").click();
 // })
 //
-// function $dispatch(eventName, {target, cancelable, data} = {}) {
-//     const event = document.createEvent("Events")
-//     event.initEvent(eventName, true, cancelable == true)
-//     event.data = data || {}
-//     if (event.cancelable && !preventDefaultSupported) {
-//         const {preventDefault} = event
-//         event.preventDefault = function () {
-//             if (!this.defaultPrevented) {
-//                 Object.defineProperty(this, "defaultPrevented", {get: () => true})
-//             }
-//             preventDefault.call(this)
-//         }
-//     }
-//     (target || document).dispatchEvent(event);
-//     return event
-// }
+
 //
 //
 // // reset counter and append file to gallery when file is dropped

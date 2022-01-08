@@ -1,14 +1,37 @@
 document.addEventListener('alpine:init', () => {
-    Alpine.data('initBaseDropDown', (name) => ({
-        isOpen: false,
-        name: name,
-        value: undefined,
-        closeDrop(value, name) {
-            this.isOpen = false;
-            this.name = name;
-            this.value = value;
-        }
-    }))
+    Alpine.data('initBaseDropDown', (name) => (
+        {
+            isOpen: false,
+            name: name,
+            initial_name: name,
+            value: undefined,
+            uniqueId: undefined,
+            initId() {
+                console.log("ASDS");
+                this.uniqueId = this.$wire.get('uniqueId');
+                console.log(this.uniqueId);
+            },
+            closeDrop(value, name) {
+                this.isOpen = false;
+                this.name = name;
+                this.value = value;
+            },
+            loadingDropDown(id, name) {
+                this.$dispatch("loading-dropdown", {
+                    name: name
+                });
+            },
+            setDropName(name) {
+                console.log(name);
+                this.name = name;
+            },
+            sendValues(value, name) {
+                this.$dispatch("change-state-dropdown", {
+                    value: value,
+                    name: name
+                });
+            },
+        }))
     Alpine.data('initDropDown', (name, model_name) => ({
         isOpen: false,
         name: name,
@@ -53,3 +76,35 @@ document.addEventListener('alpine:init', () => {
         }
     }))
 })
+// document.addEventListener('search_event', () => {
+//     Alpine.data('initBaseDropDown', (name) => ({
+//         isOpen: false,
+//         name: name,
+//         value: undefined,
+//         closeDrop(value, name) {
+//             this.isOpen = false;
+//             console.log("clicked");
+//             console.log(name);
+//             console.log(value);
+//             this.name = name;
+//             this.value = value;
+//         }
+//     }))
+// });
+
+function $dispatch(eventName, {target, cancelable, data} = {}) {
+    const event = document.createEvent("Events")
+    event.initEvent(eventName, true, cancelable === true)
+    event.data = data || {}
+    if (event.cancelable && !preventDefaultSupported) {
+        const {preventDefault} = event
+        event.preventDefault = function () {
+            if (!this.defaultPrevented) {
+                Object.defineProperty(this, "defaultPrevented", {get: () => true})
+            }
+            preventDefault.call(this)
+        }
+    }
+    (target || document).dispatchEvent(event);
+    return event
+}

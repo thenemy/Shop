@@ -15,11 +15,10 @@ class Visibility extends Container
         return self::new(self::append($attributes, [
             'x-data' => "{show: false}",
             'class' => 'w-full',
+            ':class' => 'show && " " || "hidden"'
         ]), [
             Container::new(
                 [
-
-                    'x-show' => "show",
                     sprintf('@%s.window', $name_listener) => 'show = !show'
                 ], $items)
         ]);
