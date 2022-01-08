@@ -40,11 +40,20 @@ trait   FrontDynamicGeneration
     {
         return AllActions::generation([
             ...$this->getAddingCustomActions(),
-            ButtonGreenLivewire::new(__("Изменить"), "addToUpdate('" . $this->id . "')"),
-            ButtonRedLivewire::new(__("Удалить"), sprintf("delete('%s')", $this->id)),
+            $this->getEditButton(),
+            $this->getRemoveButton()
         ]);
     }
 
+    public function getEditButton()
+    {
+        return ButtonGreenLivewire::new(__("Изменить"), "addToUpdate('" . $this->id . "')");
+    }
+
+    public function getRemoveButton()
+    {
+        return ButtonRedLivewire::new(__("Удалить"), sprintf("delete('%s')", $this->id));
+    }
 
     protected function generateAttributes()
     {

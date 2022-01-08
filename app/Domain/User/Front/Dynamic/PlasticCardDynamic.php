@@ -2,6 +2,7 @@
 
 namespace App\Domain\User\Front\Dynamic;
 
+use App\Domain\Core\Front\Admin\CustomTable\Actions\Base\AllActions;
 use App\Domain\Core\Front\Admin\CustomTable\Interfaces\TableInFront;
 use App\Domain\Core\Front\Admin\CustomTable\Traits\TableDynamic;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireFunctions;
@@ -18,6 +19,19 @@ use App\Domain\User\Services\PlasticCardService;
 class PlasticCardDynamic extends PlasticCard implements TableInFront
 {
     use TableDynamic;
+
+    public function getActionsAttribute(): string
+    {
+        return $this->getRemoveButton();
+    }
+
+    public function getCustomFrontRules(): array
+    {
+        return [
+            'card_number' => $this->pan,
+            'date_number' => $this->expiry
+        ];
+    }
 
     public static function setInputAttr($key, $type)
     {
@@ -38,6 +52,7 @@ class PlasticCardDynamic extends PlasticCard implements TableInFront
                 }
         }
     }
+
 
     public function getTitle(): string
     {
