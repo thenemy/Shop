@@ -9,6 +9,7 @@ use App\Domain\Common\Banners\Front\Admin\File\BannerCreator;
 use App\Domain\Common\Brands\Front\Admin\File\BrandCreator;
 use App\Domain\Common\Colors\Front\Admin\File\ColorCreator;
 use App\Domain\CreditProduct\Front\Admin\File\MainCreditCreator;
+use App\Domain\Dashboard\File\DashboardCreator;
 use App\Domain\Installment\Front\Admin\Files\TakenCreditCreator;
 use App\Domain\Product\Product\Front\Admin\File\ProductCreator;
 use App\Domain\Shop\Front\Admin\File\ShopFileCreator;
@@ -62,6 +63,7 @@ class   CreateBlades extends Command
         BannerCreator::createFiles();
         BrandCreator::createFiles();
         ColorCreator::createFiles();
+        DashboardCreator::createFiles();
         return 0;
     }
 }

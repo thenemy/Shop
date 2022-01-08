@@ -21,4 +21,5 @@ interface AdminRoutesInterface
     const BANNER = "banner";
     const BRAND = "brand";
     const COLOR = "color";
+    const DASHBOARD = "dashboard";
 }

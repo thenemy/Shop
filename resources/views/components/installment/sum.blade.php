@@ -41,6 +41,7 @@
             },
             setProducts(new_sum) {
                 this.sum_products = new_sum;
+                console.log(new_sum);
                 this.calculateSum();
             },
             addSpacing(value) {

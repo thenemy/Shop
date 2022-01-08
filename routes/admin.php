@@ -21,7 +21,8 @@ Route::name("admin.")->group(function () {
             AdminRoutesInterface::SURETY => \App\Http\Controllers\Admin\SuretyController::class,
             AdminRoutesInterface::BANNER => \App\Http\Controllers\Admin\BannerController::class,
             AdminRoutesInterface::BRAND => \App\Http\Controllers\Admin\BrandController::class,
-            AdminRoutesInterface::COLOR => \App\Http\Controllers\Admin\ColorController::class
+            AdminRoutesInterface::COLOR => \App\Http\Controllers\Admin\ColorController::class,
+            AdminRoutesInterface::DASHBOARD => \App\Http\Controllers\Admin\DashboardController::class
         ]
     );
 });

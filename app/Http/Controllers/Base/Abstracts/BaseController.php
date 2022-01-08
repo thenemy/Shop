@@ -131,7 +131,6 @@ abstract class BaseController extends Controller implements ControllerInterface
     }
     public function index(Request $request)
     {
-
         return $this->getIndex($request);
     }
 

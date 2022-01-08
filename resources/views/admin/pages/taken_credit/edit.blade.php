@@ -9,14 +9,14 @@
                 			
 
             <div 	class='border p-2'>
-            <span class='font-bold text-lg'>Информация о клиенте</span>
+            <span class='font-bold text-lg'>{{__('Информация о клиенте')}}</span>
                 			
 <x-helper.text.text_key key='Имя клиента' value='{{$entity->userData->crucialData->name ?? ""}}'></x-helper.text.text_key>			
 <x-helper.text.text_key key='Номер карты' value='{{$entity->plastic->pin ?? ""}}'></x-helper.text.text_key>
             </div>			
 
             <div 	class='border p-2'>
-            <span class='font-bold text-lg'>Информация о товаре</span>
+            <span class='font-bold text-lg'>{{__('Информация о товаре')}}</span>
                 			
 <x-helper.text.text_key key='Номер Договора' value='{{$entity->purchase->id ?? ""}}'></x-helper.text.text_key>			
 <x-helper.text.text_key key='Количество покупок' value='{{$entity->purchase->number_purchase ?? ""}}'></x-helper.text.text_key>			

@@ -43,7 +43,11 @@ abstract class  AbstractFileManagerBlade extends AbstractFileManager implements 
         try {
             return $this->translate($this->entity->getTitle()) . " " . $this->getScope($this->entity->addTitle());
         } catch (\Exception $exception) {
-            return $this->translate($this->entity->getTitle());
+            try {
+                return $this->translate($this->entity->getTitle());
+            } catch (\Exception $exception) {
+                return "";
+            }
         }
     }
 
