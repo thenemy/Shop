@@ -4,6 +4,7 @@ namespace App\Domain\User\Front\Admin\Functions;
 
 use App\Domain\Core\Api\CardService\BindCard\Error\BindCardError;
 use App\Domain\Core\Api\CardService\BindCard\Model\BindCardService;
+use App\Domain\Core\Api\CardService\Error\CardServiceError;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Abstracts\AbstractFunction;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Abstracts\AbstractFunctionComponent;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\FunctionStandardTemplate;
@@ -33,14 +34,13 @@ class SendSmsLivewire extends AbstractFunction
             );
             session()->flash("success", __("Вам отправлен SMS код"));
         } catch (BindCardError $exception) {
-            if ($exception->getCode() == BindCardError::ERROR_OCCURED) {
-                $component->addError("bind", $exception->getMessage());
-            } else if ($exception->getCode() == BindCardError::ALREADY_EXISTS) {
-                $plastic_data = json_decode($exception->getMessage());
-                $component->entity['plastic_data'] = $plastic_data;
-                session()->flash("success", $plastic_data['result']['description']);
-            }
+            $plastic_data = json_decode($exception->getMessage());
+            $component->entity['plastic_data'] = $plastic_data;
+            session()->flash("success", $plastic_data['result']['description']);
+        } catch (CardServiceError $exception) {
+            $component->addError("bind", $exception->getMessage());
         }
+
         return "";
     }
 

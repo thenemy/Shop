@@ -3,7 +3,7 @@
 
 ])
 <x-helper.drop_down.base_drop_down :drop="$drop" :attributes="$attributes">
-
+    <div class="hidden">{{$slot}}</div>
     @foreach($drop->items as $item)
         <button
             x-init="{{old($drop->key) != null && old($drop->key) == $item->id ?

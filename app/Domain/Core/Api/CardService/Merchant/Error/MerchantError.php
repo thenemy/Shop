@@ -2,7 +2,9 @@
 
 namespace App\Domain\Core\Api\CardService\Merchant\Error;
 
-class MerchantError extends \Exception
+use App\Domain\Core\Api\CardService\Error\CardServiceError;
+
+class MerchantError extends CardServiceError
 {
 
 }

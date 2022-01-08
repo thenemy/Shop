@@ -2,7 +2,9 @@
 
 namespace App\Domain\Core\Api\CardService\Model;
 
+use App\Domain\Core\Api\CardService\BindCard\Error\BindCardError;
 use App\Domain\Core\Api\CardService\Error\CardServiceError;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
 class AuthPaymoService
@@ -12,13 +14,27 @@ class AuthPaymoService
     private $base64 = null;
     const TEST = "TEST_";
     const PROD = "PRODUCTION_";
-    const EXECUTE = self::PROD;
+    const EXECUTE = self::TEST;
     const ACCESS_TOKEN = self::EXECUTE . "CARD_ACCESS_TOKEN";
 
     public function __construct()
     {
         $this->base64 = base64_encode(env(self::EXECUTE . "CONSUMER_KEY") . ":" . env(self::EXECUTE . "CONSUMER_SECRET"));
     }
+
+    final    protected function checkErrorCondition($object): bool
+    {
+        return $object['result'] && $object['result']['code'] != "OK";
+    }
+
+    protected function checkOnError($object, Response $response)
+    {
+        if ($this->checkErrorCondition($object)) {
+            throw new CardServiceError($object['result']['description'], CardServiceError::ERROR_OCCURRED);
+        }
+    }
+    // :"STPIMS-ERR-133
+    // :STPIMS-ERR-004
 
     public function storeToken($res)
     {

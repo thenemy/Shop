@@ -3,11 +3,12 @@
 namespace App\Domain\Core\Api\CardService\Merchant\Model;
 
 use App\Domain\Core\Api\CardService\Model\AuthPaymoService;
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
 class Merchant extends AuthPaymoService
 {
-    const SERVER =  parent::SERVER . "merchant/pay/";
+    const SERVER = parent::SERVER . "merchant/pay/";
     const STORE_ID = self::EXECUTE . "STORE_ID";
     private string $token;
     private string $store_id;
@@ -19,26 +20,32 @@ class Merchant extends AuthPaymoService
         $this->store_id = env(self::STORE_ID);
     }
 
+    protected function checkOnError($object, Response $response)
+    {
+        dd($object);
+    }
+
     public function create($amount, $account, $terminal_id = null, $details = null)
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->token,
-        ])->asForm()->post(self::SERVER . 'create', [
+        ])->post(self::SERVER . 'create', [
             'amount' => $amount,
             'account' => $account,
             'store_id' => $this->store_id,
             'terminal_id' => $terminal_id,
             'details' => $details
         ]);
-        $response_decoded = $response->json();
-        return $response_decoded['transaction_id'];
+        $object = $response->json();
+        $this->checkOnError($object, $response);
+        return $object['transaction_id'];
     }
 
     public function pre_confirm($card_token, $transaction_id, $card_number = null, $expiry = null)
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->token,
-        ])->asForm()->post(self::SERVER . 'pre-confirm', [
+        ])->post(self::SERVER . 'pre-confirm', [
             'card_token' => $card_token,
             'card_number' => $card_number,
             'expiry' => $expiry,
@@ -52,7 +59,7 @@ class Merchant extends AuthPaymoService
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->token,
-        ])->asForm()->post(self::SERVER . 'confirm', [
+        ])->post(self::SERVER . 'confirm', [
             'transaction_id' => $transaction_id,
             'otp' => $otp,
             'store_id' => $this->store_id
@@ -64,7 +71,7 @@ class Merchant extends AuthPaymoService
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->token,
-        ])->asForm()->post(self::SERVER . 'otp-resend', [
+        ])->post(self::SERVER . 'otp-resend', [
             'transaction_id' => $transaction_id,
         ]);
         return $response->json();
@@ -74,7 +81,7 @@ class Merchant extends AuthPaymoService
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->token,
-        ])->asForm()->post(self::SERVER . 'reverse', [
+        ])->post(self::SERVER . 'reverse', [
             'transaction_id' => $transaction_id,
             'reason' => $reason,
             'hold_amount' => $hold_amount
@@ -86,7 +93,7 @@ class Merchant extends AuthPaymoService
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->token,
-        ])->asForm()->post(self::SERVER . 'get', [
+        ])->post(self::SERVER . 'get', [
             'store_id' => $this->store_id,
             'transaction_id' => $transaction_id
         ]);
