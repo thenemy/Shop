@@ -35,6 +35,7 @@ class FiltrationCategoryDynamic extends FiltrationCategoryDynamicWithoutEntity
         return [
             'key' => null,
             'attribute' => fn($value) => self::DB_TO_FRONT[$this->attribute],
+
         ];
     }
 

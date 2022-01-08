@@ -29,7 +29,8 @@ class PlasticCardDynamic extends PlasticCard implements TableInFront
     {
         return [
             'card_number' =>fn ($text) => $this->pan,
-            'date_number' =>fn ($text) =>$this->expiry
+            'date_number' =>fn ($text) =>$this->expiry,
+            'code' => null
         ];
     }
 
