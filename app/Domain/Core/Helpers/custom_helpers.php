@@ -58,9 +58,11 @@ if (!function_exists('send_code')) {
 if (!function_exists('merchant')) {
     function merchant(array $values = [])
     {
-//        $merchant = new \App\Domain\Core\Api\CardService\Merchant\Model\Merchant();
-//        $create = $merchant->create("10", "0000000");
-//        $merchant->
+        $merchant = new \App\Domain\Core\Api\CardService\Merchant\Model\Merchant();
+        $create = $merchant->create("100000", "0000000");
+        $merchant->pre_confirm("937675F10965005AE053C0A865A6689Bx",$create);
+        $s =  $merchant->confirm($create);
+        dd($s);
     }
 }
 

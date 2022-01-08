@@ -2,6 +2,7 @@
 
 namespace App\Domain\Core\Api\CardService\Merchant\Model;
 
+use App\Domain\Core\Api\CardService\Error\CardServiceError;
 use App\Domain\Core\Api\CardService\Model\AuthPaymoService;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
@@ -62,7 +63,11 @@ class Merchant extends AuthPaymoService
             'store_id' => $this->store_id
         ]);
         $object = $response->json();
-        $this->checkOnError($object);
+        try{
+            $this->checkOnError($object);
+        }catch(CardServiceError $exception){
+            return $this->get($transaction_id);
+        }
         return $object;
     }
 
