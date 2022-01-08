@@ -12,4 +12,8 @@ class DispatchCredit extends Dispatch
         $credit = Credit::find($object->initial);
         $object->dispatchBrowserEvent('credit-update', ['month' => $credit->month, 'percent' => $credit->percent]);
     }
+        public static function clear($object)
+        {
+            $object->dispatchBrowserEvent('credit-update', ['month' => 0, 'percent' => 0]);
+        }
 }

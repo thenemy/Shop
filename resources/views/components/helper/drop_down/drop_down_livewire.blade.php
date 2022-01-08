@@ -3,7 +3,6 @@
 ])
 <x-helper.drop_down.base_drop_down
     @change-state-dropdown="closeDrop($event.detail.value, $event.detail.name)"
-    @set-initial.window="setDropName('{{$drop->name}}')"
     :drop="$drop" :attributes="$attributes">
     <div class="hidden"> {{$slot}}</div>
         @foreach($drop->items as $item)

@@ -11,7 +11,11 @@
     </x-helper.drop_down.drop_down_livewire>
     @if(!empty($filterByAssociated))
         <x-helper.drop_down.drop_down_livewire :drop="$drop_associated">
-            <div x-init="$watch('isParentSet', value => setDropName('{{$drop_associated->name}}'))"></div>
+            <div
+                @loading-dropdown="setDropName($event.detail.name)">
+                <div
+                    x-init="$watch('isParentSet', value => setDropName('{{$drop_associated->name}}'))"></div>
+            </div>
         </x-helper.drop_down.drop_down_livewire>
     @endif
     <input type="text" class="hidden" value="{{$initial}}" name="{{$dropDownAssociatedClass::KEY}}">

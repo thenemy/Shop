@@ -7,21 +7,21 @@ document.addEventListener('alpine:init', () => {
             value: undefined,
             uniqueId: undefined,
             initId() {
-                console.log("ASDS");
                 this.uniqueId = this.$wire.get('uniqueId');
-                console.log(this.uniqueId);
             },
             closeDrop(value, name) {
                 this.isOpen = false;
                 this.name = name;
                 this.value = value;
             },
-            loadingDropDown( name) {
-                this.$dispatch("loading-dropdown", {
-                    name: name
-                });
+            loadingDropDown(name) {
+                console.log(this.initial_name);
+                // this.$dispatch("loading-dropdown", {
+                //     name: this.initial_name
+                // });
             },
             setDropName(name) {
+                console.log("New");
                 console.log(name);
                 this.name = name;
             },

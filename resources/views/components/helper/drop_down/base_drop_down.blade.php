@@ -4,6 +4,7 @@
 ])
 <div
     x-data="initBaseDropDown('{{ $chosen->name ?? $drop->name}}')"
+
     {{$attributes->merge(["class"=>"relative drop_down_init inline-block text-left w-max" ])}}>
     <div
 

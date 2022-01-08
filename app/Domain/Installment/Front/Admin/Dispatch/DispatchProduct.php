@@ -28,4 +28,5 @@ class DispatchProduct extends Dispatch
         $object->dispatchBrowserEvent('product-update', ['sum' => $overall_sum]);
         $object->dispatchBrowserEvent('product-number', ['product' => json_encode($object->entitiesStore)]);
     }
+
 }

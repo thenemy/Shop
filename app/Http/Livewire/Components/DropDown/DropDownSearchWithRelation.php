@@ -18,16 +18,14 @@ class DropDownSearchWithRelation extends DropDownSearch
     public array $filterByAssociated = [];
     public string $dispatchClass = Dispatch::class;
     public $parentInitial;
-//    public string $uniqueId = "";
-//    public function mount(){
-//        $this->uniqueId = $this->id;
-//    }
+
     public function setParent($id)
     {
+        $this->clear();
+        $this->initial = "";
         $this->parentInitial = $id;
         $this->filterByAssociated[$this->dropDownAssociatedClass::parentKey()] = $id;
-        $this->clear();
-//        $this->dispatchClass::run($this, self::SET_PARENT);
+
     }
 
     public function setChild($id)
