@@ -16,14 +16,14 @@ class WithdrawMoney
         $this->payable = $payable;
     }
 
-    public function withdraw($token = null)
+    public function withdraw($token = null): bool
     {
         $token = $token ?? $this->payable->getTokens()->first();
         $transaction_id = $this->merchant->create($this->payable->amount(), $this->payable->account_id());
         $this->payable->setTransaction($transaction_id);
         $this->merchant->pre_confirm($token, $this->payable->getTransaction());
         $confirm = $this->merchant->confirm($this->payable->getTransaction());
-        $this->payable->finishTransaction($confirm);
+        return $this->payable->finishTransaction($confirm);
     }
 
     public function reverse()

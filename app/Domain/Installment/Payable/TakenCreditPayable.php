@@ -27,7 +27,7 @@ class TakenCreditPayable extends TakenCredit implements Payable
     }
 
 
-    public function finishTransaction(array $confirm)
+    public function finishTransaction(array $confirm):bool
     {
         //write logic to finish transaction
         // check confirm is everything exists and etc

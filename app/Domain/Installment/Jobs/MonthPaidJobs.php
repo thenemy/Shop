@@ -2,6 +2,7 @@
 
 namespace App\Domain\Installment\Jobs;
 
+use App\Domain\Core\Api\CardService\Error\CardServiceError;
 use App\Domain\Core\Api\CardService\Interfaces\Payable;
 use App\Domain\Core\Api\CardService\Merchant\Model\Merchant;
 use App\Domain\Core\Api\CardService\Model\WithdrawMoney;
@@ -30,13 +31,16 @@ class MonthPaidJobs extends AbstractJob
     ///  what has to be the condition for this case
     public function withdraw()
     {
+        $is_paid = false;
         foreach ($this->monthPaid->getTokens() as $token) {
             try {
-                $this->withdrawMoney->withdraw($token);
-                break;
-            } catch (\Exception $exception) {
+                if ($is_paid = $this->withdrawMoney->withdraw($token)) {
+                    break;
+                }
+            } catch (CardServiceError $exception) {}
+        }
+        if(!$is_paid){
 
-            }
         }
     }
 

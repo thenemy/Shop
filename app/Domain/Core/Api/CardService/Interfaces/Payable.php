@@ -16,5 +16,5 @@ interface Payable
 
     public function getTransaction();
 
-    public function finishTransaction(array $confirm);
+    public function finishTransaction(array $confirm):bool;
 }
