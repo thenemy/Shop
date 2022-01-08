@@ -40,15 +40,13 @@ class TakenCreditCreate extends TakenCredit implements CreateAttributesInterface
                 DispatchCredit::class),
             InputAttribute::createAttribute("initial_price",
                 "number", "Первоначальная плата",
-                "initial_payment"),
+                "initial_payment", "pay-update"),
             InputAttribute::createAttribute(
                 "payment_type",
                 'checkbox',
                 "Уплачен на кассе",
                 "initial_pay",
             ),
-
-
             new FileLivewireNestedWithoutEntity("TakenCredit", $this->getProductsView()),
 
             ContainerRow::newClass("border-2 rounded p-2 w-full justify-start", [

@@ -25,7 +25,11 @@
         
              />
 <x-helper.input.input name='initial_price' type='number'
-            label='{{__("Первоначальная плата")}}' value='{{old("initial_price") ?? $entity->initial_price ?? " "}}' id='initial_payment'  onkeyup=""/>
+            label='{{__("Первоначальная плата")}}' value='{{old("initial_price") ?? $entity->initial_price ?? " "}}' id='initial_payment'  onkeyup="$dispatch('pay-update', {
+               data:{
+                    value: event.target.value
+               }
+            })"/>
 <x-helper.input.input_checked name='payment_type' type='checkbox'
             label='{{__("Уплачен на кассе")}}' value='{{old("payment_type") ?? $entity->payment_type ?? " "}}' id='initial_pay'  onchange=""/>
 <livewire:admin.pages.taken-credit.product-installment-nested
