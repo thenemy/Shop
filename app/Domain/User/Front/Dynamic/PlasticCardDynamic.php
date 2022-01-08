@@ -28,8 +28,8 @@ class PlasticCardDynamic extends PlasticCard implements TableInFront
     public function getCustomFrontRules(): array
     {
         return [
-            'card_number' => $this->pan,
-            'date_number' => $this->expiry
+            'card_number' =>fn ($text) => $this->pan,
+            'date_number' =>fn ($text) =>$this->expiry
         ];
     }
 
