@@ -18,7 +18,10 @@ class PlasticCard extends Entity
     {
         return new PlasticCardBuilder($query);
     }
-
+    public function getPanAttribute(){
+        $pan = $this->attributes['pan'];
+        return substr($pan, 0 , 2) . "/" . substr($pan, 2);
+    }
     public static function getRules(): array
     {
         return [
