@@ -12,6 +12,8 @@ use Livewire\Component;
  */
 class DropDownSearchWithRelation extends DropDownSearch
 {
+    const SET_PARENT = 1;
+    const SET_CHILD = 2;
     public string $dropDownAssociatedClass;
     public array $filterByAssociated = [];
     public string $dispatchClass = Dispatch::class;
@@ -24,31 +26,32 @@ class DropDownSearchWithRelation extends DropDownSearch
     {
         $this->parentInitial = $id;
         $this->filterByAssociated[$this->dropDownAssociatedClass::parentKey()] = $id;
+        $this->clear();
+//        $this->dispatchClass::run($this, self::SET_PARENT);
+    }
 
-    }
-    public function updatingSearch()
-    {
-        $this->reset([
-            'initial',
-            "filterBy"]);
-    }
     public function setChild($id)
     {
         $this->initial = $id;
-        $this->dispatchClass::run($this);
+        $this->dispatchClass::run($this, self::SET_CHILD);
     }
 
-
-    public function dehydrate(){
-        $this->resetDropDown = false;
+    private function clear()
+    {
+        try {
+            $this->dispatchClass::clear($this);
+        } catch (\Error $exception) {
+        }
     }
+
+    public function updatingSearch()
+    {
+        $this->reset(['filterByAssociated']);
+        $this->clear();
+    }
+
     public function updatedSearch()
     {
-        $this->reset([
-            'filterByAssociated',
-            'initial',
-            'parentInitial',
-            "filterBy"]);
         $this->filterBy[$this->searchByKey] = $this->search;
         $this->dispatchEvent();
     }

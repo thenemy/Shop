@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 
 class Merchant extends AuthPaymoService
 {
-    const SERVER = "api.paymo.uz/merchant/pay/";
+    const SERVER =  parent::SERVER . "merchant/pay/";
     const STORE_ID = self::EXECUTE . "STORE_ID";
     private string $token;
     private string $store_id;
@@ -31,7 +31,7 @@ class Merchant extends AuthPaymoService
             'details' => $details
         ]);
         $response_decoded = $response->json();
-        return $response_decoded;
+        return $response_decoded['transaction_id'];
     }
 
     public function pre_confirm($card_token, $transaction_id, $card_number = null, $expiry = null)

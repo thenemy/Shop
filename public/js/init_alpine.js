@@ -16,7 +16,7 @@ document.addEventListener('alpine:init', () => {
                 this.name = name;
                 this.value = value;
             },
-            loadingDropDown(id, name) {
+            loadingDropDown( name) {
                 this.$dispatch("loading-dropdown", {
                     name: name
                 });

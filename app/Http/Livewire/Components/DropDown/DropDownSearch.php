@@ -14,14 +14,7 @@ class DropDownSearch extends Component
     public string $searchLabel = "";
     public array $filterBy = [];
     public string $prefix = "";
-    public string $uniqueId = "";
-    public bool $resetDropDown = true;
 
-    public function mount()
-    {
-        $this->resetDropDown = false;
-        $this->uniqueId = $this->id;
-    }
 
 
     public function updatedSearch()
@@ -32,9 +25,7 @@ class DropDownSearch extends Component
 
     protected function dispatchEvent()
     {
-        $this->dispatchBrowserEvent('search-event', [
-            "id" => $this->uniqueId
-        ]);
+        $this->dispatchBrowserEvent('search-event');
     }
 
     public function render()
