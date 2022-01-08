@@ -27,7 +27,7 @@ class BindCardService extends AuthPaymoService
         throw new BindCardError(__("Не правильный формат даты"), BindCardError::ERROR_OCCURRED);
     }
 
-    protected function checkOnError($object, Response $response)
+    protected function checkOnError($object, Response $response = null)
     {
         if ($this->checkErrorCondition($object)) {
             if ($object['result']['code'] == "STPIMS-ERR-133") {

@@ -20,12 +20,7 @@ class Merchant extends AuthPaymoService
         $this->store_id = env(self::STORE_ID);
     }
 
-    protected function checkOnError($object, Response $response)
-    {
-        dd($object);
-    }
-
-    public function create($amount, $account, $terminal_id = null, $details = null)
+    public function create($amount, $account, $terminal_id = null, $details = null): int
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->token,
@@ -37,7 +32,7 @@ class Merchant extends AuthPaymoService
             'details' => $details
         ]);
         $object = $response->json();
-        $this->checkOnError($object, $response);
+        $this->checkOnError($object);
         return $object['transaction_id'];
     }
 
@@ -52,6 +47,8 @@ class Merchant extends AuthPaymoService
             'store_id' => $this->store_id,
             'transaction_id' => $transaction_id
         ]);
+        $object = $response->json();
+        $this->checkOnError($object);
         return $response->json();
     }
 
@@ -64,7 +61,9 @@ class Merchant extends AuthPaymoService
             'otp' => $otp,
             'store_id' => $this->store_id
         ]);
-        return $response->json();
+        $object = $response->json();
+        $this->checkOnError($object);
+        return $object;
     }
 
     public function otp_resend($transaction_id)
@@ -74,7 +73,9 @@ class Merchant extends AuthPaymoService
         ])->post(self::SERVER . 'otp-resend', [
             'transaction_id' => $transaction_id,
         ]);
-        return $response->json();
+        $object = $response->json();
+        $this->checkOnError($object);
+        return $object;
     }
 
     public function reverse($transaction_id, $hold_amount = 0, $reason = "")
@@ -86,7 +87,9 @@ class Merchant extends AuthPaymoService
             'reason' => $reason,
             'hold_amount' => $hold_amount
         ]);
-        return $response->json();
+        $object = $response->json();
+        $this->checkOnError($object);
+        return $object;
     }
 
     public function get($transaction_id)
@@ -97,6 +100,8 @@ class Merchant extends AuthPaymoService
             'store_id' => $this->store_id,
             'transaction_id' => $transaction_id
         ]);
-        return $response->json();
+        $object = $response->json();
+        $this->checkOnError($object);
+        return $object;
     }
 }

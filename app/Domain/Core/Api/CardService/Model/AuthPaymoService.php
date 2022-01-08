@@ -27,7 +27,7 @@ class AuthPaymoService
         return $object['result'] && $object['result']['code'] != "OK";
     }
 
-    protected function checkOnError($object, Response $response)
+    protected function checkOnError($object)
     {
         if ($this->checkErrorCondition($object)) {
             throw new CardServiceError($object['result']['description'], CardServiceError::ERROR_OCCURRED);
