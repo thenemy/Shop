@@ -49,7 +49,7 @@ class TakenCreditService extends BaseService implements TakenCreditRelationInter
     // visible widget
     public function create(array $object_data)
     {
-        $this->serializeTempFile($object_data, $object_data['surety_is']);
+        $this->serializeTempFile($object_data, isset($object_data['surety_is']));
         try {
             DB::beginTransaction();
             $user_data = User::findByPlastic($object_data['plastic_id'])
@@ -57,7 +57,7 @@ class TakenCreditService extends BaseService implements TakenCreditRelationInter
             $object_data['user_credit_data_id'] = $user_data->id;
             $object_data['user_id'] = $user_data->user_id;
             $surety_data = $this->popCondition($object_data, self::SURETY_SERVICE);
-            if ($object_data['surety_is']) {
+            if (isset($object_data['surety_is'])) {
                 $object_data['surety_id'] = $this->surety->create($surety_data)->id;
             }
             $object = parent::create(array_merge($object_data, ['status' => true]));
