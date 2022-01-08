@@ -77,7 +77,7 @@ class Merchant extends AuthPaymoService
         return $response->json();
     }
 
-    public function reverse($transaction_id, $reason = "", $hold_amount = 0)
+    public function reverse($transaction_id, $hold_amount = 0, $reason = "")
     {
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->token,

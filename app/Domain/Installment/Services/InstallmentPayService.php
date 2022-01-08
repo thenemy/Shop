@@ -19,6 +19,7 @@ class InstallmentPayService
     private float $initial_price;
     private Credit $credit;
     private array $object_data;
+    private TakenCreditPayable $taken;
 
     public function __construct(array $object_data, TakenCreditPayable $taken)
     {
@@ -27,6 +28,7 @@ class InstallmentPayService
         $this->object_data = $object_data;
         $this->purchaseService = new UserPurchaseService();
         $this->withdraw = new WithdrawMoney($taken);
+        $this->taken = $taken;
     }
 
     //*
@@ -36,6 +38,12 @@ class InstallmentPayService
     //  if cannot be installed will be thrown error cannot be installed
     // I will catch and dispatch FailedToWithdraw
     //**/
+    private function isPaidInPlace()
+    {
+        return isset($this->object_data['payment_type']);
+    }
+
+    /// method which will add to true sum the cost of delivery
     public function pay()
     {
         try {
@@ -43,7 +51,9 @@ class InstallmentPayService
             $true_sum = $this->getTrueSum($overall_sum);
             $sum_per_month = $this->getSumPerMonth($true_sum);
             $this->fillMonthPaid($sum_per_month);
-            $this->withdraw->withdraw();
+            if ($this->isPaidInPlace()) {
+                $this->withdraw->withdraw();
+            }
         } catch (\Exception $exception) {
             $this->withdraw->reverse();
             throw $exception;
@@ -75,8 +85,8 @@ class InstallmentPayService
     private function fillMonthPaid($sum_per_month)
     {
         $months = [];
-        for ($i = 0; $i <= $this->credit->month; $i++) {
-            $correct_month = ($i + month_num()) % 12;
+        for ($i = 1; $i <= $this->credit->month; $i++) {
+            $correct_month = ($i + month_num()) % 13;
             array_push($months, [
                 'month' => $correct_month,
                 'must_pay' => $sum_per_month
