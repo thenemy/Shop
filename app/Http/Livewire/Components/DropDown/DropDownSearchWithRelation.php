@@ -21,11 +21,12 @@ class DropDownSearchWithRelation extends DropDownSearch
 
     public function setParent($id)
     {
-        $this->clear();
-        $this->initial = "";
-        $this->parentInitial = $id;
-        $this->filterByAssociated[$this->dropDownAssociatedClass::parentKey()] = $id;
-
+        if ($this->parentInitial != $id) {
+            $this->clear();
+            $this->initial = "";
+            $this->parentInitial = $id;
+            $this->filterByAssociated[$this->dropDownAssociatedClass::parentKey()] = $id;
+        }
     }
 
     public function setChild($id)
