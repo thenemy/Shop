@@ -16,9 +16,19 @@ class WithdrawMoney
         $this->payable = $payable;
     }
 
+    public function getPayable()
+    {
+        return $this->payable;
+    }
+
+    public function getToken($token = null)
+    {
+        return $token ?? $this->payable->getTokens()->first();
+    }
+
     public function withdraw($token = null): bool
     {
-        $token = $token ?? $this->payable->getTokens()->first();
+        $token = $this->getToken($token);
         $transaction_id = $this->merchant->create($this->payable->amount(), $this->payable->account_id());
         $this->payable->setTransaction($transaction_id);
         $this->merchant->pre_confirm($token, $this->payable->getTransaction());

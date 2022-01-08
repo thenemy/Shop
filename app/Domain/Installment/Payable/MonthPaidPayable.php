@@ -27,8 +27,13 @@ class MonthPaidPayable extends MonthPaid implements Payable
     }
 
 
-    public function finishTransaction(array $confirm):bool
+    public function finishTransaction(array $confirm): bool
     {
         // write logic for finishing transaction
+    }
+
+    public function taken_id()
+    {
+        return $this->taken_credit_id;
     }
 }

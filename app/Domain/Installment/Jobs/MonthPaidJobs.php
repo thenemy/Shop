@@ -8,7 +8,10 @@ use App\Domain\Core\Api\CardService\Merchant\Model\Merchant;
 use App\Domain\Core\Api\CardService\Model\WithdrawMoney;
 use App\Domain\Core\BackgroundTask\Base\AbstractJob;
 use App\Domain\Installment\Entities\MonthPaid;
+use App\Domain\Installment\Entities\TimeScheduleTransactions;
 use App\Domain\Installment\Payable\MonthPaidPayable;
+use App\Domain\Installment\Services\TimeScheduleService;
+use App\Domain\User\Entities\PlasticCard;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -32,15 +35,21 @@ class MonthPaidJobs extends AbstractJob
     public function withdraw()
     {
         $is_paid = false;
+        $taken_id = $this->monthPaid->taken_credit_id;
         foreach ($this->monthPaid->getTokens() as $token) {
             try {
                 if ($is_paid = $this->withdrawMoney->withdraw($token)) {
                     break;
                 }
-            } catch (CardServiceError $exception) {}
+            } catch (CardServiceError $exception) {
+                TimeScheduleService::failed(PlasticCard::byToken($token)->first()->pan,
+                    $exception->getMessage(),
+                    $taken_id);
+            }
         }
-        if(!$is_paid){
-
+        TimeScheduleService::failedAll($taken_id);
+        if (!$is_paid) {
+            FailedToWithdraw::dispatch($this->monthPaid);
         }
     }
 

@@ -32,4 +32,9 @@ class TakenCreditPayable extends TakenCredit implements Payable
         //write logic to finish transaction
         // check confirm is everything exists and etc
     }
+
+    public function taken_id()
+    {
+        return $this->id;
+    }
 }

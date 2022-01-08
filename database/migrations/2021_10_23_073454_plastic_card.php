@@ -23,6 +23,8 @@ class PlasticCard extends Migration
             $table->string("pan");/// see what are comming here
             ///  because maybe card number is not necessary
             $table->boolean("activated")->default(true); // true activated | false deactivated
+
+            $table->index('card_token');
         });
     }
 
