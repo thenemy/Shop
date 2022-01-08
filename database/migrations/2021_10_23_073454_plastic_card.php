@@ -16,7 +16,6 @@ class PlasticCard extends Migration
         Schema::create('plastic_card', function (Blueprint $table) {
             $table->uuid("id")->primary();
             $table->timestamps();
-            $table->string("transaction_id");
             $table->string("card_number");
             $table->string("expiry");
             $table->string("phone");

@@ -34,7 +34,7 @@ class SendSmsLivewire extends AbstractFunction
             );
             session()->flash("success", __("Вам отправлен SMS код"));
         } catch (BindCardError $exception) {
-            $plastic_data = json_decode($exception->getMessage());
+            $plastic_data = json_decode($exception->getMessage(), true);
             $component->entity['plastic_data'] = $plastic_data;
             session()->flash("success", $plastic_data['result']['description']);
         } catch (CardServiceError $exception) {
