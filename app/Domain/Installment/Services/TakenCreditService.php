@@ -62,8 +62,8 @@ class TakenCreditService extends BaseService implements TakenCreditRelationInter
             }
             $object = parent::create(array_merge($object_data, ['status' => true]));
             $object_data['taken_credit_id'] = $object->id;
-//            $payService = new InstallmentPayService($object_data, $object);
-//            $payService->pay();
+            $payService = new InstallmentPayService($object_data, $object);
+            $payService->pay();
             DB::commit();
             return $object;
         } catch (\Throwable $exception) {

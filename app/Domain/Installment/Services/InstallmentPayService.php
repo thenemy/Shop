@@ -53,7 +53,7 @@ class InstallmentPayService
 
     public function createUserPurchase(): int
     {
-        $this->object_data['status'] = $this->getStatus($this->object_data);
+        $this->object_data['status'] = $this->getStatus($this->object_data); // delivery
         $purchase = $this->purchaseService->create($this->object_data);
         return $purchase->purchases()->sum('price');
     }
