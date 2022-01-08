@@ -45,7 +45,7 @@ class DropDownSearchWithRelation extends DropDownSearch
 
     public function updatingSearch()
     {
-        $this->reset(['filterByAssociated']);
+        $this->reset(['filterByAssociated', 'parentInitial']);
         $this->clear();
     }
 
