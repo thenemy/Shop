@@ -14,7 +14,6 @@ use function Symfony\Component\Translation\t;
 
 class InstallmentPayService
 {
-    private UserPurchaseService $purchaseService;
     private WithdrawMoney $withdraw;
     private float $initial_price;
     private Credit $credit;
@@ -26,7 +25,6 @@ class InstallmentPayService
         $this->initial_price = $this->getInitialPrice($object_data);
         $this->credit = $this->getCredit($object_data);
         $this->object_data = $object_data;
-        $this->purchaseService = new UserPurchaseService();
         $this->withdraw = new WithdrawMoney($taken);
         $this->taken = $taken;
     }
@@ -63,9 +61,7 @@ class InstallmentPayService
 
     public function createUserPurchase(): int
     {
-        $this->object_data['status'] = $this->getStatus($this->object_data); // delivery
-        $purchase = $this->purchaseService->create($this->object_data);
-        return $purchase->purchases()->sum('price');
+        return $this->taken->purchase->sumPurchases();
     }
 
     private function getTrueSum($overall_sum): float
@@ -95,19 +91,6 @@ class InstallmentPayService
         $this->taken->monthPaid()->createMany($months);
     }
 
-    private function getStatus(array &$object_data): int
-    {
-        $status = UserOrderInterface::INSTALMENT;
-        if (isset($object_data['delivery'])) {
-            $status += UserOrderInterface::DELIVERY;
-            throw new \Exception("Delivery method is not implemented now");
-        } else {
-            $status += UserOrderInterface::SELF_DELIVERY;
-        }
-        unset($object_data['delivery']);
-
-        return $status;
-    }
 
     private function getInitialPrice(array &$object_data)
     {

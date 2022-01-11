@@ -4,6 +4,7 @@ namespace App\Domain\Core\UuidKey\Traits;
 
 trait HasUniqueId
 {
+    public $incrementing = false;
     protected static function bootHasUniqueId()
     {
         static::creating(function ($entity) {

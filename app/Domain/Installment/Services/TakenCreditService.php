@@ -10,6 +10,7 @@ use App\Domain\Installment\Entities\TakenCredit;
 use App\Domain\Installment\Interfaces\TakenCreditRelationInterface;
 use App\Domain\Installment\Payable\TakenCreditPayable;
 use App\Domain\Order\Interfaces\UserPurchaseRelation;
+use App\Domain\Order\Services\UserPurchaseService;
 use App\Domain\Product\Product\Entities\Product;
 use App\Domain\User\Entities\PlasticCard;
 use App\Domain\User\Entities\User;
@@ -21,10 +22,13 @@ class TakenCreditService extends BaseService implements TakenCreditRelationInter
     use FileUploadService;
 
     private SuretyService $surety;
+    private UserPurchaseService $purchaseService;
 
     public function __construct()
     {
         $this->surety = new SuretyService();
+        $this->purchaseService = new UserPurchaseService();
+
         parent::__construct();
     }
 
@@ -60,7 +64,10 @@ class TakenCreditService extends BaseService implements TakenCreditRelationInter
             if (isset($object_data['surety_is'])) {
                 $object_data['surety_id'] = $this->surety->create($surety_data)->id;
             }
-            $object = parent::create(array_merge($object_data, ['status' => true]));
+            $purchases = $this->purchaseService->create($object_data);
+            $object = parent::create(array_merge($object_data, [
+                'purchase_id' => $purchases->id,
+                'status' => true]));
             $object_data['taken_credit_id'] = $object->id;
             $payService = new InstallmentPayService($object_data, $object);
             $payService->pay();

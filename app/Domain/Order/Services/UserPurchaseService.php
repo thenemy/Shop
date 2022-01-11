@@ -7,6 +7,7 @@ use App\Domain\Core\Main\Services\BaseService;
 use App\Domain\Delivery\Services\DeliverySendService;
 use App\Domain\Order\Entities\Purchase;
 use App\Domain\Order\Entities\UserPurchase;
+use App\Domain\Order\Interfaces\UserOrderInterface;
 use App\Domain\Order\Interfaces\UserPurchaseRelation;
 use App\Domain\Product\Product\Entities\Product;
 use Illuminate\Support\Facades\DB;
@@ -44,6 +45,20 @@ class UserPurchaseService extends BaseService implements UserPurchaseRelation
         }
     }
 
+    private function getStatus(array &$object_data): int
+    {
+        $status = UserOrderInterface::INSTALMENT;
+        if (isset($object_data['delivery'])) {
+            $status += UserOrderInterface::DELIVERY;
+            throw new \Exception("Delivery method is not implemented now");
+        } else {
+            $status += UserOrderInterface::SELF_DELIVERY;
+        }
+        unset($object_data['delivery']);
+
+        return $status;
+    }
+
     public function getEntity(): Entity
     {
         return new UserPurchase();
@@ -53,6 +68,7 @@ class UserPurchaseService extends BaseService implements UserPurchaseRelation
     {
         try {
             DB::beginTransaction();
+            $object_data['status'] = $this->getStatus($object_data);
             $object = parent::create($object_data);
             $purchases = $this->toPurchases($object_data);
             $object->purchases()->createMany($purchases);
