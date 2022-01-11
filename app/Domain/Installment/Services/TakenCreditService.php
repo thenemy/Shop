@@ -53,7 +53,7 @@ class TakenCreditService extends BaseService implements TakenCreditRelationInter
         try {
             DB::beginTransaction();
             $user_data = User::findByPlastic($object_data['plastic_id'])
-                ->selectUserDataId()->first()->id;
+                ->selectUserData()->first();
             $object_data['user_credit_data_id'] = $user_data->id;
             $object_data['user_id'] = $user_data->user_id;
             $surety_data = $this->popCondition($object_data, self::SURETY_SERVICE);

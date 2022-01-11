@@ -28,9 +28,9 @@ class UserBuilder extends BuilderEntity
         return $this->join("user_credit_datas", "user_credit_datas.user_id", '=', 'users.id');
     }
 
-    public function selectUserDataId()
+    public function selectUserData()
     {
-        return $this->joinUserData()->select("user_credit_datas.id");
+        return $this->joinUserData()->select("user_credit_datas.*");
     }
 
     public function filterBy($filter)
