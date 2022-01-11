@@ -15,7 +15,6 @@ class PlasticSuretyCards extends Migration
     {
         Schema::create('plastic_surety_cards', function (Blueprint $table) {
             $table->foreignUuid("plastic_id")
-                ->primary()
                 ->constrained("plastic_card")
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
@@ -23,6 +22,7 @@ class PlasticSuretyCards extends Migration
                 ->constrained('surety_data')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table->primary(['plastic_id', 'surety_id']);
         });
     }
 

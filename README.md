@@ -21,8 +21,7 @@ will be charged for returning the product from the client
 there can be errors during payment installment , this error will be send to the client , and will be asked to send
 request one more time when money will be enough or just
 
-Also , a have to make the way to fill files through temporary conditions,
-and I could do the same with others 
+Also , a have to make the way to fill files through temporary conditions, and I could do the same with others
 
 So , will fill all required data about the user user datas, user plastic cards, user addresses , start giving the roles
 
@@ -32,20 +31,17 @@ Insert available cities , it is important for filling the address
 
 When everything will be ready I could start filling about the order
 
-When we create installment we have to choose the user
-Then we are choosing the products which we want to send
-Then we choose the choice of installment
-then we choose the address where to go, or check the existing address 
-the type of the payment for initially price 
+When we create installment we have to choose the user Then we are choosing the products which we want to send Then we
+choose the choice of installment then we choose the address where to go, or check the existing address the type of the
+payment for initially price
 
-when we create transactions we have to choose 
-user 
-then products
-then the address    
+when we create transactions we have to choose user then products then the address    
 the type of payment
 
-in the user table will be the button to open window for nested transactions two types 
-installment and instance payment 
+in the user table will be the button to open window for nested transactions two types installment and instance payment
 
-in the product table  will be the button to open windows for netsted transactions two types
-installment and instant payment
+in the product table will be the button to open windows for netsted transactions two types installment and instant
+payment
+
+take account the discounts of the product when withdrawing money
+will be mutual exclusive , namely first discounts which is in banners if not exists which is in products

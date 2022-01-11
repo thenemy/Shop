@@ -11,6 +11,10 @@ class PlasticCard extends Migration
      *
      * @return void
      */
+    /*
+     *  plastic card_number and card_token must be unique so no other user could use this card
+     *  but deletion must be considered thoroughaly
+     * */
     public function up()
     {
         Schema::create('plastic_card', function (Blueprint $table) {

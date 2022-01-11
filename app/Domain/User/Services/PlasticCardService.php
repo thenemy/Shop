@@ -16,6 +16,11 @@ class PlasticCardService extends BaseService
         return new PlasticCard();
     }
 
+    protected function attach($object, $object_data)
+    {
+        $object->user()->attach($object_data['user_id']);
+    }
+
     public function create(array $object_data)
     {
         try {
@@ -32,8 +37,10 @@ class PlasticCardService extends BaseService
                 unset($object_data['plastic_data']);
             }
             $object_data = array_merge($object_data, $result['data']);
-            parent::create($object_data);
+            $object = parent::create($object_data);
+            $this->attach($object, $object_data);
             DB::commit();
+            return $object;
         } catch (\Exception $exception) {
             DB::rollBack();
             throw ValidationException::withMessages([

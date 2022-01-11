@@ -8,11 +8,19 @@ use App\Domain\Installment\Entities\TakenCredit;
 use App\Domain\User\Builders\PlasticCardBuilder;
 use App\Domain\User\Traits\HasUserRelationship;
 
+// it does not have user because it can belong to surety
 class PlasticCard extends Entity
 {
-    use HasUserRelationship, HasUuidKey;
+    use HasUuidKey;
 
     protected $table = 'plastic_card';
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(User::class, "plastic_user_cards",
+            "plastic_id",
+            "user_id");
+    }
 
     public function newEloquentBuilder($query): PlasticCardBuilder
     {
