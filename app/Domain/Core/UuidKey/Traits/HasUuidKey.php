@@ -7,6 +7,8 @@ use Ramsey\Uuid\Uuid;
 
 trait HasUuidKey
 {
+    public $incrementing = false;
+
     protected static function bootHasUuidKey()
     {
         static::creating(function ($entity) {
