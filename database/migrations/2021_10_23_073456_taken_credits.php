@@ -18,7 +18,7 @@ class TakenCredits extends Migration
             $table->id();
             $table->timestamps();
             $table->boolean('is_paid')->default(false);
-            $table->bigInteger("transaction_id");
+            $table->bigInteger("transaction_id")->default(0);
             $table->bigInteger('initial_price');
             $table->boolean("status")->default(false); /// accepted the credit or not is the important
             $table->dateTime('date_taken')->nullable();
