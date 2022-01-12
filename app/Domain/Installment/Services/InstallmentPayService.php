@@ -28,19 +28,6 @@ class InstallmentPayService
         $this->withdraw = new WithdrawMoney($taken);
         $this->taken = $taken;
     }
-
-    //*
-    // make unique exception
-    // give appropriate name for them
-    // so
-    //  if cannot be installed will be thrown error cannot be installed
-    // I will catch and dispatch FailedToWithdraw
-    //**/
-    private function isPaidInPlace()
-    {
-        return isset($this->object_data['payment_type']);
-    }
-
     /// method which will add to true sum the cost of delivery
     public function pay()
     {
@@ -59,7 +46,20 @@ class InstallmentPayService
 
     }
 
-    public function createUserPurchase(): int
+    //*
+    // make unique exception
+    // give appropriate name for them
+    // so
+    //  if cannot be installed will be thrown error cannot be installed
+    // I will catch and dispatch FailedToWithdraw
+    //**/
+    private function isPaidInPlace()
+    {
+        return isset($this->object_data['payment_type']);
+    }
+
+
+    private function createUserPurchase(): int
     {
         return $this->taken->purchase->sumPurchases();
     }

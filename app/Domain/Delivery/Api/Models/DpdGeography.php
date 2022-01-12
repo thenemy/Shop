@@ -4,6 +4,7 @@ namespace App\Domain\Delivery\Api\Models;
 
 
 use App\Domain\Delivery\Api\Base\DpdClient;
+use Illuminate\Support\Facades\Validator;
 
 class DpdGeography extends DpdClient
 {
@@ -31,17 +32,6 @@ class DpdGeography extends DpdClient
         parent::__construct(self::GEOGRAPHY);
     }
 
-    private function stdToArray($obj)
-    {
-        $rc = (array)$obj;
-        foreach ($rc as $key => $item) {
-            $rc[$key] = (array)$item;
-            foreach ($rc[$key] as $keys => $items) {
-                $rc[$key][$keys] = (array)$items;
-            }
-        }
-        return $rc;
-    }
 
     /**
      * с наложеннным платежём
@@ -70,9 +60,27 @@ class DpdGeography extends DpdClient
     public function getSerializedCities(string $countryCode)
     {
         $response = $this->getCities($countryCode);
+        foreach ($response as $key => $item) {
+            $item['countryName'] = json_encode(['ru' => $item['countryName']], JSON_UNESCAPED_UNICODE);
+            $item['cityName'] = json_encode(['ru' => $item['cityName']], JSON_UNESCAPED_UNICODE);
+            $item['indexMin'] = null;
+            $item['indexMax'] = null;
+            $response[$key] = $item;
+            $validation = Validator::make($item, [
+                'cityId' => "required",
+                'countryCode' => "required",
+                "countryName" => "required",
+                "regionCode" => "required",
+                "regionName" => "required",
+                "cityCode" => "required",
+                "cityName" => "required",
+                "abbreviation" => "required",
+            ]);
+            if ($validation->fails()) {
+               throw  new \Exception($validation->errors()->toJson());
+            }
+        }
         return $response;
-        //**
-        // seriealize the data
-        //*/
+
     }
 }

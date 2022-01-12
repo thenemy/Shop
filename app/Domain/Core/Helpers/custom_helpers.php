@@ -33,7 +33,9 @@ if (!function_exists('test')) {
     function test(array $values = [])
     {
         $s = new \App\Domain\Delivery\Api\Models\DpdGeography();
-        return $s->getSerializedCities("UZ");
+        $result = $s->getSerializedCities("UZ");
+        $service = new \App\Domain\Delivery\Services\AvailableCitiesService();
+        $service->bulkInsertion($result);
     }
 }
 
@@ -60,8 +62,8 @@ if (!function_exists('merchant')) {
     {
         $merchant = new \App\Domain\Core\Api\CardService\Merchant\Model\Merchant();
         $create = $merchant->create("100000", "0000000");
-        $merchant->pre_confirm("937675F10965005AE053C0A865A6689Bx",$create);
-        $s =  $merchant->confirm($create);
+        $merchant->pre_confirm("937675F10965005AE053C0A865A6689Bx", $create);
+        $s = $merchant->confirm($create);
         dd($s);
     }
 }

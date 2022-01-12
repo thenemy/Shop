@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Domain\Delivery\Schedule\AvailableCitiesSchedule;
 use App\Domain\Installment\Entities\TakenCredit;
 use App\Domain\Installment\Schedule\InstallmentDailyCheck;
 use Illuminate\Console\Scheduling\Schedule;
@@ -27,6 +28,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         InstallmentDailyCheck::schedule($schedule);
+        AvailableCitiesSchedule::schedule($schedule);
     }
 
     /**

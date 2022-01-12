@@ -86,11 +86,6 @@ trait   FrontDynamicGeneration
                     true
                 );
             $input[$key] = $text_html;
-//            if ($this->getPrefixInputHidden())
-//                $input[$key] = $text_html . ' ' . $this->hiddenInputAdd($key);
-//            else
-//                $input[$key] = $text_html;
-
         }
         return $input;
     }
@@ -121,10 +116,6 @@ trait   FrontDynamicGeneration
                 $this,
                 $key
             );
-//            if ($this->getPrefixInputHidden())
-//                $input[$key] = $text_html . ' ' . $this->hiddenInputAdd($key);
-//            else
-//                $input[$key] = $text_html;
             $input[$key] = $text_html;
         }
         return $input;

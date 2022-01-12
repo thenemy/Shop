@@ -26,7 +26,7 @@ class NestedContainer implements HtmlInterface
         $self = get_called_class();
         return new $self($title, $items, $attributes);
     }
-
+   // in title there is no __() because we want keep more functionality
     public function generateHtml(): string
     {
         $str = "";

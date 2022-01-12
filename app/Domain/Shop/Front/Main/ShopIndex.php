@@ -83,8 +83,8 @@ class ShopIndex extends Shop implements TableInFront, CreateAttributesInterface
 
     public function livewireFunctions(): LivewireAdditionalFunctions
     {
-       return  AllLivewireFunctions::generation([
+        return AllLivewireFunctions::generation([
 
-       ]);
+        ]);
     }
 }

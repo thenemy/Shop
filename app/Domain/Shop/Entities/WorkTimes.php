@@ -8,7 +8,6 @@ use App\Domain\Shop\Builders\WorkTimeBuilder;
 class WorkTimes extends Entity
 {
     protected $table = 'work_times';
-    public $incrementing = false;
 
     public function newEloquentBuilder($query)
     {
@@ -17,7 +16,7 @@ class WorkTimes extends Entity
 
     public function shopAddress(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(ShopAddress::class, "id");
+        return $this->belongsTo(ShopAddress::class, "shop_address_id");
     }
 
     public static function getRules(): array

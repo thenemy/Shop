@@ -17,16 +17,16 @@ class AvailableCities extends Migration
         Schema::create('available_cities', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer("cityId");
-            $table->string("countryCode");
-            $table->string("countryName");
-            $table->integer("regionCode");
+            $table->bigInteger("cityId")->unique()->index();
+                $table->string("countryCode")->index();
+                $table->json("countryName");
+            $table->bigInteger("regionCode");
             $table->string("regionName");
             $table->string("cityCode");
-            $table->string("cityName");
+            $table->json("cityName");
             $table->string("abbreviation");
-            $table->string("indexMin");
-            $table->string("indexMax");
+            $table->string("indexMin")->nullable();
+            $table->string("indexMax")->nullable();
         });
     }
 

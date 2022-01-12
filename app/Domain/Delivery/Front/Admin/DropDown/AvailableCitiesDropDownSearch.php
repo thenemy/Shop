@@ -33,8 +33,22 @@ class AvailableCitiesDropDownSearch extends BaseDropDownSearchAttribute
         return "Выберите город";
     }
 
+    static public function getDropDown($initial, array $filterBy, string $class, string $attribute)
+    {
+        $items = $class::filterBy($filterBy)->paginate(10)->map(function ($item) use ($attribute) {
+            $class = get_called_class();
+            $drop = $class::getDropItem();
+            return new $drop($item->id, $item->$attribute);
+        })->toArray();
+
+        $init = $class::find($initial) ?? new $class();
+        $self = get_called_class();
+        $object = new $self($items, $init->$attribute);
+        return $object;
+    }
+
     static public function getDropDownSearch($initial, array $filterBy)
     {
-        return parent::getDropDown($initial, $filterBy, AvailableCities::class, "cityName");
+        return self::getDropDown($initial, $filterBy, AvailableCities::class, "fullName");
     }
 }

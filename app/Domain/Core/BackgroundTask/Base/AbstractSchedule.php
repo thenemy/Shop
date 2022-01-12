@@ -14,9 +14,9 @@ abstract class AbstractSchedule implements ScheduleInterface
         $this->schedule = $schedule;
     }
 
-    final public function call()
+    public function call()
     {
-        $this->schedule->call(function () {
+        return $this->schedule->call(function () {
             $this->run();
         });
     }

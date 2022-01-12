@@ -7,7 +7,12 @@ use Ramsey\Uuid\Uuid;
 
 trait HasUuidKey
 {
-    public $incrementing = false;
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->incrementing = false;
+    }
 
     protected static function bootHasUuidKey()
     {
@@ -37,6 +42,7 @@ trait HasUuidKey
     {
         return "id";
     }
+
     protected function generateUuidKey(): string
     {
         return Uuid::uuid4();

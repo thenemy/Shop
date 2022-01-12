@@ -14,15 +14,15 @@ class WorkTimes extends Migration
     public function up()
     {
         Schema::create('work_times', function (Blueprint $table) {
-            $table->foreignId("shop_id")
-                ->primary()
+            $table->id();
+            $table->foreignId("shop_address_id")
                 ->constrained("shop_addresses")
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->integer("day"); // from 1 to 7
             $table->integer("workTimeFrom"); // 0 to 24
             $table->integer("workTimeTo"); // 0 to 24
-            $table->index(['shop_id', 'day']);
+            $table->index(['shop_address_id', 'day']);
         });
     }
 

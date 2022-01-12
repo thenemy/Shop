@@ -15,6 +15,7 @@ class Entity extends Model implements RuleInterface
     public $timestamps = false;
     protected $guarded = ['params'];
 
+
     public function getClassNameAttribute(): string
     {
         $array = explode("\\", get_class($this));

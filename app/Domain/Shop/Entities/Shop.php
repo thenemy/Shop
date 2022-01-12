@@ -18,6 +18,7 @@ class Shop extends Entity implements ShopRelationInterface
     use Sluggable, MediaTrait, MediaShopAttributes;
 
     protected $table = "shops";
+    public $incrementing = false;
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

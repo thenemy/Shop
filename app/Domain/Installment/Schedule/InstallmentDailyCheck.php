@@ -10,6 +10,11 @@ use App\Domain\Installment\Jobs\MonthPaidJobs;
 
 class InstallmentDailyCheck extends AbstractSchedule
 {
+    public function call()
+    {
+        return parent::call()->daily();
+    }
+
     public function run()
     {
         $month_pay = MonthPaid::unpaidForMonth();

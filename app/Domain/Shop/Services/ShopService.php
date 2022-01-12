@@ -17,12 +17,12 @@ class ShopService extends BaseService implements ShopRelationInterface
     use FileUploadService;
 
     private UserShopService $userService;
-    private WorkTimesService $workTimesService;
+    private ShopAddressService $addressService;
 
     public function __construct()
     {
         $this->userService = new UserShopService();
-        $this->workTimesService = new WorkTimesService();
+        $this->addressService = new ShopAddressService();
         parent::__construct();
     }
 
@@ -40,12 +40,11 @@ class ShopService extends BaseService implements ShopRelationInterface
         try {
             DB::beginTransaction();
             $user_array = $this->popCondition($object_data, self::USER);
-            $work_array = $this->popCondition($object_data, self::WORK_TIME);
+            $address = $this->popCondition($object_data, self::SHOP_ADDRESS);
             $object_data['id'] = $this->userService->create($user_array)->id;
             $object = parent::create($object_data);
-            //will be added when work could be made without entity
-//            $work_array['id'] = $object->id;
-//            $this->workTimesService->create($work_array);
+            $address['user_id'] = $object_data['id'];
+            $this->addressService->create($address);
             DB::commit();
             return $object;
         } catch (\Throwable $exception) {
@@ -62,10 +61,10 @@ class ShopService extends BaseService implements ShopRelationInterface
         try {
             DB::beginTransaction();
             $userData = $this->popCondition($object_data, self::USER);
-            if (!empty($userData)) {
-                $this->userService->update($object[self::USER], $userData);
-            }
-            $object = $this->update($object, $object_data);
+            $address = $this->popCondition($object_data, self::SHOP_ADDRESS);
+            $this->userService->update($object[self::USER], $userData);
+            $this->addressService->update($object[self::SHOP_ADDRESS], $address);
+            $object = parent::update($object, $object_data);
             DB::commit();
             return $object;
         } catch (\Throwable $exception) {

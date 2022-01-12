@@ -25,7 +25,7 @@ class DeliveryAddress extends Migration
             $table->string("street");
             $table->smallInteger("house")->nullable();
             $table->string('flat')->nullable();
-            $table->string("instructions"); //additional instructions for courier to get the product
+            $table->text("instructions")->nullable(); //additional instructions for courier to get the product
             $table->foreignId("city_id")->constrained(
                 "available_cities")
                 ->restrictOnDelete()

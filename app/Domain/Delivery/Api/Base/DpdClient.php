@@ -21,4 +21,15 @@ class DpdClient implements DpdInterface
             'clientKey' => env("DPD_CLIENT_KEY")
         ];
     }
+    protected function stdToArray($obj)
+    {
+        $rc = (array)$obj;
+        foreach ($rc as $key => $item) {
+            $rc[$key] = (array)$item;
+            foreach ($rc[$key] as $keys => $items) {
+                $rc[$key][$keys] = (array)$items;
+            }
+        }
+        return $rc;
+    }
 }

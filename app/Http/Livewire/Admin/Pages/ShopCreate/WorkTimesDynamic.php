@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Admin\Pages\ShopEdit;  // 1  --- namespace
+namespace App\Http\Livewire\Admin\Pages\ShopCreate;  // 1  --- namespace
 
 
 use App\Domain\Core\Main\Services\BaseService;
@@ -10,13 +10,13 @@ class WorkTimesDynamic extends BaseLivewireDynamic
 {
 
 
-
+ 
 
 
     //3   --- set of functions and variables
     public function getPath()
     {
-        return 'livewire.admin.pages.shop-edit.work-times-dynamic'; //4  --- path to blade
+        return 'livewire.admin.pages.shop-create.work-times-dynamic'; //4  --- path to blade
     }
 
     public function getVariable()
@@ -38,7 +38,7 @@ class WorkTimesDynamic extends BaseLivewireDynamic
     }
 
     public function getEntity(){
-        return 'App\Domain\Shop\Front\Dynamic\WorkTimesDynamicWithoutEntity'; //8  --- class name of entity
+        return 'App\Domain\Shop\Front\Dynamic\WorkTimesDynamic'; //8  --- class name of entity
     }
 
 
