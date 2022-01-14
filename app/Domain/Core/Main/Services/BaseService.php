@@ -147,8 +147,9 @@ abstract class BaseService implements ServiceInterface
     public
     function createIfExists(array $object_data, array $addition = [])
     {
-        if (!empty($object_data)) {
-           return $this->createNew(array_merge($object_data, $addition));
+        $filtered = $this->filterRecursive($object_data);
+        if (!empty($filtered)) {
+            return $this->createNew(array_merge($object_data, $addition));
         }
     }
 
@@ -173,7 +174,7 @@ abstract class BaseService implements ServiceInterface
     private function createNew(array $object_data)
     {
         $filtered = $this->filterRecursive($object_data);
-        $this->validate($object_data, $this->validateCreateRules());
+        $this->validate($filtered, $this->validateCreateRules());
         return $this->entity->create($filtered);
     }
 
