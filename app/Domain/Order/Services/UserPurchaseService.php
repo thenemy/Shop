@@ -38,7 +38,8 @@ class UserPurchaseService extends BaseService implements UserPurchaseRelation
                 array_push($purchases, [
                     'quantity' => $number,
                     'price' => $uzs_price * $number,
-                    'product_id' => $id
+                    'product_id' => $id,
+                    "order" => json_encode("", JSON_UNESCAPED_UNICODE)
                 ]);
             }
             return $purchases;
