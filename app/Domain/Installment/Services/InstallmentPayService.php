@@ -39,7 +39,7 @@ class InstallmentPayService
             $sum_per_month = $this->getSumPerMonth($true_sum);
             $this->fillMonthPaid($sum_per_month);
             Log::debug($this->isPaidInPlace());
-            if ($this->isPaidInPlace()) {
+            if (!$this->isPaidInPlace()) {
                 $this->withdraw->withdraw();
             }
         } catch (\Exception $exception) {
