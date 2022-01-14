@@ -16,6 +16,7 @@ use App\Domain\User\Entities\PlasticCard;
 use App\Domain\User\Entities\User;
 use App\Domain\User\Services\SuretyService;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class TakenCreditService extends BaseService implements TakenCreditRelationInterface
 {
@@ -69,6 +70,7 @@ class TakenCreditService extends BaseService implements TakenCreditRelationInter
                 'purchase_id' => $purchases->id,
                 'status' => true]));
             $object_data['taken_credit_id'] = $object->id;
+            Log::debug("SUCCESS TAKEN_CREDIT", $object);
             $payService = new InstallmentPayService($object_data, $object);
             $payService->pay();
             DB::commit();
