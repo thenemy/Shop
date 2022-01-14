@@ -47,7 +47,7 @@ trait InputDynamicGeneration
     protected function generateInput()
     {
         try {
-            $input = $this->generateNewWay($this->getCustomRules());
+            $input = $this->generateNewWay(self::getCustomRules());
         } catch (DynamicTableException $exception) {
             $input = $this->generateOldWay($this->getRules());
         }

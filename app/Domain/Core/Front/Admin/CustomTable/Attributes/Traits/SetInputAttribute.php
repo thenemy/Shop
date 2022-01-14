@@ -4,6 +4,7 @@ namespace App\Domain\Core\Front\Admin\CustomTable\Attributes\Traits;
 
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Abstracts\DynamicAttributes;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\InputTableAttribute;
+use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Errors\DynamicTableException;
 
 /**
@@ -42,10 +43,23 @@ trait SetInputAttribute
         }
         foreach ($dynamic as $key => $value) {
             $classes = explode("|", $value);
+            switch ($classes[0]) {
+                case DynamicAttributes::INPUT:
+                    $input[$key] = $this->setInputAttributeTable($key, $value);
+                    break;
+                case DynamicAttributes::DROP_DOWN:
+                    $input[$key] = $this->setDropDownAttributeTable($classes[1], $key);
+                    break;
+                case DynamicAttributes::NOTHING:
+                    $input[$key] = "";
+                    break;
+                default:
+                    $input[$key] = TextAttribute::generation($this, $key);
+            }
             if ($classes[0] == DynamicAttributes::INPUT) {
-                $input[$key] = $this->setInputAttributeTable($key, $value);
+
             } else if ($classes[0] == DynamicAttributes::DROP_DOWN) {
-                $input[$key] = $this->setDropDownAttributeTable($classes[1], $key);
+
             }
         }
         return $input;

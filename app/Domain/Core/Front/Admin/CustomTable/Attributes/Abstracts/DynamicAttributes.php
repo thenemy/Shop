@@ -9,6 +9,7 @@ abstract class DynamicAttributes
 {
     const INPUT = "1";
     const DROP_DOWN = "2";
+    const NOTHING = "3";
 
     public static function INPUT(string $rules): string
     {
