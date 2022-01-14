@@ -7,6 +7,9 @@ use App\Http\Livewire\Admin\Base\Abstracts\BaseLivewire;
 class MonthlyPaidIndex extends BaseLivewire
 {
 
+    
+
+
     //3   --- set of functions and variables
     public function getPath()
     {
