@@ -10,7 +10,7 @@ trait HasTransaction
         $this->save();
     }
 
-    public function getTransaction(): int
+    public function getTransaction(): ?int
     {
         return $this->transaction_id;
     }
