@@ -29,7 +29,7 @@ class TimeScheduleTransactionIndex extends TimeScheduleTransactions implements T
     function filterByData(): array
     {
         return [
-            "taken_credit_id" => $this->getAttributeVariable("id")
+            "taken_credit_id" => $this->getWithoutScopeAtrVariable("id")
         ];
     }
 

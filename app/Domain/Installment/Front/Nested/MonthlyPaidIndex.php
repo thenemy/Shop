@@ -17,7 +17,7 @@ use App\Domain\Core\Main\Traits\ArrayHandle;
 use App\Domain\Installment\Entities\MonthPaid;
 use App\Domain\Installment\Front\Admin\CustomTables\Tables\MonthlyPaidTable;
 
-    class MonthlyPaidIndex extends MonthPaid implements TableInFront, FilterInterface, TableFilterByInterface
+class MonthlyPaidIndex extends MonthPaid implements TableInFront, FilterInterface, TableFilterByInterface
 {
     use TableFilterBy, ArrayHandle, AttributeGetVariable;
 
@@ -65,7 +65,7 @@ use App\Domain\Installment\Front\Admin\CustomTables\Tables\MonthlyPaidTable;
     function filterByData(): array
     {
         return [
-            "taken_credit_id" => $this->getAttributeVariable("id")
+            "taken_credit_id" => $this->getWithoutScopeAtrVariable("id")
         ];
     }
 }
