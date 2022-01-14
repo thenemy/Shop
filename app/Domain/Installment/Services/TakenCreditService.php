@@ -70,7 +70,7 @@ class TakenCreditService extends BaseService implements TakenCreditRelationInter
                 'purchase_id' => $purchases->id,
                 'status' => true]));
             $object_data['taken_credit_id'] = $object->id;
-            Log::debug("SUCCESS TAKEN_CREDIT", $object);
+            Log::debug("SUCCESS TAKEN_CREDIT", $object->toArray());
             $payService = new InstallmentPayService($object_data, $object);
             $payService->pay();
             DB::commit();
