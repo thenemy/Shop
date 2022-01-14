@@ -5,13 +5,14 @@ namespace App\Domain\Installment\Front\Admin\CustomTables\Tables;
 use App\Domain\Core\Front\Admin\Attributes\Models\Column;
 use App\Domain\Core\Front\Admin\CustomTable\Abstracts\AbstractDynamicTable;
 use App\Domain\Installment\Entities\CommentInstallment;
+use App\Domain\Installment\Front\Dynamic\CommentInstallmentDynamic;
 
 class CommentInstallmentTable extends AbstractDynamicTable
 {
 
     public function getInputs(): array
     {
-        return $this->generateInput(CommentInstallment::getRules());
+        return $this->generateNewInput(CommentInstallmentDynamic::getCustomRules());
     }
 
     public function getColumns(): array
