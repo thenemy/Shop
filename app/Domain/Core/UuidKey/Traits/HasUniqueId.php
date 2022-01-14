@@ -29,7 +29,7 @@ trait HasUniqueId
     protected function generateUniqueKey(): int
     {
         $max = 18446744073709551615;
-        while (self::where($this->getPrimary(), $rand = rand(1000000, $max))->exists()) ;
+        while (self::where($this->getPrimary(), $rand = rand(1000000, intval($max)))->exists()) ;
         return $rand;
     }
 }
