@@ -10,6 +10,7 @@ use App\Domain\Installment\Payable\TakenCreditPayable;
 use App\Domain\Order\Interfaces\UserOrderInterface;
 use App\Domain\Order\Services\UserPurchaseService;
 use App\Domain\Product\Product\Entities\Product;
+use Illuminate\Support\Facades\Log;
 use function Symfony\Component\Translation\t;
 
 class InstallmentPayService
@@ -37,6 +38,7 @@ class InstallmentPayService
             $true_sum = $this->getTrueSum($overall_sum);
             $sum_per_month = $this->getSumPerMonth($true_sum);
             $this->fillMonthPaid($sum_per_month);
+            Log::debug($this->isPaidInPlace());
             if ($this->isPaidInPlace()) {
                 $this->withdraw->withdraw();
             }
