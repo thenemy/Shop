@@ -8,7 +8,7 @@ use App\Domain\Installment\Builders\CommentInstallmentBuilder;
 class CommentInstallment extends Entity
 {
     protected $table = "comment_installments";
-
+    public $timestamps = true;
     public function newEloquentBuilder($query)
     {
         return new CommentInstallmentBuilder($query);

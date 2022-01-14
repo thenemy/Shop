@@ -17,8 +17,8 @@ class CommentInstallmentTable extends AbstractDynamicTable
     public function getColumns(): array
     {
         return [
-            Column::new(__("Дата создания"), "date_index"),
-            Column::new(__("Комментарий"), "comment_index")
+            Column::new(__("Дата создания"), "created_at-index"),
+            Column::new(__("Комментарий"), "comment-index")
         ];
     }
 }
