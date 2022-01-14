@@ -21,4 +21,6 @@
 <livewire:admin.pages.category-edit.filtration-category-dynamic 
                  parentKey='category_id'
                 :parentId='$entity->id'/>
+<x-helper.input.input_checked name='deliveryImportant->checked' type='checkbox'
+            label='{{__("Ценный груз")}}' value='{{old("deliveryImportant->checked") ?? $entity->deliveryImportant->checked ?? " "}}' id='deliveryImportant->checked'  onchange=""/>
 @endsection

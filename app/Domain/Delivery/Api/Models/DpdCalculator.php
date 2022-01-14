@@ -6,6 +6,8 @@ use App\Domain\Delivery\Api\Base\DpdClient;
 use App\Domain\Delivery\Entities\DeliveryAddress;
 use Illuminate\Support\Collection;
 
+/// ask about DPD parcel serviceCode
+/// /// Error will be in SoapFault so catch it and display error
 class DpdCalculator extends DpdClient
 {
     const CALCULATOR = "calculator2?wsdl";
@@ -29,11 +31,11 @@ class DpdCalculator extends DpdClient
         return $response;
     }
 
+    // for now do nothing with service code
     private function setWeightAndServiceCode(Collection $product, int &$weight): string
     {
         $partial = true;
         $weight = $product->reduce(function ($cary, $item) {
-            $partial = $item->weight <= 30;
             return $cary + $item->weight;
         });
         return $partial ? "" : "";
@@ -53,13 +55,13 @@ class DpdCalculator extends DpdClient
             'selfPickup' => false,
             "selfDelivery" => false,
             "weight" => $weight,
+            "serviceCode" => "PLC"
         ];
-        $request = ["request" => array_merge($request, $this->auth)];
-
-        $reponse = $this->client->getServiceCost2($request);
+        $response = $this->callSoapMethod($request, "request", "getServiceCost2");
         /***
          * check the status of the response
          */
-        return $reponse['return'];
+
+        return $response['return'];
     }
 }

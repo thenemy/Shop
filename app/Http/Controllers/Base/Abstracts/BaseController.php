@@ -75,8 +75,8 @@ abstract class BaseController extends Controller implements ControllerInterface
     protected function getStore($object): \Illuminate\Http\RedirectResponse
     {
 //        try {
-            $this->service->create($object);
-            return back()->with("success", __("Добавлено успешно"));
+        $this->service->create($object);
+        return back()->with("success", __("Добавлено успешно"));
 //        } catch (\Exception $e) {
 //            return back()->withErrors($e->getMessage())->withInput();
 //        }
@@ -129,6 +129,7 @@ abstract class BaseController extends Controller implements ControllerInterface
         $this->service->destroy($entity);
         return back();
     }
+
     public function index(Request $request)
     {
         return $this->getIndex($request);
@@ -139,7 +140,7 @@ abstract class BaseController extends Controller implements ControllerInterface
         return $this->getCreate($request);
     }
 
-    public function store(Request $request)
+    public function store(Request  $request)
     {
         return $this->getStoreValidation($request);
     }

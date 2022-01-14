@@ -24,12 +24,12 @@ class SubCategoryController extends BaseOpenController
         return new FormForModel(SubCategoryRouteHandler::new(), __("Под Категории"));
     }
 
-    public function index(ParamsRequest $request)
+    public function index(Request $request)
     {
         return $this->getIndex($request);
     }
 
-    public function create(ParamsRequest $request)
+    public function create(Request $request)
     {
         return $this->getCreate($request);
     }

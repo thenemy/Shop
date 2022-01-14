@@ -24,7 +24,15 @@ class CategoryEdit extends Category implements CreateAttributesInterface
             new InputLangAttribute("name", __("Введите  имя категории"), false),
             new InputFileAttribute("icon_file", "Иконка", self::class),
             FiltrationCategoryDynamic::getDynamic('CategoryEdit'),
+            ...$this->additionalGeneration()
         ));
+    }
+
+    public function additionalGeneration(): array
+    {
+        return [
+            InputAttribute::updateAttribute(self::DELIVERY_IMPORTANT_TO, "checkbox", "Ценный груз")
+        ];
     }
 
     public function getIconFileAttribute(): FileAttribute

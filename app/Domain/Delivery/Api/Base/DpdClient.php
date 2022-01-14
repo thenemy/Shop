@@ -7,8 +7,8 @@ use SoapClient;
 
 class DpdClient implements DpdInterface
 {
-    public SoapClient $client;
-    public array $auth = [];
+    private SoapClient $client;
+    private array $auth = [];
 
     /**
      * @throws \SoapFault
@@ -21,6 +21,7 @@ class DpdClient implements DpdInterface
             'clientKey' => env("DPD_CLIENT_KEY")
         ];
     }
+
     protected function stdToArray($obj)
     {
         $rc = (array)$obj;
@@ -31,5 +32,12 @@ class DpdClient implements DpdInterface
             }
         }
         return $rc;
+    }
+
+    protected function callSoapMethod($request, $externalKey, $methodName)
+    {
+        $request = [$externalKey => array_merge($request, $this->auth)];
+        $response = $this->client->$methodName($request);
+        return $this->stdToArray($response);
     }
 }

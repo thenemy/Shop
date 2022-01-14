@@ -18,7 +18,6 @@ class Delivery extends Migration
     public function up()
     {
         Schema::create('delivery', function (Blueprint $table) {
-            $table->id();//orderNumberInteral   this must be putted
             $table->foreignId("user_purchase_id") // from here we will get all relevant products
             ->constrained("user_purchases")
                 ->restrictOnDelete()
@@ -29,8 +28,10 @@ class Delivery extends Migration
                 ->restrictOnDelete();
             // Namely, some products have the same pick up address , so we have to put them together
             $table->string("orderNum");
+            $table->string("datePickup");
             $table->integer("status"); //// all status that possible for delivery
-            ///
+
+            $table->primary(['user_purchase_id', "sho   p_id"]);
         });
     }
 

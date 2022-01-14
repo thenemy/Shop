@@ -18,6 +18,15 @@ class Category extends Entity implements CategoryRelationInterface
 {
     use Translatable, Sluggable;
 
+    protected $fillable = [
+        'name',
+        'status',
+        'depth',
+        'slug',
+        'depth',
+        'is_important'
+    ];
+    protected $guarded = null;
     protected $table = "categories";
 
     public function newEloquentBuilder($query): CategoryBuilder
@@ -28,6 +37,11 @@ class Category extends Entity implements CategoryRelationInterface
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function deliveryImportant()
+    {
+        return $this->hasOne(DeliveryCategory::class, "id");
     }
 
     public function getNameAttribute($value): ?Collection
@@ -58,6 +72,11 @@ class Category extends Entity implements CategoryRelationInterface
     public function childsCategory()
     {
         return $this->hasMany(Category::class, "parent_id");
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, "parent_id");
     }
 
     public function icon()

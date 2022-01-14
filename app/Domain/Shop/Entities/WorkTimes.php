@@ -5,9 +5,10 @@ namespace App\Domain\Shop\Entities;
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Shop\Builders\WorkTimeBuilder;
 
-class WorkTimes extends Entity
+class   WorkTimes extends Entity
 {
     protected $table = 'work_times';
+    protected $guarded = ['params', 'id'];
 
     public function newEloquentBuilder($query)
     {

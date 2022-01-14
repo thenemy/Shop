@@ -22,4 +22,6 @@
                     wire:key=''
                      />
 <livewire:admin.pages.category-create.filtration-category-dynamic-without-entity />
+<x-helper.input.input_checked name='deliveryImportant->checked' type='checkbox'
+            label='{{__("Ценный груз")}}' value='{{old("deliveryImportant->checked") ?? $entity->deliveryImportant->checked ?? " "}}' id='deliveryImportant->checked'  onchange=""/>
 @endsection

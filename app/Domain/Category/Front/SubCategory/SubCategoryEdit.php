@@ -6,5 +6,8 @@ use App\Domain\Category\Front\Main\CategoryEdit;
 
 class SubCategoryEdit extends CategoryEdit
 {
-
+    public function additionalGeneration(): array
+    {
+        return [];
+    }
 }

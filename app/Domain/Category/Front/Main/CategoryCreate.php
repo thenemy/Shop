@@ -12,6 +12,7 @@ use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputFileTempAttribute;
 use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputLangAttribute;
 use App\Domain\Core\Front\Admin\Form\Interfaces\CreateAttributesInterface;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
+use Symfony\Component\Console\Input\Input;
 
 class CategoryCreate extends Category implements CreateAttributesInterface
 {
@@ -31,6 +32,8 @@ class CategoryCreate extends Category implements CreateAttributesInterface
 
     public function additionalGeneration(): array
     {
-        return [];
+        return [
+            InputAttribute::createAttribute(self::DELIVERY_IMPORTANT_TO, "checkbox", "Ценный груз")
+        ];
     }
 }

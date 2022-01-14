@@ -41,13 +41,7 @@ class DpdGeography extends DpdClient
         $request = [
             'countryCode' => $countryCode
         ];
-        $merged = array_merge($request, $this->auth);
-        $request = [
-            'request' => $merged
-        ];
-        echo collect($request);
-        $response = $this->client->getCitiesCashPay($request);
-        $response = $this->stdToArray($response);
+        $response = $this->callSoapMethod($request, "request", "getCitiesCashPay");
         /**
          * check the status of the response raise the error if the error occured
          */
@@ -77,7 +71,7 @@ class DpdGeography extends DpdClient
                 "abbreviation" => "required",
             ]);
             if ($validation->fails()) {
-               throw  new \Exception($validation->errors()->toJson());
+                throw  new \Exception($validation->errors()->toJson());
             }
         }
         return $response;

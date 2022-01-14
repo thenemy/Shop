@@ -41,16 +41,7 @@ class ProductService extends BaseService implements ProductInterface
 
     private function createCheck(array $object_data, Product $product, string $class)
     {
-        $product_day = false;
-        $object = $class::where("product_id", "=", $product->id);
-        $exists = $object->exists();
-        if (array_key_exists("checked", $object_data) && !$exists) {
-            $product_day = true;
-        } else if (!array_key_exists("checked", $object_data) && $exists) {
-            $object->delete();
-        }
-        if ($product_day)
-            $class::create(['product_id' => $product->id]);
+        $this->toggleCheckBoxObject($object_data, $product, $class, "product_id");
     }
 
     public function create(array $object_data)

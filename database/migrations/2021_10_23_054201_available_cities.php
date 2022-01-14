@@ -18,15 +18,9 @@ class AvailableCities extends Migration
             $table->id();
             $table->timestamps();
             $table->bigInteger("cityId")->unique()->index();
-                $table->string("countryCode")->index();
-                $table->json("countryName");
-            $table->bigInteger("regionCode");
-            $table->string("regionName");
+            $table->json("regionName");
             $table->string("cityCode");
             $table->json("cityName");
-            $table->string("abbreviation");
-            $table->string("indexMin")->nullable();
-            $table->string("indexMax")->nullable();
         });
     }
 

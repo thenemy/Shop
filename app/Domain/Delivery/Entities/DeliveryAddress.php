@@ -13,4 +13,8 @@ class DeliveryAddress extends Entity
         return $this->belongsTo(AvailableCities::class, "city_id");
     }
 
+    public function toArray()
+    {
+        return array_merge(parent::toArray(), $this->availableCities->toArray());
+    }
 }

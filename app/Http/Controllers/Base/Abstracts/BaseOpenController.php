@@ -11,6 +11,9 @@ abstract class BaseOpenController extends BaseController
 {
     public function getIndex($request, $variables = [])
     {
+        $request->validate([
+            'params' => "required"
+        ]);
         return parent::getIndex($request, [
             'params' => $request->params
         ]);
@@ -18,6 +21,9 @@ abstract class BaseOpenController extends BaseController
 
     public function getEdit(Request $formRequest, $entity, $params = [], $variables = [])
     {
+        $formRequest->validate([
+            'params' => "required"
+        ]);
         $params = array_merge($params, [
             'params' => $formRequest->params
         ]);
@@ -26,6 +32,9 @@ abstract class BaseOpenController extends BaseController
 
     public function getCreate($request, $params = [], $variables = [])
     {
+        $request->validate([
+            'params' => "required"
+        ]);
         return parent::getCreate($request, [
             'params' => $request->params
         ], $variables);

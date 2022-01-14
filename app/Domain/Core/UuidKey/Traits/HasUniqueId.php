@@ -4,12 +4,16 @@ namespace App\Domain\Core\UuidKey\Traits;
 
 trait HasUniqueId
 {
-    public $incrementing = false;
     protected static function bootHasUniqueId()
     {
         static::creating(function ($entity) {
             $entity->setAttribute($entity->getPrimary(), $entity->generateUniqueKey());
         });
+    }
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->incrementing = false;
     }
 
     public function isIncrementing(): bool
@@ -25,7 +29,7 @@ trait HasUniqueId
     protected function generateUniqueKey(): int
     {
         $max = 18446744073709551615;
-        while (self::where($this->getPrimary(), $rand = rand(1000, $max))->exists()) ;
+        while (self::where($this->getPrimary(), $rand = rand(1000000, $max))->exists()) ;
         return $rand;
     }
 }

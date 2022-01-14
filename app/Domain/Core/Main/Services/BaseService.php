@@ -8,6 +8,7 @@ use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Core\Main\Interfaces\ServiceInterface;
 use App\Domain\Core\Main\Traits\FastInstantiation;
 use App\Domain\Core\Main\Traits\FilterArray;
+use App\Domain\Product\Product\Entities\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Nette\Schema\ValidationException;
@@ -102,6 +103,20 @@ abstract class BaseService implements ServiceInterface
         }
     }
 
+    protected function toggleCheckBoxObject(array $object_data, $parent_object, string $class, $parent_key)
+    {
+        $create_object = false;
+        $object = $class::where($parent_key, "=", $parent_object->id);
+        $exists = $object->exists();
+        if (array_key_exists("checked", $object_data) && !$exists) {
+            $create_object = true;
+        } else if (!array_key_exists("checked", $object_data) && $exists) {
+            $object->delete();
+        }
+        if ($create_object)
+            $class::create([$parent_key => $parent_object->id]);
+    }
+
 // there is many , when I will use key in entity it will give many items
     public
     function createOrUpdateMany(array $object_data, array $parent, int $start = 1)
@@ -174,7 +189,7 @@ abstract class BaseService implements ServiceInterface
 
         $filtered = $this->filterRecursive($object_data);
         if (!empty($filtered)) {
-            $this->validate($object_data, $this->validateUpdateRules());
+//            $this->validate($object_data, $this->validateUpdateRules());
             $object->update($filtered);
         }
         return $object;

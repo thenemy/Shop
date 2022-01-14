@@ -29,8 +29,8 @@ if (!function_exists('put_env')) {
         return true;
     }
 }
-if (!function_exists('test')) {
-    function test(array $values = [])
+if (!function_exists('get_cities')) {
+    function get_cities(array $values = [])
     {
         $s = new \App\Domain\Delivery\Api\Models\DpdGeography();
         $result = $s->getSerializedCities("UZ");
@@ -38,7 +38,23 @@ if (!function_exists('test')) {
         $service->bulkInsertion($result);
     }
 }
-
+if (!function_exists('test')) {
+    function test(array $values = [])
+    {
+        $s = new \App\Domain\Delivery\Api\Models\DpdCalculator();
+        $all = \App\Domain\Shop\Entities\ShopAddress::all();
+        try {
+            $result = $s->getCost(
+                $all->first()->delivery,
+                $all->skip(1)->first()->delivery,
+                \App\Domain\Product\Product\Entities\Product::all()
+            );
+            dd($result);
+        } catch (\SoapFault $exception) {
+            dd($exception->getMessage());
+        }
+    }
+}
 if (!function_exists('check_auto')) {
     function check_auto(array $values = [])
     {
@@ -72,5 +88,21 @@ if (!function_exists('month_num')) {
     function month_num(): int
     {
         return intval(date('m'));
+    }
+}
+
+if (!function_exists('today_num')) {
+    function today_num(): int
+    {
+        return intval(date('w'));
+    }
+}
+
+
+if (!function_exists('cities')) {
+    function cities()
+    {
+        \Maatwebsite\Excel\Facades\Excel::import(new \App\Domain\Delivery\Excell\Imports\AvailableCityImport(),
+            public_path("cities.xls"));
     }
 }

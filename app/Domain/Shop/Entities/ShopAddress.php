@@ -5,15 +5,14 @@ namespace App\Domain\Shop\Entities;
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Delivery\Entities\DeliveryAddress;
 use App\Domain\User\Entities\User;
+use App\Domain\User\Traits\HasUserRelationship;
 
 class ShopAddress extends Entity
 {
+    use HasUserRelationship;
+
     protected $table = "shop_addresses";
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(User::class, 'user_id');
-    }
 
     public function workTime(): \Illuminate\Database\Eloquent\Relations\HasOne
     {

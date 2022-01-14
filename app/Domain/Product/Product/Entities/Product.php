@@ -29,7 +29,6 @@ class Product extends Entity implements ProductInterface
 {
     use Translatable, Sluggable, MediaManyTrait, ConvertToSum, AttachNested;
 
-    public $guarded = [];
     protected $table = "products";
 
     public function newEloquentBuilder($query): ProductBuilder

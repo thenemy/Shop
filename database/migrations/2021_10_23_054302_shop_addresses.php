@@ -16,6 +16,7 @@ class ShopAddresses extends Migration
         Schema::create('shop_addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
+                ->unique()
                 ->constrained('users')
                 ->onDelete('CASCADE')
                 ->onUpdate('CASCADE');
