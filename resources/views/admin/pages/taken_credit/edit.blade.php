@@ -27,7 +27,7 @@
             </div>
             </div>			
 
-            <div 	class='flex flex-col  space-y-2 space-y-2'>
+            <div 	class='flex flex-col  space-y-2 space-y-2 w-full flex-1'>
                 			
 <livewire:admin.pages.taken-credit-edit.monthly-paid-index
             :filterBy="['taken_credit_id' => $entity->id,]" />			

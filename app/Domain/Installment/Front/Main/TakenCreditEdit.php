@@ -41,9 +41,9 @@ class TakenCreditEdit extends TakenCredit implements CreateAttributesInterface
                             KeyTextAttribute::new(__("Количество месяцев"), 'number_month')
                         ])
                 ]),
-                ContainerColumn::newClass("space-y-2", [
-                        new FileLivewireCreatorWithFilterBy("TakenCreditEdit", MonthlyPaidIndex::new()),
-                        new FileLivewireCreatorWithFilterBy("TakenCreditEdit", TimeScheduleTransactionIndex::new())
+                ContainerColumn::newClass("space-y-2 w-full flex-1", [
+                    new FileLivewireCreatorWithFilterBy("TakenCreditEdit", MonthlyPaidIndex::new()),
+                    new FileLivewireCreatorWithFilterBy("TakenCreditEdit", TimeScheduleTransactionIndex::new())
                 ])
             ]),
 //            self::generationSuretyEdit(self::SURETY_TO),
