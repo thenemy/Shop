@@ -26,7 +26,7 @@ class Merchant extends AuthPaymoService
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->token,
         ])->post(self::SERVER . 'create', [
-            'amount' => $amount,
+            'amount' => $amount * 100,
             'account' => $account,
             'store_id' => $this->store_id,
             'terminal_id' => $terminal_id,
