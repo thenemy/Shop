@@ -38,6 +38,7 @@ class WithdrawMoney
 
     public function reverse()
     {
-        $this->merchant->reverse($this->payable->getTransaction());
+        if ($this->payable->getTransaction())
+            $this->merchant->reverse($this->payable->getTransaction());
     }
 }
