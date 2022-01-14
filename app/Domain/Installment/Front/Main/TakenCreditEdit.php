@@ -6,6 +6,7 @@ use App\Domain\Core\File\Models\Livewire\FileLivewireCreatorWithFilterBy;
 use App\Domain\Core\Front\Admin\Attributes\Containers\ContainerColumn;
 use App\Domain\Core\Front\Admin\Attributes\Containers\ContainerRow;
 use App\Domain\Core\Front\Admin\Attributes\Containers\ContainerTitle;
+use App\Domain\Core\Front\Admin\Attributes\Containers\NestedContainer;
 use App\Domain\Core\Front\Admin\File\Attributes\FileAttribute;
 use App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute;
 use App\Domain\Core\Front\Admin\Form\Interfaces\CreateAttributesInterface;
@@ -41,12 +42,10 @@ class TakenCreditEdit extends TakenCredit implements CreateAttributesInterface
                         ])
                 ]),
                 ContainerColumn::newClass("space-y-2", [
-                    new FileLivewireCreatorWithFilterBy("TakenCreditEdit", MonthlyPaidIndex::new()),
-                    new FileLivewireCreatorWithFilterBy("TakenCreditEdit", TimeScheduleTransactionIndex::new())
+                        new FileLivewireCreatorWithFilterBy("TakenCreditEdit", MonthlyPaidIndex::new()),
+                        new FileLivewireCreatorWithFilterBy("TakenCreditEdit", TimeScheduleTransactionIndex::new())
                 ])
             ]),
-            new FileLivewireCreatorWithFilterBy("TakenCreditEdit", MonthlyPaidIndex::new()),
-
 //            self::generationSuretyEdit(self::SURETY_TO),
             CommentInstallmentDynamic::getDynamic("TakenCreditEdit"),
 

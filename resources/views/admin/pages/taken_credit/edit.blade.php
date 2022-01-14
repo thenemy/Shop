@@ -35,8 +35,6 @@
             :filterBy="['taken_credit_id' => $entity->id,]" />
             </div>
             </div>
-<livewire:admin.pages.taken-credit-edit.monthly-paid-index
-            :filterBy="['taken_credit_id' => $entity->id,]" />
 <livewire:admin.pages.taken-credit-edit.comment-installment-dynamic 
                  parentKey='taken_credit_id'
                 :parentId='$entity->id'/>
