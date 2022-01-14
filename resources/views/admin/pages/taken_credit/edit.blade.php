@@ -12,7 +12,7 @@
             <span class='font-bold text-lg'>{{__('Информация о клиенте')}}</span>
                 			
 <x-helper.text.text_key key='Имя клиента' value='{{$entity->userData->crucialData->name ?? ""}}'></x-helper.text.text_key>			
-<x-helper.text.text_key key='Номер карты' value='{{$entity->plastic->pin ?? ""}}'></x-helper.text.text_key>
+<x-helper.text.text_key key='Номер карты' value='{{$entity->plastic->pan ?? ""}}'></x-helper.text.text_key>
             </div>			
 
             <div 	class='border p-2'>

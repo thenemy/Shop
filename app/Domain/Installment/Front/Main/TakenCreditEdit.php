@@ -28,7 +28,7 @@ class TakenCreditEdit extends TakenCredit implements CreateAttributesInterface
                     ContainerTitle::newTitle("Информация о клиенте",
                         "border p-2", [
                             KeyTextAttribute::new(__("Имя клиента"), self::CRUCIAL_DATA_TO . "name"),
-                            KeyTextAttribute::new(__("Номер карты"), self::PLASTIC_CARD_TO . "pin")
+                            KeyTextAttribute::new(__("Номер карты"), self::PLASTIC_CARD_TO . "pan")
                         ]),
                     ContainerTitle::newTitle("Информация о товаре",
                         "border p-2", [
