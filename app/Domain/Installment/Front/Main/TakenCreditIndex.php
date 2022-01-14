@@ -26,6 +26,7 @@ class TakenCreditIndex extends TakenCredit implements TableInFront, CreateAttrib
 {
     public function getIdUserPurchaseIndexAttribute()
     {
+        dd($this);
         return TextAttribute::generation($this, $this->purchase->user_purchase_id);
     }
 
