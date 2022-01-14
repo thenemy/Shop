@@ -27,37 +27,37 @@ class TakenCreditIndex extends TakenCredit implements TableInFront, CreateAttrib
 
     public function getIdPurchaseAttribute()
     {
-        return TextAttribute::generation($this, $this->purchase_id);
+        return TextAttribute::generation($this, $this->purchase_id, true);
     }
 
     public function getAllSumIndexAttribute()
     {
-        return TextAttribute::generation($this, $this->purchase->price);
+        return TextAttribute::generation($this, $this->purchase->price, true);
     }
 
     public function getClientIndexAttribute()
     {
-        return TextAttribute::generation($this, $this->userData->full_name);
+        return TextAttribute::generation($this, $this->userData->full_name, true);
     }
 
     public function getPhoneIndexAttribute()
     {
-        return TextAttribute::generation($this, $this->userData->phone);
+        return TextAttribute::generation($this, $this->userData->phone, true);
     }
 
     public function getDateCreationIndexAttribute()
     {
-        return TextAttribute::generation($this, $this->created_at);
+        return TextAttribute::generation($this, $this->created_at , true);
     }
 
     public function getDateApprovalIndexAttribute()
     {
-        return TextAttribute::generation($this, $this->date_taken);
+        return TextAttribute::generation($this, $this->date_taken, true);
     }
 
     public function getDateFinishIndexAttribute()
     {
-        return TextAttribute::generation($this, $this->date_finish);
+        return TextAttribute::generation($this, $this->date_finish, true);
     }
 
     public function getStatusIndexAttribute()
