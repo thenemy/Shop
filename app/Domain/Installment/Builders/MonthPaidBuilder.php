@@ -9,7 +9,7 @@ class MonthPaidBuilder extends BuilderEntity
 {
     protected function getSearch(): string
     {
-        return "";
+        return "paid";
     }
 
     protected function getParent(): string
