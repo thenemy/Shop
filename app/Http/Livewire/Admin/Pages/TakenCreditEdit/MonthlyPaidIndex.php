@@ -7,12 +7,13 @@ use App\Http\Livewire\Admin\Base\Abstracts\BaseLivewire;
 class MonthlyPaidIndex extends BaseLivewire
 {
 
-    
+
 
 
     //3   --- set of functions and variables
     public function getPath()
     {
+        dd();
         return 'livewire.admin.pages.taken-credit-edit.monthly-paid-index'; //4  --- path to blade
     }
 
