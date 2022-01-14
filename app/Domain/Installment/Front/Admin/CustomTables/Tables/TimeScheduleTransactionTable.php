@@ -11,8 +11,13 @@ class TimeScheduleTransactionTable extends BaseTable
     public function getColumns(): array
     {
         return [
-            Column::new(__("Время списания"), 'time_index'),
-            Column::new(__("Детали"), "detail_index")
+            Column::new(__("Время списания"), 'time-index'),
+            Column::new(__("Детали"), "detail-index")
         ];
+    }
+
+    public function turnOffActions(): string
+    {
+        return "1";
     }
 }
