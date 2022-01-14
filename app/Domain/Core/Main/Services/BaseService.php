@@ -148,7 +148,7 @@ abstract class BaseService implements ServiceInterface
     function createIfExists(array $object_data, array $addition = [])
     {
         if (!empty($object_data)) {
-            $this->createNew(array_merge($object_data, $addition));
+           return $this->createNew(array_merge($object_data, $addition));
         }
     }
 

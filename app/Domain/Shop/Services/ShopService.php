@@ -44,8 +44,7 @@ class ShopService extends BaseService implements ShopRelationInterface
             $object_data['id'] = $this->userService->create($user_array)->id;
             $object = parent::create($object_data);
             $address['user_id'] = $object_data['id'];
-            if (!empty($address))
-                $this->addressService->create($address);
+            $this->addressService->create($address);
             DB::commit();
             return $object;
         } catch (\Throwable $exception) {

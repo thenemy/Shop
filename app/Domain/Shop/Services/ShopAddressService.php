@@ -27,7 +27,7 @@ class ShopAddressService extends BaseService implements ShopRelationInterface
             DB::beginTransaction();
             $works = $this->popCondition($object_data, self::WORK_TIME);
             $delivery = $this->popCondition($object_data, self::DELIVERY_ADDRESS);
-            $delivery_object = $this->addressService->create($delivery);
+            $delivery_object = $this->addressService->createIfExists($delivery);
             $object = $this->createWith($object_data, [
                 'delivery_address_id' => $delivery_object->id
             ]);
