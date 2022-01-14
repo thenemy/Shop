@@ -28,6 +28,7 @@ class InstallmentPayService
         $this->withdraw = new WithdrawMoney($taken);
         $this->taken = $taken;
     }
+
     /// method which will add to true sum the cost of delivery
     public function pay()
     {
@@ -55,7 +56,7 @@ class InstallmentPayService
     //**/
     private function isPaidInPlace()
     {
-        return isset($this->object_data['payment_type']);
+        return array_key_exists("payment_type", $this->object_data);
     }
 
 
