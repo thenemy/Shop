@@ -45,7 +45,7 @@ class TakenCreditEdit extends TakenCredit implements CreateAttributesInterface
                     new FileLivewireCreatorWithFilterBy("TakenCreditEdit", TimeScheduleTransactionIndex::new())
                 ])
             ]),
-            self::generationSuretyEdit(self::SURETY_TO),
+//            self::generationSuretyEdit(self::SURETY_TO),
             CommentInstallmentDynamic::getDynamic("TakenCreditEdit"),
 
         ]);

@@ -35,47 +35,6 @@
             :filterBy="['taken_credit_id' => {{$entity->id ?? ""}},]" />
             </div>
             </div>
-
-<x-helper.input.input name='surety->phone' type='text'
-            label='{{__("Телефон пользователя")}}' value='{{old("surety->phone") ?? $entity->surety->phone ?? " "}}' id='surety->phone'  onkeyup=""/>
-<x-helper.input.input name='surety->additional_phone' type='text'
-            label='{{__("Дополнительный телефон")}}' value='{{old("surety->additional_phone") ?? $entity->surety->additional_phone ?? " "}}' id='surety->additional_phone'  onkeyup=""/>
-<x-helper.input.input name='surety->crucialData->firstname' type='text'
-            label='{{__("Имя пользователя")}}' value='{{old("surety->crucialData->firstname") ?? $entity->surety->crucialData->firstname ?? " "}}' id='surety->crucialData->firstname'  onkeyup=""/>
-<x-helper.input.input name='surety->crucialData->lastname' type='text'
-            label='{{__("Фамилия пользователя")}}' value='{{old("surety->crucialData->lastname") ?? $entity->surety->crucialData->lastname ?? " "}}' id='surety->crucialData->lastname'  onkeyup=""/>
-<x-helper.input.input name='surety->crucialData->father_name' type='text'
-            label='{{__("Отчество пользователя")}}' value='{{old("surety->crucialData->father_name") ?? $entity->surety->crucialData->father_name ?? " "}}' id='surety->crucialData->father_name'  onkeyup=""/>
-<x-helper.input.input name='surety->crucialData->series' type='text'
-            label='{{__("Паспорт серия")}}' value='{{old("surety->crucialData->series") ?? $entity->surety->crucialData->series ?? " "}}' id='surety->crucialData->series'  onkeyup=""/>
-<x-helper.input.input name='surety->crucialData->pnfl' type='text'
-            label='{{__("ПНФЛ")}}' value='{{old("surety->crucialData->pnfl") ?? $entity->surety->crucialData->pnfl ?? " "}}' id='surety->crucialData->pnfl'  onkeyup=""/>
-<x-helper.input.input name='surety->crucialData->date_of_birth' type='date'
-            label='{{__("Дата рождения")}}' value='{{old("surety->crucialData->date_of_birth") ?? $entity->surety->crucialData->date_of_birth ?? " "}}' id='surety->crucialData->date_of_birth'  onkeyup=""/>
-<livewire:components.file.file-uploading
-                    :entityId='$entity->id'
-                    mediaKey='surety->passport_reverse_edit'
-                    entityClass='App\Domain\User\Front\Open\SuretyOpenEdit'
-                    :multiple='false'
-                    label='Прописка'
-                     />
-<livewire:components.file.file-uploading
-                    :entityId='$entity->id'
-                    mediaKey='surety->passport_user_edit'
-                    entityClass='App\Domain\User\Front\Open\SuretyOpenEdit'
-                    :multiple='false'
-                    label='Паспорт c пользователем'
-                     />
-<livewire:components.file.file-uploading
-                    :entityId='$entity->id'
-                    mediaKey='surety->passport_edit'
-                    entityClass='App\Domain\User\Front\Open\SuretyOpenEdit'
-                    :multiple='false'
-                    label='Паспорт пользователя'
-                     />
-<livewire:admin.pages.surety-open-edit.surety-plastic-card-dynamic 
-                 parentKey='user_id'
-                :parentId='$entity->id'/>
 <livewire:admin.pages.taken-credit-edit.comment-installment-dynamic 
                  parentKey='taken_credit_id'
                 :parentId='$entity->id'/>
