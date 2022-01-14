@@ -14,12 +14,16 @@ class InvoiceFile extends Migration
     public function up()
     {
         Schema::create('invoice_file', function (Blueprint $table) {
-            $table->foreignId("id")
-                ->primary()
-                ->constrained("delivery")
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
+            $table->foreignId("user_purchase_id") // from here we will get all relevant products
+            ->constrained("user_purchases")
+                ->restrictOnDelete()
+                ->restrictOnDelete();
+            $table->foreignId("shop_id") // this is needed for getting relevant products, and pick Up
+            ->constrained("shops")
+                ->restrictOnUpdate()
+                ->restrictOnDelete();
             $table->string("file");
+            $table->primary(['user_purchase_id', "shop_id"]);
         });
     }
 
