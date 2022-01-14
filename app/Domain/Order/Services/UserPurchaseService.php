@@ -74,7 +74,7 @@ class UserPurchaseService extends BaseService implements UserPurchaseRelation
             $purchases = $this->toPurchases($object_data);
             $object->purchases()->createMany($purchases);
             DB::commit();
-            return $purchases;
+            return $object;
         } catch (\Throwable $exception) {
             DB::rollBack();
             throw  $exception;
