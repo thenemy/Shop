@@ -10,7 +10,7 @@
             %s
         </div>
         {{--    insert name of the breadcrumbs and the arguments--}}
-        <div class="w-full ">
+        <div class="w-full pb-10 ">
             %s
         </div>
     </div>

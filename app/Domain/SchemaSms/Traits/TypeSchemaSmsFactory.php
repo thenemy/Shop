@@ -10,6 +10,7 @@ use App\Domain\SchemaSms\Interfaces\SchemaSmsType;
 
 trait TypeSchemaSmsFactory
 {
+
     public function getNameSchemaAttribute()
     {
 

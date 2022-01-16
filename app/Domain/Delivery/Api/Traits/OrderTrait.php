@@ -20,13 +20,13 @@ trait OrderTrait
      */
     private function calculateDatePickUp(Collection $times): array
     {
-        $datePickUp = $times->firstWhere("day", ">=", today_num()); // there can be null because working period
+        $datePickUp = $times->firstWhere("day", ">=", weekday_num()); // there can be null because working period
         // on this week ends
         if (!$datePickUp) {
             $datePickUp = $times->first(); // so first working day is picked in the next week
-            $day = self::NUM_DAYS_WEEK + $datePickUp->day - today_num(); // we only need
+            $day = self::NUM_DAYS_WEEK + $datePickUp->day - weekday_num(); // we only need
         } else {
-            $day = today_num() - $datePickUp->day;
+            $day = weekday_num() - $datePickUp->day;
         }
         return [now()->addDays($day)->format("yy-mm-dd"), $datePickUp];
     }

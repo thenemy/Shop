@@ -8,7 +8,7 @@ class MonthlyPaidIndex extends BaseLivewire
 {
 
     
-
+ public function sendNotPaid(){\App\Domain\Installment\Front\Admin\Functions\SmsNotPayment::sendNotPaid($this);}
 
     //3   --- set of functions and variables
     public function getPath()

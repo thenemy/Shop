@@ -90,9 +90,15 @@ if (!function_exists('month_num')) {
         return intval(date('m'));
     }
 }
-
 if (!function_exists('today_num')) {
     function today_num(): int
+    {
+        return intval(date('d'));
+    }
+}
+
+if (!function_exists('weekday_num')) {
+    function weekday_num(): int
     {
         return intval(date('w'));
     }

@@ -62,7 +62,7 @@ class TakenCreditService extends BaseService implements TakenCreditRelationInter
             $object_data['user_credit_data_id'] = $user_data->id;
             $object_data['user_id'] = $user_data->user_id;
             $surety_data = $this->popCondition($object_data, self::SURETY_SERVICE);
-            if (isset($object_data['surety_is'])) {
+            if (array_key_exists("check", $surety_data)) {
                 $object_data['surety_id'] = $this->surety->create($surety_data)->id;
             }
             $purchases = $this->purchaseService->create($object_data);

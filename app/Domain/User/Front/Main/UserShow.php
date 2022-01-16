@@ -9,7 +9,7 @@ use App\Domain\Core\Front\Admin\Attributes\Containers\ContainerRow;
 use App\Domain\Core\Front\Admin\Attributes\Containers\NestedContainer;
 use App\Domain\Core\Front\Admin\Form\Attributes\Models\ImageCompileAttribute;
 use App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute;
-use App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextLinkAttribute;
+use App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextLinkDownloadAttribute;
 use App\Domain\Core\Front\Admin\Form\Interfaces\CreateAttributesInterface;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\Installment\Front\Nested\TakenCreditFiltered;
@@ -51,12 +51,12 @@ class UserShow extends User implements CreateAttributesInterface
                     ], [
                         KeyTextAttribute::new(__("Серия паспорта"), self::CRUCIAL_DATA . 'series'),
                         KeyTextAttribute::new('ПНФЛ', self::CRUCIAL_DATA . 'pnfl'),
-                        KeyTextLinkAttribute::newLink(__("Паспорт"), __("Скачать"),
+                        KeyTextLinkDownloadAttribute::newLink(__("Паспорт"), __("Скачать"),
                             UserRelationInterface::CRUCIAL_DATA . 'passport'),
-                        KeyTextLinkAttribute::newLink(__("Прописка"), __("Скачать"),
+                        KeyTextLinkDownloadAttribute::newLink(__("Прописка"), __("Скачать"),
                             UserRelationInterface::CRUCIAL_DATA
                             . "passport_reverse"),
-                        KeyTextLinkAttribute::newLink(__("Паспорт c пользователем"), __("Скачать"),
+                        KeyTextLinkDownloadAttribute::newLink(__("Паспорт c пользователем"), __("Скачать"),
                             UserRelationInterface::CRUCIAL_DATA
                             . "user_passport"),
                     ]),

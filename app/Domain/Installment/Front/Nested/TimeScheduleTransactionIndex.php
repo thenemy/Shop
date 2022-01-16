@@ -3,6 +3,7 @@
 namespace App\Domain\Installment\Front\Nested;
 
 use App\Domain\Core\Front\Admin\CustomTable\Actions\Base\AllActions;
+use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Interfaces\TableFilterByInterface;
 use App\Domain\Core\Front\Admin\CustomTable\Interfaces\TableInFront;
 use App\Domain\Core\Front\Admin\CustomTable\Traits\TableFilterBy;
@@ -20,6 +21,16 @@ use App\Domain\Installment\Front\Admin\CustomTables\Tables\TimeScheduleTransacti
 class TimeScheduleTransactionIndex extends TimeScheduleTransactions implements TableInFront, FilterInterface, TableFilterByInterface
 {
     use TableFilterBy, ArrayHandle, AttributeGetVariable;
+
+    public function getTimeIndexAttribute()
+    {
+        return TextAttribute::generation($this, "created_at");
+    }
+
+    public function getDetailAttribute()
+    {
+        return TextAttribute::generation($this, "detail");
+    }
 
     public function getKeyForFilter(): string
     {

@@ -10,9 +10,7 @@ class TakenCreditIndex extends BaseLivewire
     
 
 
-        public function statusIndex($arg){$entity = $this->getEntity()::find($arg);
-             $entity->status_handle = !$entity->status_handle;
-             $entity->save();} //3   --- set of functions and variables
+         //3   --- set of functions and variables
     public function getPath()
     {
         return 'livewire.admin.pages.taken-credit.taken-credit-index'; //4  --- path to blade

@@ -2,20 +2,15 @@
 
 namespace App\Domain\Installment\Services;
 
-use App\Domain\Core\Api\CardService\Merchant\Model\Merchant;
+use App\Domain\Core\Api\CardService\Error\CardServiceError;
 use App\Domain\Core\Api\CardService\Model\WithdrawMoney;
 use App\Domain\CreditProduct\Entity\Credit;
-use App\Domain\Installment\Entities\TakenCredit;
 use App\Domain\Installment\Payable\TakenCreditPayable;
-use App\Domain\Order\Interfaces\UserOrderInterface;
-use App\Domain\Order\Services\UserPurchaseService;
-use App\Domain\Product\Product\Entities\Product;
-use Illuminate\Support\Facades\Log;
-use function Symfony\Component\Translation\t;
+use App\Domain\Order\Entities\UserPurchase;
+
 
 class InstallmentPayService
 {
-    private WithdrawMoney $withdraw;
     private float $initial_price;
     private Credit $credit;
     private array $object_data;
@@ -26,24 +21,34 @@ class InstallmentPayService
         $this->initial_price = $this->getInitialPrice($object_data);
         $this->credit = $this->getCredit($object_data);
         $this->object_data = $object_data;
-        $this->withdraw = new WithdrawMoney($taken);
         $this->taken = $taken;
+
+    }
+
+    private function withdraw()
+    {
+        if (!$this->isPaidInPlace()) {
+            try {
+                $withdraw = new WithdrawMoney($this->taken);
+                $withdraw->withdraw();
+            } catch (CardServiceError $exception) {
+                $withdraw->reverse();
+                throw $exception;
+            }
+        }
     }
 
     /// method which will add to true sum the cost of delivery
+
     public function pay()
     {
         try {
-            $overall_sum = $this->createUserPurchase();
+            $overall_sum = $this->getSumOfPurchases();
             $true_sum = $this->getTrueSum($overall_sum);
             $sum_per_month = $this->getSumPerMonth($true_sum);
             $this->fillMonthPaid($sum_per_month);
-            Log::debug($this->isPaidInPlace());
-            if (!$this->isPaidInPlace()) {
-                $this->withdraw->withdraw();
-            }
+            $this->withdraw();
         } catch (\Exception $exception) {
-            $this->withdraw->reverse();
             throw $exception;
         }
 
@@ -53,7 +58,7 @@ class InstallmentPayService
     // make unique exception
     // give appropriate name for them
     // so
-    //  if cannot be installed will be thrown error cannot be installed
+    // if cannot be installed will be thrown error cannot be installed
     // I will catch and dispatch FailedToWithdraw
     //**/
     private function isPaidInPlace()
@@ -62,7 +67,10 @@ class InstallmentPayService
     }
 
 
-    private function createUserPurchase(): int
+    /**
+     * @props  UserPurchase
+     */
+    private function getSumOfPurchases(): int
     {
         return $this->taken->purchase->sumPurchases();
     }
@@ -81,6 +89,8 @@ class InstallmentPayService
 
 
     //create MonthPaid for TakenCredit
+    // might be rewritten
+    // because there is no responsibility to create any entities
     private function fillMonthPaid($sum_per_month)
     {
         $months = [];
@@ -92,6 +102,11 @@ class InstallmentPayService
             ]);
         }
         $this->taken->monthPaid()->createMany($months);
+
+        /// must be set only when it will be accepted
+        $this->taken->date_taken = now();
+        $this->taken->date_finish = now()->addMonths(count($months));
+        $this->taken->save();
     }
 
 

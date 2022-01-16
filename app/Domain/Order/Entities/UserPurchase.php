@@ -23,12 +23,15 @@ class UserPurchase extends Entity implements UserPurchaseRelation
     {
         return $this->hasMany(Purchase::class);
     }
-    public function sumPurchases(){
+
+    public function sumPurchases()
+    {
         return $this->purchases()->sum("price");
     }
+
     public function getNumberPurchaseAttribute(): int
     {
-        return $this->purchases()->count();
+        return $this->purchases()->sum("quantity");
     }
 
     public function deliveryAddress(): \Illuminate\Database\Eloquent\Relations\BelongsTo

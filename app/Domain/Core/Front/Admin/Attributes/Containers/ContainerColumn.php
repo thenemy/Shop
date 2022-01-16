@@ -6,6 +6,6 @@ class ContainerColumn extends Container
 {
     public function __construct(array $items, array $attribute)
     {
-        parent::__construct($items, $this->append(['class' => "flex flex-col  space-y-2"], $attribute));
+        parent::__construct($items, $this->append($attribute, ['class' => " flex flex-col  space-y-2"]));
     }
 }

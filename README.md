@@ -43,5 +43,10 @@ in the user table will be the button to open window for nested transactions two 
 in the product table will be the button to open windows for netsted transactions two types installment and instant
 payment
 
-take account the discounts of the product when withdrawing money
-will be mutual exclusive , namely first discounts which is in banners if not exists which is in products
+take account the discounts of the product when withdrawing money will be mutual exclusive , namely first discounts which
+is in banners if not exists which is in products
+
+Check ALL JOBS IMPORTANT
+
+REWRITE MONTH in MONTH PAID MAKE IT THE DATE FIELD 
+

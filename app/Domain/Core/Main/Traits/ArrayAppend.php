@@ -6,7 +6,7 @@ trait ArrayAppend
 {
     static protected function append($attribute, array $append): array
     {
-        foreach ($attribute as $key => $value) {
+            foreach ($attribute as $key => $value) {
             $append_value = "";
             if (isset($append[$key])) {
                 $append_value = $append[$key];

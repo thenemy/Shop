@@ -2,6 +2,7 @@
 
 namespace App\Domain\Installment\Front\Admin\CustomTables\Tables;
 
+use App\Domain\Core\Front\Admin\Attributes\Containers\Container;
 use App\Domain\Core\Front\Admin\Attributes\Containers\ContainerRow;
 use App\Domain\Core\Front\Admin\Attributes\Models\Column;
 use App\Domain\Core\Front\Admin\Button\ModelInCompelationTime\MainButtonCompile;
@@ -26,9 +27,12 @@ class MonthlyPaidTable extends BaseTable
     public function slot(): string
     {
         return ContainerRow::generateClass("justify-end items-end", [
-            MainButtonCompile::new("Выставить счет", [
-                'wire:click' => SmsNotPayment::FUNCTION_NAME
-            ])
+            Container::new([],
+                [
+                    MainButtonCompile::new("Выставить счет", [
+                        'wire:click' => SmsNotPayment::FUNCTION_NAME
+                    ])
+                ])
         ]);
     }
 

@@ -10,7 +10,7 @@ class TakenCreditFiltered extends BaseLivewire
     
 
 
-         public function statusIndex($arg){$entity = $this->getEntity()::find($arg);
+        public function statusIndex($arg){$entity = $this->getEntity()::find($arg);
              $entity->status_handle = !$entity->status_handle;
              $entity->save();} //3   --- set of functions and variables
     public function getPath()

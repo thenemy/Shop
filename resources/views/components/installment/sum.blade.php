@@ -6,7 +6,7 @@
      @product-number.window="setProductsWithNumber($event.detail.product)"
      class="flex flex-row border w-full justify-around space-x-1">
     <div>
-        <span class="font-bold">{{__("Процент за месяц:")}}</span> <span x-text="percent_month"></span>
+        <span class="font-bold ">{{__("Процент за месяц:")}}</span> <span x-text="percent_month"></span>
     </div>
     <div>
         <span class="font-bold">{{__("Количество месяцев:")}}</span> <span x-text="number_month"> </span>

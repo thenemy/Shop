@@ -17,7 +17,7 @@ class Merchant extends AuthPaymoService
     public function __construct()
     {
         parent::__construct();
-        $this->token = $this->getToken();
+            $this->token = $this->getToken();
         $this->store_id = env(self::STORE_ID);
     }
 

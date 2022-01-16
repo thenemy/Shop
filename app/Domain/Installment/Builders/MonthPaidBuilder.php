@@ -17,12 +17,16 @@ class MonthPaidBuilder extends BuilderEntity
         return "taken_credit_id";
     }
 
+    // will be rewritten
     public function unpaidForMonth()
     {
         return $this
-            ->where('month', month_num())
-            ->from('month_paid', 'check')
-            ->where("month_paid.paid", "<", "check.must_pay")
-            ->select('month_paid.*');
+            ->from('month_paid', "first")
+            ->join("taken_credits", "taken_credits.id", "=", "first.taken_credit_id")
+            ->whereColumn("first.paid", "<", "first.must_pay") // check already paid or not
+            ->whereYear("taken_credits.date_taken", "<=", date('y'))
+            ->whereDay("taken_credits.date_taken", "<=", today_num()) // check  correct day
+            ->where('first.month', "<=", month_num()) // check correct month
+            ->select('*');
     }
 }

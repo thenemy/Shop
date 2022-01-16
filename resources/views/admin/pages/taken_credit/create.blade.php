@@ -38,7 +38,7 @@
                 additionalAction='App\Domain\Product\Product\Front\Admin\AdditionalActions\GenerateRuleProductAdditionalAction'
                 />
 
-            <div 	class='flex flex-row  space-x-2 border-2 rounded p-2 w-full justify-start'>
+            <div 	class='border-2 rounded p-2 w-full justify-start flex flex-row  space-x-2'>
                 			
 <x-helper.input.input_checked name='delivery' type='checkbox'
             label='{{__("Самовызов")}}' value='{{old("delivery") ?? $entity->delivery ?? " "}}' id='payment_type'  onchange="$dispatch('delivery-update', {
@@ -48,10 +48,10 @@
             })"/>
             </div>
 
-            <div 	class='flex flex-col  space-y-2 border-2 rounded p-2 w-full items-start'>
+            <div 	class='border-2 rounded p-2 w-full items-start  flex flex-col  space-y-2'>
                 			
-<x-helper.input.input_checked name='surety' type='checkbox'
-            label='{{__("Поручитель")}}' value='{{old("surety") ?? $entity->surety ?? " "}}' id='surety_check'  onchange="$dispatch('surety-update', {
+<x-helper.input.input_checked name='surety->check' type='checkbox'
+            label='{{__("Поручитель")}}' value='{{old("surety->check") ?? $entity->surety->check ?? " "}}' id='surety_check'  onchange="$dispatch('surety-update', {
                data:{
                     value: event.target.value
                }

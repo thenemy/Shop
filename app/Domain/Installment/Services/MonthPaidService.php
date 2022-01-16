@@ -8,7 +8,6 @@ use App\Domain\Installment\Entities\MonthPaid;
 
 class MonthPaidService extends BaseService
 {
-
     public function getEntity(): Entity
     {
         return MonthPaid::new();

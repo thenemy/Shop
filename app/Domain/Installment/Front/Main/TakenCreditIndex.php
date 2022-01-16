@@ -24,6 +24,10 @@ use App\Domain\SchemaSms\Front\Attribute\SchemaSmsAttribute;
 
 class TakenCreditIndex extends TakenCredit implements TableInFront, CreateAttributesInterface, BladeActionsInterface
 {
+    public function getNumProductIndexAttribute()
+    {
+        return TextAttribute::generation($this, $this[self::PURCHASE_SERVICE]['number_purchase'], true);
+    }
 
     public function getIdPurchaseAttribute()
     {

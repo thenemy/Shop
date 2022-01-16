@@ -3,11 +3,17 @@
 namespace App\Domain\Order\Entities;
 
 use App\Domain\Core\Main\Entities\Entity;
+use App\Domain\Order\Builders\PurchaseBuilder;
 use App\Domain\Product\Product\Entities\Product;
 
 class Purchase extends Entity
 {
     protected $table = "purchases";
+
+    public function newEloquentBuilder($query)
+    {
+        return new PurchaseBuilder($query);
+    }
 
     public function product()
     {

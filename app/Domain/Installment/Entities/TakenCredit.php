@@ -17,11 +17,12 @@ use App\Domain\User\Traits\HasUserRelationship;
 /**
  * made tomorrow the installment
  */
-class TakenCredit extends Entity implements TakenCreditRelationInterface
+class   TakenCredit extends Entity implements TakenCreditRelationInterface
 {
     use HasUserRelationship;
 
     public $timestamps = true;
+
 
     protected $table = "taken_credits";
 
@@ -84,6 +85,17 @@ class TakenCredit extends Entity implements TakenCreditRelationInterface
     {
         return $this->belongsTo(UserPurchase::class, "purchase_id");
     }
+
+    public function getNumberMonthAttribute()
+    {
+        return $this->credit->month;
+    }
+
+    public function getMonthlyPaidAttribute()
+    {
+        return $this->monthPaid->first()->must_pay;
+    }
+
 
     public static function getRules(): array
     {

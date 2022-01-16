@@ -13,4 +13,13 @@ trait ArrayHandle
         }
         return $str . "]\"";
     }
+
+    public function arrayToStringWithoutQuotes(array $data): string
+    {
+        $str = "[";
+        foreach ($data as $key => $item) {
+            $str = $str . sprintf('"%s" => %s,', $key, $item);
+        }
+        return $str . "]";
+    }
 }

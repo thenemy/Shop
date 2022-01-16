@@ -60,7 +60,7 @@ class TakenCreditCreate extends TakenCredit implements CreateAttributesInterface
             ]),
             ContainerColumn::newClass("border-2 rounded p-2 w-full items-start", [
                 InputAttribute::createAttribute(
-                    "surety",
+                    self::SURETY_TO . "check",
                     'checkbox',
                     "Поручитель",
                     "surety_check",

@@ -12,25 +12,28 @@ class KeyTextAttribute implements HtmlInterface
 
     protected string $key;
     protected string $value;
+    protected string $postfix;
 
-    public function __construct(string $key, string $value)
+    public function __construct(string $key, string $value, string $postfix = "")
     {
         $this->key = $key;
         $this->value = $value;
+        $this->postfix = $postfix;
     }
 
-    static public function new(string $key, string $value)
+    static public function new(string $key, string $value, string $postfix = "")
     {
         $class = get_called_class();
-        return new $class($key, $value);
+        return new $class($key, $value, $postfix);
     }
 
     public function generateHtml(): string
     {
         return sprintf(
-            "<x-helper.text.text_key key='%s' value='%s'></x-helper.text.text_key>",
+            "<x-helper.text.text_key key='%s' value='%s %s'></x-helper.text.text_key>",
             $this->key,
-            $this->getAttributeVariable($this->value)
+            $this->getAttributeVariable($this->value),
+            $this->postfix
         );
     }
 }

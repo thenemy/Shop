@@ -18,28 +18,54 @@
             label='{{__("ПНФЛ")}}' value='{{old("crucialData->pnfl") ?? $entity->crucialData->pnfl ?? " "}}' id='crucialData->pnfl'  onkeyup=""/>
 <x-helper.input.input name='crucialData->date_of_birth' type='date'
             label='{{__("Дата рождения")}}' value='{{old("crucialData->date_of_birth") ?? $entity->crucialData->date_of_birth ?? " "}}' id='crucialData->date_of_birth'  onkeyup=""/>
-<livewire:components.file.file-uploading
+@if($entity)  <livewire:components.file.file-uploading
                     :entityId='$entity->id'
                     mediaKey='passport_reverse_edit'
                     entityClass='App\Domain\User\Front\Open\SuretyOpenEdit'
                     :multiple='false'
                     label='Прописка'
-                     />
-<livewire:components.file.file-uploading
+                     /> <livewire:components.file.file-uploading
                     :entityId='$entity->id'
                     mediaKey='passport_user_edit'
                     entityClass='App\Domain\User\Front\Open\SuretyOpenEdit'
                     :multiple='false'
                     label='Паспорт c пользователем'
-                     />
-<livewire:components.file.file-uploading
+                     /> <livewire:components.file.file-uploading
                     :entityId='$entity->id'
                     mediaKey='passport_edit'
                     entityClass='App\Domain\User\Front\Open\SuretyOpenEdit'
                     :multiple='false'
                     label='Паспорт пользователя'
-                     />
-<livewire:admin.pages.surety-open-edit.surety-plastic-card-dynamic 
+                     /> <livewire:admin.pages.surety-open-edit.surety-plastic-card-dynamic 
                  parentKey='user_id'
                 :parentId='$entity->id'/>
+@else  <livewire:components.file.file-uploading-without-entity
+                    keyToAttach='crucialData->passport_reverse'
+                    mediaKey='file_create'
+                    entityClass='App\Domain\File\Entities\FileTemp'
+                    :multiple='false'
+                    :label='__("Прописка")'
+                    :entityId='old("file->id_file->crucialData->passport_reverse") ?? ""'
+                    :mediaInitial='""'
+                    wire:key=''
+                     /> <livewire:components.file.file-uploading-without-entity
+                    keyToAttach='crucialData->user_passport'
+                    mediaKey='file_create'
+                    entityClass='App\Domain\File\Entities\FileTemp'
+                    :multiple='false'
+                    :label='__("Паспорт c пользователем")'
+                    :entityId='old("file->id_file->crucialData->user_passport") ?? ""'
+                    :mediaInitial='""'
+                    wire:key=''
+                     /> <livewire:components.file.file-uploading-without-entity
+                    keyToAttach='crucialData->passport'
+                    mediaKey='file_create'
+                    entityClass='App\Domain\File\Entities\FileTemp'
+                    :multiple='false'
+                    :label='__("Паспорт пользователя")'
+                    :entityId='old("file->id_file->crucialData->passport") ?? ""'
+                    :mediaInitial='""'
+                    wire:key=''
+                     />
+ @endif
 @endsection

@@ -4,8 +4,9 @@ namespace App\Domain\Installment\Entities;
 
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Installment\Builders\MonthPaidBuilder;
+use App\Domain\Installment\Interfaces\MonthPaidInterface;
 
-class MonthPaid extends Entity
+class MonthPaid extends Entity implements MonthPaidInterface
 {
     protected $table = "month_paid";
 

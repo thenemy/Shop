@@ -5,8 +5,6 @@
                 <x-helper.text.text_lg>{{$title}}</x-helper.text.text_lg>
             </div>
             <div class="w-5">
-                {{--                <img class="w-4/5 transform transition rotate-0 duration-300" :class="{'rotate-180': open}"--}}
-                {{--                     src="{{asset("images/arrows/arrow_down.svg")}}" alt="drop_down_below">--}}
                 <div :class="open && 'transform transition rotate-270'  || 'transform transition rotate-180' "
                      class="transform transition  ">
                     <span class="fas fa-arrow-up"></span>

@@ -31,6 +31,7 @@ abstract class BuilderEntity extends Builder implements BuilderInterface
         }
         return $this;
     }
+
     public function filterByNotIn($filter)
     {
         if (isset($filter['id'])) {
@@ -47,9 +48,11 @@ abstract class BuilderEntity extends Builder implements BuilderInterface
         if (isset($filter["search"])) {
             $search = $filter["search"];
             $this->where($this->getSearch(), "LIKE", "%" . $search . "%");
+            unset($filter['search']);
         }
         if (isset($filter[$this->getParent()])) {
             $this->where($this->getParent(), '=', $filter[$this->getParent()]);
+            unset($filter[$this->getParent()]);
         }
 
         return $this;

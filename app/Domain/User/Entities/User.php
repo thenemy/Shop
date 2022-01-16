@@ -71,4 +71,5 @@ class User extends Entity implements UserRelationInterface
             'phone' => "required",
         ];
     }
+
 }

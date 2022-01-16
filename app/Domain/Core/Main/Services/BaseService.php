@@ -139,8 +139,10 @@ abstract class BaseService implements ServiceInterface
     protected
     function changeKey(&$object_array, $new, $old = 'params')
     {
-        $object_array[$new] = $object_array[$old];
-        unset($object_array[$old]);
+        if (isset($object_array[$old])) {
+            $object_array[$new] = $object_array[$old];
+            unset($object_array[$old]);
+        }
     }
 
 

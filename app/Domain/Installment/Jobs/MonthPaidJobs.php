@@ -19,6 +19,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use PHPUnit\Exception;
 
+// check how it is working
 class MonthPaidJobs extends AbstractJob
 {
     private MonthPaidPayable $monthPaid;

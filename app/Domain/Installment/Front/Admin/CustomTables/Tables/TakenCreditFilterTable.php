@@ -16,8 +16,7 @@ class TakenCreditFilterTable extends AbstractTable
     public function getColumns(): array
     {
         return [
-            new Column(__("ID купленного заказа"), "id_user_purchase_index"),
-            new Column(__("ID купленного товара"), "id_purchase"),
+            new Column(__("ID заказа"), "id_purchase"),
             new Column(__("Cумма оплаты"), "all_sum_index"),
             new Column(__("Ф.И.О"), "client_index"),
             new Column(__("Номер телефона"), "phone_index"),

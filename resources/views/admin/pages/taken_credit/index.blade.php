@@ -10,7 +10,7 @@
             <livewire:components.schema-sms.schema-sms-livewire selected_class='App\Domain\SchemaSms\Entities\SchemaSmsInstallment' />
         </div>
         {{--    insert name of the breadcrumbs and the arguments--}}
-        <div class="w-full ">
+        <div class="w-full pb-10 ">
             
 <livewire:admin.pages.taken-credit.taken-credit-index />
         </div>

@@ -4,22 +4,27 @@ namespace App\Domain\Core\Front\Admin\Form\Traits;
 
 trait AttributeGetVariable
 {
-    protected function getAttributeVariable($value): string
+    static protected function getAttributeVariable($value): string
     {
-        return $this->getScope($this->getWithoutScopeAtrVariable($value));
+        return self::getScope(self::getWithoutScopeAtrVariable($value));
     }
 
-    protected function getScope($value)
+    static protected function getScope($value)
     {
         return sprintf('{{%s ?? ""}}', $value);
     }
 
-    protected function getWithoutScopeAtrVariable($value): string
+    static protected function getLangScope($value)
     {
-        return sprintf('%s->%s', $this->getEntityVariable(), $value);
+        return sprintf("{{__('%s')}}", $value);
     }
 
-    protected function getEntityVariable()
+    static protected function getWithoutScopeAtrVariable($value): string
+    {
+        return sprintf('%s->%s', self::getEntityVariable(), $value);
+    }
+
+    static protected function getEntityVariable()
     {
         return '$entity';
     }
