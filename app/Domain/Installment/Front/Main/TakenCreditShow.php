@@ -99,7 +99,10 @@ class TakenCreditShow extends TakenCredit implements CreateAttributesInterface
                         ENDIFstatement::new(),
                         DeliveryInformation::new()
                     ]),
-                SuretyPlasticCardDynamic::getDynamic("TakenCreditEdit"),
+                IFstatement::new(self::getWithoutScopeAtrVariable(self::SURETY_TO)),
+                SuretyPlasticCardDynamic::getDynamic("TakenCreditEdit", self::SURETY_TO . "id"),
+                ENDIFstatement::new(),
+
                 NestedContainer::new("__(\"Товары\")", [
                     new  FileLivewireWithoutActionFilterBy("TakenCreditEdit", PurchaseMain::new())
                 ], [

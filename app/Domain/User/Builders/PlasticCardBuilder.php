@@ -6,13 +6,13 @@ use App\Domain\Core\Main\Builders\BuilderEntity;
 
 class PlasticCardBuilder extends BuilderEntity
 {
-    public function joinUser(): PlasticCardBuilder
+    public function joinUser()
     {
         return $this->join("plastic_user_cards", "plastic_user_cards.plastic_id",
             "=", "plastic_card.id");
     }
 
-    public function joinUserWhere($user_id): PlasticCardBuilder
+    public function joinUserWhere($user_id)
     {
         return $this->joinUser()->where("plastic_user_cards.user_id", '=', $user_id);
     }

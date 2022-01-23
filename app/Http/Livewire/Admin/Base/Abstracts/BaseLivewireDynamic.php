@@ -11,11 +11,16 @@ use Illuminate\Support\Collection;
  * rules are not made
  * */
 
+
 abstract class BaseLivewireDynamic extends BaseLivewire
 {
     use FastInstantiation, GenerateRules;
 
     public $parentId = 0;
+
+    /**
+     * parent key used for insertion and filtration also for deletion
+     */
     public string $parentKey = "";
     public Collection $entity;
     public Collection $collection;

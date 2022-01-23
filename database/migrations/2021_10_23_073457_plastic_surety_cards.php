@@ -18,7 +18,7 @@ class PlasticSuretyCards extends Migration
                 ->constrained("plastic_card")
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
-            $table->foreignId('surety_id')
+                $table->foreignId('surety_id')
                 ->constrained('surety_data')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();

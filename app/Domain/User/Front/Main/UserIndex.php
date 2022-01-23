@@ -4,6 +4,7 @@ namespace App\Domain\User\Front\Main;
 
 use App\Domain\Core\File\Models\Livewire\FileLivewireCreator;
 use App\Domain\Core\Front\Admin\CustomTable\Actions\Base\AllActions;
+use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\ContainerTextAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\ImageAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\OpenAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
@@ -58,6 +59,17 @@ class UserIndex extends User implements
     public function getPhoneIndexAttribute(): string
     {
         return TextAttribute::generation($this, "phone");
+    }
+
+    public function getStatusIndexAttribute(): string
+    {
+        $class = "bg-blue-400";
+        $text = "Активный";
+        if($this->created_at->format("Y-m-d") == now()->format("Y-m-d")){
+            $class ="bg-green-400";
+            $text = "Новый";
+        }
+        return  ContainerTextAttribute::generation($class, new TextAttribute($this, __($text), true));
     }
 
     public function generateAttributes(): BladeGenerator

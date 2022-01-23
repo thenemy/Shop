@@ -6,6 +6,7 @@ use App\Domain\Core\File\Interfaces\BladeActionsInterface;
 use App\Domain\Core\File\Models\Livewire\FileLivewireCreator;
 use App\Domain\Core\Front\Admin\Blade\Base\AllBladeActions;
 use App\Domain\Core\Front\Admin\CustomTable\Actions\Base\AllActions;
+use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\ContainerTextAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\StatusAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Interfaces\TableInFront;
@@ -66,7 +67,32 @@ class TakenCreditIndex extends TakenCredit implements TableInFront, CreateAttrib
 
     public function getStatusIndexAttribute()
     {
-        return (new StatusAttribute($this, "status", "statusIndex"))->generateHtml();
+        $class=  "";
+        $text = "";
+        switch ($this->status){
+            case self::WAIT_ANSWER:
+                $class = "bg-blue-400";
+                $text = "Ожидается";
+                break;
+            case  self::ACCEPTED:
+                $class ="bg-green-400";
+                $text = "Принят";
+                break;
+            case self::DECLINED:
+                $class="bg-red-400";
+                $text ="Отказано";
+                break;
+            case self::REQUIRED_SURETY:
+                $class = "bg-blue-400";
+                $text = "Поручитель";
+                break;
+        }
+        return ContainerTextAttribute::generation(
+            $class,
+            new TextAttribute(
+                $this,
+                $text,
+                true));
     }
 
     public function setStatusHandleAttribute($value)

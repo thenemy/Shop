@@ -81,9 +81,11 @@
 <x-helper.text.text_key key='Адрес доставки' value='{{$entity->purchase->delivery_address->street ?? ""}}, {{$entity->purchase->delivery_address->house ?? ""}} '></x-helper.text.text_key>
             </div>  @endif
             </div>			
+@if($entity->surety) 			
 <livewire:admin.pages.taken-credit-edit.surety-plastic-card-dynamic 
                  parentKey='user_id'
-                :parentId='$entity->id'/>			
+                :parentId='$entity->surety->id'/>			
+ @endif			
 <x-helper.container.container :title='__("Товары")' 	class='flex flex-col flex flex-wrap justify-between'>
                 			
 <livewire:admin.pages.taken-credit-edit.purchase-main
