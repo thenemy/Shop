@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class MakeDateMonth extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+//        Schema::table('month_paid', function (Blueprint $table) {
+//            $table->dropColumn("month");
+//        });
+//
+//        Schema::table('month_paid', function (Blueprint $table) {
+//            $table->date("month");
+//        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //
+    }
+}

@@ -10,10 +10,10 @@ class MainCreditBuilder extends BuilderEntity
     {
         if (isset($filter['product_id'])) {
             $this->whereNotIn("id", function ($query) use ($filter) {
-                return $query->from("main_credits")
-                    ->join('product_credits',
-                        "product_credits.main_credit_id",
-                        '=', 'main_credits.id')
+                return $query->from("main_credits") // this is subquery
+                ->join('product_credits',
+                    "product_credits.main_credit_id",
+                    '=', 'main_credits.id')
                     ->where("product_id", "=", $filter['product_id'])
                     ->select('main_credits.id');
             });

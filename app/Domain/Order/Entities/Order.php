@@ -17,6 +17,14 @@ class Order extends Entity
 
     public $guarded = [];
     protected $table = "orders";
+    protected $casts = [
+        'order' => 'json'
+    ];
+
+    public function setOrderAttribute($value)
+    {
+        $this->appendToExisting('order', $value);
+    }
 
     public function basket(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
@@ -29,7 +37,7 @@ class Order extends Entity
             ->using(UserOrders::class);
     }
 
-    public function productOrder(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Product::class, "id");
     }

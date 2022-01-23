@@ -16,26 +16,53 @@ class StatisticAttribute implements HtmlInterface
     use GenerateTagAttributes, AttributeGetVariable;
 
     public string $icon;
-    public string $counter;
+    public string $all_counter;
+    public string $today_counter;
     public string $title;
+    public array $attribute_today;
+    public array $attribute_all;
 
-    public function __construct($icon, $counter, $title, array $attributes)
+    public function __construct(string $icon,
+                                string $counter,
+                                string $today_counter,
+                                string $title,
+                                array  $attributes,
+                                array  $attribute_today = [],
+                                array  $attribute_all = [])
     {
         $this->icon = $icon;
-        $this->counter = $counter;
+        $this->all_counter = $counter;
         $this->title = $title;
+        $this->today_counter = $today_counter;
         $this->attributes = $attributes;
+        $this->attribute_all = $attribute_all;
+        $this->attribute_today = $attribute_today;
     }
 
-    public static function new(string $icon, string $counter, string $title, array $attributes = [])
+    public static function new(string $icon, string $all_counter, string $today_counter, string $title, array $attributes = [])
     {
-        return new self($icon, $counter, $title, $attributes);
+        return new self($icon, $all_counter, $today_counter, $title, $attributes);
     }
 
-    public static function newLink(string $icon, string $counter, string $title, string $link): StatisticAttribute
+    public static function newLink(string $icon,
+                                   string $all_counter,
+                                   string $today_counter,
+                                   string $title,
+                                   string $link_today, string $link_all): StatisticAttribute
     {
-        return new self($icon, $counter, $title, ["class" => "cursor-pointer",
-            "onclick" => sprintf("location.href =\"{{%s}}\"", $link)]);
+        return new self(
+            $icon, $all_counter,
+            $today_counter,
+            $title, [],
+            [
+                "class" => "cursor-pointer hover:text-blue-300",
+                "onclick" => sprintf("location.href =\"{{%s}}\"", $link_today)
+            ],
+            [
+                'class' => "cursor-pointer hover:text-blue-300",
+                "onclick" => sprintf("location.href =\"{{%s}}\"", $link_all)
+            ]
+        );
     }
 
     public function generateHtml(): string
@@ -47,14 +74,29 @@ class StatisticAttribute implements HtmlInterface
                     'class' => $this->icon . ' text-4xl text-[#bebebe]'
                 ]),
                 ContainerColumn::new([
-                    'class' => "space-y-0.5 items-center"
+                    'class' => "space-y-0.5 items-start"
                 ], [
-                    Text::new(self::getScope($this->counter), [
-                        "class" => "font-bold text-2xl"
+                    Text::new(self::lang($this->title), [
+                        'class' => "text-sm text-center font-bold"
                     ]),
-                    Text::new(self::getLangScope($this->title), [
-                        'class' => "text-xs text-center"
+                    Container::new([
+                        'class' => "text-sm"
+                    ], [
+                        Container::new($this->attribute_all, [
+                            Text::new(self::lang("Всего") . ":", []),
+                            Text::new(self::getScope($this->all_counter), [
+                                "class" => "font-bold"
+                            ]),
+                        ]),
+                        Container::new($this->attribute_today, [
+                            Text::new(self::lang("Сегодня") . ":", []),
+                            Text::new(self::getScope($this->today_counter), [
+                                "class" => "font-bold"
+                            ]),
+                        ]),
+
                     ])
+
                 ])
             ]);
     }

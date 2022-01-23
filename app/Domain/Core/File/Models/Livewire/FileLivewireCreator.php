@@ -77,31 +77,58 @@ class FileLivewireCreator extends AbstractFileManager
 
     public function initializeVariables(): string
     {
-        return $this->entity->livewireComponents()->initializeVariables();
+        try {
+            return $this->entity->livewireComponents()->initializeVariables();
+        } catch (\Exception $exception) {
+            return "";
+        }
     }
 
     // implement this function
     //to livewire class
     protected function getFunctions(): string
     {
-        return $this->entity->livewireComponents()->generateFunctions()
+        try {
+            $from_table = self::newClass($this->entity->getTableClass())->generateFunctions();
+        } catch (\Exception $exception) {
+            $from_table = "";
+        }
+
+        return $this->safelyCallFunction('livewireComponents')
             . "\n"
-            . $this->entity->livewireFunctions()->generateFunctions()
+            . $this->safelyCallFunction("livewireFunctions")
             . "\n"
-            . $this->entity->livewireOptionalDropDown()->generateFunctions()
+            . $this->safelyCallFunction("livewireOptionalDropDown")
             . "\n"
-            . self::newClass($this->entity->getTableClass())->generateFunctions();
+            . $from_table;
+    }
+
+    private function safelyCallFunction($functionName): string
+    {
+        try {
+            return $this->entity->$functionName()->generateFunctions();
+        } catch (\Exception $exception) {
+            return "";
+        }
     }
 
     protected function getOptionalDropItems(): string
     {
-        return $this->entity->livewireOptionalDropDown()->generateDropItems();
+        try {
+            return $this->entity->livewireOptionalDropDown()->generateDropItems();
+        } catch (\Exception $exception) {
+            return "";
+        }
     }
 
     // to blade in livewire
     protected function getFunctionComponents(): string
     {
-        return $this->entity->livewireComponents()->generateBlades();
+        try {
+            return $this->entity->livewireComponents()->generateBlades();
+        }catch (\Exception $exception){
+            return  "";
+        }
     }
 
     public function openFile()

@@ -9,6 +9,7 @@ use App\Domain\Delivery\Api\Traits\OrderTrait;
 use App\Domain\Delivery\Entities\Delivery;
 use App\Domain\Delivery\Entities\DeliveryAddress;
 use App\Domain\Order\Entities\UserPurchase;
+use App\Domain\Order\Interfaces\UserPurchaseStatus;
 use App\Domain\Shop\Entities\ShopAddress;
 use App\Domain\Shop\Entities\WorkTimes;
 use Illuminate\Support\Collection;
@@ -48,19 +49,31 @@ class DpdOrder extends DpdClient
         }
     }
 
+    private function getPaymentType(array &$request, UserPurchase $purchase)
+    {
+        if ($purchase->status % 10 == UserPurchaseStatus::CASH) {
+            $request['delivery']['paymentType'] = "ОУП";
+        }
+    }
+
+//•	ОУП – оплата у получателя наличными
+//•	ОУО – оплата у отправителя наличными
+//•	Оплата по безналичному расчету отправителем (автоматически, если не передавать paymentType)
     // delivery will be created after this method
-    public function createOrder(ShopAddress $fromAddress, DeliveryAddress $toAddress, $purchase_number, Collection $purchases)
+    public function createOrder(ShopAddress $fromAddress, DeliveryAddress $toAddress, UserPurchase $purchase, Collection $purchases)
     {
         $categories = $this->purchaseToCategory($purchases);
         $dateAndWorkTime = $this->calculateDatePickUp($fromAddress->workTime()->orderBy("day")->get());
+        $datePickUp = [
+            'datePickup' => $dateAndWorkTime[0]
+        ];
         $request = [
             'header' => [
-                'datePickup' => $dateAndWorkTime[0],
                 'senderAddress' => $this->generateSenderAddress($dateAndWorkTime[1], $fromAddress),
                 'pickupTimePeriod' => "9-18",
             ],
             'order' => [
-                'orderNumberInternal' => $this->orderNumberInternal($purchase_number, $fromAddress),
+                'orderNumberInternal' => $this->orderNumberInternal($purchase, $fromAddress),
                 'serviceCode' => "PLC",
                 'serviceVariant' => "ДД",
                 "cargoNumPack" => $purchases->sum("quantity"),
@@ -77,9 +90,11 @@ class DpdOrder extends DpdClient
                 ],
             ]
         ];
+        $request['header'] = $datePickUp;
+        $this->getPaymentType($request, $purchase);
         $response = $this->callSoapMethod($request, "orders", "createOrders");
         $this->checkOnError($response);
-        return $response;
+        return array_merge($response, $datePickUp);
     }
 
     public function getOrderStatus(Delivery $delivery)

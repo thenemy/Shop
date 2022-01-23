@@ -7,7 +7,7 @@ use App\Domain\Core\Main\Services\BaseService;
 use App\Domain\CreditProduct\Entity\Credit;
 use App\Domain\File\Traits\FileUploadService;
 use App\Domain\Installment\Entities\TakenCredit;
-use App\Domain\Installment\Interfaces\TakenCreditRelationInterface;
+use App\Domain\Installment\Interfaces\PurchaseRelationInterface;
 use App\Domain\Installment\Payable\TakenCreditPayable;
 use App\Domain\Order\Interfaces\UserPurchaseRelation;
 use App\Domain\Order\Services\UserPurchaseService;
@@ -18,7 +18,7 @@ use App\Domain\User\Services\SuretyService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class TakenCreditService extends BaseService implements TakenCreditRelationInterface
+class TakenCreditService extends BaseService implements PurchaseRelationInterface
 {
     use FileUploadService;
 

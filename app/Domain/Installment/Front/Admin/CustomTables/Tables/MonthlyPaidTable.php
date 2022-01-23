@@ -4,6 +4,9 @@ namespace App\Domain\Installment\Front\Admin\CustomTables\Tables;
 
 use App\Domain\Core\Front\Admin\Attributes\Containers\Container;
 use App\Domain\Core\Front\Admin\Attributes\Containers\ContainerRow;
+use App\Domain\Core\Front\Admin\Attributes\Containers\DecisionModal;
+use App\Domain\Core\Front\Admin\Attributes\Containers\ModalCreator;
+use App\Domain\Core\Front\Admin\Attributes\Info\ErrorSuccess;
 use App\Domain\Core\Front\Admin\Attributes\Models\Column;
 use App\Domain\Core\Front\Admin\Button\ModelInCompelationTime\MainButtonCompile;
 use App\Domain\Core\Front\Admin\Button\ModelInRunTime\ButtonGrayLivewire;
@@ -27,11 +30,25 @@ class MonthlyPaidTable extends BaseTable
     public function slot(): string
     {
         return ContainerRow::generateClass("justify-end items-end", [
+            ErrorSuccess::new(),
             Container::new([],
                 [
-                    MainButtonCompile::new("Выставить счет", [
-                        'wire:click' => SmsNotPayment::FUNCTION_NAME
-                    ])
+                    ModalCreator::new(
+                        MainButtonCompile::new("Выставить счет", [
+                            "@click" => "open()"
+                        ]),
+                        DecisionModal::new(
+                            "Отправка сообщения",
+                            "Вы уверены что хотите выставить счёт ?",
+                            [
+
+                            ],
+                            [
+                                "wire:click" => SmsNotPayment::FUNCTION_NAME
+                            ]),
+
+                    )
+
                 ])
         ]);
     }

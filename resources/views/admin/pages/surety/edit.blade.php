@@ -39,33 +39,6 @@
                      /> <livewire:admin.pages.surety-open-edit.surety-plastic-card-dynamic 
                  parentKey='user_id'
                 :parentId='$entity->id'/>
-@else  <livewire:components.file.file-uploading-without-entity
-                    keyToAttach='crucialData->passport_reverse'
-                    mediaKey='file_create'
-                    entityClass='App\Domain\File\Entities\FileTemp'
-                    :multiple='false'
-                    :label='__("Прописка")'
-                    :entityId='old("file->id_file->crucialData->passport_reverse") ?? ""'
-                    :mediaInitial='""'
-                    wire:key=''
-                     /> <livewire:components.file.file-uploading-without-entity
-                    keyToAttach='crucialData->user_passport'
-                    mediaKey='file_create'
-                    entityClass='App\Domain\File\Entities\FileTemp'
-                    :multiple='false'
-                    :label='__("Паспорт c пользователем")'
-                    :entityId='old("file->id_file->crucialData->user_passport") ?? ""'
-                    :mediaInitial='""'
-                    wire:key=''
-                     /> <livewire:components.file.file-uploading-without-entity
-                    keyToAttach='crucialData->passport'
-                    mediaKey='file_create'
-                    entityClass='App\Domain\File\Entities\FileTemp'
-                    :multiple='false'
-                    :label='__("Паспорт пользователя")'
-                    :entityId='old("file->id_file->crucialData->passport") ?? ""'
-                    :mediaInitial='""'
-                    wire:key=''
-                     />
+@else 
  @endif
 @endsection

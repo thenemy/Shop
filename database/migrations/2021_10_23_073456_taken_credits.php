@@ -17,15 +17,11 @@ class TakenCredits extends Migration
         Schema::create('taken_credits', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->boolean('is_paid')->default(false);
             $table->bigInteger("transaction_id")->nullable();
             $table->bigInteger('initial_price');
-            $table->boolean("status")->default(false); /// accepted the credit or not is the important
+            $table->integer("status")->default(\App\Domain\Installment\Interfaces\PurchaseStatus::WAIT_ANSWER);
             $table->dateTime('date_taken')->nullable();
             $table->dateTime('date_finish')->nullable();
-//            $table->smallInteger("day_payment");// may be not necessary because it was need for
-//            // recursion payment
-//            $table->time("time_payment"); // from hh:mm:ss to HH:mm
             $table->foreignId("user_credit_data_id")
                 ->constrained("user_credit_datas")
                 ->restrictOnDelete();

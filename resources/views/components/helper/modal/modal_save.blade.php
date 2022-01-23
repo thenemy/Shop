@@ -5,6 +5,7 @@
 ])
 <div
     x-show="{{$show}}"
+    x-cloak
     class="fixed z-10 h-full w-full inset-0 hide_during_loading hidden overflow-y-auto" aria-labelledby="modal-title"
     role="dialog"
     aria-modal="true">

@@ -52,9 +52,9 @@ class TakenCreditController extends BaseController
         return $this->getStoreValidation($request);
     }
 
-    public function edit(Request $request, TakenCredit $taken_credit)
+    public function show(Request $request, TakenCredit $taken_credit)
     {
-        return $this->getEdit($request, $taken_credit, [$taken_credit]);
+        return $this->getShow($request, $taken_credit, [$taken_credit]);
     }
 
     public function update(Request $request, TakenCredit $taken_credit): \Illuminate\Http\RedirectResponse

@@ -6,11 +6,12 @@ use Illuminate\Support\Collection;
 
 interface Payable
 {
+    public function check(): bool;
+
     public function amount();
 
     public function account_id();
 
-    public function taken_id();
 
     public function getTokens(): Collection;
 

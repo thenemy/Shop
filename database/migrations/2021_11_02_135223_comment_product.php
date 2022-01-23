@@ -16,9 +16,15 @@ class CommentProduct extends Migration
         Schema::create('comment_product', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId("user_id")->constrained("users");
-            $table->foreignId("product_id")->constrained("products");
+            $table->foreignId("user_id")->constrained("users")
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table->foreignId("product_id")->constrained("products")
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+            $table->boolean("status")->default(false);
             $table->string("message");
+
         });
     }
 

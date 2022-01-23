@@ -26,13 +26,16 @@ class KeyTextAttribute implements HtmlInterface
         $class = get_called_class();
         return new $class($key, $value, $postfix);
     }
-
+    protected function value(): string
+    {
+        return self::getAttributeVariable($this->value);
+    }
     public function generateHtml(): string
     {
         return sprintf(
             "<x-helper.text.text_key key='%s' value='%s %s'></x-helper.text.text_key>",
             $this->key,
-            $this->getAttributeVariable($this->value),
+            $this->value(),
             $this->postfix
         );
     }

@@ -11,13 +11,19 @@ abstract class AbstractFunction implements LivewireAdditionalFunctions, Function
     private function generateMethods($class, $method_name): string
     {
         $reflection = new \ReflectionMethod($class, $method_name);
-        if ($reflection->isPublic() && $reflection->isStatic())
+        if ($reflection->isPublic() && $reflection->isStatic() && $reflection->name != "new")
             return sprintf(self::FUNCTION_BODY,
                 $method_name,
                 "",
                 sprintf('\\%s::%s($this);', $class, $method_name)
             );
         return "";
+    }
+
+    static public function new(): AbstractFunction
+    {
+        $self = get_called_class();
+        return new $self();
     }
 
     public function generateFunctions(): string

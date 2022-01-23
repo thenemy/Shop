@@ -9,7 +9,7 @@ use App\Domain\CreditProduct\Front\Main\MainCreditEdit;
 use App\Domain\CreditProduct\Front\Main\MainCreditIndex;
 use App\Domain\Installment\Entities\TakenCredit;
 use App\Domain\Installment\Front\Main\TakenCreditCreate;
-use App\Domain\Installment\Front\Main\TakenCreditEdit;
+use App\Domain\Installment\Front\Main\TakenCreditShow;
 use App\Domain\Installment\Front\Main\TakenCreditIndex;
 
 class TakenCreditCreator extends MainFactoryCreator
@@ -30,8 +30,13 @@ class TakenCreditCreator extends MainFactoryCreator
         return TakenCreditCreate::class;
     }
 
+    public function getShowEntity(): string
+    {
+        return TakenCreditShow::class;
+    }
+
     public function getEditEntity(): string
     {
-        return TakenCreditEdit::class;
+        return  "";
     }
 }

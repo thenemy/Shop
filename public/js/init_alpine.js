@@ -1,4 +1,41 @@
+var Alpine = window.Alpine;
+
+// document.addEventListener("DOMContentLoaded", () => {
+//     Livewire.hook('element.updated', (el, component) => {
+//
+//     })
+// });
 document.addEventListener('alpine:init', () => {
+
+    Alpine.data("dataMoney", function () {
+        return {
+            // text: textInput,
+            isEditing: false,
+            toggleEditingState() {
+                this.isEditing = !this.isEditing;
+                if (this.isEditing) {
+                    this.$nextTick(() => {
+                        this.$refs.input.focus();
+                    });
+                }
+            },
+            disableEditing() {
+                this.isEditing = false;
+            },
+            enableEditing() {
+                this.isEditing = true;
+            }
+        };
+    })
+    Alpine.data("modalWindow", function () {
+        return {
+            show: false,
+            open() {
+                this.show = true;
+                console.log("opening");
+            },
+        }
+    })
     Alpine.data('initBaseDropDown', (name) => (
         {
             isOpen: false,
@@ -21,8 +58,6 @@ document.addEventListener('alpine:init', () => {
                 // });
             },
             setDropName(name) {
-                console.log("New");
-                console.log(name);
                 this.name = name;
             },
             sendValues(value, name) {

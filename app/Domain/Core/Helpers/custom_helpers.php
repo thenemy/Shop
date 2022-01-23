@@ -83,7 +83,12 @@ if (!function_exists('merchant')) {
         dd($s);
     }
 }
-
+if (!function_exists('str_day_of_week')) {
+    function str_day_of_week(int $day): string
+    {
+        return \App\Domain\Shop\Interfaces\DayInterface::DB_TO_FRONT[__($day)];
+    }
+}
 if (!function_exists('month_num')) {
     function month_num(): int
     {

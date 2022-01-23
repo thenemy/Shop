@@ -6,9 +6,12 @@ use App\Domain\Core\Front\Admin\Form\Attributes\Base\BaseAttributeFromText;
 
 class InputLangAttribute extends BaseAttributeFromText
 {
-    public function __construct(string $key, string $label, bool $create = true)
+    public $model = "";
+
+    public function __construct(string $key, string $label, bool $create = true, $model = "")
     {
         parent::__construct($key, "", $label, $create);
+        $this->model = $model;
     }
 
     protected function getContainer()
@@ -65,19 +68,26 @@ class InputLangAttribute extends BaseAttributeFromText
 
     private function langGenerate(string $lang, string $labelContinue)
     {
-        $create = $this->generateCreateValue($lang);
         $update = $this->generateEditValue($lang);
         return sprintf(
             $this->getComponent(),
             $this->key,
             $lang,
             $labelContinue,
-            $update
+            $update,
+            $this->getModel($lang)
         );
+    }
+
+    private function getModel(string $lang)
+    {
+        if ($this->model)
+            return sprintf("x-model=%s.%s", $this->model, $lang);
+        return "";
     }
 
     protected function getComponent(): string
     {
-        return "<x-helper.input.input name='%s[%s]'  label='{{__(\"%s\")}}' value='%s'/>";
+        return "<x-helper.input.input name='%s[%s]'  label='{{__(\"%s\")}}' value='%s' %s/>";
     }
 }

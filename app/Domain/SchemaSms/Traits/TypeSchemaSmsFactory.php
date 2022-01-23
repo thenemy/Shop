@@ -27,7 +27,9 @@ trait TypeSchemaSmsFactory
     {
         return $this->getSmsSchema(self::class, $this->type)->values[$type];
     }
-
+    public function getConcreteTypeValue($type){
+        return $this->getConcreteType($type)->value;
+    }
     public function getSmsSchema(string $selected, $type)
     {
         try {

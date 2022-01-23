@@ -4,6 +4,7 @@ namespace App\Domain\Delivery\Api\Traits;
 
 use App\Domain\Category\Entities\Category;
 use App\Domain\Delivery\Api\Exceptions\DpdException;
+use App\Domain\Order\Entities\UserPurchase;
 use App\Domain\Shop\Entities\ShopAddress;
 use App\Domain\Shop\Entities\WorkTimes;
 use Illuminate\Support\Collection;
@@ -47,9 +48,9 @@ trait OrderTrait
         return array_merge($address_request, $request);
     }
 
-    private function orderNumberInternal(int $pruchaseNumber, ShopAddress $fromAddress)
+    private function orderNumberInternal(UserPurchase $pruchaseNumber, ShopAddress $fromAddress)
     {
-        return $pruchaseNumber + $fromAddress->id;
+        return $pruchaseNumber->id + $fromAddress->id;
     }
 
     private function purchaseToCategory(Collection $purchases)

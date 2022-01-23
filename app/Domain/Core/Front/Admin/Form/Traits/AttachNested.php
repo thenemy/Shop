@@ -5,6 +5,11 @@ namespace App\Domain\Core\Front\Admin\Form\Traits;
 use App\Domain\Category\Builders\CategoryBuilder;
 use App\Domain\Category\Entities\Category;
 
+/**
+ *  TRAIT FOR ATTACHING AND DETACHING NESTED RELATIONSHIP
+ *  method attachNested -- for one to many relationship
+ *  method attachedManyNested -- for many-to-many relationship
+ * */
 trait AttachNested
 {
     public function attachNested($id, $status, $entityClass, $parent_id, $primary_key = "id")
@@ -27,7 +32,8 @@ trait AttachNested
             ]);
         }
     }
-
+    // takes the array or single id
+    // this comes from LivewireNested class
     public function attachedManyNested($id, $key)
     {
         $this->$key()->toggle($id);

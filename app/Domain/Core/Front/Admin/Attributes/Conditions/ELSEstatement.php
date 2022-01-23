@@ -2,6 +2,7 @@
 
 namespace App\Domain\Core\Front\Admin\Attributes\Conditions;
 
+use App\Domain\Core\Front\Admin\Attributes\Models\EmptyAttribute;
 use App\Domain\Core\Front\Interfaces\HtmlInterface;
 
 class ELSEstatement implements HtmlInterface
@@ -13,8 +14,9 @@ class ELSEstatement implements HtmlInterface
         $this->block = $block;
     }
 
-    static public function new(HtmlInterface $block)
+    static public function new(?HtmlInterface $block = null)
     {
+        $block = EmptyAttribute::new();
         return new self($block);
     }
 

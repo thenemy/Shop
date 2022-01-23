@@ -23,7 +23,7 @@ class Container implements HtmlInterface
         return new $self($item, ['class' => $class]);
     }
 
-    static public function new(array $attributes = [], array $item = []): Container
+    static public function new(array $attributes = [], array $item = [])
     {
         $self = get_called_class();
         return new $self($item, $attributes);

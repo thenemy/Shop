@@ -22,4 +22,7 @@ interface AdminRoutesInterface
     const BRAND = "brand";
     const COLOR = "color";
     const DASHBOARD = "dashboard";
+    const DISCOUNTS = "discounts";
+    const PAYMENT = "payment";
+    const COMMENT_PRODUCT= "comment_product";
 }

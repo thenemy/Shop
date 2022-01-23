@@ -62,7 +62,7 @@ class ProductCreate extends Product implements CreateAttributesInterface
         ]);
     }
 
-    public function getMainCredit()
+        public function getMainCredit()
     {
         return MainCreditNested::generateWithoutEntity(
             self::MAIN_CREDIT_SERVICE,

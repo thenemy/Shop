@@ -9,8 +9,13 @@ use App\Domain\Order\Entities\UserPurchase;
  * is it possible to connect several
  * products to one delivery
  * if it is possible there is the method how i can make this
- * formula user_purchase_id + shop_id
+ * formula user_purchase_id + shop_address_id
  *
+ * All status will be observed , so when all will be delivered , overall status will be delivered
+ *
+ * So there could be several status:
+ * First about delivery
+ * Second about payment
  */
 class Delivery extends Entity
 {

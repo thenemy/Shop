@@ -2,6 +2,7 @@
 
 namespace App\Domain\Core\Front\Admin\Attributes\Conditions;
 
+use App\Domain\Core\Front\Admin\Attributes\Models\EmptyAttribute;
 use App\Domain\Core\Front\Interfaces\HtmlInterface;
 
 class IFstatement implements HtmlInterface
@@ -27,8 +28,9 @@ class IFstatement implements HtmlInterface
         $this->block = $block;
     }
 
-    static public function new($condition, HtmlInterface $block)
+    static public function new($condition, HtmlInterface $block = null)
     {
+        $block = $block ?? EmptyAttribute::new();
         $self = get_called_class();
         return new $self($condition, $block);
     }

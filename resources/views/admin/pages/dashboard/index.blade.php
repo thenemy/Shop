@@ -13,10 +13,10 @@
         <div class="w-full pb-10 ">
             
 
-            <div 	class='m-4'>
+            <div 	class='mr-4 space-y-10'>
                 			
 
-            <div 	class=' flex flex-row  space-x-2'>
+            <div 	class='justify-between flex flex-row  space-x-2'>
                 			
 
             <div 	class='border border-blue-300 p-2 bg-white rounded shadow w-max'>
@@ -25,67 +25,156 @@
 <livewire:components.currency-field.currency/>
             </div>			
 
-            <div 	class='items-center p-2 bg-white h-full shadow-lg rounded'>
+            <div 	class='border border-blue-300 p-2 bg-white rounded shadow w-max'>
+            <span class='font-bold text-lg'>{{__('Удержка Денег')}}</span>
+                			
+<livewire:components.currency-field.money/>
+            </div>
+            </div>			
+
+            <div 	class='w-full flex flex-row  space-x-2'>
+                			
+
+            <div 	class='items-center block p-2 bg-white w-full h-full shadow-lg rounded'>
             <span class='font-bold text-lg'>{{__('Статистика')}}</span>
                 			
 
-            <div 	class=' flex flex-row  space-x-2'>
+            <div 	class='justify-around w-full flex flex-row  space-x-2'>
                 			
 
-            <div 	class='cursor-pointer space-x-6 p-5 items-center  flex flex-row  space-x-2'	onclick='location.href ="{{route("admin.taken_credit.index", [])}}"  '>
+            <div 	class='space-x-6 p-5 items-center  flex flex-row  space-x-2'>
                 			
 <span 	class='fas fa-cash-register text-4xl text-[#bebebe]'></span>			
 
-            <div 	class='space-y-0.5 items-center  flex flex-col  space-y-2'>
+            <div 	class='space-y-0.5 items-start  flex flex-col  space-y-2'>
                 			
-<span 	class='font-bold text-2xl'>{{App\Domain\Installment\Entities\TakenCredit::count() ?? ""}}</span>			
-<span 	class='text-xs text-center'>{{__('Рассрочки')}}</span>
+<span 	class='text-sm text-center font-bold'>{{__('Рассрочки')}}</span>			
+
+            <div 	class='text-sm'>
+                			
+
+            <div 	class='cursor-pointer hover:text-blue-300'	onclick='location.href ="{{route("admin.taken_credit.index", [])}}"'>
+                			
+<span >{{__('Всего')}}:</span>			
+<span 	class='font-bold'>{{App\Domain\Installment\Entities\TakenCredit::count() ?? ""}}</span>
+            </div>			
+
+            <div 	class='cursor-pointer hover:text-blue-300'	onclick='location.href ="{{route("admin.taken_credit.index", [])}}"'>
+                			
+<span >{{__('Сегодня')}}:</span>			
+<span 	class='font-bold'>{{0 ?? ""}}</span>
+            </div>
+            </div>
             </div>
             </div>			
 
-            <div 	class='cursor-pointer space-x-6 p-5 items-center  flex flex-row  space-x-2'	onclick='location.href ="{{route("admin.taken_credit.index", [])}}"  '>
+            <div 	class='space-x-6 p-5 items-center  flex flex-row  space-x-2'>
                 			
 <span 	class='fas fa-address-book text-4xl text-[#bebebe]'></span>			
 
-            <div 	class='space-y-0.5 items-center  flex flex-col  space-y-2'>
+            <div 	class='space-y-0.5 items-start  flex flex-col  space-y-2'>
                 			
-<span 	class='font-bold text-2xl'>{{App\Domain\Installment\Entities\TakenCredit::unpaidCredits() ?? ""}}</span>			
-<span 	class='text-xs text-center'>{{__('Просроченные рассрочки')}}</span>
+<span 	class='text-sm text-center font-bold'>{{__('Просроченные рассрочки')}}</span>			
+
+            <div 	class='text-sm'>
+                			
+
+            <div 	class='cursor-pointer hover:text-blue-300'	onclick='location.href ="{{route("admin.taken_credit.index", [])}}"'>
+                			
+<span >{{__('Всего')}}:</span>			
+<span 	class='font-bold'>{{App\Domain\Installment\Entities\TakenCredit::unpaidCredits() ?? ""}}</span>
+            </div>			
+
+            <div 	class='cursor-pointer hover:text-blue-300'	onclick='location.href ="{{route("admin.taken_credit.index", [])}}"'>
+                			
+<span >{{__('Сегодня')}}:</span>			
+<span 	class='font-bold'>{{0 ?? ""}}</span>
+            </div>
+            </div>
             </div>
             </div>			
 
-            <div 	class='cursor-pointer space-x-6 p-5 items-center  flex flex-row  space-x-2'	onclick='location.href ="{{route("admin.taken_credit.index", [])}}"  '>
+            <div 	class='space-x-6 p-5 items-center  flex flex-row  space-x-2'>
                 			
 <span 	class='fas fa-calendar-day text-4xl text-[#bebebe]'></span>			
 
-            <div 	class='space-y-0.5 items-center  flex flex-col  space-y-2'>
+            <div 	class='space-y-0.5 items-start  flex flex-col  space-y-2'>
                 			
-<span 	class='font-bold text-2xl'>{{0 ?? ""}}</span>			
-<span 	class='text-xs text-center'>{{__('За должность')}}</span>
+<span 	class='text-sm text-center font-bold'>{{__('За должность')}}</span>			
+
+            <div 	class='text-sm'>
+                			
+
+            <div 	class='cursor-pointer hover:text-blue-300'	onclick='location.href ="{{route("admin.taken_credit.index", [])}}"'>
+                			
+<span >{{__('Всего')}}:</span>			
+<span 	class='font-bold'>{{0 ?? ""}}</span>
+            </div>			
+
+            <div 	class='cursor-pointer hover:text-blue-300'	onclick='location.href ="{{route("admin.taken_credit.index", [])}}"'>
+                			
+<span >{{__('Сегодня')}}:</span>			
+<span 	class='font-bold'>{{0 ?? ""}}</span>
+            </div>
+            </div>
             </div>
             </div>			
 
-            <div 	class='cursor-pointer space-x-6 p-5 items-center  flex flex-row  space-x-2'	onclick='location.href ="{{route("admin.user.index", [])}}"  '>
+            <div 	class='space-x-6 p-5 items-center  flex flex-row  space-x-2'>
                 			
 <span 	class='fas fa-user text-4xl text-[#bebebe]'></span>			
 
-            <div 	class='space-y-0.5 items-center  flex flex-col  space-y-2'>
+            <div 	class='space-y-0.5 items-start  flex flex-col  space-y-2'>
                 			
-<span 	class='font-bold text-2xl'>{{App\Domain\User\Entities\User::newInMonth() ?? ""}}</span>			
-<span 	class='text-xs text-center'>{{__('Пользователей за месяц')}}</span>
+<span 	class='text-sm text-center font-bold'>{{__('Пользователей за месяц')}}</span>			
+
+            <div 	class='text-sm'>
+                			
+
+            <div 	class='cursor-pointer hover:text-blue-300'	onclick='location.href ="{{route("admin.taken_credit.index", [])}}"'>
+                			
+<span >{{__('Всего')}}:</span>			
+<span 	class='font-bold'>{{App\Domain\User\Entities\User::newInMonth() ?? ""}}</span>
+            </div>			
+
+            <div 	class='cursor-pointer hover:text-blue-300'	onclick='location.href ="{{route("admin.user.index", [])}}"'>
+                			
+<span >{{__('Сегодня')}}:</span>			
+<span 	class='font-bold'>{{0 ?? ""}}</span>
+            </div>
+            </div>
             </div>
             </div>
             </div>
             </div>
             </div>			
 
-            <div 	class='mt-10'>
+            <div 	class=' flex flex-row  space-x-2'>
                 			
-<x-helper.container.container :title='__("Новые рассрочки")' 	class='flex flex-wrap justify-between'>
+<x-dashboard.bar_chart  />			
+<x-dashboard.doughnut_chart/>
+            </div>			
+
+            <div 	class='justify-between flex flex-row  space-x-2'>
+                			
+
+            <div >
+                			
+
+            <div 	class=' overflow-x-auto border shadow p-4 space-y-4 bg-white'>
+            <span class='font-bold text-lg'>{{__('Новые Рассрочки')}}</span>
                 			
 <livewire:admin.pages.dashboard-main.taken-credit-new
             :filterBy="['new_credit' => 1,]" />
-                </x-helper.container.container>
+            </div>
+            </div>			
+
+            <div 	class=' block overflow-x-auto w-min border shadow p-4 space-y-4 bg-white'>
+            <span class='font-bold text-lg'>{{__('Новые заказы')}}</span>
+                			
+<livewire:admin.pages.dashboard-main.payment-filtered
+            :filterBy="[]" />
+            </div>
             </div>
             </div>
         </div>

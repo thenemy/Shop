@@ -20,7 +20,9 @@ class Visibility extends Container
             Container::new(
                 [
                     sprintf('@%s.window', $name_listener) => 'show = !show'
-                ], $items)
+                ],
+                $items
+            )
         ]);
     }
 }

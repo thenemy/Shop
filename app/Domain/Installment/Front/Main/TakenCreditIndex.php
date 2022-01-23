@@ -17,7 +17,7 @@ use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireAdditional
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireComponents;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\Installment\Entities\TakenCredit;
-use App\Domain\Installment\Front\Admin\CustomTables\Actions\TakenCreditEditAction;
+use App\Domain\Installment\Front\Admin\CustomTables\Actions\TakenCreditShowAction;
 use App\Domain\Installment\Front\Admin\CustomTables\Tables\TakenCreditTable;
 use App\Domain\SchemaSms\Entities\SchemaSmsInstallment;
 use App\Domain\SchemaSms\Front\Attribute\SchemaSmsAttribute;
@@ -110,7 +110,7 @@ class TakenCreditIndex extends TakenCredit implements TableInFront, CreateAttrib
     public function getActionsAttribute(): string
     {
         return AllActions::generation([
-            TakenCreditEditAction::new([$this->id]),
+            TakenCreditShowAction::new([$this->id]),
         ]);
     }
 

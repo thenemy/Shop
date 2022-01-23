@@ -22,14 +22,15 @@ class Delivery extends Migration
             ->constrained("user_purchases")
                 ->restrictOnDelete()
                 ->restrictOnDelete();
-            $table->foreignId("shop_id") // this is needed for getting relevant products, and pick Up
-            ->constrained("shops")
+            $table->foreignId("shop_address_id") // this is needed for getting relevant products, and pick Up
+            ->constrained("shop_addresses")
                 ->restrictOnUpdate()
                 ->restrictOnDelete();
+            $table->integer("status")->default(\App\Domain\Delivery\Interfaces\DeliveryStatus::CREATED);
             // Namely, some products have the same pick up address , so we have to put them together
-            $table->string("orderNum");
+            $table->string("orderNum")->nullable();
             $table->string("datePickup");
-            $table->integer("status"); //// all status that possible for delivery
+            $table->integer("status")->default(\App\Domain\Delivery\Interfaces\DeliveryStatus::CREATED); //// all status that possible for delivery
 
             $table->primary(['user_purchase_id', "shop_id"]);
         });

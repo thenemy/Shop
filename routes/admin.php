@@ -22,7 +22,10 @@ Route::name("admin.")->group(function () {
             AdminRoutesInterface::BANNER => \App\Http\Controllers\Admin\BannerController::class,
             AdminRoutesInterface::BRAND => \App\Http\Controllers\Admin\BrandController::class,
             AdminRoutesInterface::COLOR => \App\Http\Controllers\Admin\ColorController::class,
-            AdminRoutesInterface::DASHBOARD => \App\Http\Controllers\Admin\DashboardController::class
+            AdminRoutesInterface::DASHBOARD => \App\Http\Controllers\Admin\DashboardController::class,
+            AdminRoutesInterface::DISCOUNTS => \App\Http\Controllers\Admin\DiscountsController::class,
+            AdminRoutesInterface::PAYMENT => \App\Http\Controllers\Admin\PaymentController::class,
+            AdminRoutesInterface::COMMENT_PRODUCT => \App\Http\Controllers\Admin\CommentProductController::class
         ]
     );
 });

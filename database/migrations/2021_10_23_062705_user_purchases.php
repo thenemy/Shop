@@ -18,7 +18,7 @@ class UserPurchases extends Migration
     /**
      * everything that was bought comes here.
      * here we must know how the order was bought whether it was taken
-     * by credits, cash , or instance payment
+     * by credits, cash, or instance payment
      * where this product must be delivered
      *
      *  orderNumberInternal will be generated id + shop_address_id

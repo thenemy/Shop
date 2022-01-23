@@ -6,7 +6,7 @@ use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\CreditProduct\Entity\Credit;
 
 use App\Domain\Installment\Builders\TakenCreditBuilder;
-use App\Domain\Installment\Interfaces\TakenCreditRelationInterface;
+use App\Domain\Installment\Interfaces\PurchaseRelationInterface;
 use App\Domain\Order\Entities\Purchase;
 use App\Domain\Order\Entities\UserPurchase;
 use App\Domain\User\Entities\PlasticCard;
@@ -17,7 +17,7 @@ use App\Domain\User\Traits\HasUserRelationship;
 /**
  * made tomorrow the installment
  */
-class   TakenCredit extends Entity implements TakenCreditRelationInterface
+class TakenCredit extends Entity implements PurchaseRelationInterface
 {
     use HasUserRelationship;
 
@@ -30,6 +30,21 @@ class   TakenCredit extends Entity implements TakenCreditRelationInterface
     {
         $this->is_paid = true;
         $this->save();
+    }
+
+    public function saveAccept()
+    {
+        if ($this->status % 10 == self::WAIT_ANSWER && !$this->date_taken) {
+            $this->date_taken = now();
+            $this->status = self::ACCEPTED;
+            $this->date_finish = now()->addMonths($this->monthPaid()->count());
+            $this->save();
+        }
+    }
+
+    public function reason()
+    {
+        return $this->hasOne(TakenCreditError::class, 'id');
     }
 
     public function newEloquentBuilder($query)

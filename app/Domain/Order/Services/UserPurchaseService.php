@@ -34,13 +34,22 @@ class UserPurchaseService extends BaseService implements UserPurchaseRelation
             unset($object_data[self::PRODUCTS_ENCODE]);
             $purchases = [];
             foreach ($product as $id => $number) {
-                $uzs_price = Product::find($id)->real_price;
-                array_push($purchases, [
-                    'quantity' => $number,
-                    'price' => $uzs_price * $number,
-                    'product_id' => $id,
-                    "order" => json_encode("", JSON_UNESCAPED_UNICODE)
-                ]);
+                $real_product = Product::find($id);
+                $uzs_price = $real_product->real_price;
+                if ($real_product->number >= $number)
+                    array_push($purchases, [
+                        'quantity' => $number,
+                        'price' => $uzs_price * $number,
+                        'product_id' => $id,
+                        "order" => json_encode("", JSON_UNESCAPED_UNICODE)
+                    ]);
+                else
+                    throw new \Exception(
+                        __("Количество превосходит доступного для продукта")
+                        . sprintf(" %s .", $product->title_current)
+                        . __("Всего иметься") . sprintf(": %s .", $real_product->number) .
+                        __("Заказано") . sprintf(": %s .", $number)
+                    );
             }
             return $purchases;
         }

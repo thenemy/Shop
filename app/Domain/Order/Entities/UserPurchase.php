@@ -4,6 +4,8 @@ namespace App\Domain\Order\Entities;
 
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Core\UuidKey\Traits\HasUniqueId;
+use App\Domain\Delivery\Entities\Delivery;
+use App\Domain\Delivery\Entities\DeliveryAddress;
 use App\Domain\Order\Interfaces\UserPurchaseRelation;
 use App\Domain\User\Entities\User;
 use App\Domain\User\Traits\HasUserRelationship;
@@ -34,8 +36,15 @@ class UserPurchase extends Entity implements UserPurchaseRelation
         return $this->purchases()->sum("quantity");
     }
 
-    public function deliveryAddress(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    private function delivery(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-//        return $this->belongsTo();
+        return $this->hasMany(Delivery::class, "user_purchase_id");
+    }
+
+    public function getDeliveryAddressAttribute()
+    {
+        return $this->belongsToMany(DeliveryAddress::class, "purchase_address",
+            "user_purchase_id",
+            "delivery_address_id")->first();
     }
 }

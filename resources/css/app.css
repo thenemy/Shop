@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 @tailwind variants;
+
+[x-cloak] { display: none !important; }
 .drop-down-button {
     @apply inline-flex h-8  justify-center w-full items-center rounded-md border shadow-sm px-4  bg-white text-base font-medium  hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500;
 }

@@ -14,7 +14,7 @@ trait AttributeGetVariable
         return sprintf('{{%s ?? ""}}', $value);
     }
 
-    static protected function getLangScope($value)
+    static protected function lang($value)
     {
         return sprintf("{{__('%s')}}", $value);
     }

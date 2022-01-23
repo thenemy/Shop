@@ -3,6 +3,7 @@
 namespace App\Domain\Product\Product\Entities;
 
 use App\Domain\Category\Entities\Category;
+use App\Domain\Common\Discounts\Entities\Discount;
 use App\Domain\Core\Front\Admin\File\Attributes\FilesAttributes;
 use App\Domain\Core\Front\Admin\Form\Traits\AttachNested;
 use App\Domain\Core\Language\Traits\Translatable;
@@ -19,6 +20,7 @@ use App\Domain\Product\HeaderText\Entities\HeaderText;
 use App\Domain\Product\Images\Entities\Image;
 use App\Domain\Product\Product\Builders\ProductBuilder;
 use App\Domain\Product\Product\Interfaces\ProductInterface;
+use App\Domain\Product\Product\Logic\ProductLogic;
 use App\Domain\Shop\Entities\Shop;
 use App\Domain\User\Entities\User;
 use CardImages;
@@ -30,63 +32,96 @@ class Product extends Entity implements ProductInterface
     use Translatable, Sluggable, MediaManyTrait, ConvertToSum, AttachNested;
 
     protected $table = "products";
+    private ProductLogic $productLogic;
 
-    public function newEloquentBuilder($query): ProductBuilder
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->productLogic = new ProductLogic($this);
+    }
+
+    public function getLogic(): ProductLogic
+    {
+        return $this->productLogic;
+    }
+
+    public
+    function newEloquentBuilder($query): ProductBuilder
     {
         return new ProductBuilder($query);
     }
 
-    public function colors()
+    public
+    function colors()
     {
         return $this->hasMany(ProductMainColor::class, "product_id");
     }
 
-    public function description(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public
+    function description(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(ProductDescription::class, "product_id");
     }
 
-    public function bodies(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public
+    function bodies(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(HeaderBody::class, "product_id");
     }
 
-    public function getBodyFirstAttribute()
+    public
+    function getBodyFirstAttribute()
     {
         return $this->bodies()->first()->header;
     }
 
-    public function shop()
+    public
+    function shop()
     {
         return $this->belongsTo(Shop::class, "shop_id");
     }
 
-    public function category()
+    public
+    function category()
     {
         return $this->belongsTo(Category::class, "category_id");
     }
 
-    public function user_favourites(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public
+    function user_favourites(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class, "favourites");
     }
 
-    public function acceptMainCredit($id, $status)
+    public
+    function discounts()
+    {
+        return $this->belongsToMany(Discount::class,
+            "discount_product",
+            "product_id",
+            "discount_id");
+    }
+
+    public
+    function acceptMainCredit($id, $status)
     {
         $this->attachedManyNested($id, self::MAIN_CREDIT_SERVICE);
     }
 
-    public function setProductOfDayAttribute($value)
+    public
+    function setProductOfDayAttribute($value)
     {
         $this->productDay()->attach($value);
     }
 
-    public function productDay()
+    public
+    function productDay()
     {
         return $this->hasOne(ProductOfDay::class, "product_id");
     }
 
-    public function mainCredit()
+    public
+    function mainCredit()
     {
         return $this->belongsToMany(MainCredit::class,
             "product_credits",
@@ -95,88 +130,102 @@ class Product extends Entity implements ProductInterface
         );
     }
 
-    public function productProductStatus()
+    public
+    function productProductStatus()
     {
         return $this->belongsToMany(ProductStats::class);
     }
 
-    public function productImage(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public
+    function productImage(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Image::class, 'product_id');
     }
 
-    public function productImageHeader(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public
+    function productImageHeader(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(CardImage::class, 'product_id');
     }
 
-    public function getRealPriceAttribute()
+    public
+    function getRealPriceAttribute()
     {
-        if ($this->currency == self::CURRENCY_USD_DB)
-            return $this->convertToSum($this->price);
-        return $this->price;
+        return $this->productLogic->getPrice();
     }
 
-    public function productProductInfo(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public
+    function productProductInfo(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(ProductInfo::class, 'product_id');
     }
 
-    public function productKey(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public
+    function productKey(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
 //        return $this->hasMany(Key::class, 'product_id');
     }
 
-    public function productHeaderText(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public
+    function productHeaderText(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(HeaderText::class, 'product_id');
     }
 
-    public function productHeaderTable(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public
+    function productHeaderTable(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(HeaderTable::class, 'product_id');
     }
 
-    public function productHeaderComponent(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public
+    function productHeaderComponent(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(HeaderComponent::class, 'product_id');
     }
 
 
-    public function productHit()
+    public
+    function productHit()
     {
         return $this->hasOne(ProductHit::class, "product_id");
     }
 
-    public function setTitleAttribute($value)
+    public
+    function setTitleAttribute($value)
     {
         $this->setTranslate('title', $value);
     }
 
-    public function getTitleAttribute(): ?\Illuminate\Support\Collection
+    public
+    function getTitleAttribute(): ?\Illuminate\Support\Collection
     {
         return $this->getTranslations('title');
     }
 
-    public function getTitleCurrentAttribute(): ?string
+    public
+    function getTitleCurrentAttribute(): ?string
     {
         return $this->getTranslatable('title');
     }
 
 
-    public function slugSources(): array
+    public
+    function slugSources(): array
     {
         return [
             'slug' => 'title'
         ];
     }
 
-    public function getImagesAttribute()
+    public
+    function getImagesAttribute()
     {
         return $this->getManyMedia("productImage", "image");
     }
 
-    public function setImagesAttribute($value)
+    public
+    function setImagesAttribute($value)
     {
         $this->setSaveManyMedia("productImage", $value, "image");
     }
@@ -185,7 +234,8 @@ class Product extends Entity implements ProductInterface
      *  it is being here to reduce amount of work to do
      *  the upload function is used in the service
      * **/
-    public function getImageProductAttribute(): FilesAttributes
+    public
+    function getImageProductAttribute(): FilesAttributes
     {
         return new FilesAttributes($this,
             "images",

@@ -2,6 +2,7 @@
 
 namespace App\Domain\Core\Api\CardService\Model;
 
+use App\Domain\Core\Api\CardService\Error\CardServiceError;
 use App\Domain\Core\Api\CardService\Interfaces\Payable;
 use App\Domain\Core\Api\CardService\Merchant\Model\Merchant;
 use Illuminate\Support\Facades\Log;
@@ -27,23 +28,37 @@ class WithdrawMoney
         return $token ?? $this->payable->getTokens()->first();
     }
 
+    private function checkBeforeWithdraw()
+    {
+        if (!$this->payable->check()) {
+            throw new CardServiceError(__("Запрещено снимать деньги"));
+        }
+    }
+
+    public function saveWithdraw()
+    {
+        try {
+            $this->withdraw();
+        } catch (CardServiceError $exception) {
+            $this->reverse();
+            throw $exception;
+        }
+    }
+
     public function withdraw($token = null): bool
     {
+        $this->checkBeforeWithdraw();
         $token = $this->getToken($token);
-        Log::debug("INFO ABOUT TOKEN ", [$token]);
         $transaction_id = $this->merchant->create($this->payable->amount(), $this->payable->account_id());
-        Log::debug("TRANSATCION ID ", [$transaction_id, "money" => $this->payable->amount()]);
         $this->payable->setTransaction($transaction_id);
         $response = $this->merchant->pre_confirm($token, $this->payable->getTransaction());
-        Log::debug("RESPONSE PRE CONFIRM GOTTED", $response);
         $confirm = $this->merchant->confirm($this->payable->getTransaction());
-        Log::debug("GOT confirm", $confirm);
         return $this->payable->finishTransaction($confirm);
     }
 
-    public function reverse()
+    public function reverse($hold_money = 0)
     {
         if ($this->payable->getTransaction())
-            $this->merchant->reverse($this->payable->getTransaction());
+            $this->merchant->reverse($this->payable->getTransaction(), $hold_money);
     }
 }

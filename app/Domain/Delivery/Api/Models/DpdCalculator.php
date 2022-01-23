@@ -31,30 +31,25 @@ class DpdCalculator extends DpdClient
         return $response;
     }
 
-    // for now do nothing with service code
-    private function setWeightAndServiceCode(Collection $product, int &$weight): string
+    /**
+     * calculate the products weight
+     */
+    private function getWeight(Collection $product): string
     {
-        $partial = true;
-        $weight = $product->reduce(function ($cary, $item) {
+
+        return $product->reduce(function ($cary, $item) {
             return $cary + $item->weight;
         });
-        return $partial ? "" : "";
     }
 
     public function getCost(DeliveryAddress $pickUp, DeliveryAddress $delivery, Collection $products)
     {
-        /**
-         * calculate the products weight
-         */
-
-        $weight = 0;
-        $this->setWeightAndServiceCode($products, $weight);
         $request = [
             "pickup" => $this->getDelivery($pickUp),
             'delivery' => $this->getDelivery($delivery),
             'selfPickup' => false,
             "selfDelivery" => false,
-            "weight" => $weight,
+            "weight" => $this->getWeight($products),
             "serviceCode" => "PLC"
         ];
         $response = $this->callSoapMethod($request, "request", "getServiceCost2");

@@ -22,7 +22,7 @@ class KeyTextLinkAttribute extends KeyTextAttribute
         return $this->link;
     }
 
-    protected function value()
+    protected function value():string
     {
         return self::getAttributeVariable($this->value);
     }

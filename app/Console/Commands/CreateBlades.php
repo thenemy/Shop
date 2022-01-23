@@ -5,12 +5,15 @@ namespace App\Console\Commands;
 use App\Domain\Category\Front\Admin\File\CategoryAllCreator;
 use App\Domain\Category\Front\Admin\File\CategoryCreator;
 use App\Domain\Category\Front\Admin\File\CategoryOpenCreator;
+use App\Domain\Comments\Front\Admin\File\CommentProductCreator;
 use App\Domain\Common\Banners\Front\Admin\File\BannerCreator;
 use App\Domain\Common\Brands\Front\Admin\File\BrandCreator;
 use App\Domain\Common\Colors\Front\Admin\File\ColorCreator;
+use App\Domain\Common\Discounts\Front\Admin\File\DiscountFileCreator;
 use App\Domain\CreditProduct\Front\Admin\File\MainCreditCreator;
 use App\Domain\Dashboard\File\DashboardCreator;
 use App\Domain\Installment\Front\Admin\Files\TakenCreditCreator;
+use App\Domain\Payment\Front\Admin\File\PaymentCreator;
 use App\Domain\Product\Product\Front\Admin\File\ProductCreator;
 use App\Domain\Shop\Front\Admin\File\ShopFileCreator;
 use App\Domain\Shop\Front\Main\ShopCreate;
@@ -64,6 +67,9 @@ class   CreateBlades extends Command
         BrandCreator::createFiles();
         ColorCreator::createFiles();
         DashboardCreator::createFiles();
+        DiscountFileCreator::createFiles();
+        PaymentCreator::createFiles();
+        CommentProductCreator::createFiles();
         return 0;
     }
 }

@@ -28,8 +28,8 @@ class InstallmentPayService
     private function withdraw()
     {
         if (!$this->isPaidInPlace()) {
+            $withdraw = new WithdrawMoney($this->taken);
             try {
-                $withdraw = new WithdrawMoney($this->taken);
                 $withdraw->withdraw();
             } catch (CardServiceError $exception) {
                 $withdraw->reverse();
@@ -97,16 +97,14 @@ class InstallmentPayService
         for ($i = 1; $i <= $this->credit->month; $i++) {
             $correct_month = ($i + month_num()) % 13;
             array_push($months, [
-                'month' => $correct_month,
+                'month' => now()->addMonths($correct_month),
                 'must_pay' => $sum_per_month
             ]);
         }
         $this->taken->monthPaid()->createMany($months);
-
+        $this->taken->saveAccept();
         /// must be set only when it will be accepted
-        $this->taken->date_taken = now();
-        $this->taken->date_finish = now()->addMonths(count($months));
-        $this->taken->save();
+
     }
 
 

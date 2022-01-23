@@ -11,7 +11,7 @@ interface DayInterface
     const DB_FRIDAY = 5;
     const DB_SATURDAY = 6;
     const DB_SUNDAY = 7;
-
+    const DB_SUNDAY_ALSO = 0;
     const TEXT_MONDAY = "Понедельник";
     const TEXT_TUESDAY = "Вторник";
     const TEXT_WEDNESDAY = "Среда";
@@ -20,6 +20,7 @@ interface DayInterface
     const TEXT_SATURDAY = "Суббота";
     const TEXT_SUNDAY = "Воскресенье";
     const DB_TO_FRONT = [
+        self::DB_SUNDAY_ALSO =>self::TEXT_SUNDAY,
         self::DB_MONDAY => self::TEXT_MONDAY,
         self::DB_TUESDAY => self::TEXT_TUESDAY,
         self::DB_WEDNESDAY => self::TEXT_WEDNESDAY,

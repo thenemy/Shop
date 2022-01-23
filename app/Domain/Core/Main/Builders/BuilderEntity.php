@@ -45,7 +45,7 @@ abstract class BuilderEntity extends Builder implements BuilderInterface
         if (isset($filter[$this->getSearch()])) {
             $filter['search'] = $filter[$this->getSearch()];
         }
-        if (isset($filter["search"])) {
+        if (isset($filter["search"]) && $this->getSearch()) {
             $search = $filter["search"];
             $this->where($this->getSearch(), "LIKE", "%" . $search . "%");
             unset($filter['search']);

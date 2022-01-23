@@ -18,15 +18,15 @@ class DatabaseSeeder extends Seeder
 //        (new RoleSeeder())->run();
 //        (new CurrencySeeder())->run();
 //        (new SchemaSmsSeeder())->run();
-        User::find(5)->plasticCard()->attach(PlasticCard::create(
-            [
-                'card_number' => "asdsad",
-                "expiry" => "asdsa",
-                "phone" => "ASD",
-                "card_token" => "ASDs",
-                "pan" => "ASD"
-            ]
-        ));
-        // \App\Models\User::factory(10)->create();
+//        User::find(5)->plasticCard()->attach(PlasticCard::create(
+//            [
+//                'card_number' => "asdsad",
+//                "expiry" => "asdsa",
+//                "phone" => "ASD",
+//                "card_token" => "ASDs",
+//                "pan" => "ASD"
+//            ]
+//        ));
+
     }
 }

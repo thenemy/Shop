@@ -12,7 +12,7 @@ use App\Domain\Installment\Front\Main\TakenCreditIndex;
 
 class TakenCreditFiltered extends TakenCreditIndex implements TableFilterByInterface
 {
-    use TableFilterBy, ArrayHandle, AttributeGetVariable;
+    use TableFilterBy;
 
     public function getTableClass(): string
     {

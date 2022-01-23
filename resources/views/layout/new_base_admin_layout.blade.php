@@ -1,8 +1,9 @@
 @extends("layout.layout")
 @section("body")
-    <div class="flex flex-row w-full">
-        <div x-data="{isSideBarOpen: false}"
-             :class="isSideBarOpen && 'w-16' || 'basis-1/5'">
+    <div x-data="{isSideBarOpen: false}" class="flex flex-row w-full">
+        <div
+             :class="isSideBarOpen && 'w-16' || 'basis-1/5'"
+        >
             <div class="flex flex-row items-center bg-black h-16">
                 <div class="self-center">
                     <div @click="isSideBarOpen = !isSideBarOpen" class="p-5 text-center">
@@ -17,11 +18,13 @@
             </div>
         </div>
 
-        <div class="bg-background flex-1">
+        <div
+            :class="isSideBarOpen && 'w-full' || 'max-w-[80vw]'"
+            class="bg-background flex-1">
             <div class="bg-white w-full h-16 shadow">
                 @yield("new_header")
             </div>
-            <div class="ml-4 mt-4">
+            <div class="ml-4 mt-4 ">
                 @yield("content")
             </div>
         </div>

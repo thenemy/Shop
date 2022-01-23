@@ -24,6 +24,7 @@ trait TableNested
 //    this is required for filtering data in nested component
 //    so we get all records that belongs to parent
 //   filterBy = [ $key_to_filter => parent_id ]
+//  The foreignkey of parent
     public string $key_to_filter;
 
     /**

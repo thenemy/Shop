@@ -9,7 +9,7 @@ use App\Domain\Core\Main\Services\BaseService;
 
 interface ControllerInterface
 {
-//
+    // for path generation
     public function getEntityClass(): string;
 
     public function getService(): BaseService;

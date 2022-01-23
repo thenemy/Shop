@@ -25,13 +25,18 @@ class PhoneService
         put_env(["SMS_AUTHORIZATION" => $this->authorization]);
     }
 
+    private function leftOnlyIntegers($phone)
+    {
+        return preg_filter("/[^0-9]/", "", $phone);
+    }
+
     public function send_code($phone_to_send, string $message)
     {
         $secret = $this->authorization ?? env("SMS_AUTHORIZATION");
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $secret,
         ])->post(self::SERVER . 'message/sms/send', [
-            'mobile_phone' => $phone_to_send,
+            'mobile_phone' => $this->leftOnlyIntegers($phone_to_send),
             'message' => $message,
             'from' => '4546'
         ]);
@@ -39,9 +44,10 @@ class PhoneService
             $this->authorize();
             return $this->send_code($phone_to_send, $message);
         }
-        $response_decoded = json_decode($response->body());
-        if ($response_decoded->getStatusCode() == 400) {
-            throw new PhoneError($response_decoded['message'], 400);
+        $response_decoded = $response->json();
+        if ($response->getStatusCode() == 400) {
+
+            throw new PhoneError($response->body(), 400);
         }
         return $response_decoded;
     }

@@ -19,6 +19,7 @@ class PurchaseAddress extends Migration
                 ->constrained("user_purchases")
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table->
             $table->foreignId("delivery_address_id")
                 //*
                 // who to deliver

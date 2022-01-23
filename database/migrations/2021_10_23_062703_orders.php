@@ -35,7 +35,7 @@ class Orders extends Migration
             $table->timestamps();
             $table->integer('quantity');
             $table->json('order');
-            $table->integer('price'); /// calculated price
+            $table->bigInteger('price'); /// calculated price
             $table->foreignId("product_id")->constrained("products");
         });
     }

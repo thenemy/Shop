@@ -44,4 +44,16 @@ class UserBuilder extends BuilderEntity
         return $this->where("created_at", "<=", now())
             ->where("created_at", ">", now()->subDays(30))->get()->count();
     }
+
+    public function joinTakenCredit(): UserBuilder
+    {
+        return $this->join("taken_credits", "taken_credits.user_id", "=", 'users.id');
+    }
+
+    public function findByTakenCredit($taken_credit_id)
+    {
+        return $this->joinTakenCredit()
+            ->where("taken_credits.id", "=", $taken_credit_id)
+            ->select("users.*");
+    }
 }

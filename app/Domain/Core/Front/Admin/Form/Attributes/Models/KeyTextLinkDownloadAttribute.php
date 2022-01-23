@@ -8,7 +8,7 @@ namespace App\Domain\Core\Front\Admin\Form\Attributes\Models;
 
 class KeyTextLinkDownloadAttribute extends KeyTextLinkAttribute
 {
-    protected function value()
+    protected function value(): string
     {
         return $this->value;
     }
