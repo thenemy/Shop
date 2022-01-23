@@ -5,6 +5,7 @@ namespace App\View\Helper\Sidebar\Models\Admin;
 
 use App\Domain\Category\Front\Admin\Path\CategoryAllRouteHandler;
 use App\Domain\Category\Front\Admin\Path\CategoryRouteHandler;
+use App\Domain\Comments\Front\Admin\Path\CommentProductRouteHandler;
 use App\Domain\Common\Banners\Front\Admin\Path\BannerRouteHandler;
 use App\Domain\Common\Brands\Front\Admin\Path\BrandRouteHandler;
 use App\Domain\Common\Colors\Front\Admin\Path\ColorRouteHandler;
@@ -58,12 +59,12 @@ class AdminSidebar implements \SideBarFactoryInterface
                     "Рассрочка",
                     "fa-money-bill-alt"
                 ),
-                new \SideBarDrop(__("Комментарии"), ShopRouteHandler::new(), "fa-comment"),
+                new \SideBarDrop(__("Комментарии"), CommentProductRouteHandler::new(), "fa-comment"),
                 new \SideBarList([
 
                 ],
                     "Доставка",
-                    "fa-comment"
+                    "fa-car"
                 ),
 
             ],
