@@ -26,7 +26,6 @@ class Delivery extends Migration
             ->constrained("shop_addresses")
                 ->restrictOnUpdate()
                 ->restrictOnDelete();
-            $table->integer("status")->default(\App\Domain\Delivery\Interfaces\DeliveryStatus::CREATED);
             // Namely, some products have the same pick up address , so we have to put them together
             $table->string("orderNum")->nullable();
             $table->string("datePickup");
