@@ -15,9 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//        (new RoleSeeder())->run();
-//        (new CurrencySeeder())->run();
-//        (new SchemaSmsSeeder())->run();
+        (new RoleSeeder())->run();
+        (new CurrencySeeder())->run();
+        (new SchemaSmsSeeder())->run();
 //        User::find(5)->plasticCard()->attach(PlasticCard::create(
 //            [
 //                'card_number' => "asdsad",
