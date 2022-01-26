@@ -68,8 +68,8 @@ class   CreateBlades extends Command
         ColorCreator::createFiles();
         DashboardCreator::createFiles();
         DiscountFileCreator::createFiles();
-        PaymentCreator::createFiles();
         CommentProductCreator::createFiles();
+        PaymentCreator::createFiles();
         return 0;
     }
 }

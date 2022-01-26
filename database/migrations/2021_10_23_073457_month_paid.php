@@ -18,8 +18,8 @@ class MonthPaid extends Migration
             $table->timestamps();
             $table->float("must_pay");
             $table->float("paid")->default(0);
-//            $table->date("month");
-            $table->integer("month");
+            $table->date("month");
+//            $table->integer("month");
             $table->bigInteger("transaction_id")->nullable();
             $table->foreignId("taken_credit_id")
                 ->constrained("taken_credits")

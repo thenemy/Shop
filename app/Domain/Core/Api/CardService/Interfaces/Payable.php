@@ -12,7 +12,6 @@ interface Payable
 
     public function account_id();
 
-
     public function getTokens(): Collection;
 
     public function setTransaction(int $transaction_id);

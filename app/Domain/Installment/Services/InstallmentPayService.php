@@ -95,9 +95,8 @@ class InstallmentPayService
     {
         $months = [];
         for ($i = 1; $i <= $this->credit->month; $i++) {
-            $correct_month = ($i + month_num()) % 13;
             array_push($months, [
-                'month' => now()->addMonths($correct_month),
+                'month' => now()->addMonths($i),
                 'must_pay' => $sum_per_month
             ]);
         }

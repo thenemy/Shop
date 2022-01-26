@@ -6,6 +6,7 @@ use App\Domain\Core\Api\CardService\Error\CardServiceError;
 use App\Domain\Core\Api\CardService\Interfaces\Payable;
 use App\Domain\Core\Api\CardService\Model\WithdrawMoney;
 use App\Domain\Core\BackgroundTask\Base\AbstractJob;
+use App\Domain\Installment\Payable\MonthPaidPayable;
 use App\Domain\Installment\Services\TimeScheduleService;
 use App\Domain\User\Entities\PlasticCard;
 
