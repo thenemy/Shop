@@ -31,7 +31,7 @@ class Delivery extends Migration
             $table->string("datePickup");
             $table->integer("status")->default(\App\Domain\Delivery\Interfaces\DeliveryStatus::CREATED); //// all status that possible for delivery
 
-            $table->primary(['user_purchase_id', "shop_id"]);
+            $table->primary(['user_purchase_id', "shop_address_id"]);
         });
     }
 
