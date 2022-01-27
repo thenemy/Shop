@@ -44,6 +44,6 @@ class SuretyPlasticCardDynamic extends BaseLivewireDynamic
 
     public function getServiceClass(): string
     {
-        return  'App\Domain\User\Services\PlasticCardService'; //9
+        return  'App\Domain\User\Services\PlasticCardSuretyService'; //9
     }
 }

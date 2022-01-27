@@ -18,6 +18,7 @@ class PlasticCardSuretyBuilder extends PlasticCardBuilder
     public function filterBy($filter)
     {
         if (isset($filter['user_id'])) {
+            dd($filter);
             $this->joinUserWhere($filter['user_id']);
         }
         return parent::filterBy($filter);
