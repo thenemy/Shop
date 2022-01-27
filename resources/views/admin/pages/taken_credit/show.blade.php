@@ -27,32 +27,32 @@
             <span class='font-bold text-lg'>{{__('Информация о клиенте')}}</span>
                 			
 <x-helper.text.text_key_link key='Имя клиента' value='{{$entity->userData->crucialData->name ?? ""}}' :link='route("admin.user.show", ["0" => $entity->user_id,])'></x-helper.text.text_key_link>			
-<x-helper.text.text_key key='Номер карты' value='{{$entity->plastic->pan ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Номер телефона' value='{{$entity->plastic->phone ?? ""}} '></x-helper.text.text_key>
+<x-helper.text.text_key key='Номер карты' value='{{$entity->plastic->pan ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Номер телефона' value='{{$entity->plastic->phone ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>
             </div>			
 
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
             <span class='font-bold text-lg'>{{__('Информация о кредите')}}</span>
                 			
-<x-helper.text.text_key key='Номер Договора' value='{{$entity->purchase->id ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Количество покупок' value='{{$entity->purchase->number_purchase ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Сумма договора' value='{{$entity->allToPay() ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Первоначальная оплата' value='{{$entity->initial_price ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Ежемесячный платеж' value='{{$entity->monthly_paid ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Количество месяцев' value='{{$entity->number_month ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Процент' value='{{$entity->credit->percent ?? ""}} %'></x-helper.text.text_key>
+<x-helper.text.text_key key='Номер Договора' value='{{$entity->purchase->id ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Количество покупок' value='{{$entity->purchase->number_purchase ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Сумма договора' value='{{$entity->allToPay() ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Первоначальная оплата' value='{{$entity->initial_price ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Ежемесячный платеж' value='{{$entity->monthly_paid ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Количество месяцев' value='{{$entity->number_month ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Процент' value='{{$entity->credit->percent ?? ""}} %' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>
             </div>			
 @if($entity->surety) 			
 
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
             <span class='font-bold text-lg'>{{__('Информация о поручители')}}</span>
                 			
-<x-helper.text.text_key key='Имя' value='{{$entity->surety->crucialData->name ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Серия паспорта' value='{{$entity->surety->crucialData->series ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='ПНФЛ' value='{{$entity->surety->crucialData->pnfl ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Телефон' value='{{$entity->surety->phone ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Дополнительный номер' value='{{$entity->surety->additional_phone ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Дата рождения' value='{{$entity->surety->crucialData->date_of_birth ?? ""}} '></x-helper.text.text_key>			
+<x-helper.text.text_key key='Имя' value='{{$entity->surety->crucialData->name ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Серия паспорта' value='{{$entity->surety->crucialData->series ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='ПНФЛ' value='{{$entity->surety->crucialData->pnfl ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Телефон' value='{{$entity->surety->phone ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Дополнительный номер' value='{{$entity->surety->additional_phone ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Дата рождения' value='{{$entity->surety->crucialData->date_of_birth ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
 <x-helper.text.text_key_link key='Паспорт' value='Скачать' :link='route("download.file", ["path"=> $entity->surety->crucialData->passport->path])'></x-helper.text.text_key_link>			
 <x-helper.text.text_key_link key='Прописка' value='Скачать' :link='route("download.file", ["path"=> $entity->surety->crucialData->passport_reverse->path])'></x-helper.text.text_key_link>			
 <x-helper.text.text_key_link key='Паспорт c пользователем' value='Скачать' :link='route("download.file", ["path"=> $entity->surety->crucialData->user_passport->path])'></x-helper.text.text_key_link>
@@ -62,17 +62,20 @@
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
             <span class='font-bold text-lg'>{{__('Информация о доставке')}}</span>
                 			
-<x-helper.text.text_key key='Количество посылок' value='{{$entity->purchase->delivery()->count() ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Количество посылок доставлено' value='{{$entity->purchase->delivery()->whereNot("status", 0)->count() ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Город доставки' value='{{$entity->purchase->delivery_address->availableCities->cityName ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Адрес доставки' value='{{$entity->purchase->delivery_address->street ?? ""}}, {{$entity->purchase->delivery_address->house ?? ""}} '></x-helper.text.text_key>
+<x-helper.text.text_key key='Количество посылок' value='{{$entity->purchase->delivery()->count() ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Количество посылок доставлено' value='{{$entity->purchase->delivery()->whereNot("status", 0)->count() ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Город доставки' value='{{$entity->purchase->delivery_address->availableCities->cityName ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Адрес доставки' value='{{$entity->purchase->delivery_address->street ?? ""}}, {{$entity->purchase->delivery_address->house ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextValueAttribute'></x-helper.text.text_key>
             </div>  @endif			
+@if(abs($entity->status)% 10 == 1) 			
 
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
             <span class='font-bold text-lg'>{{__('Состояние')}}</span>
                 			
-<x-helper.text.text_key key='Сальдо' value='{{$entity->saldo ?? ""}} '></x-helper.text.text_key>
-            </div>
+<x-helper.text.text_key key='Сальдо' value='{{$entity->saldo ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.button.base_button 	class='bg-red-600 hover:bg-red-400'>Аннулировать рассрочку</x-helper.button.base_button>
+            </div>			
+ @endif
             </div>			
 
             <div 	class='  flex flex-col  space-y-2'>

@@ -93,12 +93,14 @@ class TakenCreditShow extends TakenCredit implements CreateAttributesInterface
                             ]),
                         ENDIFstatement::new(),
                         DeliveryInformation::new(),
+                        IFstatement::new(
+                            sprintf('abs($entity->status)%% 10 == %s', PurchaseStatus::ACCEPTED)),
                         BoxTitleContainer::newTitle("Состояние", "", [
-                            KeyTextAttribute::new(__("Сальдо"),  'saldo'),
-                            RedButtonCompile::new("Аннулировать рассрочку" , [
-
-                            ])
+                            KeyTextAttribute::new(__("Сальдо"), 'saldo', "",
+                                '@if($entity->saldo < 0) text-red-400 @endif'),
+                            RedButtonCompile::new("Аннулировать рассрочку", [])
                         ]),
+                        ENDIFstatement::new()
                     ]),
                     ContainerColumn::newClass("", [
                         BoxTitleContainer::newTitle("Сведения об оплате", "", [

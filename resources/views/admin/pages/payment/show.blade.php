@@ -22,27 +22,27 @@
                 			
 <x-helper.text.text_key_link key='Имя клиента' value='{{$entity->user->userCreditData->crucialData->name ?? ""}}' :link='route("admin.user.show", ["0" => $entity->user_id,])'></x-helper.text.text_key_link>			
 @if($entity->purchase->status%10 == 1) 			
-<x-helper.text.text_key key='Тип оплаты' value='Наличка '></x-helper.text.text_key>			
+<x-helper.text.text_key key='Тип оплаты' value='Наличка ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextValueAttribute'></x-helper.text.text_key>			
 @else 			
-<x-helper.text.text_key key='Номер карты' value='{{$entity->card->plastic->pan ?? ""}} '></x-helper.text.text_key>			
+<x-helper.text.text_key key='Номер карты' value='{{$entity->card->plastic->pan ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
  @endif
             </div>			
 
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
             <span class='font-bold text-lg'>{{__('Информация о покупке')}}</span>
                 			
-<x-helper.text.text_key key='Номер Договора' value='{{$entity->purchase->id ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Количество покупок' value='{{$entity->purchase->number_purchase ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Сумма договора' value='{{$entity->price ?? ""}} '></x-helper.text.text_key>
+<x-helper.text.text_key key='Номер Договора' value='{{$entity->purchase->id ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Количество покупок' value='{{$entity->purchase->number_purchase ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Сумма договора' value='{{$entity->price ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>
             </div>			
  @if($entity->purchase->status == 10)  
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
             <span class='font-bold text-lg'>{{__('Информация о доставке')}}</span>
                 			
-<x-helper.text.text_key key='Количество посылок' value='{{$entity->purchase->delivery()->count() ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Количество посылок доставлено' value='{{$entity->purchase->delivery()->whereNot("status", 0)->count() ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Город доставки' value='{{$entity->purchase->delivery_address->availableCities->cityName ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Адрес доставки' value='{{$entity->purchase->delivery_address->street ?? ""}}, {{$entity->purchase->delivery_address->house ?? ""}} '></x-helper.text.text_key>
+<x-helper.text.text_key key='Количество посылок' value='{{$entity->purchase->delivery()->count() ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Количество посылок доставлено' value='{{$entity->purchase->delivery()->whereNot("status", 0)->count() ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Город доставки' value='{{$entity->purchase->delivery_address->availableCities->cityName ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Адрес доставки' value='{{$entity->purchase->delivery_address->street ?? ""}}, {{$entity->purchase->delivery_address->house ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextValueAttribute'></x-helper.text.text_key>
             </div>  @endif
             </div>
 <x-helper.container.container :title='__("Товары")' 	class='flex flex-col flex flex-wrap justify-between'>

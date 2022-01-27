@@ -29,18 +29,18 @@
 
             <div >
                 			
-<x-helper.text.text_key key='Имя клиента' value='{{$entity->userCreditData->crucialData->name ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Телефон' value='{{$entity->phone ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Дополнительный номер' value='{{$entity->userCreditData->additional_phone ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Пол' value='{{$entity->userCreditData->sex_show ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='Дата рождения' value='{{$entity->userCreditData->crucialData->date_of_birth ?? ""}} '></x-helper.text.text_key>
+<x-helper.text.text_key key='Имя клиента' value='{{$entity->userCreditData->crucialData->name ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Телефон' value='{{$entity->phone ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Дополнительный номер' value='{{$entity->userCreditData->additional_phone ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Пол' value='{{$entity->userCreditData->sex_show ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='Дата рождения' value='{{$entity->userCreditData->crucialData->date_of_birth ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>
             </div>
             </div>			
 
             <div 	class='items-center bg-white shadow-lg rounded p-10'>
                 			
-<x-helper.text.text_key key='Серия паспорта' value='{{$entity->userCreditData->crucialData->series ?? ""}} '></x-helper.text.text_key>			
-<x-helper.text.text_key key='ПНФЛ' value='{{$entity->userCreditData->crucialData->pnfl ?? ""}} '></x-helper.text.text_key>			
+<x-helper.text.text_key key='Серия паспорта' value='{{$entity->userCreditData->crucialData->series ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key='ПНФЛ' value='{{$entity->userCreditData->crucialData->pnfl ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
 <x-helper.text.text_key_link key='Паспорт' value='Скачать' :link='route("download.file", ["path"=> $entity->userCreditData->crucialData->passport->path])'></x-helper.text.text_key_link>			
 <x-helper.text.text_key_link key='Прописка' value='Скачать' :link='route("download.file", ["path"=> $entity->userCreditData->crucialData->passport_reverse->path])'></x-helper.text.text_key_link>			
 <x-helper.text.text_key_link key='Паспорт c пользователем' value='Скачать' :link='route("download.file", ["path"=> $entity->userCreditData->crucialData->user_passport->path])'></x-helper.text.text_key_link>
