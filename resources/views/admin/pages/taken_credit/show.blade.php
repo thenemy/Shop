@@ -40,24 +40,7 @@
 <x-helper.text.text_key key='Ежемесячный платеж' value='{{$entity->monthly_paid ?? ""}} '></x-helper.text.text_key>			
 <x-helper.text.text_key key='Количество месяцев' value='{{$entity->number_month ?? ""}} '></x-helper.text.text_key>			
 <x-helper.text.text_key key='Процент' value='{{$entity->credit->percent ?? ""}} %'></x-helper.text.text_key>
-            </div>
             </div>			
-
-            <div 	class='border p-4 bg-white shadow space-y-2 flex-1'>
-            <span class='font-bold text-lg'>{{__('Сведения')}}</span>
-                			
-<livewire:admin.pages.taken-credit-edit.monthly-paid-index
-            :filterBy="['taken_credit_id' => $entity->id,]" />			
-<livewire:admin.pages.taken-credit-edit.comment-installment-dynamic 
-                 parentKey='taken_credit_id'
-                :parentId='$entity->id'/>			
-<livewire:admin.pages.taken-credit-edit.time-schedule-transaction-index
-            :filterBy="['taken_credit_id' => $entity->id,]" />
-            </div>
-            </div>			
-
-            <div 	class='w-full flex flex-row  space-x-2'>
-                			
 @if($entity->surety) 			
 
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
@@ -83,6 +66,19 @@
 <x-helper.text.text_key key='Город доставки' value='{{$entity->purchase->delivery_address->availableCities->cityName ?? ""}} '></x-helper.text.text_key>			
 <x-helper.text.text_key key='Адрес доставки' value='{{$entity->purchase->delivery_address->street ?? ""}}, {{$entity->purchase->delivery_address->house ?? ""}} '></x-helper.text.text_key>
             </div>  @endif
+            </div>			
+
+            <div 	class='border p-4 bg-white shadow space-y-2 flex-1'>
+            <span class='font-bold text-lg'>{{__('Сведения')}}</span>
+                			
+<livewire:admin.pages.taken-credit-edit.monthly-paid-index
+            :filterBy="['taken_credit_id' => $entity->id,]" />			
+<livewire:admin.pages.taken-credit-edit.comment-installment-dynamic 
+                 parentKey='taken_credit_id'
+                :parentId='$entity->id'/>			
+<livewire:admin.pages.taken-credit-edit.time-schedule-transaction-index
+            :filterBy="['taken_credit_id' => $entity->id,]" />
+            </div>
             </div>			
 @if($entity->surety) 			
 <livewire:admin.pages.taken-credit-edit.surety-plastic-card-dynamic 
