@@ -20,6 +20,7 @@ use App\Domain\Core\Main\Traits\ArrayHandle;
 use App\Domain\Installment\Entities\MonthPaid;
 use App\Domain\Installment\Front\Admin\CustomTables\Tables\MonthlyPaidTable;
 use App\Domain\Installment\Front\Admin\Functions\SmsNotPayment;
+use Illuminate\Support\Carbon;
 
 class MonthlyPaidIndex extends MonthPaid implements TableInFront, FilterInterface, TableFilterByInterface
 {
@@ -27,10 +28,7 @@ class MonthlyPaidIndex extends MonthPaid implements TableInFront, FilterInterfac
 
     public function getMonthIndexAttribute()
     {
-        dd($this->month);
-        if ($this->month)
-            return TextAttribute::generation($this, self::DB_TO_FRONT[$this->month->month], true);
-        return  "";
+        return TextAttribute::generation($this, self::DB_TO_FRONT[Carbon::createFromFormat("Y-m-d", $this->month)->month], true);
     }
 
     public function getPaidIndexAttribute()
