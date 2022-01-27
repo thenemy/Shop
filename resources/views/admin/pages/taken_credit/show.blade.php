@@ -68,11 +68,15 @@
             </div>  @endif
             </div>			
 
-            <div 	class='border p-4 bg-white shadow space-y-2 flex-1'>
+            <div 	class='  flex flex-col  space-y-2'>
+                			
+
+            <div 	class=' border shadow p-4 space-y-4 bg-white'>
             <span class='font-bold text-lg'>{{__('Сведения')}}</span>
                 			
 <livewire:admin.pages.taken-credit-edit.monthly-paid-index
-            :filterBy="['taken_credit_id' => $entity->id,]" />			
+            :filterBy="['taken_credit_id' => $entity->id,]" />
+            </div>			
 
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
             <span class='font-bold text-lg'>{{__('Комментарии')}}</span>
@@ -81,8 +85,13 @@
                  parentKey='taken_credit_id'
                 :parentId='$entity->id'/>
             </div>			
+
+            <div 	class=' border shadow p-4 space-y-4 bg-white'>
+            <span class='font-bold text-lg'>{{__('Журнал авто списаний')}}</span>
+                			
 <livewire:admin.pages.taken-credit-edit.time-schedule-transaction-index
             :filterBy="['taken_credit_id' => $entity->id,]" />
+            </div>
             </div>
             </div>			
 @if($entity->surety) 			
