@@ -4,6 +4,7 @@ namespace App\Domain\Core\Front\Admin\CustomTable\Traits;
 
 use App\Domain\Category\Front\Admin\DropDown\FiltrationCategoryDropDown;
 use App\Domain\Core\File\Models\Livewire\FileLivewireDynamic;
+use App\Domain\Core\File\Models\Livewire\FileLivewireDynamicWithoutContainer;
 use App\Domain\Core\Front\Admin\Button\ModelInRunTime\ButtonGrayLivewire;
 use App\Domain\Core\Front\Admin\Button\ModelInRunTime\ButtonGreenLivewire;
 use App\Domain\Core\Front\Admin\Button\ModelInRunTime\ButtonRedLivewire;
@@ -19,7 +20,17 @@ use App\Domain\CreditProduct\Services\CreditService;
 trait TableDynamic
 {
     use TableDynamicWithoutEntity;
-
+    public static function getDynamicWithoutContainer($className, $parentId = "id"): FileLivewireDynamic
+    {
+        $class = get_called_class();
+        return new FileLivewireDynamicWithoutContainer(
+            $className,
+            new $class(),
+            self::getBaseService(),
+            self::getDynamicParentKey(),
+            $parentId
+        );
+    }
     public static function getDynamic($className, $parentId = "id"): FileLivewireDynamic
     {
         $class = get_called_class();

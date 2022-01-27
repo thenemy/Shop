@@ -73,6 +73,7 @@ class TakenCreditShow extends TakenCredit implements CreateAttributesInterface
                     ]),
                     ContainerTitle::newTitle("Сведения", "border p-4 bg-white shadow space-y-2 flex-1", [
                         new FileLivewireWithoutActionFilterBy("TakenCreditEdit", MonthlyPaidIndex::new()),
+                        CommentInstallmentDynamic::getDynamicWithoutContainer("TakenCreditEdit"),
                         new FileLivewireWithoutActionFilterBy("TakenCreditEdit", TimeScheduleTransactionIndex::new())
                     ])
                 ]),
@@ -107,9 +108,7 @@ class TakenCreditShow extends TakenCredit implements CreateAttributesInterface
                     new  FileLivewireWithoutActionFilterBy("TakenCreditEdit", PurchaseMain::new())
                 ], [
                     'class' => "flex flex-col"
-                ]),
-                CommentInstallmentDynamic::getDynamic("TakenCreditEdit"),
-            ])
+                ]),])
         ]);
     }
 

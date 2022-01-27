@@ -48,6 +48,9 @@
                 			
 <livewire:admin.pages.taken-credit-edit.monthly-paid-index
             :filterBy="['taken_credit_id' => $entity->id,]" />			
+<livewire:admin.pages.taken-credit-edit.comment-installment-dynamic 
+                 parentKey='taken_credit_id'
+                :parentId='$entity->id'/>			
 <livewire:admin.pages.taken-credit-edit.time-schedule-transaction-index
             :filterBy="['taken_credit_id' => $entity->id,]" />
             </div>
@@ -90,10 +93,7 @@
                 			
 <livewire:admin.pages.taken-credit-edit.purchase-main
             :filterBy="['user_purchase_id' => $entity->purchase_id,]" />
-                </x-helper.container.container>			
-<livewire:admin.pages.taken-credit-edit.comment-installment-dynamic 
-                 parentKey='taken_credit_id'
-                :parentId='$entity->id'/>
+                </x-helper.container.container>
             </div>
         </div>
 

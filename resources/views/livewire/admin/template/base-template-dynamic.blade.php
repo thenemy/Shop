@@ -3,6 +3,5 @@
         {{--   table -> drop down action --}}
         <x-helper.error.error :error="$errors"/>
         %s
-        {{--    <x-helper.table.table :table="$table" :optional="$optional"/>--}}
     </div>
 </x-helper.container.container>

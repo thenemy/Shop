@@ -7,6 +7,5 @@
                 :table="$table"
                 :storedValues="$storedValues"
                 :optional="$optional"/>
-        {{--    <x-helper.table.table :table="$table" :optional="$optional"/>--}}
     </div>
 </x-helper.container.container>
