@@ -27,7 +27,9 @@ class MonthlyPaidIndex extends MonthPaid implements TableInFront, FilterInterfac
 
     public function getMonthIndexAttribute()
     {
-        return TextAttribute::generation($this, self::DB_TO_FRONT[$this->month->month], true);
+        if ($this->month)
+            return TextAttribute::generation($this, self::DB_TO_FRONT[$this->month->month], true);
+        return  "";
     }
 
     public function getPaidIndexAttribute()
