@@ -58,7 +58,7 @@ class TakenCreditShow extends TakenCredit implements CreateAttributesInterface
                                     LinkGenerator::new(UserRouteHandler::new())->show("user_id")
                                 ),
                                 KeyTextAttribute::new(__("Номер карты"), self::PLASTIC_CARD_TO . "pan"),
-                                KeyTextAttribute::new(__("Номер карты"), self::PLASTIC_CARD_TO . "phone"),
+                                KeyTextAttribute::new(__("Номер телефона"), self::PLASTIC_CARD_TO . "phone"),
 
                             ]),
                         BoxTitleContainer::newTitle("Информация о кредите",
