@@ -73,9 +73,14 @@
                 			
 <livewire:admin.pages.taken-credit-edit.monthly-paid-index
             :filterBy="['taken_credit_id' => $entity->id,]" />			
+
+            <div 	class=' border shadow p-4 space-y-4 bg-white'>
+            <span class='font-bold text-lg'>{{__('Комментарии')}}</span>
+                			
 <livewire:admin.pages.taken-credit-edit.comment-installment-dynamic 
                  parentKey='taken_credit_id'
-                :parentId='$entity->id'/>			
+                :parentId='$entity->id'/>
+            </div>			
 <livewire:admin.pages.taken-credit-edit.time-schedule-transaction-index
             :filterBy="['taken_credit_id' => $entity->id,]" />
             </div>
