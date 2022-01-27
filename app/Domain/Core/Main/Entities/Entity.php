@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 class Entity extends Model implements RuleInterface
 {
     public $timestamps = false;
-    protected $guarded = [];
+    protected $guarded = ['params'];
 
 
     public function getClassNameAttribute(): string
