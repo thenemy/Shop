@@ -98,7 +98,12 @@ class TakenCreditShow extends TakenCredit implements CreateAttributesInterface
                         BoxTitleContainer::newTitle("Состояние", "", [
                             KeyTextAttribute::new(__("Сальдо"), 'saldo', "",
                                 '@if($entity->saldo < 0) text-red-400 @endif'),
-                            RedButtonCompile::new("Аннулировать рассрочку", [])
+                            Container::newClass("m-auto w-2/5" , [
+                                RedButtonCompile::new("Аннулировать рассрочку", [
+                                    'class' => "margin-auto"
+                                ])
+                            ])
+
                         ]),
                         ENDIFstatement::new()
                     ]),
