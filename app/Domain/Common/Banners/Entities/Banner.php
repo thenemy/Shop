@@ -14,7 +14,11 @@ class Banner extends Entity
     use MediaTraitTranslatable;
 
     protected $table = "main_banner";
-
+    protected $fillable = [
+        'link',
+        'image',
+    ];
+    protected $guarded = null;
     public function newEloquentBuilder($query)
     {
         return new BannerBuilder($query);
