@@ -57,7 +57,9 @@ class TakenCreditShow extends TakenCredit implements CreateAttributesInterface
                                     self::CRUCIAL_DATA_TO . "name",
                                     LinkGenerator::new(UserRouteHandler::new())->show("user_id")
                                 ),
-                                KeyTextAttribute::new(__("Номер карты"), self::PLASTIC_CARD_TO . "pan")
+                                KeyTextAttribute::new(__("Номер карты"), self::PLASTIC_CARD_TO . "pan"),
+                                KeyTextAttribute::new(__("Номер карты"), self::PLASTIC_CARD_TO . "phone"),
+
                             ]),
                         BoxTitleContainer::newTitle("Информация о кредите",
                             "",
@@ -92,7 +94,7 @@ class TakenCreditShow extends TakenCredit implements CreateAttributesInterface
                         DeliveryInformation::new()
                     ]),
                     ContainerColumn::newClass("", [
-                        BoxTitleContainer::newTitle("Сведения", "", [
+                        BoxTitleContainer::newTitle("Сведения об оплате", "", [
                             new FileLivewireWithoutActionFilterBy("TakenCreditEdit", MonthlyPaidIndex::new()),
                         ]),
                         BoxTitleContainer::newTitle("Комментарии", "", [
