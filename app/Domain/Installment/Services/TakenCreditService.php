@@ -66,9 +66,10 @@ class TakenCreditService extends BaseService implements PurchaseRelationInterfac
                 $object_data['surety_id'] = $this->surety->create($surety_data)->id;
             }
             $purchases = $this->purchaseService->create($object_data);
-            $object = parent::create(array_merge($object_data, [
+            dd($purchases);
+            $object = parent::createWith($object_data, [
                 'purchase_id' => $purchases->id,
-                'status' => true]));
+                'status' => true]);
             $object_data['taken_credit_id'] = $object->id;
             Log::debug("SUCCESS TAKEN_CREDIT", $object->toArray());
             $payService = new InstallmentPayService($object_data, $object);
