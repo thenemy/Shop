@@ -26,14 +26,14 @@ trait MediaTraitTranslatable
     public function setMedia($key, $value, $id)
     {
         if (is_array($value) && !empty($value)) {
-            foreach ($this->getOriginalValue($key) as $sub_key => $item) {
+            foreach ($this->getOriginalValue($key) as $sub_key => $item) { // replace existing
                 if ($this->isFileNotExists($value[$sub_key], $item)) {
                     $this->deleteMediaMany($key, $item, $sub_key);
                     $this->storeMediaMany($key, $value[$sub_key], $sub_key, MediaInterface::PUBLIC_PATH, $id);
                     unset($value[$sub_key]);
                 }
             }
-            foreach ($value as $sub_key => $item) {
+            foreach ($value as $sub_key => $item) { // insert absolutely new
                 $this->storeMediaMany($key, $item, $sub_key, MediaInterface::PUBLIC_PATH, $id);
             }
         }

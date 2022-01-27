@@ -25,11 +25,11 @@ function formatCardNumber(event) {
 
 
 function formatDateForCard(event) {
-    if (onlyNumbers(event)) {
-        const v = removeSpace(event.target.value).replace(/[^0-9]/gi, '');
-        event.target.value = v.match(/\d{1,2}/g).slice(0, 2).join('/');
-        return true;
-    }
+
+    const v = removeSpace(event.target.value).replace(/[^0-9]/gi, '');
+    event.target.value = v.match(/\d{1,2}/g).slice(0, 2).join('/');
+    return true;
+
 }
 
 function onlyNumbers(event) {
