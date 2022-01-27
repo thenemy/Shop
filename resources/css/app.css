@@ -33,11 +33,11 @@
 }
 
 .table_main_td {
-    @apply border text-table_color bg-white p-1.5
+    @apply border text-table_color  p-1.5
 }
 
 .icon_action {
-    @apply text-center px-1 py-0.5 hover:text-blue-300 hover:border-blue-300 border-2  rounded
+    @apply text-center px-1 py-0.5 hover:text-blue-300 hover:border-blue-300 border-2  rounded bg-white
 }
 
 .transition-custom {

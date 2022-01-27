@@ -31,10 +31,14 @@ class MonthPaidPayable extends MonthPaid implements Payable
     public function finishTransaction(array $confirm): bool
     {
         $last = $this->takenCredit->monthPaid()->orderBy("month", "DESC")->first();
+        $current = $this->takenCredit->monthPaid()->whereDate('month', '=', now())->first();
         if ($last->id == $this->id) {
             $this->takenCredit->status = PurchaseStatus::FINISHED;
-            $this->takenCredit->save();
+        } else if ($current->id == $this->id) {
+            $this->takenCredit->status = PurchaseStatus::ACCEPTED;
         }
+        $this->takenCredit->save();
+
         return true;
     }
 
@@ -45,6 +49,6 @@ class MonthPaidPayable extends MonthPaid implements Payable
 
     public function check(): bool
     {
-        return $this->takenCredit->status == PurchaseStatus::ACCEPTED;
+        return abs($this->takenCredit->status) == PurchaseStatus::ACCEPTED;
     }
 }

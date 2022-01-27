@@ -22,6 +22,7 @@
 </head>
 <body class="mb-5 font-sans text-black_custom">
 <div class="hidden bg-green-600 hover:bg-green-400 bg-gray-600 max-w-[50vw]
+bg-red-200
 hover:bg-green-700 space-y-3 space-y-4 space-y-6 bg-red-400  basis-5/12
   hover:bg-gray-400 bg-green-400 hover:bg-green-200 text-gray-700 hover:bg-gray-50"></div>
 @yield("header")

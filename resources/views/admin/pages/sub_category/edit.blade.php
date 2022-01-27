@@ -18,7 +18,7 @@
                     :multiple='false'
                     label='Иконка'
                      />
-<livewire:admin.pages.category-edit.filtration-category-dynamic 
+<livewire:admin.pages.category-edit.filtration-key-category-dynamic 
                  parentKey='category_id'
                 :parentId='$entity->id'/>
 @endsection

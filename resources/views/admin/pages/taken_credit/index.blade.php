@@ -12,7 +12,8 @@
         {{--    insert name of the breadcrumbs and the arguments--}}
         <div class="w-full pb-10 ">
             
-<livewire:admin.pages.taken-credit.taken-credit-index />
+<livewire:admin.pages.taken-credit.taken-credit-index
+            :filterBy="['filter' => 1,]" />
         </div>
     </div>
 

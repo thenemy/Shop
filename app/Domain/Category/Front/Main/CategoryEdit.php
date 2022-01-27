@@ -5,6 +5,7 @@ namespace App\Domain\Category\Front\Main;
 use App\Domain\Category\Builders\CategoryBuilder;
 use App\Domain\Category\Entities\Category;
 use App\Domain\Category\Front\Dynamic\FiltrationCategoryDynamic;
+use App\Domain\Category\Front\Dynamic\FiltrationKeyCategoryDynamic;
 use App\Domain\Category\Front\Nested\CategoryNested;
 use App\Domain\Core\File\Models\Livewire\FileLivewireNested;
 use App\Domain\Core\Front\Admin\File\Attributes\FileAttribute;
@@ -23,7 +24,7 @@ class CategoryEdit extends Category implements CreateAttributesInterface
 //            new FileLivewireNested("Category", $this->child_category),
             new InputLangAttribute("name", __("Введите  имя категории"), false),
             new InputFileAttribute("icon_file", "Иконка", self::class),
-            FiltrationCategoryDynamic::getDynamic('CategoryEdit'),
+            FiltrationKeyCategoryDynamic::getDynamic('CategoryEdit'),
             ...$this->additionalGeneration()
         ));
     }

@@ -24,7 +24,7 @@ class MonthPaidBuilder extends BuilderEntity
         return $this
             ->from('month_paid', "first")
             ->join("taken_credits", "taken_credits.id", "=", "first.taken_credit_id")
-            ->where("taken_credits.status", "=", PurchaseStatus::ACCEPTED)
+            ->where("ABS(taken_credits.status)", "=", PurchaseStatus::ACCEPTED)
             ->whereColumn("first.paid", "<", "first.must_pay") // check already paid or not
             ->whereDate("first.month", "<=", now())
             ->select('first.*');

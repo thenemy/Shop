@@ -23,7 +23,7 @@
             </tr>
             @foreach($table->list as $items)
                 <tr wire:key="clean_table_{{$loop->index}}"
-                    class="table_main_tr">
+                    class="table_main_tr  bg-white ">
                     <td class="table_main_td hidden  checker checkbox-show">
                         <label for="check{{$loop->index}}">
                             <input type="checkbox" wire:model="checkBox" value="{{$items->id}}"
@@ -31,8 +31,8 @@
                         </label>
                     </td>
                     @foreach($table->columns as $row)
-                        <td class="table_main_td">
-                            <div class="flex  flex-row justify-center">
+                        <td class="table_main_td {{$items->row_style}}">
+                            <div class="flex  flex-row justify-center {{$items->row_style}}">
                                 {!! $items[$row->key_to_row] !!}
                             </div>
                         </td>

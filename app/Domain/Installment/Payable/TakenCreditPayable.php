@@ -41,6 +41,6 @@ class TakenCreditPayable extends TakenCredit implements Payable
 
     public function check(): bool
     {
-        return $this->status == self::ACCEPTED;
+        return abs($this->status) == self::ACCEPTED;
     }
 }

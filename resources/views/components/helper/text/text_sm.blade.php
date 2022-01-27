@@ -1,1 +1,1 @@
-<p {{$attributes->merge(["class"=>"text-sm "])}}>{{$slot}}</p>
+<span {{$attributes->merge(["class"=>"text-sm "])}}>{{$slot}}</span>

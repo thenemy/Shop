@@ -3,6 +3,6 @@
 {{--         src="{{asset('images/view.svg')}}"--}}
 {{--         alt="">--}}
 {{--</a>--}}
-<a href="{{$slot}}" class="icon_action">
+<a href="{{$slot}}" class="icon_action text-black_custom">
     <span class="fa fa-eye"></span>
 </a>

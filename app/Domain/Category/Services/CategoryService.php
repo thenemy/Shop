@@ -16,13 +16,13 @@ class CategoryService extends BaseService implements CategoryRelationInterface
     use FileUploadService;
 
     public IconCatService $service;
-    public FiltrationCategoryService $filtrationCategoryService;
+    public FiltrationKeyCategoryService $filtrationCategoryService;
 
     public function __construct()
     {
         parent::__construct();
         $this->service = new IconCatService();
-        $this->filtrationCategoryService = new FiltrationCategoryService();
+        $this->filtrationCategoryService = new FiltrationKeyCategoryService();
     }
 
     public function getEntity(): Category

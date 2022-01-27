@@ -21,5 +21,5 @@
                     :mediaInitial='""'
                     wire:key=''
                      />
-<livewire:admin.pages.category-create.filtration-category-dynamic-without-entity />
+<livewire:admin.pages.category-create.filtration-key-category-dynamic-without-entity />
 @endsection

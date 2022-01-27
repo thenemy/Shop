@@ -4,12 +4,14 @@ namespace App\Domain\Installment\Front\Main;
 
 use App\Domain\Core\File\Interfaces\BladeActionsInterface;
 use App\Domain\Core\File\Models\Livewire\FileLivewireCreator;
+use App\Domain\Core\File\Models\Livewire\FileLivewireCreatorWithFilterBy;
 use App\Domain\Core\Front\Admin\Blade\Base\AllBladeActions;
 use App\Domain\Core\Front\Admin\CustomTable\Actions\Base\AllActions;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\ContainerTextAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\StatusAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Attributes\Attributes\TextAttribute;
 use App\Domain\Core\Front\Admin\CustomTable\Interfaces\TableInFront;
+use App\Domain\Core\Front\Admin\CustomTable\Traits\TableFilterBy;
 use App\Domain\Core\Front\Admin\Form\Interfaces\CreateAttributesInterface;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireFunctions;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireOptionalDropDown;
@@ -25,6 +27,15 @@ use App\Domain\SchemaSms\Front\Attribute\SchemaSmsAttribute;
 
 class TakenCreditIndex extends TakenCredit implements TableInFront, CreateAttributesInterface, BladeActionsInterface
 {
+    use TableFilterBy;
+
+    public function getRowStyleAttribute()
+    {
+        if ($this->status == self::NOT_PAID) {
+            return "bg-red-200 text-gray-700";
+        }
+    }
+
     public function getNumProductIndexAttribute()
     {
         return TextAttribute::generation($this, $this[self::PURCHASE_SERVICE]['number_purchase'], true);
@@ -67,20 +78,20 @@ class TakenCreditIndex extends TakenCredit implements TableInFront, CreateAttrib
 
     public function getStatusIndexAttribute()
     {
-        $class=  "";
+        $class = "";
         $text = "";
-        switch ($this->status){
+        switch ($this->status) {
             case self::WAIT_ANSWER:
                 $class = "bg-blue-400";
                 $text = "Ожидается";
                 break;
             case  self::ACCEPTED:
-                $class ="bg-green-400";
+                $class = "bg-green-400";
                 $text = "Принят";
                 break;
             case self::DECLINED:
-                $class="bg-red-400";
-                $text ="Отказано";
+                $class = "bg-red-400";
+                $text = "Отказано";
                 break;
             case self::REQUIRED_SURETY:
                 $class = "bg-blue-400";
@@ -103,7 +114,7 @@ class TakenCreditIndex extends TakenCredit implements TableInFront, CreateAttrib
     public function generateAttributes(): BladeGenerator
     {
         return BladeGenerator::generation([
-            new FileLivewireCreator("TakenCredit", $this),
+            new FileLivewireCreatorWithFilterBy("TakenCredit", $this),
         ]);
     }
 
@@ -152,5 +163,12 @@ class TakenCreditIndex extends TakenCredit implements TableInFront, CreateAttrib
         return AllBladeActions::generation([
             SchemaSmsAttribute::new(SchemaSmsInstallment::class)
         ]);
+    }
+
+    function filterByData(): array
+    {
+        return [
+            "filter" => true
+        ];
     }
 }
