@@ -28,7 +28,8 @@ class MonthlyPaidIndex extends MonthPaid implements TableInFront, FilterInterfac
 
     public function getMonthIndexAttribute()
     {
-        return TextAttribute::generation($this, self::DB_TO_FRONT[Carbon::createFromFormat("Y-m-d", $this->month)->month], true);
+        $carbon = Carbon::createFromFormat("Y-m-d", $this->month);
+        return TextAttribute::generation($this, $carbon->day . "," . self::DB_TO_FRONT[$carbon->month], true);
     }
 
     public function getPaidIndexAttribute()
