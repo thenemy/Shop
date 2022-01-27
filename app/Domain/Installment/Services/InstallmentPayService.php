@@ -101,7 +101,7 @@ class InstallmentPayService
             ]);
         }
         $this->taken->monthPaid()->createMany($months);
-        $this->taken->saveAccept();
+//        $this->taken->saveAccept();
         /// must be set only when it will be accepted
 
     }
