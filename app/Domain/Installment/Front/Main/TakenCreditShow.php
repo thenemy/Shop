@@ -69,16 +69,7 @@ class TakenCreditShow extends TakenCredit implements CreateAttributesInterface
                                 KeyTextAttribute::new(__("Ежемесячный платеж"), "monthly_paid"),
                                 KeyTextAttribute::new(__("Количество месяцев"), 'number_month'),
                                 KeyTextAttribute::new(__("Процент"), self::CREDIT_TO . "percent", "%")
-                            ])
-                    ]),
-                    ContainerTitle::newTitle("Сведения", "border p-4 bg-white shadow space-y-2 flex-1", [
-                        new FileLivewireWithoutActionFilterBy("TakenCreditEdit", MonthlyPaidIndex::new()),
-                        CommentInstallmentDynamic::getDynamicWithoutContainer("TakenCreditEdit"),
-                        new FileLivewireWithoutActionFilterBy("TakenCreditEdit", TimeScheduleTransactionIndex::new())
-                    ])
-                ]),
-
-                    ContainerRow::newClass("w-full", [
+                            ]),
                         IFstatement::new(self::getWithoutScopeAtrVariable(self::SURETY_TO)),
                         BoxTitleContainer::newTitle("Информация о поручители",
                             "", [
@@ -100,6 +91,14 @@ class TakenCreditShow extends TakenCredit implements CreateAttributesInterface
                         ENDIFstatement::new(),
                         DeliveryInformation::new()
                     ]),
+                    ContainerTitle::newTitle("Сведения", "border p-4 bg-white shadow space-y-2 flex-1", [
+                        new FileLivewireWithoutActionFilterBy("TakenCreditEdit", MonthlyPaidIndex::new()),
+                        CommentInstallmentDynamic::getDynamicWithoutContainer("TakenCreditEdit"),
+                        new FileLivewireWithoutActionFilterBy("TakenCreditEdit", TimeScheduleTransactionIndex::new())
+                    ])
+                ]),
+
+
                 IFstatement::new(self::getWithoutScopeAtrVariable(self::SURETY_TO)),
                 SuretyPlasticCardDynamic::getDynamic("TakenCreditEdit", self::SURETY_TO . "id"),
                 ENDIFstatement::new(),
