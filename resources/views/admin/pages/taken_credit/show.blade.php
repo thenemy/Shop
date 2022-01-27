@@ -27,7 +27,8 @@
             <span class='font-bold text-lg'>{{__('Информация о клиенте')}}</span>
                 			
 <x-helper.text.text_key_link key='Имя клиента' value='{{$entity->userData->crucialData->name ?? ""}}' :link='route("admin.user.show", ["0" => $entity->user_id,])'></x-helper.text.text_key_link>			
-<x-helper.text.text_key key='Номер карты' value='{{$entity->plastic->pan ?? ""}} '></x-helper.text.text_key>
+<x-helper.text.text_key key='Номер карты' value='{{$entity->plastic->pan ?? ""}} '></x-helper.text.text_key>			
+<x-helper.text.text_key key='Номер телефона' value='{{$entity->plastic->phone ?? ""}} '></x-helper.text.text_key>
             </div>			
 
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
@@ -72,7 +73,7 @@
                 			
 
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
-            <span class='font-bold text-lg'>{{__('Сведения')}}</span>
+            <span class='font-bold text-lg'>{{__('Сведения об оплате')}}</span>
                 			
 <livewire:admin.pages.taken-credit-edit.monthly-paid-index
             :filterBy="['taken_credit_id' => $entity->id,]" />
