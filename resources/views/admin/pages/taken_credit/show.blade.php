@@ -66,7 +66,13 @@
 <x-helper.text.text_key key='Количество посылок доставлено' value='{{$entity->purchase->delivery()->whereNot("status", 0)->count() ?? ""}} '></x-helper.text.text_key>			
 <x-helper.text.text_key key='Город доставки' value='{{$entity->purchase->delivery_address->availableCities->cityName ?? ""}} '></x-helper.text.text_key>			
 <x-helper.text.text_key key='Адрес доставки' value='{{$entity->purchase->delivery_address->street ?? ""}}, {{$entity->purchase->delivery_address->house ?? ""}} '></x-helper.text.text_key>
-            </div>  @endif
+            </div>  @endif			
+
+            <div 	class=' border shadow p-4 space-y-4 bg-white'>
+            <span class='font-bold text-lg'>{{__('Состояние')}}</span>
+                			
+<x-helper.text.text_key key='Сальдо' value='{{$entity->saldo ?? ""}} '></x-helper.text.text_key>
+            </div>
             </div>			
 
             <div 	class='  flex flex-col  space-y-2'>

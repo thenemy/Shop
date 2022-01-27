@@ -91,7 +91,11 @@ class TakenCreditShow extends TakenCredit implements CreateAttributesInterface
                                     . "user_passport"),
                             ]),
                         ENDIFstatement::new(),
-                        DeliveryInformation::new()
+                        DeliveryInformation::new(),
+                        BoxTitleContainer::newTitle("Состояние", "", [
+                            KeyTextAttribute::new(__("Сальдо"),  'saldo'),
+
+                        ]),
                     ]),
                     ContainerColumn::newClass("", [
                         BoxTitleContainer::newTitle("Сведения об оплате", "", [

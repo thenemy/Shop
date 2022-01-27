@@ -24,4 +24,6 @@ class MonthPaid extends Entity implements MonthPaidInterface
     {
         return $this->takenCredit->plastic->card_token;
     }
+
+
 }

@@ -13,6 +13,7 @@ use App\Domain\User\Entities\PlasticCard;
 use App\Domain\User\Entities\Surety;
 use App\Domain\User\Entities\UserCreditData;
 use App\Domain\User\Traits\HasUserRelationship;
+use Illuminate\Support\Facades\DB;
 
 /**
  * made tomorrow the installment
@@ -50,6 +51,13 @@ class TakenCredit extends Entity implements PurchaseRelationInterface
     public function newEloquentBuilder($query)
     {
         return TakenCreditBuilder::new($query);
+    }
+
+    public function getSaldoAttribute()
+    {
+        return $this->monthPaid()
+            ->where("month", "<=", now())
+            ->sum(DB::raw("paid - must_pay"));
     }
 
     public function getPlasticTokens(): \Illuminate\Support\Collection
