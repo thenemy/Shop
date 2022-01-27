@@ -14,7 +14,9 @@ class PlasticCard extends Entity
     use HasUuidKey;
 
     protected $table = 'plastic_card';
-
+    protected $guarded = [
+        'date_number',
+    ];
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(User::class, "plastic_user_cards",
