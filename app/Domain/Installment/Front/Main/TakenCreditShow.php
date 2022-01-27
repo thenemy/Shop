@@ -13,6 +13,7 @@ use App\Domain\Core\Front\Admin\Attributes\Containers\ContainerRow;
 use App\Domain\Core\Front\Admin\Attributes\Containers\ContainerTitle;
 use App\Domain\Core\Front\Admin\Attributes\Containers\NestedContainer;
 use App\Domain\Core\Front\Admin\Attributes\Info\ErrorSuccess;
+use App\Domain\Core\Front\Admin\Button\ModelInCompelationTime\RedButtonCompile;
 use App\Domain\Core\Front\Admin\File\Attributes\FileAttribute;
 use App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute;
 use App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextLinkAttribute;
@@ -94,7 +95,9 @@ class TakenCreditShow extends TakenCredit implements CreateAttributesInterface
                         DeliveryInformation::new(),
                         BoxTitleContainer::newTitle("Состояние", "", [
                             KeyTextAttribute::new(__("Сальдо"),  'saldo'),
+                            RedButtonCompile::new("Аннулировать рассрочку" , [
 
+                            ])
                         ]),
                     ]),
                     ContainerColumn::newClass("", [
