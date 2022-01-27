@@ -93,7 +93,9 @@ class TakenCreditShow extends TakenCredit implements CreateAttributesInterface
                     ]),
                     ContainerTitle::newTitle("Сведения", "border p-4 bg-white shadow space-y-2 flex-1", [
                         new FileLivewireWithoutActionFilterBy("TakenCreditEdit", MonthlyPaidIndex::new()),
-                        CommentInstallmentDynamic::getDynamicWithoutContainer("TakenCreditEdit"),
+                        BoxTitleContainer::newTitle("Комментарии", "", [
+                            CommentInstallmentDynamic::getDynamicWithoutContainer("TakenCreditEdit"),
+                        ]),
                         new FileLivewireWithoutActionFilterBy("TakenCreditEdit", TimeScheduleTransactionIndex::new())
                     ])
                 ]),
