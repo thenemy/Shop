@@ -27,7 +27,7 @@ class Shop extends Entity implements ShopRelationInterface
 
     public function shopAddress(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
-        return $this->hasOne(ShopAddress::class, "id");
+        return $this->hasOne(ShopAddress::class, "user_id");
     }
 
     public function newEloquentBuilder($query): ShopBuilder
