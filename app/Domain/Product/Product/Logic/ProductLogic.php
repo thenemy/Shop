@@ -4,8 +4,9 @@ namespace App\Domain\Product\Product\Logic;
 
 use App\Domain\Currency\Traits\ConvertToSum;
 use App\Domain\Product\Product\Entities\Product;
+use App\Domain\Product\Product\Interfaces\ProductInterface;
 
-class ProductLogic
+class ProductLogic implements ProductInterface
 {
     use ConvertToSum;
 
@@ -20,12 +21,13 @@ class ProductLogic
     {
         $real_price = $this->product->price;
         $real_price = $this->considerCurrency($real_price);
+
         return $this->considerDiscounts($real_price);
     }
 
     private function considerCurrency($real_price)
     {
-        if ($this->product->currency == $this->product->CURRENCY_USD_DB)
+        if ($this->product->currency == self::CURRENCY_USD_DB)
             $real_price = $this->convertToSum($this->product->price);
         return $real_price;
     }
