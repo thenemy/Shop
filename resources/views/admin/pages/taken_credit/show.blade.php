@@ -73,7 +73,11 @@
             <span class='font-bold text-lg'>{{__('Состояние')}}</span>
                 			
 <x-helper.text.text_key key='Сальдо' value='{{$entity->saldo ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
-<x-helper.button.base_button 	class='bg-red-600 hover:bg-red-400'>Аннулировать рассрочку</x-helper.button.base_button>
+
+            <div 	class='m-auto w-2/5'>
+                			
+<x-helper.button.base_button 	class='margin-auto'>Аннулировать рассрочку</x-helper.button.base_button>
+            </div>
             </div>			
  @endif
             </div>			
