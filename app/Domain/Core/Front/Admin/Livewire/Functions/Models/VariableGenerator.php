@@ -22,8 +22,12 @@ class VariableGenerator implements LivewireAdditionalFunctions, FunctionStandard
     public function generateFunctions(): string
     {
         $str = "";
-        foreach ($this->variables as $item) {
-            $str = $str . sprintf(self::VARIABLE_TEMPLATE, $item);
+        foreach ($this->variables as $key => $item) {
+            $set_key = $item;
+            if (gettype($key) != "integer") {
+                $set_key = $key;
+            }
+            $str = $str . sprintf(self::VARIABLE_TEMPLATE, $set_key);
         }
         return $str;
     }

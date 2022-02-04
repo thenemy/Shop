@@ -18,7 +18,7 @@ use App\Domain\Core\Main\Traits\ArrayHandle;
 use App\Domain\Order\Entities\Purchase;
 use App\Domain\Order\Front\Admin\CustomTables\PurchaseTable;
 use App\Domain\Product\Product\Front\Admin\CustomTable\Actions\ProductEditAction;
-
+// Products which was bought , locaiton in intsallment taken credit show
 class PurchaseMain extends Purchase implements TableInFront, FilterInterface, TableFilterByInterface
 {
     use TableFilterBy, ArrayHandle, AttributeGetVariable;

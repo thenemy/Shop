@@ -15,7 +15,7 @@ abstract class AbstractFunction implements LivewireAdditionalFunctions, Function
             return sprintf(self::FUNCTION_BODY,
                 $method_name,
                 "",
-                sprintf('\\%s::%s($this);', $class, $method_name)
+                sprintf('\\%s::%s($this,...func_get_args());', $class, $method_name)
             );
         return "";
     }

@@ -16,12 +16,12 @@ use App\Domain\Core\Front\Admin\CustomTable\Errors\DynamicTableException;
  **/
 trait SetInputAttribute
 {
-    static private function filter(): int
+    static protected function filter(): int
     {
         return 1;
     }
 
-    static private function defer(): int
+    static protected function defer(): int
     {
         return 2;
     }

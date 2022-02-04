@@ -22,7 +22,7 @@ abstract class BaseLivewireDynamicWithoutEntity extends BaseLivewireDynamic
     {
         parent::mount();
         $this->className = $this->getEntity();
-        if ($initial) {
+        if ($initial && $initial->isNotEmpty()) {
             $this->saved = $initial->map(function ($item) {
                 return [
                     $item['id'] => $item->toArray()
@@ -71,6 +71,7 @@ abstract class BaseLivewireDynamicWithoutEntity extends BaseLivewireDynamic
         $this->entity[self::PRIMARY_KEY] = ++$this->counter;
         $this->saved[$this->counter] = $this->entity->toArray();
         $this->entity = collect([]);
+
     }
 
     public function getServiceClass(): string

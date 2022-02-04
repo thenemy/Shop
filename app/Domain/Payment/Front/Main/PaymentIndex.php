@@ -27,7 +27,7 @@ class PaymentIndex extends Payment implements CreateAttributesInterface, TableAc
 
     public function getNumProductIndexAttribute(): string
     {
-        return TextAttribute::generation($this, $this->purchase->number_purchase);
+        return TextAttribute::generation($this, $this->purchase->number_purchase, true);
     }
 
     public function getClientIndexAttribute()

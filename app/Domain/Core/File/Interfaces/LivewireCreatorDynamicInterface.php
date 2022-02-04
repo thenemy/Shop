@@ -10,4 +10,6 @@ interface LivewireCreatorDynamicInterface
 
     const CLASS_TEMPLATE_DYNAMIC_WITHOUT_ENTITY = "BaseLivewireDynamicWithoutEntity.txt";
     const BLADE_TEMPLATE_DYNAMIC_WITHOUT_ENTITY = "base-template-dynamic-without-entity.blade.php";
+    const BLADE_TEMPLATE_DYNAMIC_WITHOUT_BOTH = "base-template-dynamic-without-both.blade.php";
+
 }

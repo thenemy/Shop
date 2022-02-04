@@ -9,16 +9,16 @@ class BannerIndex extends BaseLivewire
 
     
 
- public function activateChosen(){$this->getEntity()::whereIn('id', $this->checkBox)
+ public function activateChosen(){return $this->getEntity()::whereIn('id', $this->checkBox)
             ->update(
                 ['status' => true]
             );
-        $this->checkBox = [];} public function deactivateChosenItem(){$this->getEntity()::whereIn('id', $this->checkBox)
+        $this->checkBox = [];} public function deactivateChosenItem(){return $this->getEntity()::whereIn('id', $this->checkBox)
             ->update(
                 ['status' => false]
             );
         $this->checkBox = [];}
-     public function statusIndex($arg){$entity = $this->getEntity()::find($arg);
+     public function statusIndex($arg){return $entity = $this->getEntity()::find($arg);
              $entity->status = !$entity->status;
              $entity->save();}  //3   --- set of functions and variables
     public function getPath()

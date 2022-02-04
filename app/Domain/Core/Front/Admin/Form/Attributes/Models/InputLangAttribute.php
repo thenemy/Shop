@@ -4,7 +4,7 @@ namespace App\Domain\Core\Front\Admin\Form\Attributes\Models;
 
 use App\Domain\Core\Front\Admin\Form\Attributes\Base\BaseAttributeFromText;
 
-class InputLangAttribute extends BaseAttributeFromText
+class   InputLangAttribute extends BaseAttributeFromText
 {
     public $model = "";
 
@@ -47,35 +47,48 @@ class InputLangAttribute extends BaseAttributeFromText
     {
         return sprintf(
             '{{old("%s") ? old("%s")["%s"] ?? "" : ""}}',
-            $this->key,
-            $this->key,
+            $this->oldValue(),
+            $this->oldValue(),
             $lang,
         );
     }
 
+    protected function getVariable($lang = ""): string
+    {
+        return $this->getWithoutScopeAtrVariable($this->key . '["' . $lang . '"]');
+    }
+
+    public function oldValue()
+    {
+        return $this->key;
+    }
+
     protected function generateEditValue($lang)
     {
-        $current = $this->getWithoutScopeAtrVariable($this->key . '["' . $lang . '"]');
+        $current = $this->getVariable($lang);
         return sprintf(
             '{{old("%s") ? old("%s")["%s"] ?? %s ?? " " : %s ?? " "}}',
-            $this->key,
-            $this->key,
+            $this->oldValue(),
+            $this->oldValue(),
             $lang,
             $current,
             $current
         );
     }
-
+    public function getName(){
+        return $this->key;
+    }
     private function langGenerate(string $lang, string $labelContinue)
     {
         $update = $this->generateEditValue($lang);
         return sprintf(
             $this->getComponent(),
-            $this->key,
+            $this->getName(),
             $lang,
             $labelContinue,
             $update,
-            $this->getModel($lang)
+            $this->getModel($lang),
+            $this->isActive()
         );
     }
 
@@ -88,6 +101,6 @@ class InputLangAttribute extends BaseAttributeFromText
 
     protected function getComponent(): string
     {
-        return "<x-helper.input.input name='%s[%s]'  label='{{__(\"%s\")}}' value='%s' %s/>";
+        return "<x-helper.input.input name='%s[%s]'  label='{{__(\"%s\")}}' value='%s' %s %s/>";
     }
 }

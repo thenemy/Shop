@@ -4,27 +4,28 @@ namespace App\Domain\Product\ProductKey\Entities;
 
 use App\Domain\Core\Language\Traits\Translatable;
 use App\Domain\Core\Main\Entities\Entity;
+use App\Domain\Product\ProductKey\Builders\ProductValueBuilder;
+use App\Domain\Product\ProductKey\Traits\TextTranslation;
 use App\Domain\ProductKey\Entities\Key;
 
 class ProductValue extends Entity
 {
-    use Translatable;
+    use TextTranslation;
 
+    protected $guarded = null;
     protected $table = 'product_values';
+    protected $fillable = [
+        "text",
+        "text_ru",
+        "text_uz",
+        "text_en",
+        'product_key_id'
+    ];
 
-    public function getTextAttribute($value): ?string
+    public function newEloquentBuilder($query): ProductValueBuilder
     {
-        return $this->getTranslatable('text');
+        return new ProductValueBuilder($query);
     }
 
-    public function setTextAttribute($value)
-    {
-        $this->setTranslate('text', $value);
-    }
-
-    public function value()
-    {
-        return $this->hasOne(Key::class, 'products_key_id');
-    }
 }
 

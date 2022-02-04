@@ -11,7 +11,7 @@ class DayDropDown extends AbstractDropDownAttributeTable
     static public function generate($model, $name = null): string
     {
             return (new self(
-            self::generateItems(DayInterface::DB_TO_FRONT),
+            self::generateItems(DayInterface::DB_TO_FRONT_ONLY),
             $model,
             DayInterface::DB_TO_FRONT[$name] ?? null))->generateHtml();
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class FiltrationKeyCategory extends Migration
+class HeaderKeyValue extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,14 @@ class FiltrationKeyCategory extends Migration
      */
     public function up()
     {
-            Schema::create('filtration_key_category', function (Blueprint $table) {
+        Schema::create('header_key_value', function (Blueprint $table) {
             $table->id();
-            $table->json("key");
-            $table->foreignId("category_id")
-                ->constrained("categories")
+            $table->foreignId("header_product_id")
+                ->constrained("header_product")
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
+            $table->json('key');
+            $table->json("value");
         });
     }
 
@@ -30,6 +31,6 @@ class FiltrationKeyCategory extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('filtration_key_category');
+        Schema::dropIfExists('header_key_value');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Domain\Core\Front\Admin\CustomTable\Abstracts;
 
 use App\Domain\Category\Front\Admin\Path\CategoryRouteHandler;
+use App\Domain\Core\Front\Admin\Attributes\FontIcon\IconAdd;
 use App\Domain\Core\Front\Admin\Attributes\Models\Column;
 use App\Domain\Core\Front\Admin\Attributes\Models\EmptyAttribute;
 use App\Domain\Core\Front\Admin\Attributes\Models\LivewireStatusColumn;
@@ -19,7 +20,7 @@ use App\Domain\CreditProduct\Entity\Credit;
  * there is convention give attribute name like realname_tablename
  * so realname must be followed by hyphen
  */
-abstract class AbstractDynamicTable extends BaseTable
+abstract class  AbstractDynamicTable extends BaseTable
 {
     use InputGenerator;
 
@@ -38,7 +39,10 @@ abstract class AbstractDynamicTable extends BaseTable
             'id' => TextAttribute::generation($this, 'Новый', true),
             'actions' => AllActions::generation([
                 ...$this->getActions(),
-                ButtonGreenLivewire::new("Добавить", "save")
+                IconAdd::new([
+                    'wire:click' => "save"
+                ])
+//                ButtonGreenLivewire::new("Добавить", "save")
             ])
         ];
         $this->inputs = array_merge($inputs, $this->getInputs());
@@ -62,6 +66,7 @@ abstract class AbstractDynamicTable extends BaseTable
 
     public function getInputsByKey($name): string
     {
+        dd($name);
         $real_attribute = explode('-', $name);
         return trim(preg_replace('/\s\s+/', ' ', $this->inputs[$real_attribute[0]]));
     }

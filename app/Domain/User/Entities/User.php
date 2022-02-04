@@ -11,16 +11,18 @@ use App\Domain\Product\Product\Entities\Product;
 use App\Domain\User\Builders\UserBuilder;
 use App\Domain\User\Interfaces\UserRelationInterface;
 use App\Domain\User\Traits\SmsTrait;
+use App\Domain\User\Traits\UserNotification;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Entity implements UserRelationInterface
 {
-    use SmsTrait;
+    use SmsTrait, UserNotification;
 
     protected $table = 'users';
 
     public $timestamps = true;
 
-    public function newEloquentBuilder($query): UserBuilder
+    public function newEloquentBuilder($query)
     {
         return new UserBuilder($query);
     }

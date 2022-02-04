@@ -44,6 +44,6 @@ class FiltrationKeyCategoryDynamic extends BaseLivewireDynamic
 
     public function getServiceClass(): string
     {
-        return  'App\Domain\Category\Services\FiltrationKeyCategoryService'; //9
+        return  'App\Domain\Product\ProductKey\Services\ProductKeyService'; //9
     }
 }

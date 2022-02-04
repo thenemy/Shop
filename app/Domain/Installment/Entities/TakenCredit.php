@@ -98,7 +98,9 @@ class TakenCredit extends Entity implements PurchaseRelationInterface
     {
         return $this->monthPaid()->sum('must_pay');
     }
-
+    public function getPriceAttribute(){
+        return $this->allToPay() + $this->initial_price;
+    }
     public function credit(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Credit::class, "credit_id");

@@ -23,6 +23,11 @@ class ProductMainService extends BaseService
         }
     }
 
+    protected function afterCreateOrUpdateMany($object, $data, $parent, $create)
+    {
+        $this->createImages($object, $data);
+    }
+
     public function create(array $object_data)
     {
         try {
@@ -38,16 +43,4 @@ class ProductMainService extends BaseService
 
     }
 
-    public function update($object, array $object_data)
-    {
-        try {
-            DB::beginTransaction();
-            $object = parent::update($object, $object_data);
-            $this->createImages($object, $object_data);
-            DB::commit();
-        } catch (\Throwable $exception) {
-            DB::rollBack();
-            throw $exception;
-        }
-    }
 }

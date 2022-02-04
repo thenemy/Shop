@@ -6,6 +6,7 @@ namespace App\Domain\Core\File\Models\Livewire;
 /// $entity $index
 /// $index is loop counter
 /// $entity
+///
 use App\Domain\Core\File\Interfaces\LivewireFactoringInterface;
 use App\Domain\Core\Front\Admin\Form\Attributes\Models\ComplexAttribute;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
@@ -60,14 +61,17 @@ class FileLivewireFactoring extends FileLivewireCreator implements LivewireFacto
         return sprintf($file_from,
             $this->getNamespace(),
             $this->getLivewireClassName(),
+            $this->getFunctions(),
             $this->getBladePath()
         );
     }
 
     public function generateAdditionalToHtml(): string
     {
-        $must = sprintf("  :entity='%s'
-            prefixKey='%s' initialSettingClass='%s'", '$entity ?? null',
+        $must = sprintf("%s :entity='%s'
+            prefixKey='%s' initialSettingClass='%s'",
+            parent::generateAdditionalToHtml(),
+            '$entity ?? null',
             $this->prefixKey, $this->initialSettingClass);
         if ($this->rules)
             return sprintf(":rules=(array)json_decode('%s') %s",

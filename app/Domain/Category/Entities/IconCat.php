@@ -24,6 +24,17 @@ class IconCat extends Entity
         $this->setMedia("icon", $value, $this->category_id);
     }
 
+    public function getImageAttribute($value): \App\Domain\Core\Media\Models\Media
+    {
+        return $this->getMedia("image", $value);
+    }
+
+    public function setImageAttribute($value)
+    {
+        $this->setMedia("image", $value, $this->category_id);
+    }
+
+
     public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Category::class, 'id');
@@ -37,7 +48,8 @@ class IconCat extends Entity
     public function mediaKeys(): array
     {
         return [
-            "icon"
+            "icon",
+            "image"
         ];
     }
 }

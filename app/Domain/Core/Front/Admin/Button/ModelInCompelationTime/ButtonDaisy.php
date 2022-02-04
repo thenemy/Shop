@@ -9,7 +9,7 @@ class ButtonDaisy extends BaseButtonCompile
     public static function new($name, $attributes = [])
     {
         return parent::new($name, self::append([
-            'class' => "btn"
+            'class' => "btn "
         ], $attributes));
     }
 

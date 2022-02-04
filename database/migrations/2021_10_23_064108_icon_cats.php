@@ -16,6 +16,7 @@ class IconCats extends Migration
         Schema::create('icon_cats', function (Blueprint $table) {
             $table->foreignId('id')->primary()->constrained('categories')->onDelete('CASCADE')->onUpdate('CASCADE');
             $table->string('icon');
+            $table->string("image");
         });
     }
 

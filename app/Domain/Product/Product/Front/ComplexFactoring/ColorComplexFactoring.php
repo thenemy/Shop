@@ -7,6 +7,7 @@ use App\Domain\Core\File\Models\Livewire\FileLivewireFactoring;
 use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputFileTempAttribute;
 use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputFileTempManyAttribute;
 use App\Domain\Core\Front\Admin\Form\Interfaces\ComplexFactoring;
+use App\Domain\Core\Front\Interfaces\HtmlInterface;
 use App\Domain\Product\Product\Interfaces\ProductInterface;
 use App\Http\Livewire\Admin\Base\Abstracts\BaseLivewireFactoring;
 
@@ -24,9 +25,11 @@ class ColorComplexFactoring implements ComplexFactoring, ProductInterface
     static public function delete(BaseLivewireFactoring $factoring, $id)
     {
 
+        $object = $factoring->entities->pull($id);
+        $factoring->entity->colors()->where("id", "=", $object['id'])->delete();
     }
 
-    static public function create()
+    static public function create(): array
     {
         return [
             ColorDropDownSearch::newColor(true, [], [
@@ -47,7 +50,7 @@ class ColorComplexFactoring implements ComplexFactoring, ProductInterface
         ];
     }
 
-    static public function edit()
+    static public function edit(): array
     {
         return [
             ColorDropDownSearch::newColor(false, [], [

@@ -11,7 +11,7 @@ class SuretyPlasticCardDynamic extends BaseLivewireDynamic
 
 
  
- public function sendSms(){\App\Domain\User\Front\Admin\Functions\SendSmsLivewire::sendSms($this);}
+ public function sendSms(){return \App\Domain\User\Front\Admin\Functions\SendSmsLivewire::sendSms($this,...func_get_args());}
 
     //3   --- set of functions and variables
     public function getPath()

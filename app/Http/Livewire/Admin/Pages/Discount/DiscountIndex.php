@@ -10,7 +10,7 @@ class DiscountIndex extends BaseLivewire
    
 
 
-     public function statusTable($arg){$entity = $this->getEntity()::find($arg);
+     public function statusTable($arg){return $entity = $this->getEntity()::find($arg);
              $entity->status = !$entity->status;
              $entity->save();}   //3   --- set of functions and variables
     public function getPath()

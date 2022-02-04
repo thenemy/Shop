@@ -10,7 +10,7 @@
             class="inline-block align-bottom bg-white rounded-lg text-left
             shadow-xl transform transition-all sm:my-8 sm:align-middle
             sm:max-w-max sm:w-full">
-            {{$slot}}
+            {!!  $slot !!}
         </div>
     </div>
 </div>

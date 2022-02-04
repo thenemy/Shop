@@ -17,23 +17,6 @@ class FileLivewireEmptyCreator extends FileLivewireCreator
         return self::TEMPLATE_BLADE_PATH . self::BLADE_EMPTY;
     }
 
-    public function generateAdditionalToHtml(): string
-    {
-        try {
-            $variables = $this->entity->generateAdditionalToHtml();
-            $str = "";
-            foreach ($variables as $key => $item) {
-                $set_key = $item;
-                if (gettype($key) != "integer") {
-                    $set_key = $key;
-                }
-                $str = $str . sprintf(" :%s='$%s'", $set_key, $item);
-            }
-            return $str;
-        } catch (\Exception $exception) {
-
-        }
-    }
 
     protected function formatBlade($file_from): string
     {

@@ -17,7 +17,7 @@ class Text implements HtmlInterface
         $this->attributes = $attributes;
     }
 
-    static public function new(string $text, array $attributes)
+    static public function new(string $text, array $attributes = [])
     {
         return new self($text, $attributes);
     }

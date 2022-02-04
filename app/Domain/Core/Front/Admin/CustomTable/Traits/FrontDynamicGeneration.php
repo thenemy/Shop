@@ -2,6 +2,8 @@
 
 namespace App\Domain\Core\Front\Admin\CustomTable\Traits;
 
+use App\Domain\Core\Front\Admin\Attributes\FontIcon\IconDelete;
+use App\Domain\Core\Front\Admin\Attributes\FontIcon\IconEdit;
 use App\Domain\Core\Front\Admin\Button\ModelInRunTime\ButtonGreenLivewire;
 use App\Domain\Core\Front\Admin\Button\ModelInRunTime\ButtonRedLivewire;
 use App\Domain\Core\Front\Admin\CustomTable\Actions\Base\AllActions;
@@ -47,12 +49,18 @@ trait   FrontDynamicGeneration
 
     public function getEditButton()
     {
-        return ButtonGreenLivewire::new(__("Изменить"), "addToUpdate('" . $this->id . "')");
+        return  IconEdit::new([
+            'wire:click' =>sprintf("addToUpdate(`%s`)", $this->id),
+        ]);
+//        return ButtonGreenLivewire::new(__("Изменить"), );
     }
 
     public function getRemoveButton()
     {
-        return ButtonRedLivewire::new(__("Удалить"), sprintf("delete('%s')", $this->id));
+        return IconDelete::new([
+            'wire:click' =>sprintf("delete(`%s`)", $this->id)
+        ]);
+//        return ButtonRedLivewire::new(__("Удалить"), );
     }
 
     protected function generateAttributes()

@@ -2,7 +2,7 @@
 @section("action")
     
 <x-helper.input.input name='link' type='text'
-            label='{{__("Линк для банера")}}' value='{{old("link") ?? $entity->link ?? " "}}' id='link'  onkeyup=""/>
+            label='{{__("Линк для банера")}}' value='{{old("link") ?? $entity->link ?? " "}}' id='link'  onkeyup="" />
 <livewire:components.file.file-uploading-without-entity
                     keyToAttach='image->ru'
                     mediaKey='file_create'

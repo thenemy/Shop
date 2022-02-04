@@ -6,16 +6,19 @@ namespace App\Domain\Core\Main\Services;
 //use App\Banner\Banner;
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Core\Main\Interfaces\ServiceInterface;
+use App\Domain\Core\Main\Traits\ArrayHandle;
 use App\Domain\Core\Main\Traits\FastInstantiation;
 use App\Domain\Core\Main\Traits\FilterArray;
 use App\Domain\Product\Product\Entities\Product;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Nette\Schema\ValidationException;
+use Symfony\Component\ErrorHandler\Error\FatalError;
 
 abstract class BaseService implements ServiceInterface
 {
-    use FastInstantiation, FilterArray;
+    use FastInstantiation, FilterArray, ArrayHandle;
 
     const VALIDATE_SEPARATOR = "<br>";
     protected Entity $entity;
@@ -94,13 +97,20 @@ abstract class BaseService implements ServiceInterface
     public
     function createMany(array $object_data, array $parent, int $start = 1)
     {
-        for ($i = $start; !empty($object_data); $i++) {
+        $counter = self::COUNTER;
+        if (isset($object_data['_new_created']))
+            unset($object_data['_new_created']);
+        for ($i = $start; !empty($object_data) && $counter; $i++) {
             $data = $this->popCondition($object_data, $i);
+
             if (!empty($data)) {
+                $counter++;
                 $data = array_merge($parent, $data);
                 $this->createNew($data);
             }
+            $counter--;
         }
+        $this->exceptionOfCounter($counter, $object_data);
     }
 
     protected function toggleCheckBoxObject(array $object_data, $parent_object, string $class, $parent_key)
@@ -118,22 +128,49 @@ abstract class BaseService implements ServiceInterface
     }
 
 // there is many , when I will use key in entity it will give many items
-    public
-    function createOrUpdateMany(array $object_data, array $parent, int $start = 1)
+    public function createOrUpdateMany(array $object_data, array $parent, int $start = 1)
     {
-        for ($i = $start; !empty($object_data); $i++) {
+        if (isset($object_data['_new_created']))
+            unset($object_data['_new_created']);
+        $counter = self::COUNTER;
+        for ($i = $start; !empty($object_data) && $counter; $i++) {
+            Log::info("CHECK");
+            Log::info($object_data);
+
             $data = $this->popCondition($object_data, $i);
             if (isset($data["id"])) {
                 $id = $data['id'];
                 unset($data['id']);
-                $this->update($this->entity->find($id), $data);
-            } else {
-                if (!empty($data)) {
-                    $data = array_merge($parent, $data);
-                    $this->createNew($data);
-                }
+                $object = $this->update($this->entity->find($id), $data);
+                $this->afterCreateOrUpdateMany($object, $data, $parent, false);
+                $counter++;
+            } else if (!empty($data)) {
+                $data = array_merge($parent, $data);
+                $object = $this->createNew($data);
+                $this->afterCreateOrUpdateMany($object, $data, $parent, true);
+                $counter++;
             }
+            $counter--;
         }
+        $this->exceptionOfCounter($counter, $object_data);
+    }
+
+    private function exceptionOfCounter($counter, $object_data)
+    {
+        if (!$counter) {
+            throw new \Exception(sprintf("Infinite loop counter ended. The called called class was %s .
+             The value of object data rest %s. Value of counter %s",
+                    get_called_class(),
+                    $this->arrayToString($object_data),
+                    $counter
+                )
+            );
+        }
+    }
+
+    protected function afterCreateOrUpdateMany($object, $data, $parent, $create)
+    {
+
     }
 
     protected
@@ -173,7 +210,7 @@ abstract class BaseService implements ServiceInterface
         return $this->createNew(array_merge($object_data, $additional));
     }
 
-    private function createNew(array $object_data)
+    protected function createNew(array $object_data)
     {
         $filtered = $this->filterRecursive($object_data);
         $this->validate($filtered, $this->validateCreateRules());
@@ -213,28 +250,57 @@ abstract class BaseService implements ServiceInterface
      * output $s [ 'd->asd'=> 'somedata']
      * then $d = popCondition($s , 'd')
      * output $d [ 'asd' => "somedata"]
+     *
+     * clean --- for cleaning null values
+     * operator --- means -> sign
+     *
+     * write the cleaning code before the key
+     * wrong keys
+     * ->->somedata
      */
     public
-    function popCondition(array &$array, string $check_key, bool $clean = false): array
+    function popCondition(array  &$array, string $check_key,
+                          bool   $clean = false,
+                          string $operator = \CR::CR,
+                                 $deleteSign = -1): array
     {
-        $new_array = [];
-        foreach ($array as $key => $value) {
-            $key_value = explode(\CR::CR, $key);
-            /**
-             * we are taking first element
-             * because we are putting key element at the last
-             */
-            if (preg_match(sprintf("/^%s$/i", $check_key), $key_value[0])) {
+
+        try {
+            $new_array = [];
+            foreach ($array as $key => $value) {
+                $key_value = explode($operator, $key);
                 /**
-                 * we are connecting remainder keys
+                 * we are taking first element
+                 * because we are putting key element at the last
                  */
-                $connect_rest = implode(\CR::CR, array_splice($key_value, 1));
-                if (!$clean || $value)
-                    $new_array[$connect_rest] = $value;
-                unset($array[$key]);
+                if (preg_match(sprintf("/^%s$/i", $check_key), $key_value[0])) {
+
+                    unset($key_value[0]);
+                    /**
+                     * filtering the keys
+                     * there might be cases that by mistake key format will not appropriate
+                     * instead of check->something will be ->check->something or ->%check->something
+                     */
+                    $key_value[1] = preg_replace("/[^\w]/", $deleteSign, $key_value[1]);
+
+                    if ($key_value[1] == $deleteSign || $key_value[1] == "") { // if there is nothing after remove the key
+                        unset($key_value[1]);
+                    }
+                    /**
+                     * we are connecting remained keys
+                     */
+                    $connect_rest = implode($operator, $key_value);
+                    if (!$clean || $value)
+                        $new_array[$connect_rest] = $value;
+                    unset($array[$key]);
+                }
             }
+            return $new_array;
+        } catch (FatalError $exception) {
+
+            dd(get_called_class());
         }
-        return $new_array;
+
     }
 
 

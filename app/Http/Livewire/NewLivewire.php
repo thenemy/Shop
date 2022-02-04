@@ -8,6 +8,7 @@ class NewLivewire extends Component
 {
     public $checkBox;
     public $checks;
+    public int $counter = 0;
 
     public function mount()
     {
@@ -19,12 +20,17 @@ class NewLivewire extends Component
 
     public function callFunc()
     {
-        dd($this->checkBox);
-        $this->checks = $this->checkBox;
+        $this->counter++;
+//        dd($this->checkBox);
+//        $this->checks = $this->checkBox;
     }
 
     public function render()
     {
-        return view('livewire.asd');
+        return <<<'blade'
+            <div>
+                <button wire:click="callFunc">asd {{$counter}}</button>
+            </div>
+        blade;
     }
 }

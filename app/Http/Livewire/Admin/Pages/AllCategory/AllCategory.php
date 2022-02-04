@@ -7,19 +7,19 @@ use App\Http\Livewire\Admin\Base\Abstracts\BaseLivewire;
 class AllCategory extends BaseLivewire
 {
 
-    public $depth;  public function setDropDown($depth){$this->depth=$depth;
+    public $depth;  public function setDropDown($depth){return $this->depth=$depth;
 \App\Domain\Category\Front\Admin\DropDown\DepthDropDown::filterBy($this);}
 
- public function activateChosen(){$this->getEntity()::whereIn('id', $this->checkBox)
+ public function activateChosen(){return $this->getEntity()::whereIn('id', $this->checkBox)
             ->update(
                 ['status' => true]
             );
-        $this->checkBox = [];} public function deactivateChosenItem(){$this->getEntity()::whereIn('id', $this->checkBox)
+        $this->checkBox = [];} public function deactivateChosenItem(){return $this->getEntity()::whereIn('id', $this->checkBox)
             ->update(
                 ['status' => false]
             );
         $this->checkBox = [];}
-   public function statusTable($arg){$entity = $this->getEntity()::find($arg);
+   public function statusTable($arg){return $entity = $this->getEntity()::find($arg);
              $entity->status = !$entity->status;
              $entity->save();}  //3   --- set of functions and variables
     public function getPath()

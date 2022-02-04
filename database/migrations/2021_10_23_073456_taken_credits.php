@@ -18,7 +18,7 @@ class TakenCredits extends Migration
             $table->id();
             $table->timestamps();
             $table->bigInteger("transaction_id")->nullable();
-            $table->bigInteger('initial_price');
+            $table->unsignedDecimal('initial_price', 50)->default(0);
             $table->integer("status")->default(\App\Domain\Installment\Interfaces\PurchaseStatus::WAIT_ANSWER);
             $table->dateTime('date_taken')->nullable();
             $table->dateTime('date_finish')->nullable();

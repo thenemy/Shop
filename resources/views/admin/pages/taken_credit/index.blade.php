@@ -13,7 +13,7 @@
         <div class="w-full pb-10 ">
             
 <livewire:admin.pages.taken-credit.taken-credit-index
-            :filterBy="['filter' => 1,]" />
+            :filterBy="['filter' => 1,'not_waited' => 1,]" />
         </div>
     </div>
 

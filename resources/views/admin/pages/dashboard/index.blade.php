@@ -153,28 +153,6 @@
                 			
 <x-dashboard.bar_chart  />			
 <x-dashboard.doughnut_chart/>
-            </div>			
-
-            <div 	class='justify-between flex flex-row  space-x-2'>
-                			
-
-            <div >
-                			
-
-            <div 	class=' overflow-x-auto border shadow p-4 space-y-4 bg-white'>
-            <span class='font-bold text-lg'>{{__('Новые Рассрочки')}}</span>
-                			
-<livewire:admin.pages.dashboard-main.taken-credit-new
-            :filterBy="['new_credit' => 1,]" />
-            </div>
-            </div>			
-
-            <div 	class=' block overflow-x-auto w-min border shadow p-4 space-y-4 bg-white'>
-            <span class='font-bold text-lg'>{{__('Новые заказы')}}</span>
-                			
-<livewire:admin.pages.dashboard-main.payment-filtered
-            :filterBy="[]" />
-            </div>
             </div>
             </div>
         </div>

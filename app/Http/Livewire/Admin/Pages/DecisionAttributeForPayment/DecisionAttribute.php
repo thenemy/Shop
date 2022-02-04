@@ -8,7 +8,7 @@ class DecisionAttribute extends BaseEmptyLivewire
 {
 
     
- public $entity; public function acceptPayment(){\App\Domain\Payment\Front\Admin\Functions\AcceptPayment::acceptPayment($this);} public function denyPayment(){\App\Domain\Payment\Front\Admin\Functions\DenyPayment::denyPayment($this);}
+ public $entity; public function acceptPayment(){return \App\Domain\Payment\Front\Admin\Functions\AcceptPayment::acceptPayment($this,...func_get_args());} public function denyPayment(){return \App\Domain\Payment\Front\Admin\Functions\DenyPayment::denyPayment($this,...func_get_args());}
 
  //3   --- set of functions and variables
     public function getPath():string

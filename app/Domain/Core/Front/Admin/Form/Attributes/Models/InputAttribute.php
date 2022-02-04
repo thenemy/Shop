@@ -12,7 +12,17 @@ class InputAttribute extends BaseAttributeFromText
         if ($this->type == "password") {
             return "";
         }
-        return sprintf('{{old("%s") ?? %s}}', $this->key, $this->getVariable());
+        return sprintf('{{old("%s") ?? %s}}', $this->oldKey(), $this->getVariable());
+    }
+
+    public function oldKey()
+    {
+        return $this->key;
+    }
+
+    public function nameKey()
+    {
+        return $this->key;
     }
 
     // change dispatches depending on type
@@ -24,14 +34,15 @@ class InputAttribute extends BaseAttributeFromText
             $dispatch = sprintf("onkeyup=\"%s\"", $this->createDispatch());
         }
         return sprintf("<x-helper.input.input%s name='%s' type='%s'
-            label='{{__(\"%s\")}}' value='%s' id='%s'  %s/>",
+            label='{{__(\"%s\")}}' value='%s' id='%s'  %s %s/>",
             $this->type == "checkbox" ? "_checked" : "",
-            $this->key,
+            $this->nameKey(),
             $this->type,
             $this->label,
             $this->getValue(),
             $this->id,
-            $dispatch
+            $dispatch,
+            $this->isActive()
         );
     }
 }

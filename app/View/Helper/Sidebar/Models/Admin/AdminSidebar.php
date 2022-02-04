@@ -13,9 +13,11 @@ use App\Domain\Common\Discounts\Front\Admin\Path\DiscountRouteHandler;
 use App\Domain\CreditProduct\Front\Admin\Path\MainCreditRouteHandler;
 use App\Domain\Dashboard\Path\DashboardRouteHandler;
 use App\Domain\Installment\Front\Admin\Path\TakenCreditRouteHandler;
+use App\Domain\Order\Front\Admin\Path\UserPurchaseRouteHandler;
 use App\Domain\Payment\Front\Admin\Route\PaymentRouteHandler;
 use App\Domain\Product\Product\Front\Admin\Path\ProductRouteHandler;
 use App\Domain\Shop\Front\Admin\Path\ShopRouteHandler;
+use App\Domain\User\Front\Admin\Path\AdminUserRouteHandler;
 use App\Domain\User\Front\Admin\Path\UserRouteHandler;
 
 
@@ -26,8 +28,12 @@ class AdminSidebar implements \SideBarFactoryInterface
         return new \SideBarList(
             [
                 new \SideBarDrop(__("Главная"), DashboardRouteHandler::new(), "fa-home"),
-                new \SideBarDrop(__("Пользователи"), UserRouteHandler::new(), "fa-user"),
-                new \SideBarDrop(__("Магазин"), ShopRouteHandler::new(), "fa-shopping-bag"),
+                new \SideBarList( [
+                    new \SideBarDrop(__("Клиенты"), UserRouteHandler::new()),
+                    new \SideBarDrop(__("Админы"), AdminUserRouteHandler::new()),
+                ],__("Пользователи"),
+                    "fa-user"),
+                new \SideBarDrop(__("Магазины"), ShopRouteHandler::new(), "fa-shopping-bag"),
                 new \SideBarList([
                     new \SideBarDrop(__("Главные категории"), CategoryRouteHandler::new()),
                     new \SideBarDrop(__("Все категории"), CategoryAllRouteHandler::new()),
@@ -52,6 +58,7 @@ class AdminSidebar implements \SideBarFactoryInterface
                 ),
                 new \SideBarList([
                     new \SideBarDrop(__("Виды рассрочки"), MainCreditRouteHandler::new()),
+                    new \SideBarDrop(__("Новые рассрочки"), UserPurchaseRouteHandler::new()),
                     new \SideBarDrop(__("Рассрочка"), TakenCreditRouteHandler::new()),
                     new \SideBarDrop(__("Покупки"), PaymentRouteHandler::new()),
 

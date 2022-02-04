@@ -27,6 +27,7 @@ use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\Delivery\Front\Admin\Attributes\DeliveryInformation;
 use App\Domain\Delivery\Interfaces\DeliveryStatus;
 use App\Domain\Installment\Entities\TakenCredit;
+use App\Domain\Installment\Front\Admin\Attributes\ConditionAttribute;
 use App\Domain\Installment\Front\Admin\Attributes\DecisionAttribute;
 use App\Domain\Installment\Front\Dynamic\CommentInstallmentDynamic;
 use App\Domain\Installment\Front\Nested\MonthlyPaidIndex;
@@ -93,21 +94,9 @@ class TakenCreditShow extends TakenCredit implements CreateAttributesInterface
                             ]),
                         ENDIFstatement::new(),
                         DeliveryInformation::new(),
-                        IFstatement::new(
-                            sprintf('abs($entity->status)%% 10 == %s', PurchaseStatus::ACCEPTED)),
-                        BoxTitleContainer::newTitle("Состояние", "", [
-                            KeyTextAttribute::new(__("Сальдо"), 'saldo', "",
-                                '@if($entity->saldo < 0) text-red-400 @endif'),
-                            Container::newClass("m-auto w-2/5" , [
-                                RedButtonCompile::new("Аннулировать рассрочку", [
-                                    'class' => "margin-auto"
-                                ])
-                            ])
-
-                        ]),
-                        ENDIFstatement::new()
+                        ConditionAttribute::new()
                     ]),
-                    ContainerColumn::newClass("", [
+                    ContainerColumn::newClass("flex-1", [
                         BoxTitleContainer::newTitle("Сведения об оплате", "", [
                             new FileLivewireWithoutActionFilterBy("TakenCreditEdit", MonthlyPaidIndex::new()),
                         ]),

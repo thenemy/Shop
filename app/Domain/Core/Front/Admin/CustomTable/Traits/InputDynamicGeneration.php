@@ -2,6 +2,8 @@
 
 namespace App\Domain\Core\Front\Admin\CustomTable\Traits;
 
+use App\Domain\Core\Front\Admin\Attributes\FontIcon\IconBack;
+use App\Domain\Core\Front\Admin\Attributes\FontIcon\IconEdit;
 use App\Domain\Core\Front\Admin\Button\ModelInRunTime\ButtonGrayLivewire;
 use App\Domain\Core\Front\Admin\Button\ModelInRunTime\ButtonGreenLivewire;
 use App\Domain\Core\Front\Admin\CustomTable\Actions\Base\AllActions;
@@ -37,8 +39,8 @@ trait InputDynamicGeneration
             $this->inputs['id'] = TextAttribute::generation($this, $this->getPrimaryKey());
             $this->generateInput();
             $this->inputs['actions'] = AllActions::generation([
-                ButtonGreenLivewire::new(__("Обновить"), "update('" . $this->id . "')"),
-                ButtonGrayLivewire::new(__("Отменить"), "cancel('" . $this->id . "')")
+                IconEdit::new(["wire:click" => "update(`" . $this->id . "`)"]),
+                IconBack::new(["wire:click" => "cancel(`" . $this->id . "`)"])
             ]);
         }
         return $this->inputs[$real_attribute[0]];

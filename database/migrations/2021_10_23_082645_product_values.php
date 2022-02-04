@@ -15,17 +15,11 @@ class ProductValues extends Migration
     {
         Schema::create('product_values', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('products_key_id')
-                ->constrained('product_keys')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-            $table->foreignId("product_id")
-                ->constrained("products")
+            $table->foreignId('product_key_id')
+                ->constrained('product_keys_product')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->json('text');
-            $table->unique(['products_key_id', 'product_id']);
-            $table->index(['products_key_id', "product_id"]);
         });
     }
 

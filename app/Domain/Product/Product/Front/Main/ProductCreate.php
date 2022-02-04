@@ -18,8 +18,12 @@ use App\Domain\Core\Front\Admin\Form\Interfaces\CreateAttributesInterface;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\CreditProduct\Front\Nested\MainCreditNested;
 use App\Domain\Product\Product\Entities\Product;
+use App\Domain\Product\Product\Front\Admin\Attributes\HeaderTextAttribute;
+use App\Domain\Product\Product\Front\Admin\Attributes\KeyWithMultipleValueAttribute;
 use App\Domain\Product\Product\Front\Admin\DropDown\CurrencyDropDown;
 use App\Domain\Product\Product\Front\ComplexFactoring\ColorComplexFactoring;
+use App\Domain\Product\Product\Front\ComplexFactoring\HeaderTextFactoring;
+use App\Domain\Product\Product\Front\ComplexFactoring\KeyWithMultipleValue;
 use App\Domain\Product\Product\Interfaces\ProductInterface;
 use App\Domain\Shop\Front\Admin\DropDown\ShopDropDownSearch;
 
@@ -55,14 +59,16 @@ class ProductCreate extends Product implements CreateAttributesInterface
             ], [
                 "class" => "space-y-4"
             ]),
+            KeyWithMultipleValueAttribute::new(KeyWithMultipleValue::create()),
             FileLivewireFactoring::generation("Product",
                 $this, [], "Цвета",
                 ColorComplexFactoring::create(), [],
-                self::COLORS_SERVICE)
+                self::COLORS_SERVICE),
+            HeaderTextAttribute::new(HeaderTextFactoring::create()),
         ]);
     }
 
-        public function getMainCredit()
+    public function getMainCredit()
     {
         return MainCreditNested::generateWithoutEntity(
             self::MAIN_CREDIT_SERVICE,

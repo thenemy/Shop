@@ -90,29 +90,27 @@ class DashboardMain extends Dashboard implements CreateAttributesInterface
 
                 ]),
 
-                ContainerRow::newClass("justify-between", [
-
-                    Container::new([
-//                        ':class' => 'isSideBarOpen && `max-w-[60vw]` || `max-w-[45vw]`',
-                    ], [
-                        BoxTitleContainer::newTitle(
-                            "Новые Рассрочки",
-                            " overflow-x-auto"
-                            , [
-                            new FileLivewireWithoutActionFilterBy("DashboardMain", TakenCreditNew::new()),
-
-                        ]),
-                    ]),
-
-                    BoxTitleContainer::newTitle(
-                        "Новые заказы",
-                        " block overflow-x-auto w-min",
-                        [
-                            new FileLivewireWithoutActionFilterBy("DashboardMain", PaymentFiltered::new()),
-                        ])
-
-
-                ]),
+//                ContainerRow::newClass("justify-between", [
+//
+//                    Container::new([
+////                        ':class' => 'isSideBarOpen && `max-w-[60vw]` || `max-w-[45vw]`',
+//                    ], [
+//                        BoxTitleContainer::newTitle(
+//                            "Новые Рассрочки",
+//                            " overflow-x-auto"
+//                            , [
+//                            new FileLivewireWithoutActionFilterBy("DashboardMain", TakenCreditNew::new()),
+//
+//                        ]),
+//                    ]),
+//
+//                    BoxTitleContainer::newTitle(
+//                        "Новые заказы",
+//                        " block overflow-x-auto w-min",
+//                        [
+//                            new FileLivewireWithoutActionFilterBy("DashboardMain", PaymentFiltered::new()),
+//                        ])
+//                ]),
             ])
         ]);
     }

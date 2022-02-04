@@ -10,7 +10,7 @@ class CommentProductIndex extends BaseLivewire
     
 
 
-    public function statusIndex($arg){$entity = $this->getEntity()::find($arg);
+    public function statusIndex($arg){return $entity = $this->getEntity()::find($arg);
              $entity->status = !$entity->status;
              $entity->save();} //3   --- set of functions and variables
     public function getPath()

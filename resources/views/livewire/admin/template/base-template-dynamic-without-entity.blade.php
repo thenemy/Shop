@@ -7,7 +7,7 @@
     </div>
     @foreach($saved as $id => $item)
         @foreach($item as $key => $value)
-            <input class="hidden" name="{{$className::getPrefixInputHidden() . \CR::CR . $id . \CR::CR . $key}}"
+            <input class="hidden" name="{{"%s" . \CR::CR . $id . \CR::CR . $key}}"
                    value="{{$value}}">
         @endforeach
     @endforeach

@@ -19,8 +19,7 @@ interface DayInterface
     const TEXT_FRIDAY = "Пятница";
     const TEXT_SATURDAY = "Суббота";
     const TEXT_SUNDAY = "Воскресенье";
-    const DB_TO_FRONT = [
-        self::DB_SUNDAY_ALSO =>self::TEXT_SUNDAY,
+    const DB_TO_FRONT_ONLY = [
         self::DB_MONDAY => self::TEXT_MONDAY,
         self::DB_TUESDAY => self::TEXT_TUESDAY,
         self::DB_WEDNESDAY => self::TEXT_WEDNESDAY,
@@ -28,5 +27,9 @@ interface DayInterface
         self::DB_FRIDAY => self::TEXT_FRIDAY,
         self::DB_SATURDAY => self::TEXT_SATURDAY,
         self::DB_SUNDAY => self::TEXT_SUNDAY,
+    ];
+    const DB_TO_FRONT = [
+        self::DB_SUNDAY_ALSO =>self::TEXT_SUNDAY,
+        ...self::DB_TO_FRONT_ONLY
     ];
 }

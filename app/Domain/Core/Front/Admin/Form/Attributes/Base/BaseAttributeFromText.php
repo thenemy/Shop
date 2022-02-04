@@ -8,6 +8,7 @@ abstract class BaseAttributeFromText extends BaseAttributeForm
 
     public string $type;
     public string $dispatch;
+    public bool $active = true;
 
     public function createDispatch(): string
     {
@@ -28,6 +29,26 @@ abstract class BaseAttributeFromText extends BaseAttributeForm
         return (new $self($key, $type, $label, true, $id, $dispatch))->generateHtml();
     }
 
+    /**
+     * $key -- first argument
+     * $label -- second argument
+     * @return mixed
+     */
+    public static function inActive()
+    {
+        $arg = func_get_args();
+        $self = get_called_class();
+        $object = new $self($arg[0], "text", $arg[1], true);
+        $object->active = false;
+        return $object;
+    }
+
+    public function isActive()
+    {
+        if (!$this->active)
+            return "disabled";
+        return "";
+    }
 
     public static function createAttribute(string $key, string $type, string $label, string $id = "", string $dispatch = "")
     {

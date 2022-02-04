@@ -30,8 +30,11 @@ class FileLivewireDynamic extends FileLivewireDynamicWithoutEntity
     public function generateAdditionalToHtml(): string
     {
         return sprintf("
+        %s
                  parentKey='%s'
-                :parentId='%s'", $this->parentKey,
+                :parentId='%s'",
+            $this->firstParentGenerateAdditionalToHtml(),
+            $this->parentKey,
             $this->getWithoutScopeAtrVariable($this->parentId));
     }
 
@@ -39,10 +42,12 @@ class FileLivewireDynamic extends FileLivewireDynamicWithoutEntity
     {
         return self::TEMPLATE_CLASS_PATH . self::CLASS_TEMPLATE_DYNAMIC;
     }
+
     protected function getPathFromBlade(): string
     {
         return self::TEMPLATE_BLADE_PATH . self::BLADE_TEMPLATE_DYNAMIC;
     }
+
     protected function generateAdditionalFormatClass(): array
     {
         return [

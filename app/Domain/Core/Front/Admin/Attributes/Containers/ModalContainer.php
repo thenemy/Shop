@@ -7,8 +7,16 @@ class ModalContainer extends Container
     public function generateHtml(): string
     {
         $this->attributes['x-show'] = "show";
-        return sprintf("<div x-cloak %s><x-helper.modal.modal_base>%s</x-helper.modal.modal_base></div>",
+        $view = view("components.helper.modal.modal_base", [
+            "slot" => $this->generateItems()
+        ]);
+        return sprintf("<div x-cloak %s>%s</div>",
             $this->generateAttributes(),
-            $this->generateItems());
+            $view->render()
+        );
+//        return sprintf("<div x-cloak %s><x-helper.modal.modal_base>%s</x-helper.modal.modal_base></div>",
+//            $this->generateAttributes(),
+//        );
+
     }
 }

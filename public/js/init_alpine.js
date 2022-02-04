@@ -6,7 +6,18 @@ var Alpine = window.Alpine;
 //     })
 // });
 document.addEventListener('alpine:init', () => {
-
+    Alpine.data('initDynamic', function (id) {
+        return {
+            show: false,
+            id: id,
+            showInput(event) {
+                if (event.detail.id.toString() === this.$el.dataset.id) {
+                    this.show = event.detail.show;
+                    console.log(this.show);
+                }
+            },
+        }
+    })
     Alpine.data("dataMoney", function () {
         return {
             // text: textInput,
@@ -50,6 +61,14 @@ document.addEventListener('alpine:init', () => {
                 this.isOpen = false;
                 this.name = name;
                 this.value = value;
+            },
+            closeDropLivewire(value, name) {
+                this.closeDrop(value, name);
+                const emiting = this.$wire.get("emiting");
+                console.log(emiting);
+                if (emiting) {
+                    this.$wire.emit(emiting, value);
+                }
             },
             loadingDropDown(name) {
                 console.log(this.initial_name);

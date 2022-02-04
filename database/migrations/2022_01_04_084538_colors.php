@@ -17,6 +17,7 @@ class Colors extends Migration
             $table->id();
             $table->timestamps();
             $table->json("color");
+            $table->string("color_hex");
         });
     }
 

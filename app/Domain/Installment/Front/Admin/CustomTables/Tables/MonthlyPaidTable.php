@@ -15,7 +15,7 @@ use App\Domain\Core\Front\Admin\CustomTable\Abstracts\AbstractTable;
 use App\Domain\Core\Front\Admin\CustomTable\Abstracts\BaseTable;
 use App\Domain\Installment\Front\Admin\Functions\SmsNotPayment;
 
-class MonthlyPaidTable extends BaseTable
+class MonthlyPaidTable extends AbstractTable
 {
 
     public function getColumns(): array

@@ -10,13 +10,19 @@ use App\Domain\Common\Banners\Front\Admin\File\BannerCreator;
 use App\Domain\Common\Brands\Front\Admin\File\BrandCreator;
 use App\Domain\Common\Colors\Front\Admin\File\ColorCreator;
 use App\Domain\Common\Discounts\Front\Admin\File\DiscountFileCreator;
+use App\Domain\Core\File\Models\Livewire\FileLivewireCreatorFullyEmpty;
+use App\Domain\Core\File\Models\Livewire\FileLivewireWithoutActionFilterBy;
 use App\Domain\CreditProduct\Front\Admin\File\MainCreditCreator;
 use App\Domain\Dashboard\File\DashboardCreator;
+use App\Domain\Installment\Front\Admin\Attributes\DescriptionAboutTransaction;
 use App\Domain\Installment\Front\Admin\Files\TakenCreditCreator;
+use App\Domain\Installment\Front\Nested\TransactionIndex;
+use App\Domain\Order\Front\Admin\File\UserPurchaseCreator;
 use App\Domain\Payment\Front\Admin\File\PaymentCreator;
 use App\Domain\Product\Product\Front\Admin\File\ProductCreator;
 use App\Domain\Shop\Front\Admin\File\ShopFileCreator;
 use App\Domain\Shop\Front\Main\ShopCreate;
+use App\Domain\User\Front\Admin\File\AdminFileCreator;
 use App\Domain\User\Front\Admin\File\SuretyFileCreator;
 use App\Domain\User\Front\Admin\File\UserFileCreator;
 use Illuminate\Console\Command;
@@ -70,6 +76,9 @@ class   CreateBlades extends Command
         DiscountFileCreator::createFiles();
         CommentProductCreator::createFiles();
         PaymentCreator::createFiles();
+        DescriptionAboutTransaction::createFiles();
+        UserPurchaseCreator::createFiles();
+        AdminFileCreator::createFiles();
         return 0;
     }
 }

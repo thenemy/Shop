@@ -15,9 +15,14 @@ class HeaderValueTexts extends Migration
     {
         Schema::create('header_value_texts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('header_key_text_id')->constrained('header_key_texts')->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreignId('header_key_text_id')
+                ->constrained('header_key_texts')
+                ->onUpdate('CASCADE')->onDelete('CASCADE');
+            $table->foreignId("product_id")
+                ->constrained("products")
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->json('text');
-
         });
     }
 

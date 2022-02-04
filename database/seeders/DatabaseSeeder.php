@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         (new RoleSeeder())->run();
         (new CurrencySeeder())->run();
         (new SchemaSmsSeeder())->run();
-//        User::find(5)->plasticCard()->attach(PlasticCard::create(
+//        User::all()->first()->plasticCard()->attach(PlasticCard::create(
 //            [
 //                'card_number' => "asdsad",
 //                "expiry" => "asdsa",

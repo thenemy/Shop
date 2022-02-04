@@ -48,7 +48,7 @@ class TakenCreditIndex extends TakenCredit implements TableInFront, CreateAttrib
 
     public function getAllSumIndexAttribute()
     {
-        return TextAttribute::generation($this, $this->allToPay() + $this->initial_price, true);
+        return TextAttribute::generation($this, "price");
     }
 
     public function getClientIndexAttribute()
@@ -168,7 +168,8 @@ class TakenCreditIndex extends TakenCredit implements TableInFront, CreateAttrib
     function filterByData(): array
     {
         return [
-            "filter" => true
+            "filter" => true,
+            "not_waited" => true,
         ];
     }
 }

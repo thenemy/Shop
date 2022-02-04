@@ -17,10 +17,13 @@ use App\Domain\Product\Header\Entities\HeaderBody;
 use App\Domain\Product\HeaderComponent\Header\Entities\HeaderComponent;
 use App\Domain\Product\HeaderTable\Entities\HeaderTable;
 use App\Domain\Product\HeaderText\Entities\HeaderText;
+use App\Domain\Product\HeaderText\Pivot\HeaderProduct;
 use App\Domain\Product\Images\Entities\Image;
 use App\Domain\Product\Product\Builders\ProductBuilder;
 use App\Domain\Product\Product\Interfaces\ProductInterface;
 use App\Domain\Product\Product\Logic\ProductLogic;
+use App\Domain\Product\ProductKey\Entities\ProductKey;
+use App\Domain\Product\ProductKey\Pivot\ProductKeyProducts;
 use App\Domain\Shop\Entities\Shop;
 use App\Domain\User\Entities\User;
 use CardImages;
@@ -34,10 +37,37 @@ class Product extends Entity implements ProductInterface
     protected $table = "products";
     private ProductLogic $productLogic;
 
+    public static function getCreateRules(): array
+    {
+        return [
+            'percentage' => "integer|max:99"
+        ];
+    }
+
+    public static function getUpdateRules(): array
+    {
+        return [
+            'percentage' => "integer|max:99"
+        ];
+    }
+
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
         $this->productLogic = new ProductLogic($this);
+    }
+    // характеристики
+    // header
+    // key ... value
+    // key ... value
+    // ...
+    public function headerText()
+    {
+        return $this->belongsToMany(HeaderText::class,
+            "header_product",
+            "product_id",
+            'header_text_id'
+        )->using(HeaderProduct::class)->withPivot("id");
     }
 
     public function getLogic(): ProductLogic
@@ -51,8 +81,7 @@ class Product extends Entity implements ProductInterface
         return new ProductBuilder($query);
     }
 
-    public
-    function colors()
+    public function colors()
     {
         return $this->hasMany(ProductMainColor::class, "product_id");
     }
@@ -161,9 +190,12 @@ class Product extends Entity implements ProductInterface
     }
 
     public
-    function productKey(): \Illuminate\Database\Eloquent\Relations\HasMany
+    function productKey(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-//        return $this->hasMany(Key::class, 'product_id');
+        return $this->belongsToMany(ProductKey::class,
+            'product_keys_product',
+            'product_id',
+            'products_key_id')->using(ProductKeyProducts::class)->withPivot("id");
     }
 
     public

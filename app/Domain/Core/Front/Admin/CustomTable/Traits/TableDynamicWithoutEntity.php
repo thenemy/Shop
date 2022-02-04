@@ -3,6 +3,8 @@
 namespace App\Domain\Core\Front\Admin\CustomTable\Traits;
 
 use App\Domain\Core\File\Models\Livewire\FileLivewireDynamic;
+use App\Domain\Core\File\Models\Livewire\FileLivewireDynamicWithoutBoth;
+use App\Domain\Core\File\Models\Livewire\FileLivewireDynamicWithoutContainer;
 use App\Domain\Core\File\Models\Livewire\FileLivewireDynamicWithoutEntity;
 
 trait TableDynamicWithoutEntity
@@ -38,10 +40,18 @@ trait TableDynamicWithoutEntity
     abstract public function getTitle(): string;
 
 
-    public static function getDynamic($className): FileLivewireDynamicWithoutEntity
+    public static function getDynamic($className)
     {
         $class = get_called_class();
         return new FileLivewireDynamicWithoutEntity(
+            $className,
+            new $class(),
+        );
+    }
+    public static function getDynamicWithoutContainer($className)
+    {
+        $class = get_called_class();
+        return new FileLivewireDynamicWithoutBoth(
             $className,
             new $class(),
         );

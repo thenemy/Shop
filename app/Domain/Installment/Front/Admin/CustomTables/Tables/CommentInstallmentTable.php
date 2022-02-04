@@ -15,6 +15,14 @@ class CommentInstallmentTable extends AbstractDynamicTable
         return $this->generateNewInput(CommentInstallmentDynamic::getCustomRules());
     }
 
+    public static function setInputAttr($key, $type)
+    {
+        if ($type == self::defer()) {
+            return true;
+        }
+
+    }
+
     public function getColumns(): array
     {
         return [

@@ -5,7 +5,7 @@ namespace App\Domain\Core\Main\Builders;
 use App\Domain\Category\Builders\CategoryBuilder;
 use App\Domain\Core\Main\Interfaces\BuilderInterface;
 use Illuminate\Database\Eloquent\Builder;
-
+// use full notation for the table
 abstract class BuilderEntity extends Builder implements BuilderInterface
 {
     protected function getParent(): string

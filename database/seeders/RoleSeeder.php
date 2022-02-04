@@ -22,7 +22,15 @@ class RoleSeeder extends Seeder
             'role' => Roles::SHOP
         ]);
         Role::create([
-            'role' => Roles::ADMIN
+            'role' => Roles::ADMIN_MAIN
         ]);
+        Role::create([
+            'role' => Roles::ADMIN_MODERATOR
+        ]);
+        Role::create([
+            'role' => Roles::NOT_ADMIN
+        ]);
+
+
     }
 }

@@ -10,7 +10,7 @@ class ProductInstallmentNested extends BaseLivewireNestedWithoutEntity
 
     
  public $entitiesStore = [];
- public function activateChosen(){$this->getEntity()::whereIn('id', $this->checkBox)
+ public function activateChosen(){return $this->getEntity()::whereIn('id', $this->checkBox)
             ->update(
                 ['status' => true]
             );

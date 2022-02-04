@@ -17,9 +17,9 @@ class FiltrationKeyCategoryTable extends AbstractDynamicTable
     public function getColumns(): array
     {
         return [
-            Column::new(__("Название RU"), "key_ru-index"),
-            Column::new(__("Название UZ"), "key_uz-index"),
-            Column::new(__("Название EN"), "key_en-index"),
+            Column::new(__("Название RU"), "text_ru-index"),
+            Column::new(__("Название UZ"), "text_uz-index"),
+            Column::new(__("Название EN"), "text_en-index"),
         ];
     }
 }

@@ -18,6 +18,7 @@ use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireComponents
 use App\Domain\Core\Front\Admin\OpenButton\Interfaces\FilterInterface;
 use App\Domain\Core\Main\Traits\ArrayHandle;
 use App\Domain\Installment\Entities\MonthPaid;
+use App\Domain\Installment\Front\Admin\Attributes\DescriptionAboutTransaction;
 use App\Domain\Installment\Front\Admin\CustomTables\Tables\MonthlyPaidTable;
 use App\Domain\Installment\Front\Admin\Functions\SmsNotPayment;
 use Illuminate\Support\Carbon;
@@ -87,7 +88,9 @@ class MonthlyPaidIndex extends MonthPaid implements TableInFront, FilterInterfac
 
     public function getActionsAttribute(): string
     {
-        return AllActions::generation([]);
+        return AllActions::generation([
+            new  DescriptionAboutTransaction()
+        ]);
     }
 
     public function getKeyForFilter(): string

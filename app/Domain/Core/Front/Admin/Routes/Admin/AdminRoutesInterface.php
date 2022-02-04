@@ -24,5 +24,7 @@ interface AdminRoutesInterface
     const DASHBOARD = "dashboard";
     const DISCOUNTS = "discounts";
     const PAYMENT = "payment";
-    const COMMENT_PRODUCT= "comment_product";
+    const COMMENT_PRODUCT = "comment_product";
+    const NEW_ORDERS = "new_orders";
+    const ADMIN_USER = "admin_user";
 }

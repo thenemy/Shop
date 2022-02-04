@@ -14,15 +14,16 @@ class DropDownSearch extends Component
     public string $searchLabel = "";
     public array $filterBy = [];
     public string $prefix = "";
-
-
+    public string $emiting = "";
 
     public function updatedSearch()
     {
         $this->filterBy[$this->searchByKey] = $this->search;
         $this->dispatchEvent();
     }
-
+    public function formCategory() {
+        dd();
+    }
     protected function dispatchEvent()
     {
         $this->dispatchBrowserEvent('search-event');

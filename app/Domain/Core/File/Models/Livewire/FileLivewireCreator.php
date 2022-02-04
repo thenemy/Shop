@@ -48,12 +48,18 @@ class FileLivewireCreator extends AbstractFileManager
     protected string $className;
     protected $entity;
 
-    public function __construct($className, $entity)
+    public function __construct($className, $entity, $create = true)
+    {
+        $this->setBasics($className, $entity);
+        if ($create)
+            $this->openFile();
+    }
+
+    protected function setBasics($className, $entity)
     {
         $this->className = $className;
         $this->entity = $entity;
         $this->classNameBlade = $this->toLivewireCase($className);
-        $this->openFile();
     }
 
     public function getDispatchClass(): string
@@ -63,15 +69,36 @@ class FileLivewireCreator extends AbstractFileManager
 
     public function generateHtml(): string
     {
-        return sprintf("<livewire:admin.pages.%s.%s %s/>",
-            $this->classNameBlade,
-            $this->getBladeName(),
+        return sprintf("<livewire:%s %s/>",
+            $this->generateHtmlPath(),
             $this->generateAdditionalToHtml()
         );
     }
 
+    public function generateHtmlPath(): string
+    {
+        return sprintf("admin.pages.%s.%s",
+            $this->classNameBlade,
+            $this->getBladeName());
+    }
+
+    // implement @LivewirePassVariableToTag
     public function generateAdditionalToHtml(): string
     {
+        try {
+            $variables = $this->entity->generateAdditionalToHtml();
+            $str = "";
+            foreach ($variables as $key => $item) {
+                $set_key = $item;
+                if (gettype($key) != "integer") {
+                    $set_key = $key;
+                }
+                $str = $str . sprintf("  :%s='$%s'", $set_key, $item);
+            }
+            return $str;
+        } catch (\Exception $exception) {
+
+        }
         return "";
     }
 
@@ -126,8 +153,8 @@ class FileLivewireCreator extends AbstractFileManager
     {
         try {
             return $this->entity->livewireComponents()->generateBlades();
-        }catch (\Exception $exception){
-            return  "";
+        } catch (\Exception $exception) {
+            return "";
         }
     }
 

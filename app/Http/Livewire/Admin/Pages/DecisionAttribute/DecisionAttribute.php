@@ -8,7 +8,7 @@ class DecisionAttribute extends BaseEmptyLivewire
 {
 
     
- public $entity;public $reason = []; public function acceptInstallment(){\App\Domain\Installment\Front\Admin\Functions\AcceptInstallment::acceptInstallment($this);} public function denyInstallment(){\App\Domain\Installment\Front\Admin\Functions\DenyInstallment::denyInstallment($this);} public function requireSurety(){\App\Domain\Installment\Front\Admin\Functions\RequiredSurety::requireSurety($this);}
+ public $entity;public $reason = []; public function acceptInstallment(){return \App\Domain\Installment\Front\Admin\Functions\AcceptInstallment::acceptInstallment($this,...func_get_args());} public function denyInstallment(){return \App\Domain\Installment\Front\Admin\Functions\DenyInstallment::denyInstallment($this,...func_get_args());} public function requireSurety(){return \App\Domain\Installment\Front\Admin\Functions\RequiredSurety::requireSurety($this,...func_get_args());}
 
  //3   --- set of functions and variables
     public function getPath():string

@@ -22,8 +22,12 @@ use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\CreditProduct\Front\Nested\MainCreditNested;
 use App\Domain\Product\Images\Entities\Image;
 use App\Domain\Product\Product\Entities\Product;
+use App\Domain\Product\Product\Front\Admin\Attributes\HeaderTextAttribute;
+use App\Domain\Product\Product\Front\Admin\Attributes\KeyWithMultipleValueAttribute;
 use App\Domain\Product\Product\Front\Admin\DropDown\CurrencyDropDown;
 use App\Domain\Product\Product\Front\ComplexFactoring\ColorComplexFactoring;
+use App\Domain\Product\Product\Front\ComplexFactoring\HeaderTextFactoring;
+use App\Domain\Product\Product\Front\ComplexFactoring\KeyWithMultipleValue;
 use App\Domain\Product\Product\Interfaces\ProductInterface;
 use App\Domain\Shop\Front\Admin\DropDown\ShopDropDownSearch;
 
@@ -70,10 +74,22 @@ class ProductEdit extends Product implements CreateAttributesInterface
             ], [
                 "class" => "space-y-4"
             ]),
+            KeyWithMultipleValueAttribute::new(
+                KeyWithMultipleValue::create(),
+                KeyWithMultipleValue::edit(),
+                KeyWithMultipleValue::class,
+                "ProductEdit"),
+
             FileLivewireFactoring::generation("ProductEdit",
                 $this, [], "Цвета",
                 ColorComplexFactoring::create(), ColorComplexFactoring::edit(),
-                self::COLORS_SERVICE, ColorComplexFactoring::class)
+                self::COLORS_SERVICE, ColorComplexFactoring::class),
+            HeaderTextAttribute::new(
+                HeaderTextFactoring::create(),
+                HeaderTextFactoring::edit(),
+                HeaderTextFactoring::class,
+                "ProductEdit"
+            )
         ]);
     }
 

@@ -2,11 +2,11 @@
 @section("action")
     
 <x-helper.input.input name='name' type='text'
-            label='{{__("Имя Магазина")}}' value='{{old("name") ?? $entity->name ?? " "}}' id='name'  onkeyup=""/>
+            label='{{__("Имя Магазина")}}' value='{{old("name") ?? $entity->name ?? " "}}' id='name'  onkeyup="" />
 <x-helper.input.input name='user->phone' type='text'
-            label='{{__("Телефон пользователя")}}' value='{{old("user->phone") ?? $entity->user->phone ?? " "}}' id='user->phone'  onkeyup=""/>
+            label='{{__("Телефон пользователя")}}' value='{{old("user->phone") ?? $entity->user->phone ?? " "}}' id='user->phone'  onkeyup="" />
 <x-helper.input.input name='user->password' type='password'
-            label='{{__("Пароль")}}' value='' id='user->password'  onkeyup=""/>
+            label='{{__("Пароль")}}' value='' id='user->password'  onkeyup="" />
 <livewire:components.file.file-uploading-without-entity
                     keyToAttach='image'
                     mediaKey='file_create'
@@ -71,15 +71,15 @@
             <div 	class='flex flex-wrap justify-between items-around'>
                 			
 <x-helper.input.input name='shopAddress->longitude' type='number'
-            label='{{__("Долгота")}}' value='{{old("shopAddress->longitude") ?? $entity->shopAddress->longitude ?? " "}}' id='shopAddress->longitude'  onkeyup=""/>			
+            label='{{__("Долгота")}}' value='{{old("shopAddress->longitude") ?? $entity->shopAddress->longitude ?? " "}}' id='shopAddress->longitude'  onkeyup="" />			
 <x-helper.input.input name='shopAddress->latitude' type='number'
-            label='{{__("Широта")}}' value='{{old("shopAddress->latitude") ?? $entity->shopAddress->latitude ?? " "}}' id='shopAddress->latitude'  onkeyup=""/>			
+            label='{{__("Широта")}}' value='{{old("shopAddress->latitude") ?? $entity->shopAddress->latitude ?? " "}}' id='shopAddress->latitude'  onkeyup="" />			
 <x-helper.input.input name='shopAddress->delivery->index' type='number'
-            label='{{__("Индекс")}}' value='{{old("shopAddress->delivery->index") ?? $entity->shopAddress->delivery->index ?? " "}}' id='shopAddress->delivery->index'  onkeyup=""/>			
+            label='{{__("Индекс")}}' value='{{old("shopAddress->delivery->index") ?? $entity->shopAddress->delivery->index ?? " "}}' id='shopAddress->delivery->index'  onkeyup="" />			
 <x-helper.input.input name='shopAddress->delivery->street' type='text'
-            label='{{__("Улица")}}' value='{{old("shopAddress->delivery->street") ?? $entity->shopAddress->delivery->street ?? " "}}' id='shopAddress->delivery->street'  onkeyup=""/>			
+            label='{{__("Улица")}}' value='{{old("shopAddress->delivery->street") ?? $entity->shopAddress->delivery->street ?? " "}}' id='shopAddress->delivery->street'  onkeyup="" />			
 <x-helper.input.input name='shopAddress->delivery->house' type='number'
-            label='{{__("Номер дома")}}' value='{{old("shopAddress->delivery->house") ?? $entity->shopAddress->delivery->house ?? " "}}' id='shopAddress->delivery->house'  onkeyup=""/>
+            label='{{__("Номер дома")}}' value='{{old("shopAddress->delivery->house") ?? $entity->shopAddress->delivery->house ?? " "}}' id='shopAddress->delivery->house'  onkeyup="" />
             </div>			
 <x-helper.text_area.text_area name='shopAddress->delivery->instructions' label='Инструкции для курьера'>{{old("shopAddress->delivery->instructions") ?? $entity->shopAddress->delivery->instructions ?? " "}}</x-helper.text_area.text_area>			
 <livewire:admin.pages.shop-create.work-times-dynamic-without-entity />

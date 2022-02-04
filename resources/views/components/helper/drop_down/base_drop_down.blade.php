@@ -26,7 +26,9 @@
         class="drop-down-block ">
         <div class="py-1" role="none">
             <input class="selected_input hidden"
+                   @if(isset($attributes['wire:model']) && $attributes['wire:model'])
                    wire:model="{{$attributes['wire:model'] ?? ''}}"
+                   @endif
                    wire:key="{{$attributes['wire:key'] ?? ''}}"
                    type="{{$drop->type}}" name="{{$drop->key}}"
                    :value="value"

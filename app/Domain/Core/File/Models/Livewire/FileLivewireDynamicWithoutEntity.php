@@ -21,11 +21,19 @@ class FileLivewireDynamicWithoutEntity extends FileLivewireCreator implements Li
         parent::__construct($className, $entity);
     }
 
+    protected function firstParentGenerateAdditionalToHtml(): string
+    {
+        return parent::generateAdditionalToHtml();
+    }
+
     public function generateAdditionalToHtml(): string
     {
+        $str = parent::generateAdditionalToHtml();
         if ($this->initial)
-            return sprintf(":initial='%s'", $this->getWithoutScopeAtrVariable($this->initial));
-        return "";
+            return $str . sprintf(" :initial='%s'",
+
+                    $this->getWithoutScopeAtrVariable($this->initial));
+        return $str;
     }
 
 
@@ -38,12 +46,20 @@ class FileLivewireDynamicWithoutEntity extends FileLivewireCreator implements Li
     {
         return self::TEMPLATE_BLADE_PATH . self::BLADE_TEMPLATE_DYNAMIC_WITHOUT_ENTITY;
     }
+    protected function getPrefixInput(){
+        try {
+           return $this->entity::getPrefixInputHidden();
+        }catch (\Exception $exception) {
 
+        }
+        return "";
+    }
     protected function formatBlade($file_from): string
     {
         return sprintf($file_from,
             $this->entity->getTitle(),
-            $this->getTableToBlade()
+            $this->getTableToBlade(),
+            $this->getPrefixInput()
         );
     }
 }

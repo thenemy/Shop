@@ -2,7 +2,7 @@
 
 namespace App\Domain\Core\File\Interfaces;
 
-interface CreatorInterface
+interface CreatorInterface extends FactoryFileInterface
 {
     public function getEntityClass(): string;
 

@@ -10,7 +10,7 @@ class MainCreditNested extends BaseLivewireNestedWithoutEntity
 
     
 
- public function activateChosen(){$this->getEntity()::whereIn('id', $this->checkBox)
+ public function activateChosen(){return $this->getEntity()::whereIn('id', $this->checkBox)
             ->update(
                 ['status' => true]
             );

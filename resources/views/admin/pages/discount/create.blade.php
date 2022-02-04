@@ -2,7 +2,7 @@
 @section("action")
     
 <x-helper.input.input name='percent' type='number'
-            label='{{__("Процент скидки")}}' value='{{old("percent") ?? $entity->percent ?? " "}}' id='percent'  onkeyup=""/>
+            label='{{__("Процент скидки")}}' value='{{old("percent") ?? $entity->percent ?? " "}}' id='percent'  onkeyup="" />
 <x-helper.container.container :title='__("Скидки для Мобилки")' 	class='flex flex-wrap justify-between'>
                 			
 <livewire:components.file.file-uploading-without-entity

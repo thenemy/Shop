@@ -26,6 +26,10 @@ class CategoryCreate extends Category implements CreateAttributesInterface
                 self::CATEGORY_ICON_DATA,
                 "Загрузите иконку",
             ),
+            new InputFileTempAttribute(
+                self::CATEGORY_ICON_TO . "image",
+                "Загрузите картинку",
+            ),
             FiltrationKeyCategoryDynamicWithoutEntity::getDynamic("CategoryCreate"),
             ...$this->additionalGeneration()
         ]);

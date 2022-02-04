@@ -7,7 +7,7 @@
             :initial='$entity->category_id'
             searchLabel='названию Категорий'
             
-            
+            emiting='fromCategory'
              />
 <livewire:components.drop-down.drop-down-search
             :searchByKey='"name"'
@@ -31,23 +31,23 @@
             Введите название
             </x-helper.text.pre_title>
                  <div class=' flex flex-row space-x-2'>
-                 <x-helper.input.input name='title[ru]'  label='{{__("на русском языке")}}' value='{{old("title") ? old("title")["ru"] ?? $entity->title["ru"] ?? " " : $entity->title["ru"] ?? " "}}' /><x-helper.input.input name='title[uz]'  label='{{__("o`zbek tilda")}}' value='{{old("title") ? old("title")["uz"] ?? $entity->title["uz"] ?? " " : $entity->title["uz"] ?? " "}}' /><x-helper.input.input name='title[en]'  label='{{__("in english")}}' value='{{old("title") ? old("title")["en"] ?? $entity->title["en"] ?? " " : $entity->title["en"] ?? " "}}' />
+                 <x-helper.input.input name='title[ru]'  label='{{__("на русском языке")}}' value='{{old("title") ? old("title")["ru"] ?? $entity->title["ru"] ?? " " : $entity->title["ru"] ?? " "}}'  /><x-helper.input.input name='title[uz]'  label='{{__("o`zbek tilda")}}' value='{{old("title") ? old("title")["uz"] ?? $entity->title["uz"] ?? " " : $entity->title["uz"] ?? " "}}'  /><x-helper.input.input name='title[en]'  label='{{__("in english")}}' value='{{old("title") ? old("title")["en"] ?? $entity->title["en"] ?? " " : $entity->title["en"] ?? " "}}'  />
              </div>
             </div>
             
 <x-helper.input.input name='number' type='number'
-            label='{{__("Введите количество данного товара")}}' value='{{old("number") ?? $entity->number ?? " "}}' id='number'  onkeyup=""/>
+            label='{{__("Введите количество данного товара")}}' value='{{old("number") ?? $entity->number ?? " "}}' id='number'  onkeyup="" />
 <x-helper.drop_down.drop_down :drop='\App\Domain\Product\Product\Front\Admin\DropDown\CurrencyDropDown::getDropDown($entity->currency)' />
 <x-helper.input.input name='price' type='number'
-            label='{{__("Введите цену")}}' value='{{old("price") ?? $entity->price ?? " "}}' id='price'  onkeyup=""/>
+            label='{{__("Введите цену")}}' value='{{old("price") ?? $entity->price ?? " "}}' id='price'  onkeyup="" />
 <x-helper.input.input name='percentage' type='number'
-            label='{{__("Укажите скидку (%)")}}' value='{{old("percentage") ?? $entity->percentage ?? " "}}' id='percentage'  onkeyup=""/>
+            label='{{__("Укажите скидку (%)")}}' value='{{old("percentage") ?? $entity->percentage ?? " "}}' id='percentage'  onkeyup="" />
 <x-helper.input.input name='weight' type='number'
-            label='{{__("Введите вес(кг)")}}' value='{{old("weight") ?? $entity->weight ?? " "}}' id='weight'  onkeyup=""/>
+            label='{{__("Введите вес(кг)")}}' value='{{old("weight") ?? $entity->weight ?? " "}}' id='weight'  onkeyup="" />
 <x-helper.input.input_checked name='productDay->checked' type='checkbox'
-            label='{{__("Продукт дня")}}' value='{{old("productDay->checked") ?? $entity->productDay->checked ?? " "}}' id='productDay->checked'  onchange=""/>
+            label='{{__("Продукт дня")}}' value='{{old("productDay->checked") ?? $entity->productDay->checked ?? " "}}' id='productDay->checked'  onchange="" />
 <x-helper.input.input_checked name='productHit->checked' type='checkbox'
-            label='{{__("Хит продаж")}}' value='{{old("productHit->checked") ?? $entity->productHit->checked ?? " "}}' id='productHit->checked'  onchange=""/>
+            label='{{__("Хит продаж")}}' value='{{old("productHit->checked") ?? $entity->productHit->checked ?? " "}}' id='productHit->checked'  onchange="" />
 <livewire:components.file.file-uploading
                     :entityId='$entity->id'
                     mediaKey='image_main'
@@ -78,7 +78,7 @@
             Введите заголовок
             </x-helper.text.pre_title>
                  <div class=' flex flex-row space-x-2'>
-                 <x-helper.input.input name='description->header[ru]'  label='{{__("на русском языке")}}' value='{{old("description->header") ? old("description->header")["ru"] ?? $entity->description->header["ru"] ?? " " : $entity->description->header["ru"] ?? " "}}' /><x-helper.input.input name='description->header[uz]'  label='{{__("o`zbek tilda")}}' value='{{old("description->header") ? old("description->header")["uz"] ?? $entity->description->header["uz"] ?? " " : $entity->description->header["uz"] ?? " "}}' /><x-helper.input.input name='description->header[en]'  label='{{__("in english")}}' value='{{old("description->header") ? old("description->header")["en"] ?? $entity->description->header["en"] ?? " " : $entity->description->header["en"] ?? " "}}' />
+                 <x-helper.input.input name='description->header[ru]'  label='{{__("на русском языке")}}' value='{{old("description->header") ? old("description->header")["ru"] ?? $entity->description->header["ru"] ?? " " : $entity->description->header["ru"] ?? " "}}'  /><x-helper.input.input name='description->header[uz]'  label='{{__("o`zbek tilda")}}' value='{{old("description->header") ? old("description->header")["uz"] ?? $entity->description->header["uz"] ?? " " : $entity->description->header["uz"] ?? " "}}'  /><x-helper.input.input name='description->header[en]'  label='{{__("in english")}}' value='{{old("description->header") ? old("description->header")["en"] ?? $entity->description->header["en"] ?? " " : $entity->description->header["en"] ?? " "}}'  />
              </div>
             </div>
             			
@@ -91,6 +91,10 @@
             </div>
             
                 </x-helper.container.container>
-<livewire:admin.pages.product-edit.product-edit   :entity='$entity ?? null'
+<livewire:admin.pages.product-edit.key-with-multiple-value-attribute  :entity='$entity ?? null'
+            prefixKey='productKey->' initialSettingClass='App\Domain\Product\Product\Front\ComplexFactoring\KeyWithMultipleValue'/>
+<livewire:admin.pages.product-edit.product-edit  :entity='$entity ?? null'
             prefixKey='colors' initialSettingClass='App\Domain\Product\Product\Front\ComplexFactoring\ColorComplexFactoring'/>
+<livewire:admin.pages.product-edit.header-text-attribute  :entity='$entity ?? null'
+            prefixKey='headerText->' initialSettingClass='App\Domain\Product\Product\Front\ComplexFactoring\HeaderTextFactoring'/>
 @endsection

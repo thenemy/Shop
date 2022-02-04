@@ -16,9 +16,10 @@
                 3,
                 {{--                    {{\App\Domain\Installment\Entities\TakenCredit::where("status", \App\Domain\Installment\Interfaces\PurchaseStatus::FINISHED)->count()}},--}}
                     4,
+                4,
                 {{--                    {{\App\Domain\Installment\Entities\TakenCredit::where("status", \App\Domain\Installment\Interfaces\PurchaseStatus::WAIT_ANSWER)->count()}},--}}
-                    {{\App\Domain\Installment\Entities\TakenCredit::where("status", \App\Domain\Installment\Interfaces\PurchaseStatus::ACCEPTED)->count()}},
-                2
+                    {{--                    {{\App\Domain\Installment\Entities\TakenCredit::where("status", \App\Domain\Installment\Interfaces\PurchaseStatus::ACCEPTED)->count()}},--}}
+                    2
                 {{--                    {{\App\Domain\Installment\Entities\TakenCredit::where("status", \App\Domain\Installment\Interfaces\PurchaseStatus::DECLINED)->count()}},--}}
             ],
             backgroundColor: [
@@ -34,10 +35,10 @@
         labels: [
             '{{__("Завершенные")}}',
             '{{__("Ожидаемые")}}',
-            '{{__("Оплачиваемые")}}',
+            '{{__("Выплаты")}}',
             '{{__("Отказанные")}}'
         ],
-        datasets:datasets,
+        datasets: datasets,
 
 
     };
@@ -50,7 +51,8 @@
                 const activePoints = chartBar.getElementsAtEventForMode(e, 'nearest', {
                     intersect: true
                 }, false)
-                window.location = "google.com";
+                if (activePoints.length !== 0)
+                    console.log(activePoints[0].index);
             },
         },
     };
@@ -58,8 +60,6 @@
     var chartBar = new Chart(
         document.getElementById("chartDoughnut"),
         configDoughnut,
-
-
     );
 
 </script>

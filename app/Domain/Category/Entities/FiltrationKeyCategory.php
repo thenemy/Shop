@@ -10,6 +10,18 @@ class FiltrationKeyCategory extends Entity
 {
     use Translatable;
     protected $guarded = null;
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+
+
+    }
+    public function attributesToArray(){
+        $this->attributes['key_ru'] = $this->getKeyRuAttribute();
+        $this->attributes['key_en'] = $this->getKeyEnAttribute();
+        $this->attributes['key_uz'] = $this->getKeyUzAttribute();
+        return $this->attributes;
+    }
     protected $fillable = [
       'key_ru',
       'key_en',
@@ -30,17 +42,17 @@ class FiltrationKeyCategory extends Entity
 
     public function getKeyRuAttribute()
     {
-        return $this->getKeyAttribute()['ru'];
+        return $this->getKeyAttribute()['ru'] ?? "";
     }
 
     public function getKeyUzAttribute()
     {
-        return $this->getKeyAttribute()['uz'];
+        return $this->getKeyAttribute()['uz'] ?? "";
     }
 
     public function getKeyEnAttribute()
     {
-        return $this->getKeyAttribute()['en'];
+        return $this->getKeyAttribute()['en'] ?? "";
     }
 
     public function setKeyAttribute($value)

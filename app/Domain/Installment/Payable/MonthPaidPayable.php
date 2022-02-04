@@ -5,7 +5,9 @@ namespace App\Domain\Installment\Payable;
 use App\Domain\Core\Api\CardService\Interfaces\Payable;
 use App\Domain\Core\Api\CardService\Traits\HasTransaction;
 use App\Domain\Installment\Entities\MonthPaid;
+use App\Domain\Installment\Entities\Transaction;
 use App\Domain\Installment\Interfaces\PurchaseStatus;
+use App\Domain\Installment\Services\TransactionService;
 use Illuminate\Support\Collection;
 
 class MonthPaidPayable extends MonthPaid implements Payable
@@ -38,7 +40,8 @@ class MonthPaidPayable extends MonthPaid implements Payable
             $this->takenCredit->status = PurchaseStatus::ACCEPTED;
         }
         $this->takenCredit->save();
-
+        $transaction = new TransactionService();
+        $transaction->create($this);
         return true;
     }
 

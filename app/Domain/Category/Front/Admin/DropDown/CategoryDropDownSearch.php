@@ -5,6 +5,7 @@ namespace App\Domain\Category\Front\Admin\DropDown;
 use App\Domain\Category\Entities\Category;
 use App\Domain\Core\Front\Admin\DropDown\Items\DropItem;
 use App\Domain\Core\Front\Admin\Form\Attributes\Base\BaseDropDownSearchAttribute;
+use App\Domain\Product\Product\Front\Admin\Functions\FromCategory;
 
 class CategoryDropDownSearch extends BaseDropDownSearchAttribute
 {
@@ -13,6 +14,11 @@ class CategoryDropDownSearch extends BaseDropDownSearchAttribute
     {
         return self::new("name", "названию Категорий",
             $create, $filterBy);
+    }
+
+    public function additionalParamsHtml(): string
+    {
+        return sprintf("emiting='%s'", FromCategory::FUNCTION_NAME);
     }
 
     function setType(): string

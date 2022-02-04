@@ -10,7 +10,7 @@ trait InputGenerator
 {
     use SetInputAttribute;
 
-    private string $model;
+    private string $model = "";
 
     protected function generateInput(array $rules, string $model = 'entity.'): array
     {

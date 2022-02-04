@@ -19,10 +19,11 @@ abstract class BaseLivewireFactoring extends Component
     public $entityId;
     public $className;
     public string $prefix = '';
-    public Collection $objects;
     public string $prefixKey;
     public string $initialSettingClass;
-    public Collection $entities;
+
+    public Collection $entities; // for already existing data
+    public Collection $objects; // for new data
     public $entity;
 
     /**
@@ -33,28 +34,43 @@ abstract class BaseLivewireFactoring extends Component
     {
         $this->entities = collect([]);
         $this->objects = collect([]);
+        $this->initializeClass();
+        $this->generateOld();
+        $this->baseGenerateRules("objects.", $rules);
+    }
+
+    protected function initializeClass()
+    {
         if ($this->initialSettingClass) {
             $this->initialSettingClass::initialize($this);
         }
+    }
+
+    protected function generateOld()
+    {
         if (old($this->prefixKey . '_new_created')) {
             foreach (old($this->prefixKey . '_new_created') as $value) {
-                $this->objects[$value] = [];
+                $this->fillObjects($value);
+                $this->counter++;
             }
         }
-        $this->baseGenerateRules("objects.", $rules);
+    }
+
+    protected function fillObjects()
+    {
+        $value = func_get_args()[0];
+        $this->objects[$value] = [];
     }
 
     public function addCounter()
     {//        dd($this->counter);
         $this->objects[$this->counter] = [];
         $this->counter++;
-
     }
 
     public function remove($id)
     {
         $this->objects->pull($id);
-
     }
 
     public function removeEntity($id)
@@ -62,8 +78,10 @@ abstract class BaseLivewireFactoring extends Component
         $this->initialSettingClass::delete($this, $id);
     }
 
+
     public function render()
     {
+
         return view($this->getPath());
     }
 

@@ -70,7 +70,9 @@ class DecisionAttribute extends Entity implements LivewireEmptyWithPassVariableI
                             "Запросить поручителя",
                             "Вы уверены что хотите запросить поручителя?", [], [
                             "wire:click" => RequiredSurety::FUNCTION_NAME
-                        ]))),
+                        ])
+                        )
+                    ),
                     ENDIFstatement::new()
                 ]),
             ]),

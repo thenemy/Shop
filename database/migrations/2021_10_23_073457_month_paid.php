@@ -16,8 +16,8 @@ class MonthPaid extends Migration
         Schema::create('month_paid', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->float("must_pay");
-            $table->float("paid")->default(0);
+            $table->unsignedDecimal("must_pay", 50);
+            $table->unsignedDecimal("paid", 50)->default(0);
             $table->date("month");
 //            $table->integer("month");
             $table->bigInteger("transaction_id")->nullable();

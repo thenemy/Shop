@@ -16,7 +16,8 @@ class FontIconAttribute implements HtmlInterface
 
     static public function new(array $attributes)
     {
-        return new self($attributes);
+        $self = get_called_class();
+        return new $self($attributes);
     }
 
     public function generateHtml(): string

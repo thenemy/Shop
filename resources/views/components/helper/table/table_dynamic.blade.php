@@ -23,6 +23,9 @@
 
         @foreach($table->list as $items)
             <tr wire:key="dynamic_table_{{$loop->index}}"
+                x-data="initDynamic('{{$items->id}}')"
+               data-id="{{$items->id}}"
+                x-on:show-inputs.window="showInput($event)"
                 class="table_main_tr">
                 <td class="table_main_td hidden checker checkbox-show">
                     <label for="check{{$loop->index}}">
@@ -34,9 +37,10 @@
                 @foreach($table->columns as $row)
                     <td
                         class="table_main_td">
-                        <div x-data="initDynamic('{{$items->id}}')"
-                             class="flex flex-row justify-center"
-                             x-on:show-inputs.window="showInput($event)">
+                        <div
+
+                            class="flex flex-row justify-center"
+                        >
                             <div x-show="! show">
                                 {!! $items->getFrontAttributes($row->key_to_row) !!}
                             </div>
@@ -65,22 +69,19 @@
     </table>
 </div>
 <script>
-    function initDynamic(id) {
-        return {
-            show: false,
-            id: id,
-            showInput(event) {
-                if (event.detail.id === this.id) {
-                    this.show = event.detail.show
-                }
-            },
-        }
-    }
+        // function initDynamic(id) {
+        //     return {
+        //         show: false,
+        //         id: id,
+        //         showInput(event) {
+        //             if (event.detail.id.toString() === this.$el.dataset.id) {
+        //                 this.show = event.detail.show;
+        //                 console.log(this.show);
+        //             }
+        //         },
+        //     }
+        // }
 
-    function testInit(value) {
-        console.log(value);
-        return {}
-    }
 </script>
 {{$table->paginate->links()}}
 

@@ -24,6 +24,8 @@ class CategoryEdit extends Category implements CreateAttributesInterface
 //            new FileLivewireNested("Category", $this->child_category),
             new InputLangAttribute("name", __("Введите  имя категории"), false),
             new InputFileAttribute("icon_file", "Иконка", self::class),
+            new InputFileAttribute("image_file", "Картинка", self::class),
+
             FiltrationKeyCategoryDynamic::getDynamic('CategoryEdit'),
             ...$this->additionalGeneration()
         ));
@@ -39,6 +41,11 @@ class CategoryEdit extends Category implements CreateAttributesInterface
     public function getIconFileAttribute(): FileAttribute
     {
         return new FileAttribute($this[self::CATEGORY_ICON], "icon", 'category_id_1');
+    }
+
+    public function getImageFileAttribute(): FileAttribute
+    {
+        return new FileAttribute($this[self::CATEGORY_ICON], "image", 'category_id_2');
     }
 
     public function getChildCategoryAttribute(): CategoryNested

@@ -9,13 +9,17 @@
                 <div class="flex-1">
                     %s
                 </div>
-                <div>
-                    <button wire:click="removeEntity({{$index}})" class="btn btn-error">
+                <div x-data="{ show : false }">
+                    <button @click = 'show = true' class="btn btn-error">
                         {{__("Удалить")}}
                     </button>
+                    <x-helper.modal.modal_delete
+                                                 type="button"
+                                                 wire:click="removeEntity({{$index}})"
+                    />
                 </div>
                 <div class="hidden" x-data="{id: {{$entity->id ?? " "}} }">
-                    <input  name="{{$prefixKey}}->{{$index}}->id" :value="id">
+                    <input name="{{$prefixKey}}->{{$index}}->id" :value="id">
                 </div>
             </div>
         @endforeach

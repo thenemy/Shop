@@ -3,6 +3,7 @@
 namespace App\Domain\Core\Front\Admin\Attributes\Containers;
 
 use App\Domain\Core\Front\Interfaces\HtmlInterface;
+use Illuminate\Support\Facades\Blade;
 
 class ConcatenateHtml implements HtmlInterface
 {
@@ -24,6 +25,6 @@ class ConcatenateHtml implements HtmlInterface
         foreach ($this->tags as $tag) {
             $str = $str . " " . $tag->generateHtml();
         }
-        return $str;
+        return Blade::compileString($str);
     }
 }
