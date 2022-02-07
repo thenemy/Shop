@@ -1744,9 +1744,6 @@ html {
 .max-w-xs {
   max-width: 20rem;
 }
-.max-w-\[35vw\] {
-  max-width: 35vw;
-}
 .flex-1 {
   flex: 1 1 0%;
 }

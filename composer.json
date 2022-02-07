@@ -7,8 +7,9 @@
         "laravel"
     ],
     "license": "MIT",
+   
     "require": {
-        "php": "^7.4||^8.0",
+        "php": "^7.4 || ^8.0",
         "ext-json": "*",
         "ext-soap": "*",
         "fruitcake/laravel-cors": "^2.0",
@@ -71,5 +72,6 @@
         "sort-packages": true
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+  "platform-check": false
 }
