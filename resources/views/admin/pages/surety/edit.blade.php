@@ -21,57 +21,57 @@
 @if($entity)  <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('components.file.file-uploading', ['entityId' => $entity->id,'mediaKey' => 'passport_reverse_edit','entityClass' => 'App\Domain\User\Front\Open\SuretyOpenEdit','multiple' => false,'label' => 'Прописка'])->html();
-} elseif ($_instance->childHasBeenRendered('RDrkng5')) {
-    $componentId = $_instance->getRenderedChildComponentId('RDrkng5');
-    $componentTag = $_instance->getRenderedChildComponentTagName('RDrkng5');
+} elseif ($_instance->childHasBeenRendered('qZ8gQD1')) {
+    $componentId = $_instance->getRenderedChildComponentId('qZ8gQD1');
+    $componentTag = $_instance->getRenderedChildComponentTagName('qZ8gQD1');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('RDrkng5');
+    $_instance->preserveRenderedChild('qZ8gQD1');
 } else {
     $response = \Livewire\Livewire::mount('components.file.file-uploading', ['entityId' => $entity->id,'mediaKey' => 'passport_reverse_edit','entityClass' => 'App\Domain\User\Front\Open\SuretyOpenEdit','multiple' => false,'label' => 'Прописка']);
     $html = $response->html();
-    $_instance->logRenderedChild('RDrkng5', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('qZ8gQD1', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?> <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('components.file.file-uploading', ['entityId' => $entity->id,'mediaKey' => 'passport_user_edit','entityClass' => 'App\Domain\User\Front\Open\SuretyOpenEdit','multiple' => false,'label' => 'Паспорт c пользователем'])->html();
-} elseif ($_instance->childHasBeenRendered('RKI7HyC')) {
-    $componentId = $_instance->getRenderedChildComponentId('RKI7HyC');
-    $componentTag = $_instance->getRenderedChildComponentTagName('RKI7HyC');
+} elseif ($_instance->childHasBeenRendered('22hyBzu')) {
+    $componentId = $_instance->getRenderedChildComponentId('22hyBzu');
+    $componentTag = $_instance->getRenderedChildComponentTagName('22hyBzu');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('RKI7HyC');
+    $_instance->preserveRenderedChild('22hyBzu');
 } else {
     $response = \Livewire\Livewire::mount('components.file.file-uploading', ['entityId' => $entity->id,'mediaKey' => 'passport_user_edit','entityClass' => 'App\Domain\User\Front\Open\SuretyOpenEdit','multiple' => false,'label' => 'Паспорт c пользователем']);
     $html = $response->html();
-    $_instance->logRenderedChild('RKI7HyC', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('22hyBzu', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?> <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('components.file.file-uploading', ['entityId' => $entity->id,'mediaKey' => 'passport_edit','entityClass' => 'App\Domain\User\Front\Open\SuretyOpenEdit','multiple' => false,'label' => 'Паспорт пользователя'])->html();
-} elseif ($_instance->childHasBeenRendered('XzdXU1q')) {
-    $componentId = $_instance->getRenderedChildComponentId('XzdXU1q');
-    $componentTag = $_instance->getRenderedChildComponentTagName('XzdXU1q');
+} elseif ($_instance->childHasBeenRendered('stWTpFk')) {
+    $componentId = $_instance->getRenderedChildComponentId('stWTpFk');
+    $componentTag = $_instance->getRenderedChildComponentTagName('stWTpFk');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('XzdXU1q');
+    $_instance->preserveRenderedChild('stWTpFk');
 } else {
     $response = \Livewire\Livewire::mount('components.file.file-uploading', ['entityId' => $entity->id,'mediaKey' => 'passport_edit','entityClass' => 'App\Domain\User\Front\Open\SuretyOpenEdit','multiple' => false,'label' => 'Паспорт пользователя']);
     $html = $response->html();
-    $_instance->logRenderedChild('XzdXU1q', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('stWTpFk', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?> <?php
 if (! isset($_instance)) {
     $html = \Livewire\Livewire::mount('admin.pages.surety-open-edit.surety-plastic-card-dynamic', ['parentKey' => 'user_id','parentId' => $entity->id])->html();
-} elseif ($_instance->childHasBeenRendered('csZ8sih')) {
-    $componentId = $_instance->getRenderedChildComponentId('csZ8sih');
-    $componentTag = $_instance->getRenderedChildComponentTagName('csZ8sih');
+} elseif ($_instance->childHasBeenRendered('J6oYXWG')) {
+    $componentId = $_instance->getRenderedChildComponentId('J6oYXWG');
+    $componentTag = $_instance->getRenderedChildComponentTagName('J6oYXWG');
     $html = \Livewire\Livewire::dummyMount($componentId, $componentTag);
-    $_instance->preserveRenderedChild('csZ8sih');
+    $_instance->preserveRenderedChild('J6oYXWG');
 } else {
     $response = \Livewire\Livewire::mount('admin.pages.surety-open-edit.surety-plastic-card-dynamic', ['parentKey' => 'user_id','parentId' => $entity->id]);
     $html = $response->html();
-    $_instance->logRenderedChild('csZ8sih', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
+    $_instance->logRenderedChild('J6oYXWG', $response->id(), \Livewire\Livewire::getRootElementTagName($html));
 }
 echo $html;
 ?>

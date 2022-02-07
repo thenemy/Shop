@@ -131,7 +131,7 @@
             <div 	class='text-sm'>
                 			
 
-            <div 	class='cursor-pointer hover:text-blue-300'	onclick='location.href ="{{route("admin.taken_credit.index", [])}}"'>
+            <div 	class='cursor-pointer hover:text-blue-300'	onclick='location.href ="{{route("admin.user.index", [])}}"'>
                 			
 <span >{{__('Всего')}}:</span>			
 <span 	class='font-bold'>{{App\Domain\User\Entities\User::newInMonth() ?? ""}}</span>
@@ -140,7 +140,7 @@
             <div 	class='cursor-pointer hover:text-blue-300'	onclick='location.href ="{{route("admin.user.index", [])}}"'>
                 			
 <span >{{__('Сегодня')}}:</span>			
-<span 	class='font-bold'>{{0 ?? ""}}</span>
+<span 	class='font-bold'>{{App\Domain\User\Entities\User::whereDate('created_at', now())->count() ?? ""}}</span>
             </div>
             </div>
             </div>
