@@ -45,6 +45,6 @@ class KeyWithMultipleValueAttribute extends BaseComplex
 
     function key(): string
     {
-        return ProductInterface::PRODUCT_KEY_TO;
+        return ProductInterface::PRODUCT_KEY_SERVICE;
     }
 }

@@ -8,6 +8,7 @@ use App\Domain\Core\File\Models\Livewire\FileLivewireFactoring;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Base\AllLivewireFunctions;
 use App\Domain\Core\Front\Admin\Livewire\Functions\Interfaces\LivewireAdditionalFunctions;
 use App\Domain\Core\Main\Entities\Entity;
+use App\Domain\Product\Product\Front\Admin\Functions\HeaderTextFunction;
 use App\Domain\Product\Product\Interfaces\ProductInterface;
 
 class HeaderTextAttribute extends BaseComplex
@@ -24,13 +25,13 @@ class HeaderTextAttribute extends BaseComplex
 
     function key(): string
     {
-        return ProductInterface::HEADER_TEXT_TO;
+        return ProductInterface::HEADER_TEXT_SERVICE;
     }
 
     public function livewireFunctions(): LivewireAdditionalFunctions
     {
         return AllLivewireFunctions::generation([
-
+            HeaderTextFunction::new()
         ]);
     }
 }

@@ -4,24 +4,23 @@ namespace App\Domain\Product\HeaderText\Entities;
 
 use App\Domain\Core\Language\Traits\Translatable;
 use App\Domain\Core\Main\Entities\Entity;
+use App\Domain\Product\HeaderText\Builders\HeaderKeyValueBuilder;
 
 class HeaderKeyValue extends Entity
 {
     use Translatable;
 
+    protected $guarded = null;
+    protected $fillable = [
+        'key',
+        'header_product_id',
+        'value'];
     protected $table = "header_key_value";
 
-    public function __construct(array $attributes = [])
+    public function newEloquentBuilder($query)
     {
-        $this->attributes['key_ru'] = $this->getKeyAttribute()['ru'] ?? "";
-        $this->attributes['key_en'] = $this->getKeyAttribute()['en'] ?? "";
-        $this->attributes['key_uz'] = $this->getKeyAttribute()['uz'] ?? "";
-        $this->attributes['value_ru'] = $this->getValueAttribute()['ru'] ?? "";
-        $this->attributes['value_en'] = $this->getValueAttribute()['en'] ?? "";
-        $this->attributes['value_uz'] = $this->getValueAttribute()['uz'] ?? "";
-        parent::__construct($attributes);
+        return new HeaderKeyValueBuilder($query);
     }
-
 
     public function getValueAttribute(): ?\Illuminate\Support\Collection
     {

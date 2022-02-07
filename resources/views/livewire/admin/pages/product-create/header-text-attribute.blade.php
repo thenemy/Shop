@@ -13,15 +13,15 @@
                 </x-helper.container.container> </div>
                 </div>
                 <div x-data="{ show : false }">
-                    <button @click = 'show = true' class="btn btn-error">
+                    <button @click='show = true' class="btn btn-error">
                         {{__("Удалить")}}
                     </button>
                     <x-helper.modal.modal_delete
-                                                 type="button"
-                                                 wire:click="removeEntity({{$index}})"
+                        type="button"
+                        wire:click="removeEntity({{$index}})"
                     />
                 </div>
-                <div class="hidden" x-data="{id: {{$entity->id ?? " "}} }">
+                <div class="hidden" x-data="{id: {{$entity->id ?? "" }} }">
                     <input name="{{$prefixKey}}->{{$index}}->id" :value="id">
                 </div>
             </div>
@@ -33,7 +33,7 @@
         ." №" . ($index + 1)' 	class='space-y-6 flex flex-wrap justify-between'>
                 			
 
-            <div 	class='w-full'	wire:key='header_text{{$index}}->create'>
+            <div 	class='w-full'	wire:key='super_key_edit.{{$index}}.god_of'>
                 			
 
             <div class='flex flex-col w-full space-y-1'>
@@ -48,7 +48,7 @@
 
             <div 	x-data='modalWindow() '	class='flex flex-row justify-start'>
                 			
-<button 	class='btn  self-start mt-4 btn-sm btn-accent'	@click='open()'>{{__('Значения')}}</button>			
+<button 	class='btn  self-start mt-4 btn-sm btn-accent'	@click='open()'	wire:key='header_text{{$index}}->modal'>{{__('Значения')}}</button>			
 <div x-cloak 	x-show='show'><div
 
     class="fixed z-10 h-full w-full inset-0 hide_during_loading  overflow-y-auto" aria-labelledby="modal-title"

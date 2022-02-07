@@ -25,9 +25,11 @@ class InputComponent extends Component
         $this->defer = $defer;
         $this->filter = $filter;
         $this->attributes = new ComponentAttributeBag($attributes);
-        $this->attributes["wire:model"] = $model;
+        if ($this->defer)
+            $this->attributes["wire:model.defer"] = $model;
+        else
+            $this->attributes['wire:model'] = $model;
         $this->attributes['wire:key'] = $key;
-        Log::info($this->attributes);
     }
 
     public function render()

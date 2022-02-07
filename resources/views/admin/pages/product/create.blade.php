@@ -95,9 +95,9 @@
             
                 </x-helper.container.container>
 <livewire:admin.pages.product-create.key-with-multiple-value-attribute  :entity='$entity ?? null'
-            prefixKey='productKey->' initialSettingClass=''/>
+            prefixKey='productKey' initialSettingClass=''/>
 <livewire:admin.pages.product.product-create  :entity='$entity ?? null'
             prefixKey='colors' initialSettingClass=''/>
 <livewire:admin.pages.product-create.header-text-attribute  :entity='$entity ?? null'
-            prefixKey='headerText->' initialSettingClass=''/>
+            prefixKey='headerText' initialSettingClass=''/>
 @endsection

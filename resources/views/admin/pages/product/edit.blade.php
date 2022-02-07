@@ -92,9 +92,9 @@
             
                 </x-helper.container.container>
 <livewire:admin.pages.product-edit.key-with-multiple-value-attribute  :entity='$entity ?? null'
-            prefixKey='productKey->' initialSettingClass='App\Domain\Product\Product\Front\ComplexFactoring\KeyWithMultipleValue'/>
+            prefixKey='productKey' initialSettingClass='App\Domain\Product\Product\Front\ComplexFactoring\KeyWithMultipleValue'/>
 <livewire:admin.pages.product-edit.product-edit  :entity='$entity ?? null'
             prefixKey='colors' initialSettingClass='App\Domain\Product\Product\Front\ComplexFactoring\ColorComplexFactoring'/>
 <livewire:admin.pages.product-edit.header-text-attribute  :entity='$entity ?? null'
-            prefixKey='headerText->' initialSettingClass='App\Domain\Product\Product\Front\ComplexFactoring\HeaderTextFactoring'/>
+            prefixKey='headerText' initialSettingClass='App\Domain\Product\Product\Front\ComplexFactoring\HeaderTextFactoring'/>
 @endsection

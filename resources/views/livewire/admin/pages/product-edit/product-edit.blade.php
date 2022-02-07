@@ -41,15 +41,15 @@
                 </x-helper.container.container> </div>
                 </div>
                 <div x-data="{ show : false }">
-                    <button @click = 'show = true' class="btn btn-error">
+                    <button @click='show = true' class="btn btn-error">
                         {{__("Удалить")}}
                     </button>
                     <x-helper.modal.modal_delete
-                                                 type="button"
-                                                 wire:click="removeEntity({{$index}})"
+                        type="button"
+                        wire:click="removeEntity({{$index}})"
                     />
                 </div>
-                <div class="hidden" x-data="{id: {{$entity->id ?? " "}} }">
+                <div class="hidden" x-data="{id: {{$entity->id ?? "" }} }">
                     <input name="{{$prefixKey}}->{{$index}}->id" :value="id">
                 </div>
             </div>

@@ -67,7 +67,7 @@ class Product extends Entity implements ProductInterface
             "header_product",
             "product_id",
             'header_text_id'
-        )->using(HeaderProduct::class)->withPivot("id");
+        )->using(HeaderProduct::class)->withPivot(["id"]);
     }
 
     public function getLogic(): ProductLogic

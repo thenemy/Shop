@@ -32,6 +32,9 @@ trait SetInputAttribute
      * */
     public static function setInputAttr($key, $type)
     {
+        if ($type == self::defer()) {
+            return true;
+        }
     }
 
     protected function generateNewWay(array $rules): array

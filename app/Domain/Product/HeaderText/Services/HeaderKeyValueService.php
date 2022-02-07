@@ -16,15 +16,16 @@ class HeaderKeyValueService extends BaseService
 
     protected function createNew(array $object_data)
     {
-        $object_data['key'] = $this->popCondition($object_data, "key", false, "-");
-        $object_data['value'] = $this->popCondition($object_data, "value", false, "-");
+        $object_data['key'] = $this->popCondition($object_data, "key", false, "_");
+        $object_data['value'] = $this->popCondition($object_data, "value", false, "_");
         return parent::createNew($object_data);
     }
 
     public function update($object, array $object_data)
     {
-        $object_data['key'] = $this->popCondition($object_data, "key", false, "-");
-        $object_data['value'] = $this->popCondition($object_data, "value", false, "-");
+
+        $object_data['key'] = $this->popCondition($object_data, "key", false, "_");
+        $object_data['value'] = $this->popCondition($object_data, "value", false, "_");
         return parent::update($object, $object_data);
     }
 }

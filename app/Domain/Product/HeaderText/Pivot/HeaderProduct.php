@@ -10,7 +10,7 @@ class HeaderProduct extends Pivot
 {
     protected $table = "header_product";
     public $incrementing = true;
-
+    public $timestamps = false;
     public function keyValue()
     {
         return $this->hasMany(

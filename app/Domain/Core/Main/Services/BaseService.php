@@ -273,7 +273,7 @@ abstract class BaseService implements ServiceInterface
                  * we are taking first element
                  * because we are putting key element at the last
                  */
-                if (preg_match(sprintf("/^%s$/i", $check_key), $key_value[0])) {
+                if (isset($key_value[1]) && preg_match(sprintf("/^%s$/i", $check_key), $key_value[0])) {
 
                     unset($key_value[0]);
                     /**

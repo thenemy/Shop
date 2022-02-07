@@ -7,11 +7,10 @@
        @endif
        name="{{$name}}"
        oninput="{{$filter}}"
-       @if($defer)
-       wire:model.defer="{{$attributes['wire:model']}}"
-       @else
-       wire:model="{{$attributes['wire:model']}}"
-       @endif
-       wire:key="{{$attributes['wire:key'] ?? ""}}"
+       {{--       @if($defer)--}}
+       {{--       @else--}}
+       {{--       wire:model="{{$attributes['wire:model']}}"--}}
+       {{--       @endif--}}
+{{--       wire:key="{{$attributes['wire:key'] ?? ""}}"--}}
 
 />

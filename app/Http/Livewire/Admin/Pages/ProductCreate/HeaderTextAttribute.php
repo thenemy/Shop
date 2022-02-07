@@ -6,7 +6,7 @@ use App\Http\Livewire\Admin\Base\Abstracts\BaseLivewireFactoring;
 class HeaderTextAttribute extends BaseLivewireFactoring
 {
         
-
+ public function fillObjects(){return \App\Domain\Product\Product\Front\Admin\Functions\HeaderTextFunction::fillObjects($this,...func_get_args());}public function render(){return \App\Domain\Product\Product\Front\Admin\Functions\HeaderTextFunction::render($this,...func_get_args());}
 
 
     function getPath()

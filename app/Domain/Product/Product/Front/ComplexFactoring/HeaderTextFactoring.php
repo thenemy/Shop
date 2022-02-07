@@ -21,7 +21,10 @@ class HeaderTextFactoring implements ComplexFactoring, ProductInterface
 
     static public function initialize(BaseLivewireFactoring $factoring)
     {
-
+        foreach ($factoring->entity->headerText  as $key) {
+            $factoring->entities[$factoring->counter] = $key;
+            $factoring->counter++;
+        }
     }
 
     static public function delete(BaseLivewireFactoring $factoring, $id)
@@ -34,7 +37,7 @@ class HeaderTextFactoring implements ComplexFactoring, ProductInterface
         return [
             Container::new([
                 "class" => "w-full",
-                "wire:key" => sprintf(self::SET_NAME, "header_text", "create")
+                'wire:key' => 'super_key_edit.{{$index}}.god_of',
             ], [
                 new InputLangWithoutAttribute(
                     sprintf(self::SET_VALUE_WIHOUT, "text"),
@@ -52,6 +55,7 @@ class HeaderTextFactoring implements ComplexFactoring, ProductInterface
         return ModalCreator::new(
             ButtonDaisy::new("Значения", [
                 '@click' => "open()",
+                "wire:key" => sprintf(self::SET_NAME, "header_text", "modal"),
                 "class" => "self-start mt-4 btn-sm btn-accent"
             ]),
             ModalContainer::new([], [
@@ -76,7 +80,7 @@ class HeaderTextFactoring implements ComplexFactoring, ProductInterface
             Container::new(
                 [
                     "class" => "w-full",
-                    "wire:key" => sprintf(self::SET_NAME, "header_text", "edit")
+                    'wire:key' => 'super_key_edit.{{$index}}.somehting',
                 ],
                 [
                     new InputLangWithoutAttribute(
