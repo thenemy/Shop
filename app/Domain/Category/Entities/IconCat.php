@@ -42,7 +42,7 @@ class IconCat extends Entity
 
     public function getMediaPathStorages(): string
     {
-        return "category/icon";
+        return "category/super_icon";
     }
 
     public function mediaKeys(): array
