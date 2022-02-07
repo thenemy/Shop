@@ -17,7 +17,7 @@ class MediaServices
     public static function createMedia($path, UploadedFile $file, string $key , $id): Media
     {
         $filename = self::generateName($path, $file->getClientOriginalName());
-        $file->storeAs($path, $filename);
+        $file->storeAs($path, $filename, 'public');
         return new Media (self::getPathToStore($path, $filename), $key, $id);
     }
 
