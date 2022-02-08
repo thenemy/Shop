@@ -72,8 +72,8 @@ class DashboardMain extends Dashboard implements CreateAttributesInterface
                                 ),
                                 StatisticAttribute::newLink(
                                     "fas fa-user",
-                                    User::class . "::newInMonth()",
-                                    User::class . "::whereDate('created_at', now())->count()",
+                                    User::class . "::allUser()",
+                                    User::class . "::newToday()",
                                     "Пользователей за месяц",
                                     LinkGenerator::new(UserRouteHandler::new())->index(),
                                     LinkGenerator::new(UserRouteHandler::new())->index(),
