@@ -47,7 +47,7 @@ class UserBuilder extends BuilderEntity
     public function newToday()
     {
         return $this->joinRole()->where("user_roles.role", '=', Roles::USER)
-            ->where("created_at", now())->count();
+            ->whereDate("created_at", now())->count();
     }
 
     public function joinTakenCredit(): UserBuilder
