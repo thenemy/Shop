@@ -9,7 +9,6 @@ class AdditionalActions
 {
     public function add($object, $id)
     {
-
     }
 
     public function delete($object, $id)

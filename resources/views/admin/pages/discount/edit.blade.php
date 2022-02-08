@@ -69,7 +69,7 @@
                     wire:key=''
                      />
                 </x-helper.container.container>
-<livewire:admin.pages.discount-create.product-nested
+<livewire:admin.pages.discount-edit.product-nested
                 :attachEntityId='$entity->id'
                 :attachEntity='get_class($entity)'
                 keyToAttach='acceptProduct'

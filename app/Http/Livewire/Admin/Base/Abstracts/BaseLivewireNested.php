@@ -121,6 +121,7 @@ abstract class BaseLivewireNested extends BaseLivewire
 
     protected function addToEntity($adding)
     {
+
         $this->additionalAction::add($this, $adding);
         $entity = $this->getAttachEntity();
         $keyToAttach = $this->keyToAttach;
