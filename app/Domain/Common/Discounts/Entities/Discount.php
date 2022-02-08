@@ -41,17 +41,17 @@ class Discount extends Entity implements DiscountRelation
 
     public function getDesImageRuAttribute(): \App\Domain\Core\Media\Models\Media
     {
-        return $this->getMedia("des_image", $this->image['ru']);
+        return $this->getMedia("des_image", $this->des_image['ru']);
     }
 
     public function getDesImageUzAttribute(): \App\Domain\Core\Media\Models\Media
     {
-        return $this->getMedia("des_image", $this->image['uz']);
+        return $this->getMedia("des_image", $this->des_image['uz']);
     }
 
     public function getDesImageEnAttribute(): \App\Domain\Core\Media\Models\Media
     {
-        return $this->getMedia("des_image", $this->image['en']);
+        return $this->getMedia("des_image", $this->des_image['en']);
     }
 
     public function setDesImageAttribute($value)
@@ -59,23 +59,34 @@ class Discount extends Entity implements DiscountRelation
         $this->setMedia("des_image", $value, $this->id);
     }
 
+    public function getDesImageAttribute($value)
+    {
+        return $this->getTranslations("des_image");
+    }
+
+    public function getMobImageAttribute($value)
+    {
+        return $this->getTranslations("mob_image");
+    }
+
     public function getMobImageRuAttribute(): \App\Domain\Core\Media\Models\Media
     {
-        return $this->getMedia("mob_image", $this->image['ru']);
+        return $this->getMedia("mob_image", $this->mob_image['ru']);
     }
 
     public function getMobImageUzAttribute(): \App\Domain\Core\Media\Models\Media
     {
-        return $this->getMedia("mob_image", $this->image['uz']);
+        return $this->getMedia("mob_image", $this->mob_image['uz']);
     }
 
     public function getMobImageEnAttribute(): \App\Domain\Core\Media\Models\Media
     {
-        return $this->getMedia("mob_image", $this->image['en']);
+        return $this->getMedia("mob_image", $this->mob_image['en']);
     }
 
     public function setMobImageAttribute($value)
     {
+
         $this->setMedia("mob_image", $value, $this->id);
     }
 
