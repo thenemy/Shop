@@ -134,13 +134,13 @@
             <div 	class='cursor-pointer hover:text-blue-300'	onclick='location.href ="{{route("admin.user.index", [])}}"'>
                 			
 <span >{{__('Всего')}}:</span>			
-<span 	class='font-bold'>{{App\Domain\User\Entities\User::newInMonth() ?? ""}}</span>
+<span 	class='font-bold'>{{App\Domain\User\Entities\User::allUser() ?? ""}}</span>
             </div>			
 
             <div 	class='cursor-pointer hover:text-blue-300'	onclick='location.href ="{{route("admin.user.index", [])}}"'>
                 			
 <span >{{__('Сегодня')}}:</span>			
-<span 	class='font-bold'>{{App\Domain\User\Entities\User::whereDate('created_at', now())->count() ?? ""}}</span>
+<span 	class='font-bold'>{{App\Domain\User\Entities\User::newToday() ?? ""}}</span>
             </div>
             </div>
             </div>
