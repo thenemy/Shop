@@ -17,6 +17,7 @@ use App\Domain\Core\Front\Admin\Attributes\Containers\ModalContainer;
 use App\Domain\Core\Front\Admin\Attributes\Containers\ModalCreator;
 use App\Domain\Core\Front\Admin\Attributes\Containers\Visibility;
 use App\Domain\Core\Front\Admin\Attributes\Info\ErrorSuccess;
+use App\Domain\Core\Front\Admin\Attributes\Spinner\Spinner;
 use App\Domain\Core\Front\Admin\Attributes\Text\Text;
 use App\Domain\Core\Front\Admin\Button\ModelInCompelationTime\ButtonDaisy;
 use App\Domain\Core\Front\Admin\Button\ModelInCompelationTime\GrayButtonCompile;
@@ -41,41 +42,55 @@ class DecisionAttribute extends Entity implements LivewireEmptyWithPassVariableI
         return BladeGenerator::generation([
             ErrorSuccess::new(),
             IFstatement::new(sprintf(
-                '$entity->status%%10 == %s', PurchaseStatus::WAIT_ANSWER)),
-            BoxTitleContainer::newTitle("Решение", "", [
-                ContainerRow::new([
-                    "data-theme" => 'custom',
-                    "class" => "space-x-4 justify-around"], [
-                    ModalCreator::new(
-                        ButtonDaisy::new("Принять", [
-                            'class' => 'btn-success',
-                            "@click" => 'open()',
-                        ]),
-                        DecisionModal::new(
-                            "Принять рассрочку",
-                            "Вы уверены что хотите принять рассрочку ?",
-                            [],
-                            [
-                                "wire:click" => AcceptInstallment::FUNCTION_NAME,
-                            ])
-                    ),
-                    new RefuseAttribute(),
-                    IFstatement::new(
-                        '!$entity->surety',
+                '$entity->status %% 10 == %s', PurchaseStatus::WAIT_ANSWER)),
+            Container::new([
+                'class' => "p-10 w-full text-center ",
+                "wire:key" => "super_secure_key",
+                "wire:loading" => null
+
+            ], [
+                Spinner::new()
+            ]),
+            Container::new([
+                "wire:key" => "super_secure_key",
+                "wire:loading.remove" => ""
+            ], [
+                BoxTitleContainer::newTitle("Решение", "", [
+                    ContainerRow::new([
+                        "data-theme" => 'custom',
+                        "class" => "space-x-4 justify-around"], [
                         ModalCreator::new(
-                            ButtonDaisy::new(
-                                "Требуется поручитель", [
-                                "@click" => "open()"
-                            ]), DecisionModal::new(
-                            "Запросить поручителя",
-                            "Вы уверены что хотите запросить поручителя?", [], [
-                            "wire:click" => RequiredSurety::FUNCTION_NAME
-                        ])
-                        )
-                    ),
-                    ENDIFstatement::new()
+                            ButtonDaisy::new("Принять", [
+                                'class' => 'btn-success',
+                                "@click" => 'open()',
+                            ]),
+                            DecisionModal::new(
+                                "Принять рассрочку",
+                                "Вы уверены что хотите принять рассрочку ?",
+                                [],
+                                [
+                                    "wire:click" => AcceptInstallment::FUNCTION_NAME,
+                                ])
+                        ),
+                        new RefuseAttribute(),
+                        IFstatement::new(
+                            '!$entity->surety && !$entity->isRequiredSurety()',
+                            ModalCreator::new(
+                                ButtonDaisy::new(
+                                    "Требуется поручитель", [
+                                    "@click" => "open()"
+                                ]), DecisionModal::new(
+                                "Запросить поручителя",
+                                "Вы уверены что хотите запросить поручителя?", [], [
+                                "wire:click" => RequiredSurety::FUNCTION_NAME
+                            ])
+                            )
+                        ),
+                        ENDIFstatement::new()
+                    ]),
                 ]),
             ]),
+
             ENDIFstatement::new()
         ]);
     }

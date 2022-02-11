@@ -15,7 +15,8 @@ class DpdClient implements DpdInterface
      */
     public function __construct($method)
     {
-        $this->client = new SoapClient(self::CONNECT_TEST . $method);
+        $this->client = new SoapClient(self::CONNECT_TEST . $method, ['trace' => 1]);
+
         $this->auth['auth'] = [
             'clientNumber' => env("DPD_CLIENT_NUMBER"),
             'clientKey' => env("DPD_CLIENT_KEY")

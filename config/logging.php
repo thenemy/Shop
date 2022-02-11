@@ -53,6 +53,11 @@ return [
             'channels' => ['single'],
             'ignore_exceptions' => false,
         ],
+        'custom' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/custom.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
         'single' => [
             'driver' => 'single',
             'path' => storage_path('logs/new_logs.log'),

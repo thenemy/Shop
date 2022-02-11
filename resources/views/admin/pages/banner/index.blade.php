@@ -1,7 +1,7 @@
 @extends("layout.admin_layout")
 @section("content")
     {{--    test blade  create template then fill with variables --}}
-    <div class="flex flex-col space-y-3">
+    <div class="flex flex-col space-y-1">
         {{--    insert there new created livewire--}}
         {{--    give the title--}}
         <x-helper.text.title>{{__("Банер") ?? ""}}</x-helper.text.title>

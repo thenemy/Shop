@@ -41,7 +41,7 @@ class DiscountEdit extends Discount implements CreateAttributesInterface
                     "Английский Баннер",
                     "des_image_en")
             ]),
-            new FileLivewireNested("DiscountCreate", $this->getProductNested())
+            new FileLivewireNested("DiscountEdit", $this->getProductNested())
         ]);
     }
 

@@ -20,6 +20,7 @@ use App\Domain\Installment\Front\Nested\TransactionIndex;
 use App\Domain\Order\Front\Admin\File\UserPurchaseCreator;
 use App\Domain\Payment\Front\Admin\File\PaymentCreator;
 use App\Domain\Product\Product\Front\Admin\File\ProductCreator;
+use App\Domain\Settings\Front\File\SettingsCreator;
 use App\Domain\Shop\Front\Admin\File\ShopFileCreator;
 use App\Domain\Shop\Front\Main\ShopCreate;
 use App\Domain\User\Front\Admin\File\AdminFileCreator;
@@ -79,6 +80,7 @@ class   CreateBlades extends Command
         DescriptionAboutTransaction::createFiles();
         UserPurchaseCreator::createFiles();
         AdminFileCreator::createFiles();
+        SettingsCreator::createFiles();
         return 0;
     }
 }

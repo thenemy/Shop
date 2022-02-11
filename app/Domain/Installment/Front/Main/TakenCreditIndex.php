@@ -161,7 +161,6 @@ class TakenCreditIndex extends TakenCredit implements TableInFront, CreateAttrib
     public function getBladeActions(): string
     {
         return AllBladeActions::generation([
-            SchemaSmsAttribute::new(SchemaSmsInstallment::class)
         ]);
     }
 

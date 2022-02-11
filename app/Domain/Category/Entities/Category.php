@@ -23,6 +23,7 @@ class Category extends Entity implements CategoryRelationInterface
         'name',
         'status',
         'depth',
+        'parent_id',
         'slug',
         'depth',
         'is_important'

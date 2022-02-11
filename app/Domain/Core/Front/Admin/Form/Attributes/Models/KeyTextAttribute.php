@@ -37,7 +37,7 @@ class KeyTextAttribute implements HtmlInterface
     public function generateHtml(): string
     {
         return sprintf(
-            "<x-helper.text.text_key key='%s' value='%s %s' class_value='%s'></x-helper.text.text_key>",
+            "<x-helper.text.text_key key=\"%s\" value='%s %s' class_value='%s'></x-helper.text.text_key>",
             $this->key,
             $this->value(),
             $this->postfix,

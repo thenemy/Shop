@@ -95,6 +95,7 @@ class UserPurchaseIndex extends UserPurchase implements TableInFront, CreateAttr
     public function filterByData(): array
     {
         return [
+            "by_created_at" => true,
             "status" => PurchaseStatus::WAIT_ANSWER,
         ];
     }

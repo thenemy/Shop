@@ -24,7 +24,9 @@ class SchemaSmsLivewire extends Component
 
     public function save($type)
     {
-        $this->selected_class::where('type', $type)->update(['schema' => $this->comment]);
+        $comment = preg_replace("/[\"']/", "", $this->comment);
+
+        $this->selected_class::where('type', $type)->update(['schema' => $comment]);
         session()->flash('success', __("Успешно сохранён"));
     }
 

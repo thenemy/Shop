@@ -29,7 +29,7 @@ trait OrderTrait
         } else {
             $day = weekday_num() - $datePickUp->day;
         }
-        return [now()->addDays($day)->format("yy-mm-dd"), $datePickUp];
+        return [now()->addDays($day)->format("Y-m-d"), $datePickUp];
     }
 
     private function intToTime(int $value): string
@@ -41,10 +41,12 @@ trait OrderTrait
     {
         $address_request = $address->delivery->toArray();
         $request = [
-            'name' => $address->user->userCreditData->name,
+            'name' => $address->shop->name,
             'workTimeFrom' => $this->intToTime($times->workTimeFrom),
-            'workTimeTo' => $this->intToTime($times->workTimeTo)
+            'workTimeTo' => $this->intToTime($times->workTimeTo),
+            'contactPhone' => $address->user->phone,
         ];
+        $request['contactFio'] = $request['name'];
         return array_merge($address_request, $request);
     }
 
@@ -56,7 +58,7 @@ trait OrderTrait
     private function purchaseToCategory(Collection $purchases)
     {
         $purchaseIds = $purchases->pluck('id');
-        return Category::byPurchaseIn($purchaseIds);
+        return Category::byPurchaseIn($purchaseIds)->get();
     }
 
     private function calculateWeight(Collection $purchases)
@@ -72,12 +74,12 @@ trait OrderTrait
         foreach ($categories as $category) {
             $parent = $category->parent;
 
-            if ($parent) {
+            if (!$parent) {
                 $parent = $category;
-            }
-
-            while ($parent->depth > 1) {
-                $parent = $parent->parent;
+            } else {
+                while ($parent->depth > 1) {
+                    $parent = $parent->parent;
+                }
             }
 
             if ($parent->deliveryImportant()->exists()) {
@@ -87,7 +89,6 @@ trait OrderTrait
         }
         return $cargoRegistered;
     }
-
 
 
 }

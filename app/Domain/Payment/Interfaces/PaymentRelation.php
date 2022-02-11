@@ -4,7 +4,7 @@ namespace App\Domain\Payment\Interfaces;
 
 use App\Domain\User\Interfaces\UserRelationInterface;
 
-interface PaymentRelation
+interface PaymentRelation extends PaymentStatus
 {
     const USER_SERVICE = "user";
     const CARD_SERVICE = "card";

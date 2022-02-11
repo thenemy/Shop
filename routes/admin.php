@@ -27,7 +27,8 @@ Route::name("admin.")->group(function () {
             AdminRoutesInterface::PAYMENT => \App\Http\Controllers\Admin\PaymentController::class,
             AdminRoutesInterface::NEW_ORDERS => \App\Http\Controllers\Admin\NewOrderController::class,
             AdminRoutesInterface::ADMIN_USER => \App\Http\Controllers\Admin\AdminUserController::class,
-            AdminRoutesInterface::COMMENT_PRODUCT => \App\Http\Controllers\Admin\CommentProductController::class
+            AdminRoutesInterface::COMMENT_PRODUCT => \App\Http\Controllers\Admin\CommentProductController::class,
+            AdminRoutesInterface::SETTING => \App\Http\Controllers\Admin\SettingController::class
         ]
     );
 });

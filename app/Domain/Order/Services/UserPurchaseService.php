@@ -4,23 +4,26 @@ namespace App\Domain\Order\Services;
 
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Core\Main\Services\BaseService;
+use App\Domain\Delivery\Services\DeliveryAddressService;
 use App\Domain\Delivery\Services\DeliverySendService;
+use App\Domain\Installment\Interfaces\PurchaseRelationInterface;
 use App\Domain\Order\Entities\Purchase;
 use App\Domain\Order\Entities\UserPurchase;
 use App\Domain\Order\Interfaces\UserOrderInterface;
 use App\Domain\Order\Interfaces\UserPurchaseRelation;
 use App\Domain\Product\Product\Entities\Product;
+use App\Domain\Telegrams\Job\TelegramJob;
 use Illuminate\Support\Facades\DB;
 
 class UserPurchaseService extends BaseService implements UserPurchaseRelation
 {
     private PurchaseService $purchaseService;
-    private DeliverySendService $deliverySendService;
+    private DeliveryAddressService $deliveryAddressService;
 
     public function __construct()
     {
         $this->purchaseService = new PurchaseService();
-        $this->deliverySendService = new DeliverySendService();
+        $this->deliveryAddressService = new DeliveryAddressService();
         parent::__construct();
     }
 
@@ -58,9 +61,8 @@ class UserPurchaseService extends BaseService implements UserPurchaseRelation
     private function getStatus(array &$object_data): int
     {
         $status = UserOrderInterface::INSTALMENT;
-        if (isset($object_data['delivery'])) {
+        if (array_key_exists("delivery", $object_data)) {
             $status += UserOrderInterface::DELIVERY;
-            throw new \Exception("Delivery method is not implemented now");
         } else {
             $status += UserOrderInterface::SELF_DELIVERY;
         }
@@ -79,7 +81,14 @@ class UserPurchaseService extends BaseService implements UserPurchaseRelation
         try {
             DB::beginTransaction();
             $object_data['status'] = $this->getStatus($object_data);
+            $purchase = $this->popCondition($object_data, PurchaseRelationInterface::PURCHASE_SERVICE);
+
             $object = parent::create($object_data);
+            if ($object->isDelivery()) {
+                $delivery = $this->popCondition($purchase, self::DELIVERY_ADDRESS_SERVICE);
+                $delivery_object = $this->deliveryAddressService->create($delivery);
+                $object->address()->attach($delivery_object->id);
+            }
             $purchases = $this->toPurchases($object_data);
             $object->purchases()->createMany($purchases);
             DB::commit();

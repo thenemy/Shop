@@ -15,6 +15,7 @@ use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\Currency\Front\Attributes\CurrencyAttribute;
 use App\Domain\Currency\Front\Attributes\MoneyAttribute;
 use App\Domain\Dashboard\Front\Attributes\BarCharAttribute;
+use App\Domain\Dashboard\Front\Attributes\CurrentAttribute;
 use App\Domain\Dashboard\Front\Attributes\DoughnutChartAttribute;
 use App\Domain\Dashboard\Front\Attributes\StatisticAttribute;
 use App\Domain\Dashboard\Models\Dashboard;
@@ -32,18 +33,11 @@ class DashboardMain extends Dashboard implements CreateAttributesInterface
     {
         return BladeGenerator::generation([
 
-            Container::newClass("mr-4 space-y-10", [
-                ContainerRow::newClass("justify-between", [
-                    ContainerTitle::newTitle("Курс валюты", "border border-blue-300 p-2 bg-white rounded shadow w-max", [
-                        new CurrencyAttribute()
-                    ]),
-                    ContainerTitle::newTitle("Удержка Денег", "border border-blue-300 p-2 bg-white rounded shadow w-max", [
-                        new MoneyAttribute()
-                    ]),
-                ]),
+            Container::newClass("mr-4 space-y-1", [
+
                 ContainerRow::newClass("w-full", [
                     ContainerTitle::newTitle("Статистика",
-                        "items-center block p-2 bg-white w-full h-full shadow-lg rounded", [
+                        "items-center block p-3 bg-white w-full h-full shadow-lg rounded", [
                             ContainerRow::newClass("justify-around w-full", [
                                 StatisticAttribute::newLink(
                                     "fas fa-cash-register",
@@ -70,13 +64,13 @@ class DashboardMain extends Dashboard implements CreateAttributesInterface
                                     LinkGenerator::new(TakenCreditRouteHandler::new())->index(),
 
                                 ),
-                                StatisticAttribute::newLink(
-                                    "fas fa-user",
-                                    User::class . "::allUser()",
-                                    User::class . "::newToday()",
-                                    "Пользователей за месяц",
-                                    LinkGenerator::new(UserRouteHandler::new())->index(),
-                                    LinkGenerator::new(UserRouteHandler::new())->index(),
+                                CurrentAttribute::newLink(
+                                    "fas fa-money-bill-wave",
+                                    "0",
+                                    "0",
+                                    "Действующие рассрочки",
+                                    LinkGenerator::new(TakenCreditRouteHandler::new())->index(),
+                                    LinkGenerator::new(TakenCreditRouteHandler::new())->index(),
                                 )
                             ])
                         ]),

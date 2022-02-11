@@ -34,7 +34,7 @@ class ProductBuilder extends BuilderEntity
     public function byDiscount($discount_id): ProductBuilder
     {
         return $this->joinDiscount()->
-        where("product_id", '=', $discount_id);
+        where("discount_id", '=', $discount_id);
     }
 
     public function joinDiscount($join = "inner"): ProductBuilder

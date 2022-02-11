@@ -9,7 +9,7 @@
 }
 
 .drop_element {
-    @apply hover:bg-white p-4 hover:border-r-4 border-blue-500 cursor-pointer
+    @apply hover:bg-white py-1 px-3 hover:border-r-4 border-blue-500 cursor-pointer
 }
 
 .drop_helper_text {

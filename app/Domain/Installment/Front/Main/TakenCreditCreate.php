@@ -9,6 +9,7 @@ use App\Domain\Core\Front\Admin\Attributes\Containers\ContainerRow;
 use App\Domain\Core\Front\Admin\Attributes\Containers\NestedContainer;
 use App\Domain\Core\Front\Admin\Attributes\Containers\Visibility;
 use App\Domain\Core\Front\Admin\Form\Attributes\Models\InputAttribute;
+use App\Domain\Core\Front\Admin\Form\Attributes\Models\TextAreaAttribute;
 use App\Domain\Core\Front\Admin\Form\Interfaces\CreateAttributesInterface;
 use App\Domain\Core\Front\Admin\Templates\Models\BladeGenerator;
 use App\Domain\CreditProduct\Front\Admin\DropDown\CreditDropDownAssociated;
@@ -18,9 +19,11 @@ use App\Domain\Installment\Entities\TakenCredit;
 use App\Domain\Installment\Front\Admin\Components\SumComponent;
 use App\Domain\Installment\Front\Admin\Dispatch\DispatchCredit;
 use App\Domain\Installment\Front\Admin\Dispatch\DispatchProduct;
+use App\Domain\Installment\Front\Admin\DropDown\IntsallmentCityDropDown;
 use App\Domain\Product\Product\Front\Admin\AdditionalActions\GenerateRuleProductAdditionalAction;
 use App\Domain\Product\Product\Front\Nested\ProductInstallmentNested;
 use App\Domain\Product\Product\Front\Nested\ProductNested;
+use App\Domain\Shop\Front\Admin\DropDown\ShopAvailableCitiesDropDownSearch;
 use App\Domain\User\Front\Admin\DropDown\PlasticCardDropDownAssociated;
 use App\Domain\User\Front\Admin\DropDown\UserDropDownRelation;
 use App\Domain\User\Front\Admin\DropDown\UserDropDownSearch;
@@ -49,14 +52,39 @@ class TakenCreditCreate extends TakenCredit implements CreateAttributesInterface
             ),
             new FileLivewireNestedWithoutEntity("TakenCredit", $this->getProductsView()),
 
-            ContainerRow::newClass("border-2 rounded p-2 w-full justify-start", [
+            ContainerColumn::newClass("border-2 rounded p-2 w-full justify-start items-start", [
                 InputAttribute::createAttribute(
                     "delivery",
                     'checkbox',
-                    "Самовызов",
+                    "Будет доставка",
                     "payment_type",
                     "delivery-update"
                 ),
+                Visibility::newVisibility("delivery-update", [
+                    IntsallmentCityDropDown::newCities(),
+                    Container::new([
+                        'class' => 'p-2'
+                    ]),
+                    Container::new([
+                        'class' => 'flex flex-wrap justify-between items-around'
+                    ], [
+                        InputAttribute::createAttribute(self::DELIVERY_ADDRESS_TO . "index",
+                            "number", "Индекс"),
+                        InputAttribute::createAttribute(self::DELIVERY_ADDRESS_TO . "street",
+                            "text", "Улица"),
+                        InputAttribute::createAttribute(self::DELIVERY_ADDRESS_TO . 'house',
+                            "number", "Номер дома"),
+                        InputAttribute::createAttribute(self::DELIVERY_ADDRESS_TO . 'flat',
+                            "number", "Этаж"),
+                    ]),
+                    Container::new([
+                        'class' => 'p-2'
+                    ]),
+                    new TextAreaAttribute(self::DELIVERY_ADDRESS_TO . "instructions",
+                        "Инструкции для курьера"),
+                ], [
+                    'class' => "space-y-4"
+                ]),
             ]),
             ContainerColumn::newClass("border-2 rounded p-2 w-full items-start", [
                 InputAttribute::createAttribute(

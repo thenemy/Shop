@@ -7,6 +7,7 @@ use App\Domain\CreditProduct\Entity\Credit;
 
 use App\Domain\Installment\Builders\TakenCreditBuilder;
 use App\Domain\Installment\Interfaces\PurchaseRelationInterface;
+use App\Domain\Installment\Traits\PurchaseStatusTrait;
 use App\Domain\Order\Entities\Purchase;
 use App\Domain\Order\Entities\UserPurchase;
 use App\Domain\User\Entities\PlasticCard;
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\DB;
  */
 class TakenCredit extends Entity implements PurchaseRelationInterface
 {
-    use HasUserRelationship;
+    use HasUserRelationship, PurchaseStatusTrait;
 
     public $timestamps = true;
 
@@ -98,9 +99,12 @@ class TakenCredit extends Entity implements PurchaseRelationInterface
     {
         return $this->monthPaid()->sum('must_pay');
     }
-    public function getPriceAttribute(){
+
+    public function getPriceAttribute()
+    {
         return $this->allToPay() + $this->initial_price;
     }
+
     public function credit(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Credit::class, "credit_id");

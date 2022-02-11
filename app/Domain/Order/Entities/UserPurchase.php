@@ -9,13 +9,15 @@ use App\Domain\Delivery\Entities\DeliveryAddress;
 use App\Domain\Installment\Entities\TakenCredit;
 use App\Domain\Order\Builders\UserPurchaseBuilder;
 use App\Domain\Order\Interfaces\UserPurchaseRelation;
+use App\Domain\Order\Traits\UserPurchaseDelivery;
+use App\Domain\Order\Traits\UserPurchaseStatus;
 use App\Domain\Payment\Entities\Payment;
 use App\Domain\User\Entities\User;
 use App\Domain\User\Traits\HasUserRelationship;
 
 class UserPurchase extends Entity implements UserPurchaseRelation
 {
-    use HasUniqueId, HasUserRelationship;
+    use HasUniqueId, HasUserRelationship, UserPurchaseStatus, UserPurchaseDelivery;
 
     protected $table = "user_purchases";
     protected $fillable = [
@@ -23,6 +25,7 @@ class UserPurchase extends Entity implements UserPurchaseRelation
         'status'
     ];
     protected $guarded = null;
+
     public function newEloquentBuilder($query)
     {
         return new UserPurchaseBuilder($query);
@@ -30,9 +33,12 @@ class UserPurchase extends Entity implements UserPurchaseRelation
 
     public function purchases(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Purchase::class , "user_purchase_id");
+        return $this->hasMany(Purchase::class, "user_purchase_id");
     }
 
+    /**
+     *  real price considering discount at the moment of purchase
+     * **/
     public function sumPurchases()
     {
         return $this->purchases()->sum("price");
@@ -45,10 +51,9 @@ class UserPurchase extends Entity implements UserPurchaseRelation
 
     public function payble()
     {
-        if($this->status % 1000 == self::INSTALMENT || $this->takenCredit()->exists()) {
+        if ($this->isInstallment() || $this->takenCredit()->exists()) {
             return $this->takenCredit;
-        }
-        else if ($this->status % 1000 == self::INSTANCE_PAYMENT || $this->payment()->exists()) {
+        } else if ($this->isInstansPayment() || $this->payment()->exists()) {
             return $this->payment;
         }
         throw new \Exception(sprintf("Отсутствует тип платежа. Номер в системе: %s ", $this->id));
@@ -65,15 +70,35 @@ class UserPurchase extends Entity implements UserPurchaseRelation
         return $this->hasOne(Payment::class, "purchase_id");
     }
 
-    public function delivery(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function typePayment()
     {
-        return $this->hasMany(Delivery::class, "user_purchase_id");
+        return self::TYPE_OF_PURCHASE[$this->getPayment()];
     }
 
-    public function getDeliveryAddressAttribute()
+    private function getPayment()
+    {
+        return $this->status % 1000 - $this->status % 100;
+    }
+
+    public function isInstallment()
+    {
+        return $this->getPayment() == self::INSTALMENT - 1;
+    }
+
+    public function isInstansPayment()
+    {
+        return $this->getPayment() == self::INSTANCE_PAYMENT;
+    }
+
+    public function address(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(DeliveryAddress::class, "purchase_address",
             "user_purchase_id",
-            "delivery_address_id")->first();
+            "delivery_address_id");
+    }
+
+    public function getDeliveryAddressAttribute(): DeliveryAddress
+    {
+        return $this->address()->first();
     }
 }

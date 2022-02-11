@@ -20,7 +20,14 @@ use App\Domain\Order\Entities\UserPurchase;
 class Delivery extends Entity
 {
     protected $table = 'delivery';
-
+    protected $guarded = null;
+    protected $fillable = [
+      "user_purchase_id",
+      "shop_address_id",
+      "orderNum",
+      "datePickup",
+      'status',
+    ];
     public function userPurchase(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(UserPurchase::class, 'user_purchase_id');

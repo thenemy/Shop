@@ -18,7 +18,11 @@ trait GenerateTagAttributes
     {
         $str = "";
         foreach ($this->attributes as $key => $attribute) {
-            $str = sprintf("%s\t%s='%s'", $str, $key, $attribute);
+            if ($attribute == null) {
+                $str = $str . " " . $key;
+            } else {
+                $str = sprintf("%s\t%s='%s'", $str, $key, $attribute);
+            }
         }
         return $str;
     }

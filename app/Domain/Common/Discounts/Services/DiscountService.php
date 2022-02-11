@@ -24,12 +24,11 @@ class DiscountService extends BaseService implements DiscountRelation
         try {
             DB::beginTransaction();
             $this->serializeTempFile($object_data);
-            $product_key = self::PRODUCT_SERVICE;
             $object_data['des_image'] = $this->popCondition($object_data, "des_image");
             $object_data['mob_image'] = $this->popCondition($object_data, "mob_image");
-            $product = collect($this->popCondition($object_data, $product_key))->collapse()->toArray();
+            $product = collect($this->popCondition($object_data,  self::PRODUCT_SERVICE))->collapse()->toArray();
             $object = parent::create($object_data);
-            $object->$product_key()->attach($product);
+            $object->product()->attach($product);
             DB::commit();
             return $object;
         } catch (\Throwable $exception) {

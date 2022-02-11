@@ -6,6 +6,27 @@ var Alpine = window.Alpine;
 //     })
 // });
 document.addEventListener('alpine:init', () => {
+    Alpine.data('initSchemaSMS', function (comment) {
+        return {
+            show: false,
+            type: 1,
+            loading: false,
+            comment: comment,
+            setComponent(type, comment) {
+                this.type = type;
+                this.comment = comment;
+            },
+            setComment(comment) {
+                this.comment = comment
+            },
+            setToComment(add) {
+                this.comment = this.comment + add;
+            },
+            close(wire) {
+                wire.save(this.type);
+            }
+        };
+    })
     Alpine.data('initDynamic', function (id) {
         return {
             show: false,

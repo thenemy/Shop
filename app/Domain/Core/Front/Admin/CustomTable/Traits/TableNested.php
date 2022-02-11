@@ -2,6 +2,8 @@
 
 namespace App\Domain\Core\Front\Admin\CustomTable\Traits;
 
+use App\Domain\Core\Front\Admin\Attributes\FontIcon\IconAdd;
+use App\Domain\Core\Front\Admin\Attributes\FontIcon\IconDelete;
 use App\Domain\Core\Front\Admin\Button\ModelInRunTime\ButtonGreenLivewire;
 use App\Domain\Core\Front\Admin\Button\ModelInRunTime\ButtonRedLivewire;
 use App\Domain\Core\Front\Admin\DropDown\OptionalItems\ActivateChooseItem;
@@ -96,13 +98,20 @@ trait TableNested
 
     public function getDeclineButtonAttribute(): string
     {
-        return (new ButtonRedLivewire(__("Удалить"),
-            "removeSpecific(" . $this->id . ")"))->generateHtml();
+        return IconDelete::new([
+            "wire:click" => "removeSpecific(`" . $this->id . "`)"
+        ])->generateHtml();
+//        return (new ButtonRedLivewire(__("Удалить"),
+//            "removeSpecific(" . $this->id . ")"))->generateHtml();
     }
 
     public function getAcceptButtonAttribute(): string
     {
-        return (new ButtonGreenLivewire(__("Добавить"),
-            "addSpecific(" . $this->id . ")"))->generateHtml();
+        return IconAdd::new([
+                "wire:click" => "addSpecific(`" . $this->id . "`)"
+            ]
+        )->generateHtml();
+//        return (new ButtonGreenLivewire(__("Добавить"),
+//            "addSpecific(" . $this->id . ")"))->generateHtml();
     }
 }

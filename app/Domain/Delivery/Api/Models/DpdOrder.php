@@ -5,6 +5,7 @@ namespace App\Domain\Delivery\Api\Models;
 use App\Domain\Category\Entities\Category;
 use App\Domain\Delivery\Api\Base\DpdClient;
 use App\Domain\Delivery\Api\Exceptions\DpdException;
+use App\Domain\Delivery\Api\Interfaces\DpdExceptionInterface;
 use App\Domain\Delivery\Api\Traits\OrderTrait;
 use App\Domain\Delivery\Entities\Delivery;
 use App\Domain\Delivery\Entities\DeliveryAddress;
@@ -12,6 +13,7 @@ use App\Domain\Order\Entities\UserPurchase;
 use App\Domain\Order\Interfaces\UserPurchaseStatus;
 use App\Domain\Shop\Entities\ShopAddress;
 use App\Domain\Shop\Entities\WorkTimes;
+use App\Domain\User\Entities\User;
 use Illuminate\Support\Collection;
 
 // create one field in category boolean weather all products in this category is considered as important
@@ -38,22 +40,36 @@ class DpdOrder extends DpdClient
         parent::__construct(self::ORDER);
     }
 
-    private function checkOnError(array $response)
+    private function checkOnError(array &$response)
     {
-        if (($status = $response['status']) != DpdException::OK) {
-            if (isset(DpdException::EXCEPTION[$status])) {
-                throw  new DpdException(__(DpdException::EXCEPTION[$status]));
-            } else
-                throw new DpdException($response['errorMessage']);
-
+        $status = $response['return']['status'][0];
+        if (!isset(DpdExceptionInterface::STATUS_TO_DB[$status])) {
+            if (isset(DpdExceptionInterface::EXCEPTION[$status])) {
+                throw  new DpdException(__(DpdExceptionInterface::EXCEPTION[$status]), $status);
+            } else {
+                throw new DpdException($response['return']['errorMessage'], $status);
+            }
+        } else {
+            $response['return']['status'] = DpdExceptionInterface::STATUS_TO_DB[$status];
         }
     }
 
     private function getPaymentType(array &$request, UserPurchase $purchase)
     {
         if ($purchase->status % 10 == UserPurchaseStatus::CASH) {
-            $request['delivery']['paymentType'] = "ОУП";
+            $request['order']['paymentType'] = "ОУП";
         }
+    }
+
+    private function receiverAddress(UserPurchase $purchase, DeliveryAddress $address)
+    {
+        $receiver = $address->toArray();
+        $receiver['name'] = $purchase->user->userCreditData->name ?? $purchase->user->phone;
+        $receiver['contactPhone'] = $purchase->user->phone;
+        $receiver['contactFio'] = $receiver['name'];
+//        $receiver['code'] = "123213";
+//        unset($receiver['city']);
+        return $receiver;
     }
 
 //•	ОУП – оплата у получателя наличными
@@ -65,16 +81,14 @@ class DpdOrder extends DpdClient
         $categories = $this->purchaseToCategory($purchases);
         $dateAndWorkTime = $this->calculateDatePickUp($fromAddress->workTime()->orderBy("day")->get());
         $datePickUp = [
-            'datePickup' => $dateAndWorkTime[0]
+            'datePickup' => $dateAndWorkTime[0],
+            'senderAddress' => $this->generateSenderAddress($dateAndWorkTime[1], $fromAddress),
+            'pickupTimePeriod' => "9-18",
         ];
         $request = [
-            'header' => [
-                'senderAddress' => $this->generateSenderAddress($dateAndWorkTime[1], $fromAddress),
-                'pickupTimePeriod' => "9-18",
-            ],
             'order' => [
                 'orderNumberInternal' => $this->orderNumberInternal($purchase, $fromAddress),
-                'serviceCode' => "PLC",
+                'serviceCode' => "PCL",
                 'serviceVariant' => "ДД",
                 "cargoNumPack" => $purchases->sum("quantity"),
                 'cargoWeight' => $this->calculateWeight($purchases),
@@ -82,19 +96,25 @@ class DpdOrder extends DpdClient
                 "cargoCategory" => $categories->map(function ($item) {
                     return $item->name['ru'];
                 })->join(', '),
-                "receiverAddress" => $toAddress->toArray(),
-                "returnAddress" => $fromAddress->delivery->toArray(),
-                'extraParam' => [
-                    'pickup_city_id' => $fromAddress->delivery->availableCities->city_id,
-                    'deliver_city_id' => $toAddress->availableCities->city_id
-                ],
+                "receiverAddress" => $this->receiverAddress($purchase, $toAddress),
+                "returnAddress" => $this->generateSenderAddress($dateAndWorkTime[1], $fromAddress),
+//                'extraParam' => [
+//                    [
+//                        'name' => 'pickup_city_id',
+//                        'value' => $fromAddress->delivery->availableCities->cityId,
+//                    ],
+//                    [
+//                        'name' => 'deliver_city_id',
+//                        'value' => $toAddress->availableCities->cityId
+//                    ],
+//                ],
             ]
         ];
         $request['header'] = $datePickUp;
         $this->getPaymentType($request, $purchase);
-        $response = $this->callSoapMethod($request, "orders", "createOrders");
+        $response = $this->callSoapMethod($request, "orders", "createOrder");
         $this->checkOnError($response);
-        return array_merge($response, $datePickUp);
+        return array_merge($response['return'], $datePickUp);
     }
 
     public function getOrderStatus(Delivery $delivery)

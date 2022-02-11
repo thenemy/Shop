@@ -2,25 +2,26 @@
 
 namespace App\Domain\Delivery\Api\Exceptions;
 
+use App\Domain\Core\Main\Traits\ArrayHandle;
 use App\Domain\Delivery\Api\Interfaces\DpdExceptionInterface;
+use Throwable;
 
 class DpdException extends \Exception implements DpdExceptionInterface
 {
-    const OK = "OK";
-    const ORDER_PENDING = "OrderPending";
-    const ORDER_DUPLICATE = "OrderDuplicate";
-    const ORDER_ERROR = "OrderError";
-    const ORDER_CANCELED = "OrderCancelled";
+    use ArrayHandle;
+    private string $error;
 
-    const CANCELED = "Canceled";
+    public function __construct($message = "", string $error = "", $code = 0, Throwable $previous = null)
+    {
+        $this->error = $error;
+        if (gettype($message) == "array") {
+            $message = $this->arrayToKeyString($message);
+        }
+        parent::__construct($message, $code, $previous);
+    }
 
-    const CANCELED_PREVIOUSLY = "CanceledPreviously";
-    const CALL_DPD = "CallDPD";
-    const NOT_FOUND = "NotFound";
-
-    const EXCEPTION = [
-        self::CANCELED_PREVIOUSLY => "Отменено ранее",
-        self::CALL_DPD => "Состояние заказа не позволяет отменить заказ самостоятельно, для отмены заказа необходим звонок в Конткат-Центр.",
-        self::NOT_FOUND => "Данные не найдены"
-    ];
+    public function getError()
+    {
+        return $this->error;
+    }
 }

@@ -16,6 +16,9 @@ class UserPurchaseBuilder extends BuilderEntity
 
     public function filterBy($filter)
     {
+        if (isset($filter['by_created_at'])) {
+            $this->orderBy("created_at");
+        }
         if (isset($filter['status'])) {
             $status = $filter['status'];
             $this->whereExists(function (Builder $query) use ($status) {
@@ -23,7 +26,7 @@ class UserPurchaseBuilder extends BuilderEntity
                     ->from("taken_credits")
                     ->whereColumn("taken_credits.purchase_id", "=", "user_purchases.id")
                     ->where(DB::raw("taken_credits.status % 10"), "=", $status);
-            })->orWhereExists(function ($query) use ($status){
+            })->orWhereExists(function ($query) use ($status) {
                 $query->select(DB::raw(1))
                     ->from("payments")
                     ->whereColumn("payments.purchase_id", "=", "user_purchases.id")

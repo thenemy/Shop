@@ -1,7 +1,7 @@
 @extends("layout.admin_layout")
 @section("content")
     {{--    test blade  create template then fill with variables --}}
-    <div class="flex flex-col space-y-3">
+    <div class="flex flex-col space-y-1">
         {{--    insert there new created livewire--}}
         {{--    give the title--}}
         <x-helper.text.title>{{__("Главная") ?? ""}}</x-helper.text.title>
@@ -13,30 +13,14 @@
         <div class="w-full pb-10 ">
             
 
-            <div 	class='mr-4 space-y-10'>
+            <div 	class='mr-4 space-y-1'>
                 			
-
-            <div 	class='justify-between flex flex-row  space-x-2'>
-                			
-
-            <div 	class='border border-blue-300 p-2 bg-white rounded shadow w-max'>
-            <span class='font-bold text-lg'>{{__('Курс валюты')}}</span>
-                			
-<livewire:components.currency-field.currency/>
-            </div>			
-
-            <div 	class='border border-blue-300 p-2 bg-white rounded shadow w-max'>
-            <span class='font-bold text-lg'>{{__('Удержка Денег')}}</span>
-                			
-<livewire:components.currency-field.money/>
-            </div>
-            </div>			
 
             <div 	class='w-full flex flex-row  space-x-2'>
                 			
 
-            <div 	class='items-center block p-2 bg-white w-full h-full shadow-lg rounded'>
-            <span class='font-bold text-lg'>{{__('Статистика')}}</span>
+            <div 	class='items-center block p-3 bg-white w-full h-full shadow-lg rounded'>
+            <span class='font-bold text-[1.09rem]'>{{__('Статистика')}}</span>
                 			
 
             <div 	class='justify-around w-full flex flex-row  space-x-2'>
@@ -122,25 +106,25 @@
 
             <div 	class='space-x-6 p-5 items-center  flex flex-row  space-x-2'>
                 			
-<span 	class='fas fa-user text-4xl text-[#bebebe]'></span>			
+<span 	class='fas fa-money-bill-wave text-4xl text-[#bebebe]'></span>			
 
             <div 	class='space-y-0.5 items-start  flex flex-col  space-y-2'>
                 			
-<span 	class='text-sm text-center font-bold'>{{__('Пользователей за месяц')}}</span>			
+<span 	class='text-sm text-center font-bold'>{{__('Действующие рассрочки')}}</span>			
 
             <div 	class='text-sm'>
                 			
 
-            <div 	class='cursor-pointer hover:text-blue-300'	onclick='location.href ="{{route("admin.user.index", [])}}"'>
+            <div 	class='cursor-pointer hover:text-blue-300'	onclick='location.href ="{{route("admin.taken_credit.index", [])}}"'>
                 			
-<span >{{__('Всего')}}:</span>			
-<span 	class='font-bold'>{{App\Domain\User\Entities\User::allUser() ?? ""}}</span>
+<span >{{__('Количество')}}:</span>			
+<span 	class='font-bold'>{{0 ?? ""}}</span>
             </div>			
 
-            <div 	class='cursor-pointer hover:text-blue-300'	onclick='location.href ="{{route("admin.user.index", [])}}"'>
+            <div 	class='cursor-pointer hover:text-blue-300'	onclick='location.href ="{{route("admin.taken_credit.index", [])}}"'>
                 			
-<span >{{__('Сегодня')}}:</span>			
-<span 	class='font-bold'>{{App\Domain\User\Entities\User::newToday() ?? ""}}</span>
+<span >{{__('Cумма')}}:</span>			
+<span 	class='font-bold'>{{0 ?? ""}}</span>
             </div>
             </div>
             </div>

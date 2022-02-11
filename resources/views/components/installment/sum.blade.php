@@ -41,7 +41,6 @@
             },
             setProducts(new_sum) {
                 this.sum_products = new_sum;
-                console.log(new_sum);
                 this.calculateSum();
             },
             addSpacing(value) {
@@ -50,7 +49,7 @@
             calculateSum() {
                 let new_percent = this.percent_month / 100;
                 let sum_percent = this.sum_products * new_percent
-                this.sum_products_show = this.addSpacing(`${this.sum_products}`);
+                this.sum_products_show = this.addSpacing(`${this.sum_products.toFixed(2)}`);
                 let total = sum_percent + this.sum_products - this.initial_payment;
                 if (this.number_month === 0) {
                     this.sum_per_month = 0;

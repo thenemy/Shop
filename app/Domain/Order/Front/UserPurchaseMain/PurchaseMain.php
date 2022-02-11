@@ -51,7 +51,7 @@ class PurchaseMain extends Purchase implements TableInFront, FilterInterface, Ta
     function filterByData(): array
     {
         return [
-            'user_purchase_id' => self::getWithoutScopeAtrVariable("purchase_id")
+            'user_purchase_id' => self::getWithoutScopeAtrVariable("purchase_id"),
         ];
     }
 

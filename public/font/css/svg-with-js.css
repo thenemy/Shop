@@ -207,7 +207,6 @@ svg:not(:root).svg-inline--fa {
     position: relative; }
 
 .fa-li {
-  left: -2em;
   position: absolute;
   text-align: center;
   width: 2em;
