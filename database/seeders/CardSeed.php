@@ -17,11 +17,11 @@ class CardSeed extends Seeder
     {
         User::onlyUser()->first()->plasticCard()->attach(PlasticCard::create(
             [
-                'card_number' => "asdsad",
-                "expiry" => "asdsa",
-                "phone" => "ASD",
-                "card_token" => "ASDs",
-                "pan" => "ASD"
+                'card_number' => "8600123445678789",
+                "expiry" => "23/23",
+                "phone" => "+998911669982",
+                "card_token" => "sadsad",
+                "pan" => "8600******78789"
             ]
         ));
     }
