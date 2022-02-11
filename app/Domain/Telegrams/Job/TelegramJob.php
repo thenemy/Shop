@@ -3,7 +3,10 @@
 namespace App\Domain\Telegrams\Job;
 
 use App\Domain\Core\BackgroundTask\Base\AbstractJob;
+use App\Domain\Core\Front\Admin\Routes\Interfaces\RoutesInterface;
 use App\Domain\Core\Main\Traits\ArrayHandle;
+use App\Domain\Installment\Entities\TakenCredit;
+use App\Domain\Installment\Front\Admin\Path\TakenCreditRouteHandler;
 use App\Domain\Order\Entities\UserPurchase;
 use App\Domain\Telegrams\Entities\Telegram as Entity;
 use App\Domain\User\Interfaces\UserRelationInterface;
@@ -28,13 +31,16 @@ class TelegramJob extends AbstractJob
             "Номер Телефона" => $this->purchase->user->phone,
             "Номер Договора" => $this->purchase->id,
             'Количество покупок' => $this->purchase->number_purchase,
-            'Общая цена учитывая скидки' => $this->purchase->sumPurchases(),
+            'Общая цена учитывая скидки' => $this->purchase->sumPurchases() . " Сумм",
             "Вид покупки" => $this->purchase->typePayment(),
         ];
         if ($this->purchase->isInstallment()) {
             $installment = [
                 "Количество месяцев" => $this->purchase->takenCredit->number_month,
                 "Процент на каждый месяц" => $this->purchase->takenCredit->credit->percent,
+                "Первоначальная оплата" => $this->purchase->takenCredit->initial_price,
+                "Ежемесячный платеж" => $this->purchase->takenCredit->monthly_paid,
+//                "Ссылка на рассрочку" => route((new TakenCreditRouteHandler())->getRoute(RoutesInterface::SHOW_ROUTE), [$this->purchase->takenCredit->])
             ];
             $message = array_merge($message, $installment);
         }
@@ -42,7 +48,7 @@ class TelegramJob extends AbstractJob
             Telegram::sendMessage([
                 'parse_mode' => 'HTML',
                 "chat_id" => $item->chat_id,
-                "text" => $this->arrayToHTML($message)
+                "text" => "<b> ==== НОВЫЙ ЗАКАЗ ==== </b> \n" . $this->arrayToHTML($message)
             ]);
         }
     }
