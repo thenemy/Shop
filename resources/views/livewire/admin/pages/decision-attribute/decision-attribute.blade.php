@@ -1,7 +1,15 @@
 <div>
     
 <x-helper.error.error/>
-@if($entity->status%10 == 0) 
+@if($entity->status % 10 == 0) 
+
+            <div 	class='p-10 w-full text-center '	wire:key='super_secure_key' wire:loading>
+                			
+<x-helper.spinner.spinner/>
+            </div>
+
+            <div 	wire:key='super_secure_key' wire:loading.remove>
+                			
 
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
             <span class='font-bold text-lg'>{{__('Решение')}}</span>
@@ -137,6 +145,7 @@
 </div>
             </div>			
  @endif
+            </div>
             </div>
             </div>
  @endif

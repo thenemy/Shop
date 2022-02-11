@@ -2,10 +2,15 @@
 @section("body")
     <div x-data="{isSideBarOpen: false}" class="flex flex-row w-full">
         <div
-             :class="isSideBarOpen && 'w-16' || 'basis-1/5'"
+            :class="isSideBarOpen && 'w-14' || 'basis-1/5'"
         >
-            <div class="flex flex-row items-center bg-black h-16">
-                <div class="self-center">
+            <div class="flex flex-row justify-between items-center bg-black  pb-1">
+                <div class="pl-2"  x-show="!isSideBarOpen">
+                    <a href="{{route('admin.dashboard.index')}}">
+                        <img src="{{asset("images/logo.svg")}}">
+                    </a>
+                </div>
+                <div class="">
                     <div @click="isSideBarOpen = !isSideBarOpen" class="p-5 text-center">
                         <span class="leading-3 text-white fa fa-bars"></span>
                     </div>

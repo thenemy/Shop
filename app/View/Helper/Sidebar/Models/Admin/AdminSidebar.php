@@ -16,6 +16,7 @@ use App\Domain\Installment\Front\Admin\Path\TakenCreditRouteHandler;
 use App\Domain\Order\Front\Admin\Path\UserPurchaseRouteHandler;
 use App\Domain\Payment\Front\Admin\Route\PaymentRouteHandler;
 use App\Domain\Product\Product\Front\Admin\Path\ProductRouteHandler;
+use App\Domain\Settings\Front\Path\SettingRouteHandler;
 use App\Domain\Shop\Front\Admin\Path\ShopRouteHandler;
 use App\Domain\User\Front\Admin\Path\AdminUserRouteHandler;
 use App\Domain\User\Front\Admin\Path\UserRouteHandler;
@@ -57,13 +58,12 @@ class AdminSidebar implements \SideBarFactoryInterface
                     "fa-tshirt"
                 ),
                 new \SideBarList([
-                    new \SideBarDrop(__("Виды рассрочки"), MainCreditRouteHandler::new()),
-                    new \SideBarDrop(__("Новые рассрочки"), UserPurchaseRouteHandler::new()),
+                    new \SideBarDrop(__("Новые заказы"), UserPurchaseRouteHandler::new()),
                     new \SideBarDrop(__("Рассрочка"), TakenCreditRouteHandler::new()),
                     new \SideBarDrop(__("Покупки"), PaymentRouteHandler::new()),
 
                 ],
-                    "Рассрочка",
+                    "Заказы",
                     "fa-money-bill-alt"
                 ),
                 new \SideBarDrop(__("Комментарии"), CommentProductRouteHandler::new(), "fa-comment"),
@@ -73,6 +73,7 @@ class AdminSidebar implements \SideBarFactoryInterface
                     "Доставка",
                     "fa-car"
                 ),
+                new \SideBarDrop(__("Настройки"), MainCreditRouteHandler::new(), "fa-cogs"),
 
             ],
         );

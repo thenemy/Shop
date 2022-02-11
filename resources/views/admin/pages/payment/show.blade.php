@@ -22,68 +22,39 @@
                 			
 <x-helper.text.text_key_link key='Имя клиента' value='{{$entity->user->userCreditData->crucialData->name ?? ""}}' :link='route("admin.user.show", ["0" => $entity->user_id,])'></x-helper.text.text_key_link>			
 @if($entity->purchase->status%10 == 1) 			
-<x-helper.text.text_key key='Тип оплаты' value='Наличка ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextValueAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key="Тип оплаты" value='Наличка ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextValueAttribute'></x-helper.text.text_key>			
 @else 			
-<x-helper.text.text_key key='Номер карты' value='{{$entity->card->plastic->pan ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key="Номер карты" value='{{$entity->card->plastic->pan ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
  @endif
             </div>			
 
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
             <span class='font-bold text-lg'>{{__('Информация о покупке')}}</span>
                 			
-<x-helper.text.text_key key='Номер Договора' value='{{$entity->purchase->id ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
-<x-helper.text.text_key key='Количество покупок' value='{{$entity->purchase->number_purchase ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
-<x-helper.text.text_key key='Сумма договора' value='{{$entity->price ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>
+<x-helper.text.text_key key="Номер Договора" value='{{$entity->purchase->id ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key="Количество покупок" value='{{$entity->purchase->number_purchase ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key="Сумма договора" value='{{$entity->price ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>
             </div>			
- <?php if($entity->purchase->status == 10): ?>  
-            <div 	class=' border shadow p-4 space-y-4 bg-white'>
-            <span class='font-bold text-lg'><?php echo e(__('Информация о доставке')); ?></span>
+
+            <div >
                 			
-<?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'components.helper.text.text_key','data' => ['key' => 'Количество посылок','value' => ''.e($entity->purchase->delivery()->count() ?? "").' ','classValue' => 'App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute']]); ?>
-<?php $component->withName('helper.text.text_key'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['key' => 'Количество посылок','value' => ''.e($entity->purchase->delivery()->count() ?? "").' ','class_value' => 'App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute']); ?> <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>			
-<?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'components.helper.text.text_key','data' => ['key' => 'Количество посылок доставлено','value' => ''.e($entity->purchase->delivery()->whereNot("status", 0)->count() ?? "").' ','classValue' => 'App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute']]); ?>
-<?php $component->withName('helper.text.text_key'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['key' => 'Количество посылок доставлено','value' => ''.e($entity->purchase->delivery()->whereNot("status", 0)->count() ?? "").' ','class_value' => 'App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute']); ?> <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>			
-<?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'components.helper.text.text_key','data' => ['key' => 'Город доставки','value' => ''.e($entity->purchase->delivery_address->availableCities->cityName ?? "").' ','classValue' => 'App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute']]); ?>
-<?php $component->withName('helper.text.text_key'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['key' => 'Город доставки','value' => ''.e($entity->purchase->delivery_address->availableCities->cityName ?? "").' ','class_value' => 'App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute']); ?> <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>			
-<?php if (isset($component)) { $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4 = $component; } ?>
-<?php $component = $__env->getContainer()->make(Illuminate\View\AnonymousComponent::class, ['view' => 'components.helper.text.text_key','data' => ['key' => 'Адрес доставки','value' => ''.e($entity->purchase->delivery_address->street ?? "").', '.e($entity->purchase->delivery_address->house ?? "").' ','classValue' => 'App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextValueAttribute']]); ?>
-<?php $component->withName('helper.text.text_key'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php $component->withAttributes(['key' => 'Адрес доставки','value' => ''.e($entity->purchase->delivery_address->street ?? "").', '.e($entity->purchase->delivery_address->house ?? "").' ','class_value' => 'App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextValueAttribute']); ?> <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4)): ?>
-<?php $component = $__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4; ?>
-<?php unset($__componentOriginalc254754b9d5db91d5165876f9d051922ca0066f4); ?>
-<?php endif; ?>
-            </div>  <?php endif; ?>
+@if($entity->purchase->isDelivery()) 			
+
+            <div 	class=' border shadow p-4 space-y-4 bg-white'>
+            <span class='font-bold text-lg'>{{__('Информация о доставке')}}</span>
+                			
+@if($entity->purchase->delivery()->exists()) 			
+<x-helper.text.text_key key="{{__('Количество посылок')}}" value='{{$entity->purchase->deliveryCount() ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key="Количество посылок доставлено" value='{{$entity->purchase->deliveredCount() ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+ @endif			
+<x-helper.text.text_key key="{{__('Индекс')}}" value='{{$entity->purchase->delivery_address->index ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextValueAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key="{{__('Регион')}}" value='{{$entity->purchase->delivery_address->availableCities->RegionNameCurrent ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key="{{__('Город доставки')}}" value='{{$entity->purchase->delivery_address->availableCities->cityNameCurrent ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key="{{__('Адрес доставки')}}" value='{{$entity->purchase->delivery_address->street ?? ""}}, {{$entity->purchase->delivery_address->house ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextValueAttribute'></x-helper.text.text_key>			
+<x-helper.text.text_key key="{{__('Специальные указания для курьера')}}" value='{{$entity->purchase->delivery_address->instructions ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextValueAttribute'></x-helper.text.text_key>
+            </div>			
+ @endif
+            </div>
             </div>
 <x-helper.container.container :title='__("Товары")' 	class='flex flex-col flex flex-wrap justify-between'>
                 			

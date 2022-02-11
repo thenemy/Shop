@@ -15,6 +15,7 @@ use App\Domain\Order\Interfaces\UserPurchaseStatus;
 use App\Domain\Shop\Entities\Shop;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 // write the service
 class OrderService
@@ -88,10 +89,13 @@ class OrderService
                         $deliveryTo,
                         $userPurchase,
                         $purchase);
-                    $this->service->createWith([
+                    $this->service->create([
                         "user_purchase_id" => $userPurchase->id,
-                        "shop_address_id" => $shop_address->id
-                    ], $response);
+                        "shop_address_id" => $shop_address->id,
+                        'orderNum' => $response['orderNum'][0],
+                        "status" => $response['status'],
+                        "datePickup" => $response['datePickup']
+                    ]);
                 } catch (DpdException $exception) {
                     $all = $userPurchase->delivery;
                     foreach ($all as $item) {

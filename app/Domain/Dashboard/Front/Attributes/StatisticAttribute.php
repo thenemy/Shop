@@ -41,7 +41,7 @@ class StatisticAttribute implements HtmlInterface
 
     public static function new(string $icon, string $all_counter, string $today_counter, string $title, array $attributes = [])
     {
-        return new self($icon, $all_counter, $today_counter, $title, $attributes);
+        return new static($icon, $all_counter, $today_counter, $title, $attributes);
     }
 
     public static function newLink(string $icon,
@@ -50,7 +50,7 @@ class StatisticAttribute implements HtmlInterface
                                    string $title,
                                    string $link_today, string $link_all): StatisticAttribute
     {
-        return new self(
+        return new static(
             $icon, $all_counter,
             $today_counter,
             $title, [],
@@ -63,6 +63,16 @@ class StatisticAttribute implements HtmlInterface
                 "onclick" => sprintf("location.href =\"{{%s}}\"", $link_all)
             ]
         );
+    }
+
+    protected function firstKey()
+    {
+        return "Всего";
+    }
+
+    protected function secondKey()
+    {
+        return "Сегодня";
     }
 
     public function generateHtml(): string
@@ -83,13 +93,13 @@ class StatisticAttribute implements HtmlInterface
                         'class' => "text-sm"
                     ], [
                         Container::new($this->attribute_all, [
-                            Text::new(self::lang("Всего") . ":", []),
+                            Text::new(self::lang($this->firstKey()) . ":", []),
                             Text::new(self::getScope($this->all_counter), [
                                 "class" => "font-bold"
                             ]),
                         ]),
                         Container::new($this->attribute_today, [
-                            Text::new(self::lang("Сегодня") . ":", []),
+                            Text::new(self::lang($this->secondKey()) . ":", []),
                             Text::new(self::getScope($this->today_counter), [
                                 "class" => "font-bold"
                             ]),

@@ -1,5 +1,5 @@
-<div x-data="initSchemaSMS( @entangle('comment'))" x-init="setComponent({{$entities->first()->type}},
-                '{{$entities->first()->schema}}')">
+<div  x-data="initSchemaSMS( @entangle('comment').defer)" x-init="setComponent({{$entities->first()->type}},
+                '{{str_replace(array("'", "\""), "", $entities->first()->schema)}}')">
     <x-helper.button.main_button @click="show = true">
         {{__("Шаблон для Смс")}}
     </x-helper.button.main_button>
@@ -8,14 +8,14 @@
         @click="close($wire)"
         :show="'show'"
         :title="__('Шаблоны Смс')">
-        <div :class=" loading && 'opacity-50'">
+        <div wire:loading.class="opacity-80">
             <div class="flex flex-row w-full">
                 @foreach($entities as $value)
                     <div wire:key="sms_category_{{$value->id}}" class="
                     @if($loop->first) border-l-2 @else  border-l  @endif
                     @if($loop->last) border-r-2 @else border-r @endif border-t-2 p-2 cursor-pointer"
                          :class="type !== {{$value->type}} && 'border-b-2'"
-                         @click="setComponent({{$value->type}},'{{$value->schema}}')">
+                         @click="setComponent({{$value->type}},'{{$value->schema}}');">
                         <span class="text-gray-500 font-bold">{{$value->name_schema}}</span>
                     </div>
                 @endforeach
@@ -23,7 +23,7 @@
             <div class="border-l-2 border-r-2 border-b-2 p-2">
                 <div class="flex flex-row space-x-2">
                     <div class="flex-1 w-full">
-                        <x-helper.text_area.text_area wire:model.bounce.150ms="comment"
+                        <x-helper.text_area.text_area x-model="comment"
                                                       type="text"></x-helper.text_area.text_area>
                     </div>
                     @foreach($entities as $value)
@@ -39,9 +39,7 @@
                     @endforeach
                 </div>
             </div>
-
         </div>
-
     </x-helper.modal.modal_save>
 
 </div>

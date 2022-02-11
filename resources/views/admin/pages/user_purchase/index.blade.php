@@ -1,7 +1,7 @@
 @extends("layout.admin_layout")
 @section("content")
     {{--    test blade  create template then fill with variables --}}
-    <div class="flex flex-col space-y-3">
+    <div class="flex flex-col space-y-1">
         {{--    insert there new created livewire--}}
         {{--    give the title--}}
         <x-helper.text.title>{{__("Новые заказы") ?? ""}}</x-helper.text.title>
@@ -13,7 +13,7 @@
         <div class="w-full pb-10 ">
             
 <livewire:admin.pages.user-purchase.user-purchase-index
-            :filterBy="['status' => 0,]" />
+            :filterBy="['by_created_at' => 1,'status' => 0,]" />
         </div>
     </div>
 

@@ -19,6 +19,9 @@ class PurchaseBuilder extends BuilderEntity
         if (isset($filter['user_purchase_id'])) {
             $this->where('user_purchase_id', $filter['user_purchase_id']);
         }
+        if (isset($filter['by_created_at'])) {
+
+        }
         return $this;
     }
 

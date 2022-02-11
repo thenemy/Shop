@@ -13,6 +13,8 @@
                 class="focus:outline-none
                 focus:ring focus:border-gray-500
                 w-full
+                p-0.5
+                m-0.5
                 focus:border-green-50"
                 placeholder="{{__('Введите Валюту')}}">
         </div>

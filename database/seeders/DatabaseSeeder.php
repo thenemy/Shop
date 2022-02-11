@@ -18,15 +18,7 @@ class DatabaseSeeder extends Seeder
         (new RoleSeeder())->run();
         (new CurrencySeeder())->run();
         (new SchemaSmsSeeder())->run();
-//        User::all()->first()->plasticCard()->attach(PlasticCard::create(
-//            [
-//                'card_number' => "asdsad",
-//                "expiry" => "asdsa",
-//                "phone" => "ASD",
-//                "card_token" => "ASDs",
-//                "pan" => "ASD"
-//            ]
-//        ));
+
 
     }
 }

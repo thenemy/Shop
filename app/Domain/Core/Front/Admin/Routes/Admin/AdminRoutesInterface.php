@@ -27,4 +27,5 @@ interface AdminRoutesInterface
     const COMMENT_PRODUCT = "comment_product";
     const NEW_ORDERS = "new_orders";
     const ADMIN_USER = "admin_user";
+    const SETTING = "setting";
 }

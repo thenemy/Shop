@@ -5,6 +5,7 @@ namespace App\Console;
 use App\Domain\Delivery\Schedule\AvailableCitiesSchedule;
 use App\Domain\Installment\Entities\TakenCredit;
 use App\Domain\Installment\Schedule\InstallmentDailyCheck;
+use App\Domain\Telegrams\Schedule\TelegramSchedule;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -29,6 +30,7 @@ class Kernel extends ConsoleKernel
     {
         InstallmentDailyCheck::schedule($schedule);
         AvailableCitiesSchedule::schedule($schedule);
+        TelegramSchedule::schedule($schedule);
     }
 
     /**

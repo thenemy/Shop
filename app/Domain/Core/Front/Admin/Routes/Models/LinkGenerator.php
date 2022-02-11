@@ -28,7 +28,9 @@ class LinkGenerator
         return $this->route(RoutesInterface::SHOW_ROUTE, [self::getWithoutScopeAtrVariable($id)]);
     }
 
-    public function index(array $params = [])
+
+
+    public function index(array $params = []): string
     {
         return $this->route(RoutesInterface::INDEX_ROUTE, $params);
     }

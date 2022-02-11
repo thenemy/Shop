@@ -23,8 +23,7 @@ abstract class AbstractSchedule implements ScheduleInterface
 
     final static public function schedule(Schedule $schedule)
     {
-        $self = get_class();
-        $object = new $self($schedule);
+        $object = new static($schedule);
         $object->call();
     }
 }

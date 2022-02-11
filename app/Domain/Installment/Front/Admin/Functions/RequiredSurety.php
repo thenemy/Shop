@@ -14,9 +14,13 @@ class RequiredSurety extends AbstractFunction
     public static function requireSurety(BaseEmptyLivewire $livewire)
     {
         $entity = $livewire->entity;
-        $entity->status = PurchaseStatus::REQUIRED_SURETY + $entity->status;
-        $entity->save();
-        session()->flash("success", __("Отправлена запрос на поручателя"));
+        if (!$entity->isRequiredSurety()) {
+            $entity->status = PurchaseStatus::REQUIRED_SURETY + $entity->status;
+            $entity->save();
+            session()->flash("success", __("Отправлен запрос на поручателя"));
+        } else {
+            $livewire->addError("surety", __("Уже отправлен запрос на поручателя"));
+        }
     }
 
 }

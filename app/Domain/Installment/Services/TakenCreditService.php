@@ -12,6 +12,7 @@ use App\Domain\Installment\Payable\TakenCreditPayable;
 use App\Domain\Order\Interfaces\UserPurchaseRelation;
 use App\Domain\Order\Services\UserPurchaseService;
 use App\Domain\Product\Product\Entities\Product;
+use App\Domain\Telegrams\Job\TelegramJob;
 use App\Domain\User\Entities\PlasticCard;
 use App\Domain\User\Entities\User;
 use App\Domain\User\Services\SuretyService;
@@ -69,9 +70,9 @@ class TakenCreditService extends BaseService implements PurchaseRelationInterfac
             $object = parent::createWith($object_data, [
                 'purchase_id' => $purchases->id]);
             $object_data['taken_credit_id'] = $object->id;
-            Log::debug("SUCCESS TAKEN_CREDIT", $object->toArray());
             $payService = new InstallmentPayService($object_data, $object);
             $payService->pay();
+            TelegramJob::dispatchSync($purchases);
             DB::commit();
             return $object;
         } catch (\Throwable $exception) {

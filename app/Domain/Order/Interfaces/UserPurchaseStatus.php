@@ -15,4 +15,9 @@ interface UserPurchaseStatus
     const CASH_AND_DELIVERY = self::CASH + self::DELIVERY;
     const INSTANCE_PAYMENT_AND_DELIVERY = self::INSTANCE_PAYMENT + self::DELIVERY;
     const INSTALMENT_AND_DELIVERY = self::INSTALMENT + self::DELIVERY;
+
+    const TYPE_OF_PURCHASE = [
+        self::INSTALMENT - 1 => "Рассрочка",
+        self::INSTANCE_PAYMENT => "Быстрая покупка"
+    ];
 }

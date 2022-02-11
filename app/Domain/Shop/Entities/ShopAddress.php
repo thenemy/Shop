@@ -13,6 +13,10 @@ class ShopAddress extends Entity
 
     protected $table = "shop_addresses";
 
+    public function shop()
+    {
+        return $this->belongsTo(Shop::class, 'user_id');
+    }
 
     public function workTime(): \Illuminate\Database\Eloquent\Relations\HasOne
     {

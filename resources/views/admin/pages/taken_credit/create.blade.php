@@ -38,14 +38,51 @@
                 additionalAction='App\Domain\Product\Product\Front\Admin\AdditionalActions\GenerateRuleProductAdditionalAction'
                 />
 
-            <div 	class='border-2 rounded p-2 w-full justify-start flex flex-row  space-x-2'>
+            <div 	class='border-2 rounded p-2 w-full justify-start items-start  flex flex-col  space-y-2'>
                 			
 <x-helper.input.input_checked name='delivery' type='checkbox'
-            label='{{__("Самовызов")}}' value='{{old("delivery") ?? $entity->delivery ?? " "}}' id='payment_type'  onchange="$dispatch('delivery-update', {
+            label='{{__("Будет доставка")}}' value='{{old("delivery") ?? $entity->delivery ?? " "}}' id='payment_type'  onchange="$dispatch('delivery-update', {
                data:{
                     value: event.target.value
                }
-            })" />
+            })" />			
+
+            <div 	class='space-y-4 w-full'	x-data='{show: false}'	:class='show && " " || "hidden"'>
+                			
+
+            <div 	@delivery-update.window='show = !show'>
+                			
+<livewire:components.drop-down.drop-down-search
+            :searchByKey='"cityName"'
+            dropDownClass='App\Domain\Installment\Front\Admin\DropDown\IntsallmentCityDropDown'
+            
+            searchLabel='названию городу'
+            
+            
+             />			
+
+            <div 	class='p-2'>
+                
+            </div>			
+
+            <div 	class='flex flex-wrap justify-between items-around'>
+                			
+<x-helper.input.input name='purchase->delivery_address->index' type='number'
+            label='{{__("Индекс")}}' value='{{old("purchase->delivery_address->index") ?? $entity->purchase->delivery_address->index ?? " "}}' id='purchase->delivery_address->index'  onkeyup="" />			
+<x-helper.input.input name='purchase->delivery_address->street' type='text'
+            label='{{__("Улица")}}' value='{{old("purchase->delivery_address->street") ?? $entity->purchase->delivery_address->street ?? " "}}' id='purchase->delivery_address->street'  onkeyup="" />			
+<x-helper.input.input name='purchase->delivery_address->house' type='number'
+            label='{{__("Номер дома")}}' value='{{old("purchase->delivery_address->house") ?? $entity->purchase->delivery_address->house ?? " "}}' id='purchase->delivery_address->house'  onkeyup="" />			
+<x-helper.input.input name='purchase->delivery_address->flat' type='number'
+            label='{{__("Этаж")}}' value='{{old("purchase->delivery_address->flat") ?? $entity->purchase->delivery_address->flat ?? " "}}' id='purchase->delivery_address->flat'  onkeyup="" />
+            </div>			
+
+            <div 	class='p-2'>
+                
+            </div>			
+<x-helper.text_area.text_area name='purchase->delivery_address->instructions' label='Инструкции для курьера'>{{old("purchase->delivery_address->instructions") ?? $entity->purchase->delivery_address->instructions ?? " "}}</x-helper.text_area.text_area>
+            </div>
+            </div>
             </div>
 
             <div 	class='border-2 rounded p-2 w-full items-start  flex flex-col  space-y-2'>

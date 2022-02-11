@@ -41,18 +41,7 @@ if (!function_exists('get_cities')) {
 if (!function_exists('test')) {
     function test(array $values = [])
     {
-        $s = new \App\Domain\Delivery\Api\Models\DpdCalculator();
-        $all = \App\Domain\Shop\Entities\ShopAddress::all();
-        try {
-            $result = $s->getCost(
-                $all->first()->delivery,
-                $all->skip(1)->first()->delivery,
-                \App\Domain\Product\Product\Entities\Product::all()
-            );
-            dd($result);
-        } catch (\SoapFault $exception) {
-            dd($exception->getMessage());
-        }
+        \App\Domain\Telegrams\Job\TelegramJob::dispatchSync(\App\Domain\Installment\Entities\TakenCredit::first()->purchase);
     }
 }
 if (!function_exists('check_auto')) {
@@ -115,5 +104,12 @@ if (!function_exists('cities')) {
     {
         \Maatwebsite\Excel\Facades\Excel::import(new \App\Domain\Delivery\Excell\Imports\AvailableCityImport(),
             public_path("cities.xls"));
+    }
+}
+if (!function_exists('telegram')) {
+    function telegram()
+    {
+        $telegram = new \App\Domain\Telegrams\Schedule\TelegramSchedule(new \Illuminate\Console\Scheduling\Schedule());
+        $telegram->run();
     }
 }
