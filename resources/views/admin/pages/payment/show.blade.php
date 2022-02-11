@@ -18,7 +18,7 @@
                 			
 
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
-            <span class='font-bold text-lg'>{{__('Информация о клиенте')}}</span>
+            <span class='font-bold text-[1.09rem]'>{{__('Информация о клиенте')}}</span>
                 			
 <x-helper.text.text_key_link key='Имя клиента' value='{{$entity->user->userCreditData->crucialData->name ?? ""}}' :link='route("admin.user.show", ["0" => $entity->user_id,])'></x-helper.text.text_key_link>			
 @if($entity->purchase->status%10 == 1) 			
@@ -29,7 +29,7 @@
             </div>			
 
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
-            <span class='font-bold text-lg'>{{__('Информация о покупке')}}</span>
+            <span class='font-bold text-[1.09rem]'>{{__('Информация о покупке')}}</span>
                 			
 <x-helper.text.text_key key="Номер Договора" value='{{$entity->purchase->id ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
 <x-helper.text.text_key key="Количество покупок" value='{{$entity->purchase->number_purchase ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
@@ -41,7 +41,7 @@
 @if($entity->purchase->isDelivery()) 			
 
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
-            <span class='font-bold text-lg'>{{__('Информация о доставке')}}</span>
+            <span class='font-bold text-[1.09rem]'>{{__('Информация о доставке')}}</span>
                 			
 @if($entity->purchase->delivery()->exists()) 			
 <x-helper.text.text_key key="{{__('Количество посылок')}}" value='{{$entity->purchase->deliveryCount() ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			

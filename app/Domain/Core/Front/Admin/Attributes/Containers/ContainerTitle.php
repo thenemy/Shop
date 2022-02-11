@@ -18,7 +18,7 @@ class ContainerTitle extends Container
         return sprintf(
             "
             <div %s>
-            <span class='font-bold text-lg'>{{__('%s')}}</span>
+            <span class='font-bold text-[1.09rem]'>{{__('%s')}}</span>
                 %s
             </div>", $this->generateAttributes(), $this->title, $this->generateItems());
     }

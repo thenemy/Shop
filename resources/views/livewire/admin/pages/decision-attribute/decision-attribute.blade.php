@@ -12,7 +12,7 @@
                 			
 
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
-            <span class='font-bold text-lg'>{{__('Решение')}}</span>
+            <span class='font-bold text-[1.09rem]'>{{__('Решение')}}</span>
                 			
 
             <div 	data-theme='custom '	class='space-x-4 justify-around flex flex-row  space-x-2'>
@@ -105,7 +105,7 @@
 
 </div>
             </div>			
-@if(!$entity->surety) 
+@if(!$entity->surety && !$entity->isRequiredSurety()) 
             <div 	x-data='modalWindow() '>
                 			
 <button 	class='btn  '	@click='open()'>{{__('Требуется поручитель')}}</button>			

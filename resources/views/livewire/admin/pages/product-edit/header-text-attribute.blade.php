@@ -45,7 +45,7 @@
                 			
 
             <div 	class='rounded border shadow p-4 space-y-4 bg-white'>
-            <span class='font-bold text-lg'>{{__('Значения')}}</span>
+            <span class='font-bold text-[1.09rem]'>{{__('Значения')}}</span>
                 			
 <livewire:admin.pages.header-edit.header-key-value-dynamic 
           :index='$index'  :wire:key='$index ."header_edit_dynamic"'
@@ -117,7 +117,7 @@
                 			
 
             <div 	class='rounded border shadow p-4 space-y-4 bg-white'>
-            <span class='font-bold text-lg'>{{__('Значения')}}</span>
+            <span class='font-bold text-[1.09rem]'>{{__('Значения')}}</span>
                 			
 <livewire:admin.pages.header-key.header-key-value-dynamic-without-entity   :index='$index'  :wire:key='$index ."header_value_dynamic"'/>
             </div>

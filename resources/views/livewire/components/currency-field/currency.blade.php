@@ -1,7 +1,6 @@
 <div>
     <div x-data="dataMoney()" class="p-4 w-full currency-field">
         <div class="flex flex-col items-start">
-
             <input
                 id="currency"
                 type="text"

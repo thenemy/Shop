@@ -24,7 +24,7 @@
                 			
 
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
-            <span class='font-bold text-lg'>{{__('Информация о клиенте')}}</span>
+            <span class='font-bold text-[1.09rem]'>{{__('Информация о клиенте')}}</span>
                 			
 <x-helper.text.text_key_link key='Имя клиента' value='{{$entity->userData->crucialData->name ?? ""}}' :link='route("admin.user.show", ["0" => $entity->user_id,])'></x-helper.text.text_key_link>			
 <x-helper.text.text_key key="Номер карты" value='{{$entity->plastic->pan ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
@@ -32,7 +32,7 @@
             </div>			
 
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
-            <span class='font-bold text-lg'>{{__('Информация о кредите')}}</span>
+            <span class='font-bold text-[1.09rem]'>{{__('Информация о кредите')}}</span>
                 			
 <x-helper.text.text_key key="Номер Договора" value='{{$entity->purchase->id ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
 <x-helper.text.text_key key="Количество покупок" value='{{$entity->purchase->number_purchase ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
@@ -45,7 +45,7 @@
 @if($entity->surety) 			
 
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
-            <span class='font-bold text-lg'>{{__('Информация о поручители')}}</span>
+            <span class='font-bold text-[1.09rem]'>{{__('Информация о поручители')}}</span>
                 			
 <x-helper.text.text_key key="Имя" value='{{$entity->surety->crucialData->name ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
 <x-helper.text.text_key key="Серия паспорта" value='{{$entity->surety->crucialData->series ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
@@ -64,7 +64,7 @@
 @if($entity->purchase->isDelivery()) 			
 
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
-            <span class='font-bold text-lg'>{{__('Информация о доставке')}}</span>
+            <span class='font-bold text-[1.09rem]'>{{__('Информация о доставке')}}</span>
                 			
 @if($entity->purchase->delivery()->exists()) 			
 <x-helper.text.text_key key="{{__('Количество посылок')}}" value='{{$entity->purchase->deliveryCount() ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
@@ -85,14 +85,14 @@
                 			
 
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
-            <span class='font-bold text-lg'>{{__('Сведения об оплате')}}</span>
+            <span class='font-bold text-[1.09rem]'>{{__('Сведения об оплате')}}</span>
                 			
 <livewire:admin.pages.taken-credit-edit.monthly-paid-index
             :filterBy="['taken_credit_id' => $entity->id,]" />
             </div>			
 
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
-            <span class='font-bold text-lg'>{{__('Комментарии')}}</span>
+            <span class='font-bold text-[1.09rem]'>{{__('Комментарии')}}</span>
                 			
 <livewire:admin.pages.taken-credit-edit.comment-installment-dynamic 
         
@@ -101,7 +101,7 @@
             </div>			
 
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
-            <span class='font-bold text-lg'>{{__('Журнал авто списаний')}}</span>
+            <span class='font-bold text-[1.09rem]'>{{__('Журнал авто списаний')}}</span>
                 			
 <livewire:admin.pages.taken-credit-edit.time-schedule-transaction-index
             :filterBy="['taken_credit_id' => $entity->id,]" />

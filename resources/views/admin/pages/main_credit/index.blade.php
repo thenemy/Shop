@@ -20,13 +20,13 @@
                 			
 
             <div 	class='border border-blue-300 p-2 bg-white rounded shadow w-max'>
-            <span class='font-bold text-lg'>{{__('Курс валюты')}}</span>
+            <span class='font-bold text-[1.09rem]'>{{__('Курс валюты')}}</span>
                 			
 <livewire:components.currency-field.currency/>
             </div>			
 
             <div 	class='border border-blue-300 p-2 bg-white rounded shadow w-max'>
-            <span class='font-bold text-lg'>{{__('Удержка Денег')}}</span>
+            <span class='font-bold text-[1.09rem]'>{{__('Удержка Денег')}}</span>
                 			
 <livewire:components.currency-field.money/>
             </div>

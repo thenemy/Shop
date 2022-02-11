@@ -3,7 +3,7 @@
 @if(abs($entity->status)% 10 == 1) 
 
             <div 	class=' border shadow p-4 space-y-4 bg-white'>
-            <span class='font-bold text-lg'>{{__('Состояние')}}</span>
+            <span class='font-bold text-[1.09rem]'>{{__('Состояние')}}</span>
                 			
 <x-helper.text.text_key key="Сальдо" value='{{$entity->saldo ?? ""}} ' class_value='App\Domain\Core\Front\Admin\Form\Attributes\Models\KeyTextAttribute'></x-helper.text.text_key>			
 @if($entity->status != 11) 			

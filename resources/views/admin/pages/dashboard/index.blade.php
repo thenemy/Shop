@@ -20,7 +20,7 @@
                 			
 
             <div 	class='items-center block p-3 bg-white w-full h-full shadow-lg rounded'>
-            <span class='font-bold text-lg'>{{__('Статистика')}}</span>
+            <span class='font-bold text-[1.09rem]'>{{__('Статистика')}}</span>
                 			
 
             <div 	class='justify-around w-full flex flex-row  space-x-2'>
