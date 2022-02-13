@@ -15,6 +15,7 @@ class FileBladeCreatorShow extends AbstractFileManagerBlade
     protected function formatFile($file_from): string
     {
         return sprintf($file_from,
+            $this->getTitle(),
             $this->bladeGenerator->generateHtml(),
         );
     }

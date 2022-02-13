@@ -24,6 +24,7 @@ abstract class  AbstractDynamicTable extends BaseTable
 {
     use InputGenerator;
 
+    const ADD_FUNCTION = 'save';
     public array $inputs;
     public string $storedVariants;
 
@@ -39,13 +40,17 @@ abstract class  AbstractDynamicTable extends BaseTable
             'id' => TextAttribute::generation($this, 'Новый', true),
             'actions' => AllActions::generation([
                 ...$this->getActions(),
-                IconAdd::new([
-                    'wire:click' => "save"
-                ])
-//                ButtonGreenLivewire::new("Добавить", "save")
+                $this->addIcon()
             ])
         ];
         $this->inputs = array_merge($inputs, $this->getInputs());
+    }
+
+    protected function addIcon(): IconAdd
+    {
+        return IconAdd::new([
+            'wire:click' => self::ADD_FUNCTION
+        ]);
     }
 
     public function getActions()
@@ -57,16 +62,20 @@ abstract class  AbstractDynamicTable extends BaseTable
 
     public function generateHtml(): string
     {
-        return '<x-helper.table.table_dynamic
+        return sprintf('<x-%s
                 :collection="$collection"
                 :table="$table"
                 :storedValues="$storedValues"
-                :optional="$optional"/>';
+                :optional="$optional">%s</x-%s>', $this->pathToBlade(), $this->slot(), $this->pathToBlade());
+    }
+
+    protected function pathToBlade(): string
+    {
+        return "helper.table.table_dynamic";
     }
 
     public function getInputsByKey($name): string
     {
-        dd($name);
         $real_attribute = explode('-', $name);
         return trim(preg_replace('/\s\s+/', ' ', $this->inputs[$real_attribute[0]]));
     }

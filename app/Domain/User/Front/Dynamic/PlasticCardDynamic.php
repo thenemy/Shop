@@ -18,88 +18,20 @@ use App\Domain\User\Services\PlasticCardService;
 
 class PlasticCardDynamic extends PlasticCard implements TableInFront
 {
-    use TableDynamic;
-
-    public function getActionsAttribute(): string
-    {
-        return $this->getRemoveButton()->generateHtml();
-    }
-
-    public function getCustomFrontRules(): array
-    {
-        return [
-            'card_number' => fn($text) => $this->pan,
-            'date_number' => fn($text) => $this->expiry,
-            'code' => fn($text) => __("Подтвержден")
-        ];
-    }
-
-    public static function setInputAttr($key, $type)
-    {
-        switch ($key) {
-            case "card_number":
-                switch ($type) {
-                    case self::filter():
-                        return FilterJsInterface::FORMAT_CARD_NUMBER;
-                    case self::defer():
-                        return true;
-                }
-            case "date_number":
-                switch ($type) {
-                    case self::filter():
-                        return FilterJsInterface::FORMAT_DATE_FOR_CARD;
-                    case self::defer():
-                        return true;
-                }
-        }
-    }
-
-
-    public function getTitle(): string
-    {
-        return "Пластиковая карта";
-    }
-
-    public
-    static function getDynamicParentKey(): string
-    {
-        return 'user_id';
-    }
-
-    public
-    function getTableClass(): string
-    {
-        return PlasticDynamicTable::class;
-    }
-
-    public
-    function livewireComponents(): LivewireComponents
-    {
-        return AllLivewireComponents::generation([
-        ]);
-    }
-
-    public
-    function livewireOptionalDropDown(): AllLivewireOptionalDropDown
-    {
-        return AllLivewireOptionalDropDown::generation([
-
-        ]);
-    }
+    use \App\Domain\User\Front\Traits\PlasticCardDynamic;
 
     public
     static function getBaseService(): string
     {
         return PlasticCardService::class;
     }
-
     public
-    function livewireFunctions(): LivewireAdditionalFunctions
+    function getTableClass(): string
     {
-        return AllLivewireFunctions::generation([
-            new SendSmsLivewire()
-        ]);
+        return PlasticDynamicTable::class;
     }
+
+
 
     public
     function getPrimaryKey(): string

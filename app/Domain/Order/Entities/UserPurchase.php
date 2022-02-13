@@ -101,4 +101,7 @@ class UserPurchase extends Entity implements UserPurchaseRelation
     {
         return $this->address()->first();
     }
+    public function titlesOfPurchases(){
+        return $this->purchases()->with("products");
+    }
 }

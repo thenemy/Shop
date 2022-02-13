@@ -31,8 +31,13 @@ abstract class BaseTable implements TableInterface, LivewireAdditionalFunctions,
 
     public function generateHtml(): string
     {
-        return sprintf('<x-helper.table.table :table="$table" :optional="$optional" %s>
-        %s </x-helper.table.table>', $this->setTurnOff(), $this->slot());
+        return sprintf('<x-%s :table="$table" :optional="$optional" %s>
+        %s </x-%s>', $this->pathToBlade(), $this->setTurnOff(), $this->slot(), $this->pathToBlade());
+    }
+
+    protected function pathToBlade(): string
+    {
+        return "helper.table.table";
     }
 
     private function setTurnOff(): string

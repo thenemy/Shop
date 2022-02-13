@@ -30,6 +30,7 @@ use App\Domain\Installment\Entities\TakenCredit;
 use App\Domain\Installment\Front\Admin\Attributes\ConditionAttribute;
 use App\Domain\Installment\Front\Admin\Attributes\DecisionAttribute;
 use App\Domain\Installment\Front\Dynamic\CommentInstallmentDynamic;
+use App\Domain\Installment\Front\Dynamic\PlasticCardTakenCreditDynamic;
 use App\Domain\Installment\Front\Nested\MonthlyPaidIndex;
 use App\Domain\Installment\Front\Nested\TimeScheduleTransactionIndex;
 use App\Domain\Installment\Interfaces\PurchaseStatus;
@@ -43,13 +44,17 @@ use App\Domain\User\Interfaces\UserRelationInterface;
 
 class TakenCreditShow extends TakenCredit implements CreateAttributesInterface
 {
-    use SuretyGenerationAttributes;
+    use SuretyGenerationAttributes, AttributeGetVariable;
+
+    public function getVarTitle()
+    {
+        return '__("Информация о рассрочке  #") . $entity->purchase_id';
+    }
 
     public function generateAttributes(): BladeGenerator
     {
         return BladeGenerator::generation([
             Container::newClass("space-y-4 mr-4", [
-                DecisionAttribute::new(),
                 ContainerRow::newClass("w-full", [
                     ContainerColumn::newClass("basis-5/12", [
                         BoxTitleContainer::newTitle("Информация о клиенте",
@@ -59,18 +64,28 @@ class TakenCreditShow extends TakenCredit implements CreateAttributesInterface
                                     self::CRUCIAL_DATA_TO . "name",
                                     LinkGenerator::new(UserRouteHandler::new())->show("user_id")
                                 ),
-                                KeyTextAttribute::new(__("Номер карты"), self::PLASTIC_CARD_TO . "pan"),
                                 KeyTextAttribute::new(__("Номер телефона"), self::PLASTIC_CARD_TO . "phone"),
+                                KeyTextAttribute::new(__("Номер карты"), self::PLASTIC_CARD_TO . "card_number"),
 
                             ]),
                         BoxTitleContainer::newTitle("Информация о кредите",
                             "",
                             [
                                 KeyTextAttribute::new(__("Номер Договора"), self::PURCHASE_TO . 'id'),
-                                KeyTextAttribute::new(__("Количество покупок"), self::PURCHASE_TO . 'number_purchase'),
-                                KeyTextAttribute::new(__("Сумма договора"), "allToPay()"),
+                                KeyTextAttribute::new(__("Количество покупок"),
+                                    self::PURCHASE_TO . 'number_purchase'),
+                                KeyTextValueAttribute::new(__("Сумма договора"),
+                                    sprintf("{{ %s . \" сум \"   . \" ( \" .  %s . \" сум \" . __(\"первоначальный\") . \")\" }}",
+                                        self::getWithoutScopeAtrVariable("allToPay()"),
+                                        self::getWithoutScopeAtrVariable("initial_price"))),
                                 KeyTextAttribute::new(__("Первоначальная оплата"), "initial_price"),
-                                KeyTextAttribute::new(__("Ежемесячный платеж"), "monthly_paid"),
+                                KeyTextValueAttribute::new(__("Ежемесячный платеж"),
+                                    sprintf(
+                                        "%s сум \"%s\" ",
+                                        self::getAttributeVariable("monthly_paid"),
+                                        self::getAttributeVariable("nextPayDate()")
+                                    )
+                                ),
                                 KeyTextAttribute::new(__("Количество месяцев"), 'number_month'),
                                 KeyTextAttribute::new(__("Процент"), self::CREDIT_TO . "percent", "%")
                             ]),
@@ -108,17 +123,20 @@ class TakenCreditShow extends TakenCredit implements CreateAttributesInterface
                         ]),
                     ])
                 ]),
-
-
-                IFstatement::new(self::getWithoutScopeAtrVariable(self::SURETY_TO)),
-                SuretyPlasticCardDynamic::getDynamic("TakenCreditEdit", self::SURETY_TO . "id"),
-                ENDIFstatement::new(),
-
                 NestedContainer::new("__(\"Товары\")", [
                     new  FileLivewireWithoutActionFilterBy("TakenCreditEdit", PurchaseMain::new())
                 ], [
                     'class' => "flex flex-col"
-                ]),])
+                ]),
+                PlasticCardTakenCreditDynamic::getDynamic("TakenCreditEdit",),
+
+                NestedContainer::new("__(\"Добавить поручателя\")", [
+                    self::generationSuretyCreate(self::SURETY_TO)
+                ]),
+
+                DecisionAttribute::new(),
+            ]),
+
         ]);
     }
 

@@ -4,6 +4,7 @@
 namespace App\Domain\User\Entities;
 
 
+use App\Domain\Core\Main\Entities\Authenticable;
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Order\Entities\Order;
 use App\Domain\Order\Entities\UserPurchase;
@@ -14,9 +15,8 @@ use App\Domain\User\Traits\SmsTrait;
 use App\Domain\User\Traits\UserNotification;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Entity implements UserRelationInterface
+class User extends Authenticable implements UserRelationInterface
 {
-    use SmsTrait, UserNotification;
 
     protected $table = 'users';
 

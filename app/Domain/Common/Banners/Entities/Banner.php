@@ -19,6 +19,7 @@ class Banner extends Entity
         'image',
     ];
     protected $guarded = null;
+
     public function newEloquentBuilder($query)
     {
         return new BannerBuilder($query);
@@ -61,4 +62,6 @@ class Banner extends Entity
             'image'
         ];
     }
+
+
 }

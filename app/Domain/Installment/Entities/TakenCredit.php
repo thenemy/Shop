@@ -125,6 +125,13 @@ class TakenCredit extends Entity implements PurchaseRelationInterface
         return $this->monthPaid->first()->must_pay;
     }
 
+    public function nextPayDate()
+    {
+        return $this->monthPaid()
+            ->where("must_pay", ">", "paid")
+            ->whereDate("month", "<=", now()->addMonth())
+            ->orderBy("month")->first()->month;
+    }
 
     public static function getRules(): array
     {

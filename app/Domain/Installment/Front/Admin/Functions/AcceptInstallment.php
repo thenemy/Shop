@@ -26,7 +26,7 @@ class AcceptInstallment extends AbstractFunction
                 $order = new OrderService();
                 $order->createOrder($purchase);
             }
-            session()->flash("success", __("Рассрочка успешно добавлена"));
+            session()->flash("success", __("Рассрочка успешно создана"));
             DB::commit();
         } catch (\Throwable $exception) {
             DB::rollBack();

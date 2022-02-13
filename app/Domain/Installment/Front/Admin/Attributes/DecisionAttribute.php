@@ -61,7 +61,7 @@ class DecisionAttribute extends Entity implements LivewireEmptyWithPassVariableI
                         "class" => "space-x-4 justify-around"], [
                         ModalCreator::new(
                             ButtonDaisy::new("Принять", [
-                                'class' => 'btn-success',
+                                'class' => 'btn-success btn-sm',
                                 "@click" => 'open()',
                             ]),
                             DecisionModal::new(
@@ -78,6 +78,7 @@ class DecisionAttribute extends Entity implements LivewireEmptyWithPassVariableI
                             ModalCreator::new(
                                 ButtonDaisy::new(
                                     "Требуется поручитель", [
+                                    "class" => "btn-sm",
                                     "@click" => "open()"
                                 ]), DecisionModal::new(
                                 "Запросить поручителя",

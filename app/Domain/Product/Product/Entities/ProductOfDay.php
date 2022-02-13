@@ -24,4 +24,13 @@ class ProductOfDay extends Entity
         return $this->belongsTo(Product::class, 'product_id');
     }
 
+    public function toArray()
+    {
+        return [
+            "title" => $this->product->title,
+            "price" => $this->product->price,
+            "real_price" => $this->product->real_price,
+            ""
+        ];
+    }
 }
