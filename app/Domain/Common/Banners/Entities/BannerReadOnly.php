@@ -9,10 +9,17 @@ class BannerReadOnly extends Banner
         return [
             "link" => $this->link,
             "image" => [
-                'ru' => url($this->getImageRuAttribute()->storage()),
-                "en" => url($this->getImageEnAttribute()->storage()),
-                "uz" => url($this->getImageUzAttribute()->storage())
+                'ru' => $this->getImageRuAttribute()->fullPath(),
+                "en" => $this->getImageEnAttribute()->fullPath(),
+                "uz" => $this->getImageUzAttribute()->fullPath()
             ],
+        ];
+    }
+
+    public static function getCreateRules(): array
+    {
+        return [
+            "image" => "required"
         ];
     }
 }

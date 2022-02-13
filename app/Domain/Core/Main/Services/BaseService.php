@@ -212,7 +212,6 @@ abstract class BaseService implements ServiceInterface
 
     protected function createNew(array $object_data)
     {
-        Log::info($object_data);
         $filtered = $this->filterRecursive($object_data);
         $this->validate($filtered, $this->validateCreateRules());
         return $this->entity->create($filtered);
