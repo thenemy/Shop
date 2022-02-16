@@ -64,6 +64,16 @@ class Discount extends Entity implements DiscountRelation
         return $this->getTranslations("des_image");
     }
 
+    public function getDesImageCurrentAttribute()
+    {
+        return $this->getMedia("des_image", $this->getTranslatable("des_image"));
+    }
+
+    public function getMobImageCurrentAttribute()
+    {
+        return $this->getMedia("mob_image", $this->getTranslatable("mob_image"));
+    }
+
     public function getMobImageAttribute($value)
     {
         return $this->getTranslations("mob_image");

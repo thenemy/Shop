@@ -38,6 +38,12 @@ class MainCredit extends Entity
         return $this->hasMany(Credit::class, "main_credit_id");
     }
 
+    // for product card to show
+    public function lastCredit()
+    {
+        return $this->credits()->orderBy("month", "DESC")->first();
+    }
+
     static public function getRules(): array
     {
         return [

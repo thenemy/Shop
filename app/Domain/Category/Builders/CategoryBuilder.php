@@ -3,11 +3,32 @@
 namespace App\Domain\Category\Builders;
 
 use App\Domain\Core\Main\Builders\BuilderEntity;
+use Illuminate\Support\Facades\DB;
 
 class CategoryBuilder extends BuilderEntity
 {
+    public function active()
+    {
+        return $this->where("status", true);
+    }
+
+    public function childs($parent_id)
+    {
+        return $this->where("parent_id", "=", $parent_id);
+    }
+
+
+    public function joinParent()
+    {
+        return $this->join(DB::raw("categories as first"),
+            "first.id",
+            "=",
+            "categories.parent_id");
+    }
+
     public function byPurchaseIn($purchases_in): CategoryBuilder
     {
+
         return $this->joinPurchases()->whereIn("purchases.id", $purchases_in)
             ->select("categories.*")->distinct();
     }

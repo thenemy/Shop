@@ -45,6 +45,14 @@ class ProductBuilder extends BuilderEntity
             $join)->select('products.*');
     }
 
+    public function joinDiscountFull()
+    {
+        return $this->joinDiscount()->join("discounts", "discounts.id",
+            "=",
+            "discount_product.discount_id"
+        );
+    }
+
     protected function getSearch(): string
     {
         return "title";
@@ -58,6 +66,13 @@ class ProductBuilder extends BuilderEntity
     public function currencyUZS()
     {
         return $this->where('currency', ProductInterface::CURRENCY_UZS_DB);
+    }
+
+    public function joinHit()
+    {
+        return $this->join("product_hits", "product_hits.product_id",
+            "=",
+            "products.id");
     }
 
 

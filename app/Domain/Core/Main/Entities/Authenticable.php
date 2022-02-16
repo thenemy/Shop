@@ -3,6 +3,7 @@
 namespace App\Domain\Core\Main\Entities;
 
 use App\Domain\User\Traits\SmsTrait;
+use App\Domain\User\Traits\TokenRegister;
 use App\Domain\User\Traits\UserNotification;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -17,5 +18,5 @@ class Authenticable extends Entity implements
     AuthorizableContract,
     CanResetPasswordContract
 {
-    use \Illuminate\Auth\Authenticatable, Authorizable, CanResetPassword, HasApiTokens, SmsTrait, UserNotification;
+    use \Illuminate\Auth\Authenticatable, Authorizable, CanResetPassword, TokenRegister, SmsTrait, UserNotification;
 }

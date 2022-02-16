@@ -9,10 +9,17 @@ use App\Domain\Core\Media\Traits\MediaTrait;
 class Brand extends Entity
 {
     use MediaTrait;
+
     protected $table = "brands";
+
     public function newEloquentBuilder($query): BrandBuilder
     {
         return new BrandBuilder($query);
+    }
+
+    public function info(): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        return $this->hasOne(BrandInfo::class, "id");
     }
 
     public function getImageAttribute($value): \App\Domain\Core\Media\Models\Media

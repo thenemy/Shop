@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Hash;
 
 trait   PasswordHandle
 {
-    protected function updatePassword(array &$object_data)
+    protected function  updatePassword(array &$object_data)
     {
 
         if (isset($object_data["password"])) {

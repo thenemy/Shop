@@ -35,6 +35,10 @@ class Banner extends Entity
         return $this->getTranslations("image");
     }
 
+    public function getImageCurrentAttribute()
+    {
+        return $this->getMedia("image", $this->getTranslatable("image"));
+    }
 
     public function getImageRuAttribute(): \App\Domain\Core\Media\Models\Media
     {

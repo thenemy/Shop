@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class MakeDateMonth extends Migration
+class BrandInfo extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class MakeDateMonth extends Migration
      */
     public function up()
     {
-//        Schema::table('month_paid', function (Blueprint $table) {
-//            $table->dropColumn("month");
-//        });
-//
-//        Schema::table('month_paid', function (Blueprint $table) {
-//            $table->date("month");
-//        });
+        Schema::create('brand_infos', function (Blueprint $table) {
+            $table->foreignId("id")->primary()->constrained("brands");
+            $table->bigInteger("views_num")->default(0);
+        });
     }
 
     /**
@@ -29,6 +26,6 @@ class MakeDateMonth extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('brand_info');
     }
 }

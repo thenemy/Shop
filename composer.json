@@ -12,6 +12,7 @@
         "ext-json": "*",
         "ext-soap": "*",
         "bastinald/laravel-livewire-loader": "^2.2",
+        "darkaonline/l5-swagger": "^8.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "guzzlehttp/psr7": "1.*",

@@ -44,15 +44,16 @@ class UserService extends BaseService implements UserRelationInterface
     /**
      * @throws \Throwable
      */
+    protected function getRole(array $parent)
+    {
+        return array_merge($parent, [
+            'role' => Roles::USER
+        ]);
+    }
+
     public function create(array $object_data)
     {
         try {
-            // [
-            // "userCreditData->name" => name
-            // "userCreditData->asd" => name
-            // "userCreditData->saf" => name
-            // "userCreditData->gsag" => name
-            // ]
             DB::beginTransaction();
             $this->updatePassword($object_data);
             $this->serializeTempFile($object_data);
@@ -67,9 +68,7 @@ class UserService extends BaseService implements UserRelationInterface
             $user_array = [
                 'user_id' => $user->id
             ];
-            $role_data = array_merge($user_array, [
-                'role' => Roles::USER
-            ]);
+            $role_data = $this->getRole($user_array);
             $this->role->create($role_data);
             $avatar_data = array_merge($user_array, $avatar_data);
             $this->avatarService->create($avatar_data);

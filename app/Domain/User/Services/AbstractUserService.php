@@ -7,6 +7,7 @@ use App\Domain\Core\Main\Services\BaseService;
 use App\Domain\User\Entities\User;
 use App\Domain\User\Interfaces\Roles;
 use App\Domain\User\Traits\PasswordHandle;
+use Illuminate\Support\Facades\DB;
 
 abstract class AbstractUserService extends BaseService
 {
@@ -37,16 +38,44 @@ abstract class AbstractUserService extends BaseService
     public function create(array $object_data)
     {
 
-        $this->updatePassword($object_data);
-        $user = parent::create($object_data);
-        $this->createRole($object_data, $user);
-        return $user;
+        try {
+            DB::beginTransaction();
+            $this->updatePassword($object_data);
+            $this->entity = parent::create($object_data);
+            $this->createRole($object_data, $this->entity);
+            $this->actionAfterCreate();
+            DB::commit();
+            return $this->entity;
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            throw  $exception;
+        }
+    }
+
+    protected function actionAfterCreate()
+    {
+
     }
 
     public function update($object, array $object_data)
     {
-        $this->updatePassword($object_data);
-        return parent::update($object, $object_data);
+        try {
+            DB::beginTransaction();
+            $this->updatePassword($object_data);
+            $this->entity = parent::update($object, $object_data);
+            $this->actionAfterUpdate();
+            DB::commit();
+            return $this->entity;
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            throw  $exception;
+        }
+
+    }
+
+    protected function actionAfterUpdate()
+    {
+
     }
 
     abstract function getRole(): int;

@@ -4,6 +4,7 @@ namespace App\Domain\Product\Product\Entities;
 
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Core\Main\Traits\CheckedAttribute;
+use App\Domain\Product\Api\ProductCard;
 use App\Domain\Product\Product\Jobs\ProductOfDayJob;
 
 class ProductOfDay extends Entity
@@ -21,16 +22,11 @@ class ProductOfDay extends Entity
 
     public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Product::class, 'product_id');
+        return $this->belongsTo(ProductCard::class, 'product_id');
     }
 
     public function toArray()
     {
-        return [
-            "title" => $this->product->title,
-            "price" => $this->product->price,
-            "real_price" => $this->product->real_price,
-            ""
-        ];
+        return $this->product->toArray();
     }
 }

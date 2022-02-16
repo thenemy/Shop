@@ -10,13 +10,16 @@ use App\Domain\User\Traits\HasUserRelationship;
 class CommentProduct extends Entity
 {
     use HasUserRelationship;
+
     protected $table = "comment_product";
+
     public function newEloquentBuilder($query)
     {
         return new CommentBuilder($query);
     }
 
-    public function product(){
+    public function product()
+    {
         return $this->belongsTo(Product::class, "product_id");
     }
 }

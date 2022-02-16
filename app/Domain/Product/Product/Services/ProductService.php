@@ -25,6 +25,7 @@ class ProductService extends BaseService implements ProductInterface
     private ProductDescriptionService $descriptionService;
     private ProductKeyProductService $keyProductService;
     private HeaderTextService $headerTextService;
+    private ProductInfoService $infoService;
 
     public function __construct()
     {
@@ -35,6 +36,7 @@ class ProductService extends BaseService implements ProductInterface
         $this->descriptionService = ProductDescriptionService::new();
         $this->keyProductService = ProductKeyProductService::new();
         $this->headerTextService = new HeaderTextService();
+        $this->infoService = ProductInfoService::new();
     }
 
     public function getEntity(): Product
@@ -52,7 +54,6 @@ class ProductService extends BaseService implements ProductInterface
         try {
             DB::beginTransaction();
             $this->serializeTempFile($object_data);
-
             $image_data = $this->popCondition($object_data, self::IMAGE_SERVICE);
             $card_image = $this->popCondition($object_data, self::CARD_IMAGE_SERVICE);
             $product_of_day = $this->popCondition($object_data, self::PRODUCT_DAY_SERVICE);
@@ -62,7 +63,7 @@ class ProductService extends BaseService implements ProductInterface
             $colors = $this->popCondition($object_data, self::COLORS_SERVICE);
             $descriptions = $this->popCondition($object_data, self::DESCRIPTION_SERVICE);
             $productKey = $this->popCondition($object_data, self::PRODUCT_KEY_SERVICE);
-            $headerText =$this->popCondition($object_data, self::HEADER_TEXT_SERVICE);
+            $headerText = $this->popCondition($object_data, self::HEADER_TEXT_SERVICE);
             $this->popCondition($object_data, self::COLORS_TEMP);
             $product = parent::create($object_data);
             $product->images = $image_data['image'];
@@ -72,6 +73,7 @@ class ProductService extends BaseService implements ProductInterface
             $this->descriptionService->createWith($descriptions, $product_id);
             $this->keyProductService->createOrUpdateMany($productKey, $product_id, 0);
             $this->headerTextService->createOrUpdateMany($headerText, $product_id, 0);
+            $this->infoService->create(['id' => $product->id]);
             $card_image['product_id'] = $product->id;
             $this->createCheck($product_of_day, $product, ProductOfDay::class);
             $this->createCheck($product_hit, $product, ProductHit::class);
@@ -101,14 +103,14 @@ class ProductService extends BaseService implements ProductInterface
             $descriptions = $this->popCondition($object_data, self::DESCRIPTION_SERVICE);
 
             $productKey = $this->popCondition($object_data, self::PRODUCT_KEY_SERVICE);
-            $headerText =$this->popCondition($object_data, self::HEADER_TEXT_SERVICE);
+            $headerText = $this->popCondition($object_data, self::HEADER_TEXT_SERVICE);
 
             $parent = ['product_id' => $object->id];
             $this->headerService->createOrUpdate($object, self::BODIES_SERVICE, $headers, $parent);
             $this->descriptionService->update($object[self::DESCRIPTION_SERVICE], $descriptions);
             $this->colorService->createOrUpdateMany($colors, $parent, 0);
             $this->keyProductService->createOrUpdateMany($productKey, $parent, 0);
-            $this->headerTextService->createOrUpdateMany($headerText, $parent,0);
+            $this->headerTextService->createOrUpdateMany($headerText, $parent, 0);
 
             if ($object instanceof Product) {
                 $this->createCheck($product_of_day, $object, ProductOfDay::class);

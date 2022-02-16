@@ -15,13 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+include "api/user.php";
+include "api/home.php";
+include "api/category.php";
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::post('/sms/send_code', [UserController::class, 'send_code']);
 
-Route::get("/banner", [\App\Http\Controllers\Api\Main\BannerController::class, "index"]);
-
-//for tests
-Route::post('/getToken', [\App\Domain\Core\Api\CardService\TestRoute::class, 'get_access_token']);
+Route::get("/banner", [\App\Http\Controllers\Api\Main\BrandController::class, "index"]);

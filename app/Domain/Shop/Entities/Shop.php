@@ -7,6 +7,7 @@ namespace App\Domain\Shop\Entities;
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Core\Media\Traits\MediaTrait;
 use App\Domain\Core\Slug\Traits\Sluggable;
+use App\Domain\Product\Product\Entities\Product;
 use App\Domain\Shop\Builders\ShopBuilder;
 use App\Domain\Shop\Interfaces\ShopRelationInterface;
 use App\Domain\Shop\Traits\MediaShopAttributes;
@@ -23,6 +24,11 @@ class Shop extends Entity implements ShopRelationInterface
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, "id");
+    }
+
+    public function product()
+    {
+        return $this->hasMany(Product::class, "shop_id");
     }
 
     public function shopAddress(): \Illuminate\Database\Eloquent\Relations\HasOne
