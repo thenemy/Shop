@@ -46,11 +46,5 @@ class ProductDescription extends Entity
         $this->setTranslate("body", $value);
     }
 
-    public function toArray()
-    {
-        return [
-            "header" => $this->header_current,
-            "body" => $this->body_current
-        ];
-    }
+
 }

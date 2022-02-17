@@ -50,12 +50,5 @@ class ProductKey extends Entity
             "category_id");
     }
 
-    public function toArray()
-    {
-        return [
-            "text" => $this->getTextCurrentAttribute(),
-            "values" => $this->pivot->toArray() ?? null,
-        ];
-    }
 
 }

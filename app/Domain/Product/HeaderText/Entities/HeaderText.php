@@ -19,11 +19,5 @@ class HeaderText extends Entity
 
     protected $table = "header_texts";
 
-    public function toArray()
-    {
-        return [
-            "header" => $this->text_current,
-            "values" => $this->pivot->toArray()
-        ];
-    }
+
 }
