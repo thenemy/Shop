@@ -35,7 +35,7 @@ class MainController extends ApiController
 
     public function category()
     {
-        return $this->result(CategoryInMain::active()->take(6));
+        return $this->result(CategoryInMain::active()->take(6)->get());
     }
 
     public function hitProduct()
