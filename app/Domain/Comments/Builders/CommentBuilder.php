@@ -10,4 +10,9 @@ class CommentBuilder extends BuilderEntity
     {
         return "message";
     }
+
+    public function show($product_id)
+    {
+        return $this->where("product_id", $product_id)->where("status", true);
+    }
 }

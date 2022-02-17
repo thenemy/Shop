@@ -22,7 +22,7 @@ class CommentProduct extends Migration
             $table->foreignId("product_id")->constrained("products")
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->boolean("status")->default(false);
+            $table->boolean("status")->default(false); // published or not
             $table->string("message");
 
         });

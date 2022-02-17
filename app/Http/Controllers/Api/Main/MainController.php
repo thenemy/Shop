@@ -9,23 +9,28 @@ use App\Domain\Common\Discounts\Entities\DiscountReadOnly;
 use App\Domain\Product\Api\ProductCard;
 use App\Domain\Product\Product\Entities\ProductOfDay;
 use App\Http\Controllers\Api\Base\ApiController;
+use App\Http\Controllers\Api\Traits\CommonComponents;
 
 class MainController extends ApiController
 {
+    use CommonComponents;
+
     public function main()
     {
-        return $this->result([
-            "category" => [
-                "drop_bar" => CategoryAppBar::active()->get(),
-                "nav_bar" => CategoryAppBar::active()->take(7)->get()
-            ],
-            "banner" => BannerReadOnly::all(),
+        return $this->result($this->connectWithCommon([
+            "banners" => BannerReadOnly::all(),
             "product_of_day" => ProductOfDay::all(),
             "discount" => [
                 self::FILTER => "discount",
                 "items" => DiscountReadOnly::active()->get()
             ]
-        ]);
+        ]));
+    }
+
+
+    public function header(): \Illuminate\Http\JsonResponse
+    {
+        return $this->result($this->getHeader());
     }
 
     public function category()

@@ -73,8 +73,7 @@ class Product extends Entity implements ProductInterface
         return $this->belongsToMany(User::class,
             "comment_product",
             "product_id",
-            "user_id")->withPivot(['status', "message"]);
-
+            "user_id")->withPivot(['status', "message", "created_at"]);
     }
 
     public function mark()

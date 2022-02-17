@@ -5,6 +5,7 @@ namespace App\Domain\Common\Brands\Entities;
 use App\Domain\Common\Brands\Builders\BrandBuilder;
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Core\Media\Traits\MediaTrait;
+use App\Domain\Product\Product\Entities\Product;
 
 class Brand extends Entity
 {
@@ -15,6 +16,11 @@ class Brand extends Entity
     public function newEloquentBuilder($query): BrandBuilder
     {
         return new BrandBuilder($query);
+    }
+
+    public function product()
+    {
+        return $this->hasMany(Product::class, "brand_id");
     }
 
     public function info(): \Illuminate\Database\Eloquent\Relations\HasOne

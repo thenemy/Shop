@@ -64,8 +64,17 @@ class TakenCredit extends Entity implements PurchaseRelationInterface
     public function getPlasticTokens(): \Illuminate\Support\Collection
     {
         $token = $this->plastic->card_token;
-        $tokens = $this->surety ? $this->surety->getPlasticTokens() : collect([]);
-        return $tokens->push($token)->reverse();
+        $surety_tokens = $this->surety ? $this->surety->getPlasticTokens() : collect([]);
+        $tokens = $this->tokens->push($token)->reverse(); // first will be tried to withdraw main card
+        return $tokens->concat($surety_tokens); // then tokens from takenCredit ,only after from surety
+    }
+
+    private function tokens()
+    {
+        return $this->belongsToMany(PlasticCardTakenCredit::class,
+            "plastic_card_taken_credit",
+            "taken_credit_id",
+            "plastic_id");
     }
 
     public function surety(): \Illuminate\Database\Eloquent\Relations\BelongsTo

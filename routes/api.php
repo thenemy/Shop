@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 include "api/user.php";
 include "api/home.php";
 include "api/category.php";
+include "api/action.php";
+include "api/product.php";
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

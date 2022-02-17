@@ -29,7 +29,16 @@ class User extends Authenticable implements UserRelationInterface
 
     public function basket(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Order::class, 'basket');
+        return $this->belongsToMany(Order::class, 'basket',
+            "user_id",
+            "order_id");
+    }
+
+    public function favourite(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, "favourites",
+            "user_id",
+            "product_id");
     }
 
     public function userPurchase(): \Illuminate\Database\Eloquent\Relations\HasMany

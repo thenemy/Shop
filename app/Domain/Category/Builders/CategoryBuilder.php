@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\DB;
 
 class CategoryBuilder extends BuilderEntity
 {
+    public function onlyParent()
+    {
+        return $this->where("depth", "=", 1);
+    }
+
     public function active()
     {
         return $this->where("status", true);
@@ -14,13 +19,12 @@ class CategoryBuilder extends BuilderEntity
 
     public function childs($parent_id)
     {
-        return $this->where("parent_id", "=", $parent_id);
+        return $this->active()->where("parent_id", "=", $parent_id);
     }
-
 
     public function joinParent()
     {
-        return $this->join(DB::raw("categories as first"),
+        return $this->leftJoin(DB::raw("categories as first"),
             "first.id",
             "=",
             "categories.parent_id");

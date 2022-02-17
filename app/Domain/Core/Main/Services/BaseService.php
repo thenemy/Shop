@@ -204,6 +204,17 @@ abstract class BaseService implements ServiceInterface
         }
     }
 
+    public function validateCreateOrUpdate()
+    {
+        return [];
+    }
+
+    public function updateOrCreate(array $condition, array $data)
+    {
+        $this->validate($data, $this->validateCreateOrUpdate());
+        return $this->entity::updateOrCreate($condition, $data);
+    }
+
     public
     function createWith(array $object_data, array $additional)
     {

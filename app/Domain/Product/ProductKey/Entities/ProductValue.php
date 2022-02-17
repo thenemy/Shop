@@ -26,6 +26,9 @@ class ProductValue extends Entity
     {
         return new ProductValueBuilder($query);
     }
-
+    public function toArray()
+    {
+        return $this->getTextCurrentAttribute();
+    }
 }
 

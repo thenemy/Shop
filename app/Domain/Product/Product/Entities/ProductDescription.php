@@ -26,13 +26,31 @@ class ProductDescription extends Entity
         $this->setTranslate("header", $value);
     }
 
+    public function getHeaderCurrentAttribute()
+    {
+        return $this->getTranslatable("header");
+    }
+
     public function getBodyAttribute(): ?\Illuminate\Support\Collection
     {
         return $this->getTranslations("body");
     }
 
+    public function getBodyCurrentAttribute()
+    {
+        return $this->getTranslatable("body");
+    }
+
     public function setBodyAttribute($value)
     {
         $this->setTranslate("body", $value);
+    }
+
+    public function toArray()
+    {
+        return [
+            "header" => $this->header_current,
+            "body" => $this->body_current
+        ];
     }
 }

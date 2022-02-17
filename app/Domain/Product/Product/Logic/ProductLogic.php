@@ -19,14 +19,12 @@ class ProductLogic implements ProductInterface
 
     public function getPrice()
     {
-        $real_price = $this->product->price;
-        $real_price = $this->considerCurrency($real_price);
-
-        return $this->considerDiscounts($real_price);
+        return $this->considerDiscounts();
     }
 
-    private function considerCurrency($real_price)
+    private function considerCurrency()
     {
+        $real_price = $this->product->price;
         if ($this->product->currency == self::CURRENCY_USD_DB)
             $real_price = $this->convertToSum($this->product->price);
         return $real_price;
@@ -34,7 +32,7 @@ class ProductLogic implements ProductInterface
 
     public function getPriceCurrency()
     {
-        return $this->considerCurrency($this->product->price);
+        return $this->considerCurrency();
     }
 
     public function discountPercent()
@@ -43,10 +41,16 @@ class ProductLogic implements ProductInterface
             + $this->product->discounts()->sum("percent");
     }
 
-    private function considerDiscounts($real_price)
+    private function getDiscountPrice($real_price)
     {
+        return $this->discountPercent() / 100 * $real_price;
+    }
+
+    private function considerDiscounts()
+    {
+        $real_price = $this->considerCurrency();
         if ($this->product->discounts()->exists()) {
-            $calculate_percent_price = $this->discountPercent() / 100 * $real_price;
+            $calculate_percent_price = $this->getDiscountPrice($real_price);
             return $real_price - $calculate_percent_price;
         }
         if ($this->product->percentage) {

@@ -42,7 +42,7 @@ class ProductCard extends Product
             "image" => $this->productImageHeader->image->fullPath(),
             "title" => $this->title_current,
             "price" => $this->productLogic->getPriceCurrency(),
-            "discount" => $this->productLogic->discountPercent(),
+            "discount" => $this->productLogic->discountPercent(), // percent of discount for the card
             "real_price" => $this->real_price,
             "mark" => $this->mark()->avg("mark") ?? 0,
             "num_comment" => $this->comment()->count(),

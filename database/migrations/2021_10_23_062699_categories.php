@@ -17,9 +17,10 @@ class Categories extends Migration
             $table->id();
             $table->json('name');
             $table->boolean("status")->default(true);
-            $table->integer("depth");
+            $table->integer("height")
+                ->index()->default(0); // how much category has nested childs
+            $table->integer("depth")->index();
             $table->string("slug")->unique();
-            $table->index('depth');
         });
         Schema::table('categories', function (Blueprint $table) {
             $table->foreignId('parent_id')->nullable()->constrained('categories')->onDelete('CASCADE')->onUpdate('CASCADE');

@@ -10,4 +10,28 @@ class ColorsBuilder extends BuilderEntity
     {
         return "color";
     }
+
+    public function joinColorProducts()
+    {
+        return $this->join(
+            "color_products",
+            "color_products.color_id",
+            "=",
+            "colors.id")
+            ->select("colors.*");
+    }
+
+    public function joinProduct()
+    {
+        return $this->joinColorProducts()->join(
+            "products",
+            "products.id",
+            "=",
+            "color_products.product_id");
+    }
+
+    public function byCategory($category_id)
+    {
+        return $this->joinProduct()->where("products.category_id", "=", $category_id);
+    }
 }

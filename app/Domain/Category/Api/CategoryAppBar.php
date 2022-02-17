@@ -26,7 +26,7 @@ class CategoryAppBar extends Category
         return [
             "name" => $this->getNameCurrentAttribute(),
             "slug" => $this->slug,
-            "child" => $this->childsCategory(),
+            "children" => $this->childsCategory->toArray(),
         ];
     }
 }

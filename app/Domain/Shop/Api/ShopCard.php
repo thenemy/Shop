@@ -17,6 +17,7 @@ class ShopCard extends Shop
         if ($object->count() == 5)
             return [
                 "name" => $this->name,
+                "slug" => $this->slug,
                 "logo" => $this->logo->fullPath(),
                 "image" => $this->image->fullPath(),
                 "left_image" => $this->takeImage($object, 0),

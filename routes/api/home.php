@@ -13,3 +13,6 @@ Route::get("/home/hitProduct/", [MainController::class, "hitProduct"]);
 Route::get("/home/products/", [MainController::class, "products"]);
 Route::get("/home/shop/", [ShopController::class, "shop"]);
 Route::get("/home/brand/", [BrandController::class, "brand"]);
+
+// new added
+Route::get("/home/header/", [MainController::class, "header"]);

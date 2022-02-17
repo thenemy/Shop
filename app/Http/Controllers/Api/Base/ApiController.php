@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\Base;
 
 use App\Domain\Core\Main\Services\BaseService;
 use App\Http\Controllers\Api\Interfaces\ApiControllerInterface;
+use App\Http\Controllers\Api\Traits\CommonComponents;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Request;
 
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Request;
  */
 abstract class ApiController extends Controller implements ApiControllerInterface
 {
+    use CommonComponents;
+
     protected function result($result, $status = 200)
     {
         return response()->json([

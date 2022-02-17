@@ -8,6 +8,7 @@ use App\Domain\Product\ProductKey\Traits\TextTranslation;
 class HeaderText extends Entity
 {
     use TextTranslation;
+
     protected $guarded = null;
     protected $fillable = [
         "text",
@@ -17,4 +18,12 @@ class HeaderText extends Entity
     ];
 
     protected $table = "header_texts";
+
+    public function toArray()
+    {
+        return [
+            "header" => $this->text_current,
+            "values" => $this->pivot->toArray()
+        ];
+    }
 }

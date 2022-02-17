@@ -17,7 +17,7 @@ class UserAvatar extends Migration
             $table->foreignId('user_id')->primary()->constrained(
                 'users'
             )->cascadeOnDelete()->cascadeOnUpdate();
-
+            $table->string("name")->default("");
             $table->string('avatar')->default('');
         });
     }
