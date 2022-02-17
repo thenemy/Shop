@@ -2,7 +2,7 @@
 
 namespace App\Domain\Product\Product\Front\Admin\DropDown;
 
-class ProductDropDownSearch extends DropDownS
+class ProductDropDownSearch
 {
 
 }

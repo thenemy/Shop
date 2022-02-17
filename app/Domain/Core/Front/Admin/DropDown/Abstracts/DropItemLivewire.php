@@ -4,12 +4,11 @@
 namespace App\Domain\Core\Front\Admin\DropDown\Abstracts;
 
 use App\Domain\Core\Front\Admin\DropDown\Interfaces\DropItemInterfaces;
-use App\View\Helper\PATH\Traits\PathHandler;
 
 // variable function
 abstract class DropItemLivewire implements DropItemInterfaces
 {
-    use PathHandler;
+
 
     public $name;
     public $id;

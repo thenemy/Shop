@@ -11,4 +11,6 @@ interface CategoryRelationInterface
     const CATEGORY_ICON_TO = self::CATEGORY_ICON . \CR::CR;
     const FILTER = "filterKey";
 
+
+
 }

@@ -6,6 +6,6 @@
                 :collection="$collection"
                 :table="$table"
                 :storedValues="$storedValues"
-                :optional="$optional"/>
+                :optional="$optional"></x-helper.table.table_dynamic>
     </div>
 </x-helper.container.container>

@@ -12,13 +12,17 @@ trait TextTranslation
     use Translatable;
 
 
-
     public function attributesToArray()
     {
         $this->attributes['text_ru'] = $this->getTextRuAttribute();
         $this->attributes['text_en'] = $this->getTextEnAttribute();
         $this->attributes['text_uz'] = $this->getTextUzAttribute();
         return $this->attributes;
+    }
+
+    public function getTextCurrentAttribute(): ?string
+    {
+        return $this->getTranslatable("text");
     }
 
     public function setTextAttribute($value)

@@ -81,7 +81,7 @@
 <x-helper.input.input name='shopAddress->delivery->house' type='number'
             label='{{__("Номер дома")}}' value='{{old("shopAddress->delivery->house") ?? $entity->shopAddress->delivery->house ?? " "}}' id='shopAddress->delivery->house'  onkeyup="" />
             </div>			
-<x-helper.text_area.text_area name='shopAddress->delivery->instructions' label='Инструкции для курьера'>{{old("shopAddress->delivery->instructions") ?? $entity->shopAddress->delivery->instructions ?? " "}}</x-helper.text_area.text_area>			
+<x-helper.text_area.text_area name='shopAddress->delivery->instructions' label='Инструкции для курьера' >{{old("shopAddress->delivery->instructions") ?? $entity->shopAddress->delivery->instructions ?? " "}}</x-helper.text_area.text_area>			
 <livewire:admin.pages.shop-create.work-times-dynamic-without-entity />
                 </x-helper.container.container>
 @endsection

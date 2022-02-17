@@ -4,6 +4,7 @@
 namespace App\Domain\User\Entities;
 
 
+use App\Domain\Core\Main\Entities\Authenticable;
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Order\Entities\Order;
 use App\Domain\Order\Entities\UserPurchase;
@@ -14,9 +15,8 @@ use App\Domain\User\Traits\SmsTrait;
 use App\Domain\User\Traits\UserNotification;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Entity implements UserRelationInterface
+class User extends Authenticable implements UserRelationInterface
 {
-    use SmsTrait, UserNotification;
 
     protected $table = 'users';
 
@@ -29,7 +29,16 @@ class User extends Entity implements UserRelationInterface
 
     public function basket(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Order::class, 'basket');
+        return $this->belongsToMany(Order::class, 'basket',
+            "user_id",
+            "order_id");
+    }
+
+    public function favourite(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, "favourites",
+            "user_id",
+            "product_id");
     }
 
     public function userPurchase(): \Illuminate\Database\Eloquent\Relations\HasMany

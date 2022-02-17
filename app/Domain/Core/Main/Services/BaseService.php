@@ -70,7 +70,7 @@ abstract class BaseService implements ServiceInterface
         if ($validator->fails()) {
             $errors = $validator->errors()->toArray();
             $collapsed = collect($errors)->collapse();
-            throw  new ValidationException($collapsed->join(self::VALIDATE_SEPARATOR));
+            throw  new ValidationException($collapsed->join(static::VALIDATE_SEPARATOR));
         }
 
     }
@@ -196,12 +196,23 @@ abstract class BaseService implements ServiceInterface
     function createOrUpdate($object, $key, array $object_data, array $addition = [])
     {
         if (!empty($object_data)) {
-            if ($update_object = $object[$key]) {
+            if ($update_object = $object[$key]) {// check if relation exists
                 return $this->update($update_object, $object_data);
             } else {
                 return $this->createNew(array_merge($object_data, $addition));
             }
         }
+    }
+
+    public function validateCreateOrUpdate()
+    {
+        return [];
+    }
+
+    public function updateOrCreate(array $condition, array $data)
+    {
+        $this->validate($data, $this->validateCreateOrUpdate());
+        return $this->entity::updateOrCreate($condition, $data);
     }
 
     public
@@ -212,7 +223,6 @@ abstract class BaseService implements ServiceInterface
 
     protected function createNew(array $object_data)
     {
-        Log::info($object_data);
         $filtered = $this->filterRecursive($object_data);
         $this->validate($filtered, $this->validateCreateRules());
         return $this->entity->create($filtered);

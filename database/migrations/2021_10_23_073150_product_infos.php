@@ -15,9 +15,9 @@ class ProductInfos extends Migration
     {
         Schema::create('product_infos', function (Blueprint $table) {
             $table->foreignId('id')->primary()->constrained('products')->onUpdate('CASCADE')->onDelete('CASCADE');
-            $table->bigInteger('views_num');
-            $table->bigInteger('favourites_num');
-            $table->bigInteger('purchased_num');
+            $table->bigInteger('views_num')->default(0);
+            $table->bigInteger('favourites_num')->default(0);
+            $table->bigInteger('purchased_num')->default(0);
         });
     }
 

@@ -6,7 +6,7 @@
                 :collection="$collection"
                 :table="$table"
                 :storedValues="$storedValues"
-                :optional="$optional"/>
+                :optional="$optional"></x-helper.table.table_dynamic>
         {{--    <x-helper.table.table :table="$table" :optional="$optional"/>--}}
     </div>
     @foreach($saved as $id => $item)

@@ -10,4 +10,9 @@ class DiscountBuilder extends BuilderEntity
     {
         return "";
     }
+
+    public function active()
+    {
+        return $this->where("status", true);
+    }
 }

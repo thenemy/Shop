@@ -4,8 +4,9 @@ namespace App\Domain\Order\Front\Admin\CustomTables;
 
 use App\Domain\Core\Front\Admin\Attributes\Models\Column;
 use App\Domain\Core\Front\Admin\CustomTable\Abstracts\AbstractTable;
+use App\Domain\Core\Front\Admin\CustomTable\Abstracts\BaseTable;
 
-class PurchaseTable extends AbstractTable
+class PurchaseTable extends BaseTable
 {
 
     public function getColumns(): array

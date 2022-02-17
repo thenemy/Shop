@@ -57,7 +57,9 @@ class Media implements MediaInterface
     {
         return Storage::url($this->path);
     }
-
+    public function fullPath(){
+        return url($this->storage());
+    }
     public function download()
     {
         return Storage::download($this->path);

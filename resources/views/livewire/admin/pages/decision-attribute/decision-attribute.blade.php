@@ -20,7 +20,7 @@
 
             <div 	x-data='modalWindow() '>
                 			
-<button 	class='btn  btn-success'	@click='open()'>{{__('Принять')}}</button>			
+<button 	class='btn  btn-success btn-sm'	@click='open()'>{{__('Принять')}}</button>			
 <div x-cloak 	x-show='show'><div
 
     class="fixed z-10 h-full w-full inset-0 hide_during_loading  overflow-y-auto" aria-labelledby="modal-title"
@@ -59,7 +59,7 @@
 
             <div 	x-data='{ show: false, reason:{} }'>
                 			
-<button 	class='btn  btn-error'	@click='show = true'>{{__('Отказать')}}</button>			
+<button 	class='btn  btn-error btn-sm'	@click='show = true'>{{__('Отказать')}}</button>			
 <div x-cloak 	x-show='show'><div
 
     class="fixed z-10 h-full w-full inset-0 hide_during_loading  overflow-y-auto" aria-labelledby="modal-title"
@@ -108,7 +108,7 @@
 @if(!$entity->surety && !$entity->isRequiredSurety()) 
             <div 	x-data='modalWindow() '>
                 			
-<button 	class='btn  '	@click='open()'>{{__('Требуется поручитель')}}</button>			
+<button 	class='btn  btn-sm'	@click='open()'>{{__('Требуется поручитель')}}</button>			
 <div x-cloak 	x-show='show'><div
 
     class="fixed z-10 h-full w-full inset-0 hide_during_loading  overflow-y-auto" aria-labelledby="modal-title"

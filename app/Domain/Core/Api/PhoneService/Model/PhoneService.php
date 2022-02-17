@@ -40,13 +40,14 @@ class PhoneService
             'message' => $message,
             'from' => '4546'
         ]);
-        if ($response->getStatusCode() == 401) {
+        $response_decoded = $response->json();
+        if ($response->getStatusCode() == 401 ||
+            (isset($response_decoded['status_code'])
+                && $response_decoded['status_code'] == 500)) {
             $this->authorize();
             return $this->send_code($phone_to_send, $message);
         }
-        $response_decoded = $response->json();
         if ($response->getStatusCode() == 400) {
-
             throw new PhoneError($response->body(), 400);
         }
         return $response_decoded;

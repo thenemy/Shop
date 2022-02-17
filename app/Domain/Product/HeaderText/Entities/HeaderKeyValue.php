@@ -32,6 +32,16 @@ class HeaderKeyValue extends Entity
         return $this->getTranslations("key");
     }
 
+    public function getKeyCurrentAttribute()
+    {
+        return $this->getTranslatable("key");
+    }
+
+    public function getValueCurrentAttribute()
+    {
+        return $this->getTranslatable("value");
+    }
+
     public function setKeyAttribute($value)
     {
         $this->setTranslate("key", $value);
@@ -51,6 +61,14 @@ class HeaderKeyValue extends Entity
             "value_ru",
             "value_en",
             "value_uz",
+        ];
+    }
+
+    public function toArray()
+    {
+        return [
+            "key" => $this->key_current,
+            "value" => $this->value_current
         ];
     }
 }

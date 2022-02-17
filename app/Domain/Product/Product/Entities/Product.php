@@ -35,7 +35,8 @@ class Product extends Entity implements ProductInterface
     use Translatable, Sluggable, MediaManyTrait, ConvertToSum, AttachNested;
 
     protected $table = "products";
-    private ProductLogic $productLogic;
+    protected ProductLogic $productLogic;
+    public $timestamps = true;
 
     public static function getCreateRules(): array
     {
@@ -56,11 +57,39 @@ class Product extends Entity implements ProductInterface
         parent::__construct($attributes);
         $this->productLogic = new ProductLogic($this);
     }
+
+    public function newInstance($attributes = [], $exists = false)
+    {
+        $this->productLogic = new ProductLogic($this);
+        return parent::newInstance($attributes, $exists);
+    }
     // характеристики
     // header
     // key ... value
     // key ... value
     // ...
+    public function comment()
+    {
+        return $this->belongsToMany(User::class,
+            "comment_product",
+            "product_id",
+            "user_id")->withPivot(['status', "message", "created_at"]);
+    }
+
+    public function mark()
+    {
+        return $this->belongsToMany(User::class,
+            "mark_product",
+            "product_id",
+            "user_id"
+        )->withPivot("mark");
+    }
+
+    public function info()
+    {
+        return $this->hasOne(ProductInfo::class, "id");
+    }
+
     public function headerText()
     {
         return $this->belongsToMany(HeaderText::class,
@@ -76,7 +105,7 @@ class Product extends Entity implements ProductInterface
     }
 
     public
-    function newEloquentBuilder($query): ProductBuilder
+    function newEloquentBuilder($query)
     {
         return new ProductBuilder($query);
     }
@@ -149,8 +178,7 @@ class Product extends Entity implements ProductInterface
         return $this->hasOne(ProductOfDay::class, "product_id");
     }
 
-    public
-    function mainCredit()
+    public function mainCredit()
     {
         return $this->belongsToMany(MainCredit::class,
             "product_credits",

@@ -68,21 +68,7 @@
         </tr>
     </table>
 </div>
-<script>
-        // function initDynamic(id) {
-        //     return {
-        //         show: false,
-        //         id: id,
-        //         showInput(event) {
-        //             if (event.detail.id.toString() === this.$el.dataset.id) {
-        //                 this.show = event.detail.show;
-        //                 console.log(this.show);
-        //             }
-        //         },
-        //     }
-        // }
 
-</script>
 {{$table->paginate->links()}}
 
 

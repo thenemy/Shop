@@ -25,7 +25,7 @@ class RefuseAttribute implements HtmlInterface
             'x-data' => "{ show: false, reason:{} }"
         ], [
             ButtonDaisy::new("Отказать", [
-                'class' => 'btn-error',
+                'class' => 'btn-error btn-sm',
                 '@click' => "show = true"
             ]),
             ModalContainer::new([], [

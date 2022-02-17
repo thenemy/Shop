@@ -8,6 +8,8 @@ use App\Domain\Core\Language\Traits\Translatable;
 use App\Domain\Core\Main\Entities\Entity;
 use App\Domain\Location\Entities\Location;
 use App\Domain\Order\Pivot\UserOrders;
+use App\Domain\Product\Api\ProductBasket;
+use App\Domain\Product\Api\ProductCard;
 use App\Domain\Product\Product\Entities\Product;
 use App\Domain\User\Entities\User;
 
@@ -39,7 +41,7 @@ class Order extends Entity
 
     public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Product::class, "id");
+        return $this->belongsTo(ProductBasket::class, "id");
     }
 
     public function locationOrder(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -57,4 +59,13 @@ class Order extends Entity
         $this->setTranslate('order-json', $value);
     }
 
+    public function toArray()
+    {
+        return [
+            "id" => $this->id,
+            "quantity" => $this->quantity,
+            "product" => $this->product,
+            "shop" => $this->product->shop,
+        ];
+    }
 }

@@ -14,6 +14,7 @@ use App\Domain\Order\Traits\UserPurchaseStatus;
 use App\Domain\Payment\Entities\Payment;
 use App\Domain\User\Entities\User;
 use App\Domain\User\Traits\HasUserRelationship;
+use Illuminate\Support\Facades\Request;
 
 class UserPurchase extends Entity implements UserPurchaseRelation
 {
@@ -62,6 +63,7 @@ class UserPurchase extends Entity implements UserPurchaseRelation
     // mutually exclusive takenCredit and payment
     public function takenCredit()
     {
+
         return $this->hasOne(TakenCredit::class, "purchase_id");
     }
 
@@ -75,21 +77,6 @@ class UserPurchase extends Entity implements UserPurchaseRelation
         return self::TYPE_OF_PURCHASE[$this->getPayment()];
     }
 
-    private function getPayment()
-    {
-        return $this->status % 1000 - $this->status % 100;
-    }
-
-    public function isInstallment()
-    {
-        return $this->getPayment() == self::INSTALMENT - 1;
-    }
-
-    public function isInstansPayment()
-    {
-        return $this->getPayment() == self::INSTANCE_PAYMENT;
-    }
-
     public function address(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(DeliveryAddress::class, "purchase_address",
@@ -100,5 +87,10 @@ class UserPurchase extends Entity implements UserPurchaseRelation
     public function getDeliveryAddressAttribute(): DeliveryAddress
     {
         return $this->address()->first();
+    }
+
+    public function titlesOfPurchases()
+    {
+        return $this->purchases()->with("products");
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Domain\Core\Main\Services;
 
+use App\Domain\Core\Main\Entities\Entity;
+
 class FrontService extends BaseService
 {
     private $class_name;
@@ -12,8 +14,8 @@ class FrontService extends BaseService
         parent::__construct();
     }
 
-    public function getEntity()
+    public function getEntity():Entity
     {
-        return $this->class_name;
+        return new $this->class_name();
     }
 }

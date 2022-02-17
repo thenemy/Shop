@@ -15,6 +15,7 @@ class Products extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
             $table->json('title');
             $table->bigInteger('price');
             $table->smallInteger("currency");

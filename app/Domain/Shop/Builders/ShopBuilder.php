@@ -10,4 +10,16 @@ class ShopBuilder extends BuilderEntity
     {
         return "name";
     }
+
+    public function joinProduct()
+    {
+        return $this->join("products", "products.shop_id",
+            "=",
+            "shops.id");
+    }
+
+    public function byCategory($category_id)
+    {
+        return $this->joinProduct()->where("products.category_id", $category_id);
+    }
 }

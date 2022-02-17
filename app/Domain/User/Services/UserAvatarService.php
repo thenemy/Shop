@@ -8,6 +8,12 @@ use App\Domain\User\Entities\UserAvatar;
 
 class UserAvatarService extends BaseService
 {
+    protected function validateCreateRules(): array
+    {
+        return [
+            "name" => "required",
+        ];
+    }
 
     public function getEntity(): Entity
     {

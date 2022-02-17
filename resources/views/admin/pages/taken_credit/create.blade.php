@@ -80,7 +80,7 @@
             <div 	class='p-2'>
                 
             </div>			
-<x-helper.text_area.text_area name='purchase->delivery_address->instructions' label='Инструкции для курьера'>{{old("purchase->delivery_address->instructions") ?? $entity->purchase->delivery_address->instructions ?? " "}}</x-helper.text_area.text_area>
+<x-helper.text_area.text_area name='purchase->delivery_address->instructions' label='Инструкции для курьера' >{{old("purchase->delivery_address->instructions") ?? $entity->purchase->delivery_address->instructions ?? " "}}</x-helper.text_area.text_area>
             </div>
             </div>
             </div>

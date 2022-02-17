@@ -9,6 +9,7 @@ use App\Domain\Product\Product\Entities\Product;
 class Purchase extends Entity
 {
     protected $table = "purchases";
+    public $timestamps = true;
 
     public function newEloquentBuilder($query)
     {

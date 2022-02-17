@@ -32,14 +32,44 @@ class CategoryService extends BaseService implements CategoryRelationInterface
         return new Category();
     }
 
+    public function incrementHeight($category)
+    {
+        if ($category->height == 0) {
+            // minus one because height become correct number of nested child depth = 2
+            // parent height = 1
+            $category->height++;
+            $category->save();
+            while ($category->parent_id != null) {
+                $category = $category->parent;
+                $category->height++;
+                $category->save();
+            }
+        }
+    }
+
+    public function decrementHeight($category)
+    {
+        if ($category && !$category->childsCategory()->exists()) {
+            $category->height--;
+            $category->save();
+            while ($category->parent_id != null) {
+                $category = $category->parent;
+                $category->height--;
+                $category->save();
+            }
+        }
+    }
+
     public function getDepth(array &$object_data)
     {
-        $depth = 0;
+        $depth = 1;
         if (isset($object_data['params'])) {
             $this->changeKey($object_data, 'parent_id');
-            $depth = Category::find($object_data['parent_id'])->depth;
+            $category = Category::find($object_data['parent_id']);
+            $depth = $category->depth + 1;
+            $this->incrementHeight($category);
         }
-        $object_data['depth'] = $depth + 1;
+        $object_data['depth'] = $depth;
     }
 
     public function create(array $object_data)
@@ -80,6 +110,21 @@ class CategoryService extends BaseService implements CategoryRelationInterface
         } catch (\Throwable $exception) {
             DB::rollBack();
             throw $exception;
+        }
+    }
+
+    public function destroy($object): bool
+    {
+        try {
+            DB::beginTransaction();
+            $parent = $object->parent;
+            $result = parent::destroy($object);
+            $this->decrementHeight($parent);
+            DB::commit();
+            return $result;
+        } catch (\Throwable $exception) {
+            DB::rollBack();
+            throw  $exception;
         }
     }
 }
