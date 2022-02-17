@@ -72,7 +72,7 @@ class ProductBuilder extends BuilderEntity
     {
         return $this->join("product_hits", "product_hits.product_id",
             "=",
-            "products.id");
+            "products.id")->select("products.*");
     }
 
 
